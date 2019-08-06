@@ -12,6 +12,11 @@ import com.expensemoitor.expensemonitor.Network.UserData
 import com.expensemoitor.expensemonitor.Network.UserResponse
 import com.expensemoitor.expensemonitor.R
 import com.squareup.moshi.Moshi
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
+import okhttp3.Dispatcher
 import retrofit2.Call
 import retrofit2.Response
 import javax.security.auth.callback.Callback
@@ -52,18 +57,31 @@ class RegisterationUserViewModel :ViewModel() {
     }
 
 
+    private var viewModelJob = Job()
+    private val coroutineJob = CoroutineScope(viewModelJob + Dispatchers.Main)
+
+
     private fun registerUser(userName:String,userEmail:String,gender:String){
-        val userData = UserData(userName,userEmail,gender)
-        ExpenseMonitorApi.retrofitService.registerationUser(userData).enqueue(object : retrofit2.Callback<UserResponse> {
-            override fun onFailure(call: Call<UserResponse>, t: Throwable) {
-               Log.d("onFailure",t.toString())
+
+        coroutineJob.launch {
+            val userData = UserData(userName,userEmail,gender)
+            var getUserResponse =  ExpenseMonitorApi.retrofitService.registerationUser(userData)
+            try {
+                var userResponse = getUserResponse.await()
+                Log.d("onResponse",userResponse?.accesstoken+" "+userResponse.userCurrentExpense)
+
+            }catch (t:Throwable){
+                Log.d("onFailure",t.toString())
             }
 
-            override fun onResponse(call: Call<UserResponse>, response: Response<UserResponse>) {
-                Log.d("onResponse",response.body()?.accesstoken+" "+response.body()?.userCurrentExpense)
-            }
+        }
 
-        })
+
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        viewModelJob.cancel()
     }
 
 }
