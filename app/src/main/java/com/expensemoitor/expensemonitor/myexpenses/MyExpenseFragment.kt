@@ -16,7 +16,7 @@ class MyExpenseFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_my_expense, container, false)
+        return inflater.inflate(R.layout.my_expense_fragment, container, false)
     }
 
 

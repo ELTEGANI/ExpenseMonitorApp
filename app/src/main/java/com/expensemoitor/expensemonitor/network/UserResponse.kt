@@ -1,4 +1,4 @@
-package com.expensemoitor.expensemonitor.Network
+package com.expensemoitor.expensemonitor.network
 
 data class UserResponse (
       val accesstoken:String,
