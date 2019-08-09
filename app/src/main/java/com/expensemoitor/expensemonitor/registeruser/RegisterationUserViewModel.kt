@@ -2,7 +2,6 @@ package com.expensemoitor.expensemonitor.registeruser
 
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.MutableLiveData
@@ -18,6 +17,7 @@ import java.io.IOException
 
 
 
+enum class progressStatus {LOADING,ERROR,DONE}
 
 class RegisterationUserViewModel(application: Application) :ViewModel() {
 
@@ -27,6 +27,10 @@ class RegisterationUserViewModel(application: Application) :ViewModel() {
     var prefManager:PrefManager = PrefManager(application)
     var geneder = ""
 
+
+    private val _status = MutableLiveData<progressStatus>()
+    val status: LiveData<progressStatus>
+        get() = _status
 
     private val _displayMsg = MutableLiveData<Boolean>()
     val displayMsg: LiveData<Boolean>
@@ -76,10 +80,13 @@ class RegisterationUserViewModel(application: Application) :ViewModel() {
             val userData = UserData(userName,userEmail,gender)
             val getUserResponse =  ExpenseMonitorApi.retrofitService.registerationUser(userData)
             try {
+                _status.value = progressStatus.LOADING
                 val userResponse = getUserResponse.await()
                  prefManager.saveAccessTokenAndCurrentExpense(userResponse.userCurrentExpense, userResponse.accesstoken)
                 _navigateToMyExpenseFragment.value = true
+                _status.value = progressStatus.DONE
             }catch (t:Throwable){
+                _status.value = progressStatus.ERROR
                 _navigateToMyExpenseFragment.value = false
                 if(t is IOException){
                     _displayMsg.value = true
