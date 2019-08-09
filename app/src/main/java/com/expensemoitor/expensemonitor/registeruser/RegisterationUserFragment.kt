@@ -20,7 +20,6 @@ import com.expensemoitor.expensemonitor.databinding.RegisterationUserFragmentBin
 
 class RegisterationUserFragment : Fragment() {
 
-    private lateinit var viewModel: RegisterationUserViewModel
     private lateinit var binding: RegisterationUserFragmentBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,savedInstanceState: Bundle?): View? {
@@ -28,7 +27,14 @@ class RegisterationUserFragment : Fragment() {
 
         binding = DataBindingUtil.inflate(inflater,R.layout.registeration_user_fragment,container,false)
 
-        viewModel = ViewModelProviders.of(this).get(RegisterationUserViewModel::class.java)
+        val application = requireNotNull(this.activity).application
+
+        val viewModelFactory = RegisterationUserViewModelFactory(application)
+
+        val viewModel = ViewModelProviders.of(this,viewModelFactory)
+            .get(RegisterationUserViewModel::class.java)
+
+
 
         binding.viewModel = viewModel
 

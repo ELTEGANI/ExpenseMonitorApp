@@ -1,6 +1,7 @@
 package com.expensemoitor.expensemonitor.registeruser
 
 
+import android.app.Application
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
@@ -8,6 +9,7 @@ import androidx.lifecycle.MutableLiveData
 import com.expensemoitor.expensemonitor.network.ExpenseMonitorApi
 import com.expensemoitor.expensemonitor.network.UserData
 import com.expensemoitor.expensemonitor.R
+import com.expensemoitor.expensemonitor.utilites.PrefManager
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -17,11 +19,12 @@ import java.io.IOException
 
 
 
-class RegisterationUserViewModel :ViewModel() {
+class RegisterationUserViewModel(application: Application) :ViewModel() {
 
     val name = MutableLiveData<String>()
     val email = MutableLiveData<String>()
     var radiochecked = MutableLiveData<Int>()
+    var prefManager:PrefManager = PrefManager(application)
     var geneder = ""
 
 
@@ -74,11 +77,8 @@ class RegisterationUserViewModel :ViewModel() {
             val getUserResponse =  ExpenseMonitorApi.retrofitService.registerationUser(userData)
             try {
                 val userResponse = getUserResponse.await()
-                //TODO save data in sharedpreferences
-                //TODO progressbar
+                 prefManager.saveAccessTokenAndCurrentExpense(userResponse.userCurrentExpense, userResponse.accesstoken)
                 _navigateToMyExpenseFragment.value = true
-                Log.d("onResponse",userResponse?.accesstoken+" "+userResponse.userCurrentExpense)
-
             }catch (t:Throwable){
                 _navigateToMyExpenseFragment.value = false
                 if(t is IOException){
