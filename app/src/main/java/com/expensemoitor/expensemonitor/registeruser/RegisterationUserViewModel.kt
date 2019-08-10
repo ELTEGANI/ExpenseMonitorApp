@@ -103,6 +103,8 @@ class RegisterationUserViewModel(application: Application) :ViewModel() {
         _displayMsg.value = false
     }
 
+
+
     override fun onCleared() {
         super.onCleared()
         viewModelJob.cancel()
