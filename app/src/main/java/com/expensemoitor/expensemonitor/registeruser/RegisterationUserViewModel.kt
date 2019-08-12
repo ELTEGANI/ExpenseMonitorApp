@@ -9,6 +9,7 @@ import com.expensemoitor.expensemonitor.network.ExpenseMonitorApi
 import com.expensemoitor.expensemonitor.network.UserData
 import com.expensemoitor.expensemonitor.R
 import com.expensemoitor.expensemonitor.utilites.PrefManager
+import com.expensemoitor.expensemonitor.utilites.progressStatus
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -17,7 +18,6 @@ import java.io.IOException
 
 
 
-enum class progressStatus {LOADING,ERROR,DONE}
 
 class RegisterationUserViewModel(application: Application) :ViewModel() {
 

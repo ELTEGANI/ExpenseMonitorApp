@@ -61,8 +61,8 @@ class RegisterationUserFragment : Fragment() {
             }
         )
 
-//        viewModel.navigateToMyExpenseFragment.observe(this, Observer{hasNavigated->
-//             if(hasNavigated){
+//        viewModel.navigateToMyExpenseFragment.observe(this, Observer{shouldNavigate->
+//             if(shouldNavigate){
 //                 val navController = binding.root.findNavController()
 //                 navController.navigate(R.id.action_registerationUserFragment_to_myExpenseFragment)
 //             }
