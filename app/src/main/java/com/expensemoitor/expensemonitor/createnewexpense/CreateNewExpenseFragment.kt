@@ -1,6 +1,7 @@
 package com.expensemoitor.expensemonitor.createnewexpense
 
 
+import android.app.DatePickerDialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -12,6 +13,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.expensemoitor.expensemonitor.R
 import com.expensemoitor.expensemonitor.databinding.CreateNewExpenseFragmentBinding
+import java.util.*
 
 
 class CreateNewExpenseFragment : Fragment() {
@@ -34,6 +36,18 @@ class CreateNewExpenseFragment : Fragment() {
         binding.lifecycleOwner = this
 
 
+        binding.newdateButton.setOnClickListener {
+            val c = Calendar.getInstance()
+            val year = c.get(Calendar.YEAR)
+            val month = c.get(Calendar.MONTH)
+            val day = c.get(Calendar.DAY_OF_MONTH)
+            val datePickerDialog = DatePickerDialog(context,
+                DatePickerDialog.OnDateSetListener {
+                        view, year, monthOfYear, dayOfMonth ->
+                   viewModel.currentDate.value = year.toString() + "-" + (monthOfYear + 1) + "-" + dayOfMonth.toString()
+                },year,month,day)
+            datePickerDialog.show()
+        }
 
         viewModel.validationMsg.observe(this, Observer { isValidate->
             if (isValidate){
@@ -41,6 +55,8 @@ class CreateNewExpenseFragment : Fragment() {
                 viewModel.onNoEmptyFields()
             }
         })
+
+
 
 
         return binding.root
