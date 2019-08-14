@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.findNavController
 import com.expensemoitor.expensemonitor.R
 import com.expensemoitor.expensemonitor.databinding.CreateNewExpenseFragmentBinding
 import java.util.*
@@ -36,6 +37,7 @@ class CreateNewExpenseFragment : Fragment() {
         binding.lifecycleOwner = this
 
 
+
         binding.newdateButton.setOnClickListener {
             val c = Calendar.getInstance()
             val year = c.get(Calendar.YEAR)
@@ -49,14 +51,21 @@ class CreateNewExpenseFragment : Fragment() {
             datePickerDialog.show()
         }
 
-        viewModel.validationMsg.observe(this, Observer { isValidate->
-            if (isValidate){
-                Toast.makeText(context,"Please Fill Empty Field",Toast.LENGTH_LONG).show()
+        viewModel.validationMsg.observe(this, Observer { validationMsg->
+            if (validationMsg.isNotEmpty()){
+                Toast.makeText(context,validationMsg,Toast.LENGTH_LONG).show()
                 viewModel.onNoEmptyFields()
             }
         })
 
 
+        viewModel.navigateToMyExpenseFragment.observe(this, Observer { shouldNavigate->
+            if(shouldNavigate){
+                val navController = binding.root.findNavController()
+                navController.navigate(R.id.action_createNewExpenseFragment_to_myExpenseFragment)
+                viewModel.onNavigateToMyExpnse()
+            }
+        })
 
 
         return binding.root

@@ -1,5 +1,6 @@
 package com.expensemoitor.expensemonitor.network
 
+import com.expensemoitor.expensemonitor.utilites.AppConstants
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -10,7 +11,6 @@ import retrofit2.http.Body
 import retrofit2.http.POST
 
 
-private const val BASE_URL = "http://10.0.2.2:3000"
 
 
 private val moshi = Moshi.Builder()
@@ -20,13 +20,13 @@ private val moshi = Moshi.Builder()
 private val retrofit = Retrofit.Builder()
     .addConverterFactory(MoshiConverterFactory.create(moshi))
     .addCallAdapterFactory(CoroutineCallAdapterFactory())
-    .baseUrl(BASE_URL)
+    .baseUrl(AppConstants.BASEURL)
     .build()
 
 
 
 interface ExpenseMonitorApiService {
-    @POST("/User/registeruser")
+    @POST(AppConstants.USER_REGISTERATION)
     fun registerationUser(@Body userData: UserData): Deferred<UserResponse>
 }
 

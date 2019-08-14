@@ -2,6 +2,7 @@ package com.expensemoitor.expensemonitor.registeruser
 
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.MutableLiveData
@@ -19,12 +20,11 @@ import java.io.IOException
 
 
 
-class RegisterationUserViewModel(application: Application) :ViewModel() {
+class RegisterationUserViewModel(var application: Application) :ViewModel() {
 
     val name = MutableLiveData<String>()
     val email = MutableLiveData<String>()
     var radiochecked = MutableLiveData<Int>()
-    var prefManager:PrefManager = PrefManager(application)
     var geneder = ""
 
 
@@ -82,7 +82,8 @@ class RegisterationUserViewModel(application: Application) :ViewModel() {
             try {
                 _status.value = progressStatus.LOADING
                 val userResponse = getUserResponse.await()
-                 prefManager.saveAccessTokenAndCurrentExpense(userResponse.userCurrentExpense, userResponse.accesstoken)
+                 PrefManager.saveAccessTokenAndCurrentExpense(application,userResponse.accesstoken,userResponse.userCurrentExpense)
+                 Log.d("accessToken",PrefManager.getAccessToken(application))
                 _navigateToMyExpenseFragment.value = true
                 _status.value = progressStatus.DONE
             }catch (t:Throwable){

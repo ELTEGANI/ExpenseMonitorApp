@@ -1,10 +1,8 @@
 <resources>
     <string name="app_name">Expense Monitor</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-
     <string name="female">female</string>
     <string name="male">male</string>
+    <string name="SelectForms">Select Forms</string>
+    <string name="SelectCategory">Select Category</string>
 
 </resources>

@@ -72,4 +72,7 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
 
+    //Okhttp3
+    implementation "com.squareup.okhttp3:okhttp:3.12.0"
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.11.0'
 }

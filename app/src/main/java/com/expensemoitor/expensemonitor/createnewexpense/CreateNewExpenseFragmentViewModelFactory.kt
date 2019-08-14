@@ -8,7 +8,7 @@ class CreateNewExpenseFragmentViewModelFactory(private val application: Applicat
     @Suppress("unchecked_cast")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(CreateNewExpenseFragmentViewModel::class.java)) {
-            return CreateNewExpenseFragmentViewModel() as T
+            return CreateNewExpenseFragmentViewModel(application) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="categories_list">
+        <item name="Select Category">@string/SelectCategory</item>
+        <item>item</item>
+        <item>item</item>
+        <item>item</item>
+    </array>
+</resources>

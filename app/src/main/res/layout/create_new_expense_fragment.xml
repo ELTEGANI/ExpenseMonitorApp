@@ -27,8 +27,8 @@
                 app:layout_constraintTop_toTopOf="parent"
                 android:layout_marginBottom="8dp"
                 app:layout_constraintBottom_toTopOf="@+id/EditTextDescription"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintVertical_bias="0.927"/>
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintVertical_bias="0.886"/>
 
         <EditText
                 android:layout_width="0dp"
@@ -46,29 +46,40 @@
                 android:text="create Expense"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:onClick="@{()->viewModel.createExpense()}"
+                android:onClick="@{()->viewModel.createExpenseClick()}"
                 android:id="@+id/button" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
                 app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintHorizontal_bias="1.0"
                 android:layout_marginBottom="268dp" android:layout_marginTop="8dp"
-                app:layout_constraintTop_toBottomOf="@+id/newdate_button" app:layout_constraintVertical_bias="0.045"/>
+                app:layout_constraintTop_toBottomOf="@+id/newdate_button" app:layout_constraintVertical_bias="1.0"/>
+
         <Spinner
                 android:layout_width="395dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/spinner2" app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginEnd="8dp" app:layout_constraintTop_toBottomOf="@+id/EditTextDescription"
-                android:layout_marginTop="24dp" app:layout_constraintHorizontal_bias="0.0"/>
-        <Spinner
-                android:layout_width="395dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/spinner3"
+                android:id="@+id/forms_spinner"
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginStart="8dp"
-                app:layout_constraintTop_toBottomOf="@+id/spinner2"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintTop_toBottomOf="@+id/EditTextDescription"
+                android:layout_marginTop="24dp"
+                android:entries="@array/forms_list"
+                android:onItemSelected="@{(parent,view,pos,id)->viewModel.onSelectExpenseFormOrCategoryItem(parent,view,pos,id)}"
+                app:layout_constraintHorizontal_bias="0.0"/>
+
+
+        <Spinner
+                android:layout_width="395dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/categories_spinner"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="8dp"
+                app:layout_constraintTop_toBottomOf="@+id/forms_spinner"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="8dp"
+                android:entries="@array/categories_list"
+                android:onItemSelected="@{(parent,view,pos,id)->viewModel.onSelectExpenseFormOrCategoryItem(parent,view,pos,id)}"
                 app:layout_constraintBottom_toTopOf="@+id/button"
                 app:layout_constraintVertical_bias="0.116"/>
 
@@ -82,7 +93,7 @@
                 android:layout_marginEnd="8dp"
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginStart="8dp"
-                app:layout_constraintTop_toBottomOf="@+id/spinner3"
+                app:layout_constraintTop_toBottomOf="@+id/categories_spinner"
                 android:layout_marginTop="48dp"
                 app:layout_constraintHorizontal_bias="0.0"
                 android:layout_marginBottom="8dp"

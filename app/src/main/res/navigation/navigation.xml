@@ -2,22 +2,27 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
             xmlns:tools="http://schemas.android.com/tools" android:id="@+id/navigation"
-            app:startDestination="@id/myExpenseFragment">
+            app:startDestination="@id/registerationUserFragment">
 
+    <fragment android:id="@+id/registerationUserFragment"
+              android:name="com.expensemoitor.expensemonitor.registeruser.RegisterationUserFragment"
+              android:label="RegisterationUserFragment">
+        <action android:id="@+id/action_registerationUserFragment_to_myExpenseFragment"
+                app:destination="@id/myExpenseFragment"/>
+    </fragment>
 
     <fragment android:id="@+id/myExpenseFragment"
               android:name="com.expensemoitor.expensemonitor.myexpenses.MyExpenseFragment"
-              android:label="my_expense_fragment" tools:layout="@layout/my_expense_fragment">
+              android:label="MyExpenseFragment">
         <action android:id="@+id/action_myExpenseFragment_to_createNewExpenseFragment"
                 app:destination="@id/createNewExpenseFragment"/>
     </fragment>
 
-
     <fragment android:id="@+id/createNewExpenseFragment"
               android:name="com.expensemoitor.expensemonitor.createnewexpense.CreateNewExpenseFragment"
-              android:label="create_new_expense_fragment" tools:layout="@layout/create_new_expense_fragment">
+              android:label="CreateNewExpenseFragment">
         <action android:id="@+id/action_createNewExpenseFragment_to_myExpenseFragment"
-                app:destination="@id/myExpenseFragment"/>
+                app:destination="@id/myExpenseFragment" app:popUpTo="@+id/myExpenseFragment"/>
     </fragment>
 
 
