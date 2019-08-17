@@ -5,8 +5,14 @@ import kotlinx.coroutines.Deferred
 import retrofit2.http.Body
 import retrofit2.http.POST
 
-interface ExpenseUrls {
+interface CreateExpenseUrls {
     @POST(AppConstants.CREATE_NEW_EXPENSE)
     fun createNewExpense(@Body expenseData: ExpenseData) : Deferred<expenseresponse>
 
+}
+
+
+interface RegisterationUrls {
+    @POST(AppConstants.USER_REGISTERATION)
+    fun registerationUser(@Body userData: UserData): Deferred<RegisterationResponse>
 }

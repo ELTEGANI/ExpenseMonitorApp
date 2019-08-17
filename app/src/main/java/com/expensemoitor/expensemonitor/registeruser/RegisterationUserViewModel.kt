@@ -3,12 +3,14 @@ package com.expensemoitor.expensemonitor.registeruser
 
 import android.app.Application
 import android.util.Log
+import android.view.View
+import android.widget.AdapterView
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.MutableLiveData
-import com.expensemoitor.expensemonitor.network.ExpenseMonitorApi
 import com.expensemoitor.expensemonitor.network.UserData
 import com.expensemoitor.expensemonitor.R
+import com.expensemoitor.expensemonitor.network.ApiFactory
 import com.expensemoitor.expensemonitor.utilites.PrefManager
 import com.expensemoitor.expensemonitor.utilites.progressStatus
 import kotlinx.coroutines.CoroutineScope
@@ -26,6 +28,7 @@ class RegisterationUserViewModel(var application: Application) :ViewModel() {
     val email = MutableLiveData<String>()
     var radiochecked = MutableLiveData<Int>()
     var geneder = ""
+    var currency = ""
 
 
     private val _status = MutableLiveData<progressStatus>()
@@ -47,6 +50,9 @@ class RegisterationUserViewModel(var application: Application) :ViewModel() {
         get() = _navigateToMyExpenseFragment
 
 
+    fun onSelectCurrencyItem(parent: AdapterView<*>, view: View?, pos: Int, id: Long) {
+            currency = parent.selectedItem.toString()
+    }
 
     fun onNext() {
         val name = name.value
@@ -62,10 +68,12 @@ class RegisterationUserViewModel(var application: Application) :ViewModel() {
             }
         }
 
-        if (geneder.isNotEmpty()){
-             registerUser(name!!, email!!,geneder)
-        }else{
+        if (geneder == null || currency.equals("Select Currency")){
             _genderSelected.value = false
+        }else{
+            PrefManager.saveCurrency(application,currency)
+            Log.d("userCurrency",PrefManager.getCurrency(application).toString())
+            name?.let { email?.let { it1 -> registerUser(it, it1,geneder) } }
         }
 
     }
@@ -78,12 +86,12 @@ class RegisterationUserViewModel(var application: Application) :ViewModel() {
     private fun registerUser(userName:String,userEmail:String,gender:String) {
         coroutineJob.launch {
             val userData = UserData(userName,userEmail,gender)
-            val getUserResponse =  ExpenseMonitorApi.retrofitService.registerationUser(userData)
+            val getUserResponse =  ApiFactory.registerationUrls.registerationUser(userData)
             try {
                 _status.value = progressStatus.LOADING
                 val userResponse = getUserResponse.await()
-                 PrefManager.saveAccessTokenAndCurrentExpense(application,userResponse.accesstoken,userResponse.userCurrentExpense)
-                 Log.d("accessToken",PrefManager.getAccessToken(application))
+                 PrefManager.saveAccessTokenAndCurrentExpense(application,userResponse.accesstoken,userResponse.userCurrentExpense.toInt())
+                 Log.d("accessToken",PrefManager.getAccessToken(application)+"\n"+PrefManager.getUserExpenses(application))
                 _navigateToMyExpenseFragment.value = true
                 _status.value = progressStatus.DONE
             }catch (t:Throwable){

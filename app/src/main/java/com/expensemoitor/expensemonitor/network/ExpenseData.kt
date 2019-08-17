@@ -14,5 +14,6 @@ data class ExpenseData(
 
 
 data class expenseresponse(
-    val message:String
+    val message:String,
+    val Expense:Int
 )

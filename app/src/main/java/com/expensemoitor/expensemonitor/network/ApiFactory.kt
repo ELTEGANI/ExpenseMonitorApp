@@ -4,7 +4,11 @@ import com.expensemoitor.expensemonitor.utilites.AppConstants
 
 object ApiFactory {
 
-    val expenseUrls:ExpenseUrls = RetrofitFactory.retrofit(AppConstants.BASEURL)
-        .create(ExpenseUrls::class.java)
+    val CREATE_EXPENSE_URLS:CreateExpenseUrls = RetrofitFactory.retrofit(AppConstants.BASEURL)
+        .create(CreateExpenseUrls::class.java)
+
+
+    val registerationUrls:RegisterationUrls = RetrofitFactory.retrofit((AppConstants.BASEURL))
+        .create(RegisterationUrls::class.java)
 
 }

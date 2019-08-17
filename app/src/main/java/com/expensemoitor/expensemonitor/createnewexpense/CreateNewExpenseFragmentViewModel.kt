@@ -2,7 +2,6 @@ package com.expensemoitor.expensemonitor.createnewexpense
 
 
 import android.app.Application
-import android.util.Log
 import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -13,6 +12,8 @@ import android.widget.Spinner
 import com.expensemoitor.expensemonitor.R
 import com.expensemoitor.expensemonitor.network.ApiFactory
 import com.expensemoitor.expensemonitor.network.ExpenseData
+import com.expensemoitor.expensemonitor.utilites.PrefManager
+import com.expensemoitor.expensemonitor.utilites.progressStatus
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -34,6 +35,11 @@ class CreateNewExpenseFragmentViewModel(var application: Application) : ViewMode
     init {
         currentDate.value = displayCurrentDate()
     }
+
+    private val _status = MutableLiveData<progressStatus>()
+    val status: LiveData<progressStatus>
+        get() = _status
+
     private val _validationMsg = MutableLiveData<String>()
     val validationMsg: LiveData<String>
         get() = _validationMsg
@@ -74,19 +80,22 @@ class CreateNewExpenseFragmentViewModel(var application: Application) : ViewMode
 
 
     private var viewModelJob = Job()
-    private val corotuineJob  = CoroutineScope(viewModelJob + Dispatchers.Main)
+    private val coroutineJob  = CoroutineScope(viewModelJob + Dispatchers.Main)
 
 
 
     private fun createNewExpense(amount:String,description:String,date:String,form:String,category:String){
-           corotuineJob.launch {
+           coroutineJob.launch {
             val expenseData = ExpenseData(amount,description,date,form,category)
-            val getResponse = ApiFactory.expenseUrls.createNewExpense(expenseData)
+            val getResponse = ApiFactory.CREATE_EXPENSE_URLS.createNewExpense(expenseData)
             try {
-              val expensResponse = getResponse.await()
-                Log.d("response",expensResponse.message.toString())
+                _status.value = progressStatus.LOADING
+                val expensResponse = getResponse.await()
+                PrefManager.saveUpdatedExpense(application,expensResponse.Expense)
                 _navigateToMyExpenseFragment.value = true
+                _status.value = progressStatus.DONE
             }catch (t:Throwable){
+                _status.value = progressStatus.ERROR
                 _navigateToMyExpenseFragment.value = false
             }
            }
