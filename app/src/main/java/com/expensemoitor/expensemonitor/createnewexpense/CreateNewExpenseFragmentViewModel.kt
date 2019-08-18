@@ -50,12 +50,7 @@ class CreateNewExpenseFragmentViewModel(var application: Application) : ViewMode
 
 
     fun onSelectExpenseFormOrCategoryItem(parent: AdapterView<*>, view: View?, pos: Int, id: Long) {
-        val forms = parent as Spinner
-        if(forms.id == R.id.forms_spinner){
-            selectedFormsItem = parent.selectedItem.toString()
-        }else if(parent.id == R.id.categories_spinner){
             selectedCategoryItem = parent.selectedItem.toString()
-        }
     }
 
 
@@ -66,14 +61,12 @@ class CreateNewExpenseFragmentViewModel(var application: Application) : ViewMode
 
         if(expenseAmount == null || expenseDescription == null){
             _validationMsg.value = "Please fill empty field"
-        }else if (selectedFormsItem.equals(application.getString(R.string.SelectForms))){
-            _validationMsg.value = "Please select Expense Forms"
         }else if(selectedCategoryItem.equals(application.getString(R.string.SelectCategory))){
             _validationMsg.value = "Please select Expense Category"
         }else{
             currentDate.value?.let {
                 createNewExpense(expenseAmount,expenseDescription,
-                    it,selectedFormsItem,selectedCategoryItem)
+                    it,selectedCategoryItem)
             }
         }
     }
@@ -84,9 +77,9 @@ class CreateNewExpenseFragmentViewModel(var application: Application) : ViewMode
 
 
 
-    private fun createNewExpense(amount:String,description:String,date:String,form:String,category:String){
+    private fun createNewExpense(amount:String,description:String,date:String,category:String){
            coroutineJob.launch {
-            val expenseData = ExpenseData(amount,description,date,form,category)
+            val expenseData = ExpenseData(amount,description,date,category)
             val getResponse = ApiFactory.CREATE_EXPENSE_URLS.createNewExpense(expenseData)
             try {
                 _status.value = progressStatus.LOADING

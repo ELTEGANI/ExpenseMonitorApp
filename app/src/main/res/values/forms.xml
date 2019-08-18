@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <array name="forms_list">
-        <item name="SelectForms">@string/SelectForms</item>
-        <item>item1</item>
-        <item>item2</item>
-        <item>item3</item>
-    </array>
-</resources>

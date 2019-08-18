@@ -2,7 +2,6 @@
     <string name="app_name">Expense Monitor</string>
     <string name="female">female</string>
     <string name="male">male</string>
-    <string name="SelectForms">Select Forms</string>
     <string name="SelectCategory">Select Category</string>
 
 </resources>
