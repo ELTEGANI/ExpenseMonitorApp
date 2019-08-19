@@ -2,8 +2,116 @@
 <resources>
     <array name="categories_list">
         <item name="Select Category">@string/SelectCategory</item>
-        <item>item</item>
-        <item>item</item>
-        <item>item</item>
+         <item>Adults’ clothing</item>
+         <item>Adults’ shoes</item>
+         <item>Auto insurance</item>
+         <item>Alcohol/Bars</item>
+         <item>Anniversary</item>
+         <item>Administrative violations</item>
+         <item>Alimony and child support</item>
+         <item>Birthday</item>
+         <item>Babysitter</item>
+         <item>Big purchases</item>
+         <item>Books</item>
+         <item>Beauty</item>
+         <item>Cafes</item>
+         <item>Car payment </item>
+         <item>Car warranty</item>
+         <item>Cable</item>
+         <item>Children’s clothing</item>
+         <item>Children’s shoes</item>
+         <item>Cleaning supplies</item>
+         <item>Christmas</item>
+         <item>Credit cards</item>
+         <item>Cosmetics</item>
+         <item>Charities</item>
+         <item>Channel Subscriptions</item>
+         <item>Concerts</item>
+         <item>Cinema</item>
+         <item>Consumer loans</item>
+         <item>Car Leasing</item>
+         <item>Casino</item>
+         <item>Cheque</item>
+         <item>Currency exchange</item>
+         <item>Disability insurance</item>
+         <item>Dishwasher detergent</item>
+         <item>Dental care</item>
+         <item>Enquiries</item>
+         <item>Emergency Fund</item>
+         <item>Electricity</item>
+         <item>Education and courses</item>
+         <item>Financial planning</item>
+         <item>Fuel</item>
+         <item>Gifts</item>
+         <item>Gym memberships</item>
+         <item>Gas</item>
+         <item>Garbage</item>
+         <item>Games</item>
+         <item>Groceries</item>
+         <item>Hobbies</item>
+         <item>Household repairs</item>
+         <item>Haircuts</item>
+         <item>Health insurance</item>
+         <item>Health and pharmaceuticals</item>
+         <item>Home fees</item>
+         <item>Internet</item>
+         <item>Investments</item>
+         <item>Invoices</item>
+         <item>Leisure Time Activities</item>
+         <item>Life insurance</item>
+         <item>Lottery</item>
+         <item>Laundry detergent</item>
+         <item>Loans between individuals</item>
+         <item>Magazines</item>
+         <item>Newspapers</item>
+         <item>Medications</item>
+         <item>Medical devices</item>
+         <item>Mortgage</item>
+         <item>Maintenance</item>
+         <item>Movies</item>
+         <item>Music</item>
+         <item>Other savings</item>
+         <item>Oil Changes</item>
+         <item>Online Retail purchases</item>
+         <item>Online Services</item>
+         <item>Other insurance expenses</item>
+         <item>Other investments</item>
+         <item>Other personal transfers</item>
+         <item>Property taxes</item>
+         <item>Parking fees</item>
+         <item>Phones</item>
+         <item>Primary care</item>
+         <item>Pet food</item>
+         <item>protection plan</item>
+         <item>Personal loans</item>
+         <item>Postal services</item>
+         <item>Rent</item>
+         <item>Repairs</item>
+         <item>Registration Fees</item>
+         <item>Restaurants</item>
+         <item>Sport</item>
+         <item>Special occasion</item>
+         <item>Salon services </item>
+         <item>Subscriptions</item>
+         <item>Student loans</item>
+         <item>School Supplies</item>
+         <item>Savings</item>
+         <item>Specialty care</item>
+         <item>Theatre</item>
+         <item>Travel expenses</item>
+         <item>Tires</item>
+         <item>Toiletries</item>
+         <item>Tools</item>
+         <item>Tobacco</item>
+         <item>To account of relatives</item>
+         <item>To own account</item>
+         <item>Transportation expenses</item>
+         <item>Unions and associations</item>
+         <item>Utilities</item>
+         <item>Urgent care</item>
+         <item>Vacations</item>
+         <item>Vehicle purchase</item>
+         <item>Water</item>
+         <item>Wedding</item>
     </array>
 </resources>
