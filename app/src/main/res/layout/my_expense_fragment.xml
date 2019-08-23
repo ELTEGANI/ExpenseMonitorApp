@@ -3,10 +3,21 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools">
     <data>
-       <variable
+        <import type="android.view.View" />
+
+        <variable
          name="viewModel"
          type="com.expensemoitor.expensemonitor.myexpenses.MyExpenseFragmentViewModel"
        />
+
+        <variable
+                name="handler"
+                type="com.expensemoitor.expensemonitor.myexpenses.MyExpenseFragment" />
+
+        <variable
+                name="manager"
+                type="androidx.fragment.app.FragmentManager" />
+
     </data>
     <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
@@ -31,8 +42,7 @@
             <androidx.appcompat.widget.Toolbar
                     android:id="@+id/toolbar"
                     android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize"
-                    >
+                    android:layout_height="?attr/actionBarSize">
             </androidx.appcompat.widget.Toolbar>
 
 
@@ -57,7 +67,23 @@
          tools:context=".MyExpenseFragment"
          tools:showIn="@layout/my_expense_fragment">
 
+        <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tab_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:pager="@{(pager)}"
+                app:tabBackground="@color/primaryColor">
+        </com.google.android.material.tabs.TabLayout>
+
+
+
     </androidx.core.widget.NestedScrollView>
+
+        <androidx.viewpager.widget.ViewPager
+                android:id="@+id/pager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:handler="@{handler}" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:layout_width="wrap_content"

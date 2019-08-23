@@ -12,8 +12,8 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import com.expensemoitor.expensemonitor.R
 import com.expensemoitor.expensemonitor.databinding.MyExpenseFragmentBinding
-import android.widget.Toast
 import android.view.MenuInflater
+
 
 class MyExpenseFragment : Fragment() {
 
@@ -28,6 +28,9 @@ class MyExpenseFragment : Fragment() {
 
 
 
+        binding.handler = this
+        binding.manager =fragmentManager
+
         val application = requireNotNull(this.activity).application
 
         val viewModelFactory = MyExpenseFragmentViewModelFactory(application)
@@ -36,12 +39,14 @@ class MyExpenseFragment : Fragment() {
             .get(MyExpenseFragmentViewModel::class.java)
 
         binding.viewModel = viewModel
-
         binding.lifecycleOwner = this
 
-        (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
+
+         (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
         (activity as AppCompatActivity).supportActionBar?.setDisplayShowTitleEnabled(false);
         setHasOptionsMenu(true)
+
+
 
 
 
@@ -73,5 +78,9 @@ class MyExpenseFragment : Fragment() {
 
         return false
     }
+
+
+
+
 
 }

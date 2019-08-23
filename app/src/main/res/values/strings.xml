@@ -4,4 +4,9 @@
     <string name="male">male</string>
     <string name="SelectCategory">Select Category</string>
 
+    <string name="daily">Daily</string>
+    <string name="monthly">Monthly</string>
+    <string name="weekly">Weekly</string>
+
+
 </resources>
