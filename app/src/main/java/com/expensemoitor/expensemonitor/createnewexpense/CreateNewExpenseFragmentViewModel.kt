@@ -8,7 +8,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.expensemoitor.expensemonitor.utilites.displayCurrentDate
 import android.widget.AdapterView
-import android.widget.Spinner
 import com.expensemoitor.expensemonitor.R
 import com.expensemoitor.expensemonitor.network.ApiFactory
 import com.expensemoitor.expensemonitor.network.ExpenseData
@@ -27,7 +26,6 @@ class CreateNewExpenseFragmentViewModel(var application: Application) : ViewMode
     val amount = MutableLiveData<String>()
     val description = MutableLiveData<String>()
     val currentDate = MutableLiveData<String>()
-    var selectedFormsItem = ""
     var selectedCategoryItem = ""
 
 
@@ -80,7 +78,7 @@ class CreateNewExpenseFragmentViewModel(var application: Application) : ViewMode
     private fun createNewExpense(amount:String,description:String,date:String,category:String){
            coroutineJob.launch {
             val expenseData = ExpenseData(amount,description,date,category)
-            val getResponse = ApiFactory.CREATE_EXPENSE_URLS.createNewExpense(expenseData)
+            val getResponse = ApiFactory.CREATE_EXPENSE_SERVICE.createNewExpense(expenseData)
             try {
                 _status.value = progressStatus.LOADING
                 val expensResponse = getResponse.await()

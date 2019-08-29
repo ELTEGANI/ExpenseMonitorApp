@@ -6,19 +6,28 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
-import com.expensemoitor.expensemonitor.R
+import androidx.lifecycle.ViewModelProviders
+import com.expensemoitor.expensemonitor.databinding.DailyExpenseFragmentBinding
 
 
 class DailyExpenseFragment : Fragment() {
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.daily_expense_fragment, container, false)
-    }
+   private val viewModel:DailyExpenseFragmentViewModel by lazy {
+       ViewModelProviders.of(this).get(DailyExpenseFragmentViewModel::class.java)
+   }
 
+
+    override fun onCreateView(inflater: LayoutInflater,container: ViewGroup?,savedInstanceState: Bundle?): View? {
+        val binding = DailyExpenseFragmentBinding.inflate(inflater)
+
+        binding.lifecycleOwner = this
+
+
+        binding.viewModel = viewModel
+
+
+        return  binding.root
+
+    }
 
 }

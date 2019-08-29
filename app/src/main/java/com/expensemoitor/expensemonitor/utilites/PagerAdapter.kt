@@ -4,21 +4,20 @@ import android.content.Context
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import com.expensemoitor.expensemonitor.R
 import com.expensemoitor.expensemonitor.dailyexpense.DailyExpenseFragment
 import com.expensemoitor.expensemonitor.monthlyexpense.MonthlyExpenseFragment
 import com.expensemoitor.expensemonitor.weeklyexpense.WeeklyExpenseFragment
 
 
-class MainSectionsAdapter(context: Context, fm: FragmentManager) : FragmentPagerAdapter(fm) {
+class PagerAdapter(context: Context, fm: FragmentManager) : FragmentPagerAdapter(fm) {
 
     private val mContext: Context = context.applicationContext
 
     override fun getItem(position: Int): Fragment? {
         when (TABS[position]) {
-            DAILY -> return DailyExpenseFragment()
-            WEEKLY -> return WeeklyExpenseFragment()
-            MONTHLY -> return MonthlyExpenseFragment()
+            TODAY -> return DailyExpenseFragment()
+            WEEK -> return WeeklyExpenseFragment()
+            MONTH -> return MonthlyExpenseFragment()
         }
         return null
     }
@@ -29,18 +28,18 @@ class MainSectionsAdapter(context: Context, fm: FragmentManager) : FragmentPager
 
     override fun getPageTitle(position: Int): CharSequence? {
         when (TABS[position]) {
-            DAILY -> return mContext.resources.getString(R.string.daily)
-            WEEKLY -> return mContext.resources.getString(R.string.weekly)
-            MONTHLY -> return mContext.resources.getString(R.string.monthly)
+            TODAY -> return mContext.resources.getString(com.expensemoitor.expensemonitor.R.string.today)
+            WEEK -> return "Week"
+            MONTH -> return "Month"
         }
         return null
     }
 
     companion object {
-        private val DAILY = 0
-        private val WEEKLY = 1
-        private val MONTHLY = 2
+        private val TODAY = 0
+        private val WEEK = 1
+        private val MONTH = 2
 
-        private val TABS = intArrayOf(DAILY,WEEKLY,MONTHLY)
+        private val TABS = intArrayOf(TODAY, WEEK,MONTH)
     }
 }

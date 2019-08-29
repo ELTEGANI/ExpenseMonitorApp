@@ -86,7 +86,7 @@ class RegisterationUserViewModel(var application: Application) :ViewModel() {
     private fun registerUser(userName:String,userEmail:String,gender:String) {
         coroutineJob.launch {
             val userData = UserData(userName,userEmail,gender)
-            val getUserResponse =  ApiFactory.registerationUrls.registerationUser(userData)
+            val getUserResponse =  ApiFactory.REGISTERATION_SERVICE.registerationUser(userData)
             try {
                 _status.value = progressStatus.LOADING
                 val userResponse = getUserResponse.await()

@@ -18,7 +18,7 @@ import android.view.MenuInflater
 class MyExpenseFragment : Fragment() {
 
     private lateinit var binding: MyExpenseFragmentBinding
-
+    lateinit var viewModel: MyExpenseFragmentViewModel
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,savedInstanceState: Bundle?): View? {
@@ -35,7 +35,7 @@ class MyExpenseFragment : Fragment() {
 
         val viewModelFactory = MyExpenseFragmentViewModelFactory(application)
 
-        val viewModel = ViewModelProviders.of(this,viewModelFactory)
+        viewModel = ViewModelProviders.of(this,viewModelFactory)
             .get(MyExpenseFragmentViewModel::class.java)
 
         binding.viewModel = viewModel
@@ -43,7 +43,7 @@ class MyExpenseFragment : Fragment() {
 
 
          (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
-        (activity as AppCompatActivity).supportActionBar?.setDisplayShowTitleEnabled(false);
+        (activity as AppCompatActivity).supportActionBar?.setDisplayShowTitleEnabled(false)
         setHasOptionsMenu(true)
 
 
@@ -58,10 +58,12 @@ class MyExpenseFragment : Fragment() {
         }
         })
 
+
         return binding.root
 
 
     }
+
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.main, menu)
@@ -78,6 +80,9 @@ class MyExpenseFragment : Fragment() {
 
         return false
     }
+
+
+
 
 
 

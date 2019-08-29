@@ -12,7 +12,7 @@ data class ExpenseData(
 
 
 
-data class expenseresponse(
+data class expenseResponse(
     val message:String,
     val Expense:Int
 )

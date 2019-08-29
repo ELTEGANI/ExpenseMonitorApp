@@ -4,11 +4,15 @@ import com.expensemoitor.expensemonitor.utilites.AppConstants
 
 object ApiFactory {
 
-    val CREATE_EXPENSE_URLS:CreateExpenseUrls = RetrofitFactory.retrofit(AppConstants.BASEURL)
-        .create(CreateExpenseUrls::class.java)
+    val CREATE_EXPENSE_SERVICE:CreateExpenseService = RetrofitFactory.retrofit(AppConstants.BASEURL)
+        .create(CreateExpenseService::class.java)
 
 
-    val registerationUrls:RegisterationUrls = RetrofitFactory.retrofit((AppConstants.BASEURL))
-        .create(RegisterationUrls::class.java)
+    val REGISTERATION_SERVICE:RegisterationService = RetrofitFactory.retrofit((AppConstants.BASEURL))
+        .create(RegisterationService::class.java)
+
+
+    val GET_EXPNSES_BASED_ON_DURATION_SERVICE:GetExpenseBasedOnDurationsService = RetrofitFactory.retrofit((AppConstants.BASEURL))
+        .create(GetExpenseBasedOnDurationsService::class.java)
 
 }
