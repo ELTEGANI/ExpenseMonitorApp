@@ -4,9 +4,9 @@ import android.content.Context
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import com.expensemoitor.expensemonitor.dailyexpense.DailyExpenseFragment
-import com.expensemoitor.expensemonitor.monthlyexpense.MonthlyExpenseFragment
-import com.expensemoitor.expensemonitor.weeklyexpense.WeeklyExpenseFragment
+import com.expensemoitor.expensemonitor.todayexpense.TodayExpenseFragment
+import com.expensemoitor.expensemonitor.monthexpense.MonthlyExpenseFragment
+import com.expensemoitor.expensemonitor.weekexpense.WeeklyExpenseFragment
 
 
 class PagerAdapter(context: Context, fm: FragmentManager) : FragmentPagerAdapter(fm) {
@@ -15,7 +15,7 @@ class PagerAdapter(context: Context, fm: FragmentManager) : FragmentPagerAdapter
 
     override fun getItem(position: Int): Fragment? {
         when (TABS[position]) {
-            TODAY -> return DailyExpenseFragment()
+            TODAY -> return TodayExpenseFragment()
             WEEK -> return WeeklyExpenseFragment()
             MONTH -> return MonthlyExpenseFragment()
         }

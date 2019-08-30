@@ -1,4 +1,4 @@
-package com.expensemoitor.expensemonitor.weeklyexpense
+package com.expensemoitor.expensemonitor.weekexpense
 
 
 import android.os.Bundle
