@@ -12,13 +12,7 @@ import com.expensemoitor.expensemonitor.R
 
 class WeeklyExpenseFragment : Fragment() {
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.weekly_expense_fragment, container, false)
-    }
+   private val
 
 
 }

@@ -1,4 +1,4 @@
-package com.expensemoitor.expensemonitor.todayexpense
+package com.expensemoitor.expensemonitor.utilites
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -8,27 +8,26 @@ import androidx.recyclerview.widget.RecyclerView
 import com.expensemoitor.expensemonitor.databinding.ExpenseViewItemBinding
 import com.expensemoitor.expensemonitor.network.GetExpensesResponse
 
-class TodayExpenseAdapter(val clickListener: GetExpensesResponseListener) : ListAdapter<GetExpensesResponse, TodayExpenseAdapter.ViewHolder>(GetExpensesResponseDiffCallback()){
+class DurationsExpenseAdapter() : ListAdapter<GetExpensesResponse, DurationsExpenseAdapter.ViewHolder>(
+    GetExpensesResponseDiffCallback()){
 
 
     override fun onCreateViewHolder(parent: ViewGroup,viewType:Int): ViewHolder {
-        return ViewHolder.from(parent)
+        return ViewHolder.from(
+            parent
+        )
     }
 
 
-    override fun onBindViewHolder(holder:ViewHolder,position:Int){
-       holder.bind(getItem(position)!!,clickListener)
+    override fun onBindViewHolder(holder: ViewHolder, position:Int){
+       holder.bind(getItem(position)!!)
     }
 
 
     class ViewHolder private constructor(val binding: ExpenseViewItemBinding):RecyclerView.ViewHolder(binding.root) {
-        fun bind(
-            getExpensesResponse: GetExpensesResponse,
-            clickListener: GetExpensesResponseListener
-        ) {
+        fun bind(getExpensesResponse: GetExpensesResponse) {
           binding.expensesProperties = getExpensesResponse
-          binding.clickListener = clickListener
-            binding.executePendingBindings()
+          binding.executePendingBindings()
         }
 
 
@@ -36,7 +35,9 @@ class TodayExpenseAdapter(val clickListener: GetExpensesResponseListener) : List
             fun from(parent: ViewGroup): ViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding = ExpenseViewItemBinding.inflate(layoutInflater, parent, false)
-                return ViewHolder(binding)
+                return ViewHolder(
+                    binding
+                )
             }
         }
     }
@@ -53,8 +54,6 @@ class GetExpensesResponseDiffCallback:DiffUtil.ItemCallback<GetExpensesResponse>
 
 }
 
-class GetExpensesResponseListener(val clickListener:(id:String)->Unit){
-    fun onClick(getExpensesResponse: GetExpensesResponse) = clickListener(getExpensesResponse.id)
-}
+
 
 
