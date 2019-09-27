@@ -15,7 +15,7 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 object RetrofitFactory {
 
     private val authInterceptor = Interceptor {chain->
-        val newUrl = chain.request().url()
+        val newUrl = chain.request().url
             .newBuilder()
             .build()
 

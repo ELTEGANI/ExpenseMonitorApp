@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
-            xmlns:tools="http://schemas.android.com/tools" android:id="@+id/navigation"
-        app:startDestination="@id/registerationUserFragment">
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/navigation"
+        app:startDestination="@id/myExpenseFragment">
     <fragment
             android:id="@+id/registerationUserFragment"
             android:name="com.expensemoitor.expensemonitor.registeruser.RegisterationUserFragment"
@@ -15,9 +16,6 @@
             android:id="@+id/myExpenseFragment"
             android:name="com.expensemoitor.expensemonitor.myexpenses.MyExpenseFragment"
             android:label="MyExpenseFragment" >
-        <action
-                android:id="@+id/action_myExpenseFragment_to_registerationUserFragment"
-                app:destination="@id/registerationUserFragment" />
         <action
                 android:id="@+id/action_myExpenseFragment_to_createNewExpenseFragment"
                 app:destination="@id/createNewExpenseFragment" />

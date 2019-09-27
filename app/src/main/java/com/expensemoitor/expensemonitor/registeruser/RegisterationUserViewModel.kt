@@ -90,7 +90,7 @@ class RegisterationUserViewModel(var application: Application) :ViewModel() {
             try {
                 _status.value = progressStatus.LOADING
                 val userResponse = getUserResponse.await()
-                 PrefManager.saveAccessTokenAndCurrentExpense(application,userResponse.accesstoken,userResponse.userCurrentExpense.toInt())
+                 PrefManager.saveAccessTokenAndCurrentExpense(application,userResponse.accesstoken,userResponse.userCurrentExpense.toInt(),userResponse.weekExpense.toInt(),userResponse.monthExpense.toInt())
                  Log.d("accessToken",PrefManager.getAccessToken(application)+"\n"+PrefManager.getUserExpenses(application))
                 _navigateToMyExpenseFragment.value = true
                 _status.value = progressStatus.DONE

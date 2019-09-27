@@ -11,5 +11,8 @@ data class UserData(
 
 data class RegisterationResponse (
     val accesstoken:String,
-    val userCurrentExpense:String
+    val userCurrentExpense:String,
+    val weekExpense:String,
+    val monthExpense:String
+
 )

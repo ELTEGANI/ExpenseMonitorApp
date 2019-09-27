@@ -11,10 +11,12 @@ class PrefManager
             return context.getSharedPreferences("APP_PREF", Context.MODE_PRIVATE)
         }
 
-        fun saveAccessTokenAndCurrentExpense(context: Context, accessToken: String,userExpenses:Int) {
+        fun saveAccessTokenAndCurrentExpense(context: Context, accessToken: String,todayExpenses:Int,weekExpense:Int,monthExpense:Int) {
             val editor = getSharedPreferences(context).edit()
             editor.putString("ACCESS_TOKEN", accessToken)
-            editor.putInt("USER_EXPENSES", userExpenses)
+            editor.putInt("TODAY_EXPENSES", todayExpenses)
+            editor.putInt("WEEK_EXPENSES", weekExpense)
+            editor.putInt("MONTH_EXPENSES", monthExpense)
             editor.apply()
         }
 
@@ -23,12 +25,24 @@ class PrefManager
         }
 
         fun getUserExpenses(context: Context):Int?{
-            return getSharedPreferences(context).getInt("USER_EXPENSES",0)
+            return getSharedPreferences(context).getInt("TODAY_EXPENSES",0)
         }
 
-        fun saveUpdatedExpense(context: Context,updatedExpenses:Int){
+        fun saveUpdatedTodayExpense(context: Context, updatedTodayExpenses:Int){
             val editor = getSharedPreferences(context).edit()
-            editor.putInt("USER_EXPENSES",updatedExpenses)
+            editor.putInt("TODAY_EXPENSES",updatedTodayExpenses)
+            editor.apply()
+        }
+
+        fun saveUpdatedWeekExpense(context: Context, updatedWeekExpenses:Int){
+            val editor = getSharedPreferences(context).edit()
+            editor.putInt("WEEK_EXPENSES",updatedWeekExpenses)
+            editor.apply()
+        }
+
+        fun saveUpdatedMonthExpense(context: Context, updatedMonthExpenses:Int){
+            val editor = getSharedPreferences(context).edit()
+            editor.putInt("MONTH_EXPENSES",updatedMonthExpenses)
             editor.apply()
         }
 
@@ -36,6 +50,26 @@ class PrefManager
             val editor = getSharedPreferences(context).edit()
             editor.putString("USER_CURRENCY",userCurrency)
             editor.apply()
+        }
+
+        fun saveStartOfWeek(context: Context,startWeek:String){
+            val editor = getSharedPreferences(context).edit()
+            editor.putString("START_OF_THE_WEEK",startWeek)
+            editor.apply()
+        }
+
+        fun getStartOfWeek(context: Context): String? {
+            return getSharedPreferences(context).getString("START_OF_THE_WEEK", null)
+        }
+
+        fun saveEndOfWeek(context: Context,endWeek:String){
+            val editor = getSharedPreferences(context).edit()
+            editor.putString("END_OF_THE_WEEK",endWeek)
+            editor.apply()
+        }
+
+        fun getEndOfWeek(context: Context): String? {
+            return getSharedPreferences(context).getString("END_OF_THE_WEEK", null)
         }
 
         fun getCurrency(context: Context): String? {

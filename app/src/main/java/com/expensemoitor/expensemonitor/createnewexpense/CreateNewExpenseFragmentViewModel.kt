@@ -82,7 +82,7 @@ class CreateNewExpenseFragmentViewModel(var application: Application) : ViewMode
             try {
                 _status.value = progressStatus.LOADING
                 val expensResponse = getResponse.await()
-                PrefManager.saveUpdatedExpense(application,expensResponse.Expense)
+                PrefManager.saveUpdatedTodayExpense(application,expensResponse.Expense)
                 _navigateToMyExpenseFragment.value = true
                 _status.value = progressStatus.DONE
             }catch (t:Throwable){

@@ -11,6 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DefaultItemAnimator
 import com.expensemoitor.expensemonitor.databinding.TodayExpenseFragmentBinding
+import com.expensemoitor.expensemonitor.utilites.DurationsExpenseAdapter
 
 
 class TodayExpenseFragment : Fragment() {
@@ -28,9 +29,7 @@ class TodayExpenseFragment : Fragment() {
 
         binding.viewModel = viewModel
 
-        val adapter = TodayExpenseAdapter(GetExpensesResponseListener {
-           expenseId->viewModel.onGetExpenseClicked(expenseId)
-        })
+        val adapter = DurationsExpenseAdapter()
 
 
         binding.todayExpenseList.itemAnimator = DefaultItemAnimator()

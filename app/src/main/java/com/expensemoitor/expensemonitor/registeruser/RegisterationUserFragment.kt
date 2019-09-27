@@ -41,9 +41,8 @@ class RegisterationUserFragment : Fragment() {
         binding.lifecycleOwner = this
 
 
-        viewModel.genderSelected.observe(
-            this,
-            Observer { isSelected ->
+
+        viewModel.genderSelected.observe(this, Observer { isSelected ->
             if (!isSelected) {
                 Toast.makeText(context,"Please Select Option",Toast.LENGTH_LONG).show()
                 viewModel.genderAlreadySelected()

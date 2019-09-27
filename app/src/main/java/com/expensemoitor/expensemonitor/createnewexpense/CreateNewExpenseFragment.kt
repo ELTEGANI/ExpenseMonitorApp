@@ -43,12 +43,14 @@ class CreateNewExpenseFragment : Fragment() {
             val year = c.get(Calendar.YEAR)
             val month = c.get(Calendar.MONTH)
             val day = c.get(Calendar.DAY_OF_MONTH)
-            val datePickerDialog = DatePickerDialog(context,
-                DatePickerDialog.OnDateSetListener {
-                        view, year, monthOfYear, dayOfMonth ->
-                   viewModel.currentDate.value = year.toString() + "-" + (monthOfYear + 1) + "-" + dayOfMonth.toString()
-                },year,month,day)
-            datePickerDialog.show()
+            val datePickerDialog = context?.let { it1 ->
+                DatePickerDialog(
+                    it1,
+                    DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+                        viewModel.currentDate.value = year.toString() + "-" + (monthOfYear + 1) + "-" + dayOfMonth.toString()
+                    },year,month,day)
+            }
+            datePickerDialog?.show()
         }
 
         viewModel.validationMsg.observe(this, Observer { validationMsg->

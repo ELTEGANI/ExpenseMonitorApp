@@ -1,4 +1,4 @@
-package com.expensemoitor.expensemonitor.weekexpense
+package com.expensemoitor.expensemonitor.monthexpense
 
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -13,27 +13,29 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
-class WeekExpenseFragmentViewModel : ViewModel() {
-
+class MonthExpenseViewModel : ViewModel() {
 
     private val viewModelJob = Job()
+
     private val coroutineScope = CoroutineScope(viewModelJob+ Dispatchers.Main)
 
     private val _status = MutableLiveData<progressStatus>()
     val status: LiveData<progressStatus>
         get() = _status
 
+
     private val _expensesProperties = MutableLiveData<List<GetExpensesResponse>>()
-    val expensesProperties:LiveData<List<GetExpensesResponse>>
+    val expensesProperties: LiveData<List<GetExpensesResponse>>
         get() = _expensesProperties
 
 
+
     init {
-        getWeekExpense("week")
+        getMonthExpense("month")
     }
 
 
-    private fun getWeekExpense(duration:String) {
+    private fun getMonthExpense(duration:String) {
         coroutineScope.launch {
             val durationTag = DurationTag(duration)
             val getResponse = ApiFactory.GET_EXPNSES_BASED_ON_DURATION_SERVICE.getExpensesBasedOnDuration(durationTag)
@@ -55,4 +57,5 @@ class WeekExpenseFragmentViewModel : ViewModel() {
         super.onCleared()
         viewModelJob.cancel()
     }
+
 }

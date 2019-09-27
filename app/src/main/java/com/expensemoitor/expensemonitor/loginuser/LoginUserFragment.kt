@@ -20,11 +20,6 @@ class LoginUserFragment : Fragment() {
             inflate(inflater,R.layout.login_user_fragment,container,false)
 
 
-//        binding.loginUseButton.setOnClickListener {
-//            Navigation.createNavigateOnClickListener(R.id.action_loginUserFragment_to_registerationUserFragment)
-//        }
-
-
         return binding.root
     }
 

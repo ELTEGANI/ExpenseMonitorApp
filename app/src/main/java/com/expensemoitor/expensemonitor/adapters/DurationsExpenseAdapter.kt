@@ -8,14 +8,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.expensemoitor.expensemonitor.databinding.ExpenseViewItemBinding
 import com.expensemoitor.expensemonitor.network.GetExpensesResponse
 
-class DurationsExpenseAdapter() : ListAdapter<GetExpensesResponse, DurationsExpenseAdapter.ViewHolder>(
+class DurationsExpenseAdapter : ListAdapter<GetExpensesResponse, DurationsExpenseAdapter.ViewHolder>(
     GetExpensesResponseDiffCallback()){
 
 
     override fun onCreateViewHolder(parent: ViewGroup,viewType:Int): ViewHolder {
-        return ViewHolder.from(
-            parent
-        )
+        return ViewHolder.from(parent)
     }
 
 
@@ -35,9 +33,7 @@ class DurationsExpenseAdapter() : ListAdapter<GetExpensesResponse, DurationsExpe
             fun from(parent: ViewGroup): ViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding = ExpenseViewItemBinding.inflate(layoutInflater, parent, false)
-                return ViewHolder(
-                    binding
-                )
+                return ViewHolder(binding)
             }
         }
     }

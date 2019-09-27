@@ -4,42 +4,39 @@ import android.content.Context
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
+import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.expensemoitor.expensemonitor.monthexpense.MonthExpenseFragment
 import com.expensemoitor.expensemonitor.todayexpense.TodayExpenseFragment
-import com.expensemoitor.expensemonitor.monthexpense.MonthlyExpenseFragment
-import com.expensemoitor.expensemonitor.weekexpense.WeeklyExpenseFragment
+import com.expensemoitor.expensemonitor.weekexpense.WeekExpenseFragment
 
 
-class PagerAdapter(context: Context, fm: FragmentManager) : FragmentPagerAdapter(fm) {
 
-    private val mContext: Context = context.applicationContext
+const val TODAY_EXPENSE_INDEX = 0
+const val WEEK_EXPENSE_INDEX = 1
+const val MONTH_EXPENSE_INDEX =2
 
-    override fun getItem(position: Int): Fragment? {
-        when (TABS[position]) {
-            TODAY -> return TodayExpenseFragment()
-            WEEK -> return WeeklyExpenseFragment()
-            MONTH -> return MonthlyExpenseFragment()
+
+class PagerAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
+
+    /**
+     * Mapping of the ViewPager page indexes to their respective Fragments
+     */
+    private val tabFragmentsCreators: Map<Int, () -> Fragment> = mapOf(
+        TODAY_EXPENSE_INDEX to {
+            TodayExpenseFragment()
+        },
+        WEEK_EXPENSE_INDEX to {
+            WeekExpenseFragment()
+        },
+        MONTH_EXPENSE_INDEX to {
+            MonthExpenseFragment()
         }
-        return null
+    )
+
+    override fun getItemCount() = tabFragmentsCreators.size
+
+    override fun createFragment(position: Int): Fragment {
+        return tabFragmentsCreators[position]?.invoke() ?: throw IndexOutOfBoundsException()
     }
 
-    override fun getCount(): Int {
-        return TABS.size
-    }
-
-    override fun getPageTitle(position: Int): CharSequence? {
-        when (TABS[position]) {
-            TODAY -> return mContext.resources.getString(com.expensemoitor.expensemonitor.R.string.today)
-            WEEK -> return "Week"
-            MONTH -> return "Month"
-        }
-        return null
-    }
-
-    companion object {
-        private val TODAY = 0
-        private val WEEK = 1
-        private val MONTH = 2
-
-        private val TABS = intArrayOf(TODAY, WEEK,MONTH)
-    }
 }

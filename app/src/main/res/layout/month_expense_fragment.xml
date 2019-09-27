@@ -4,19 +4,19 @@
         xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <variable
-                name="viewModel"
-                type="com.expensemoitor.expensemonitor.weekexpense.WeekExpenseFragmentViewModel" />
-
+       <variable
+               name="viewModel"
+               type="com.expensemoitor.expensemonitor.monthexpense.MonthExpenseViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context=".weekexpense.WeekExpenseFragment">
+            tools:context=".monthexpense.MonthExpenseFragment">
+
 
         <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/week_expense_list"
+                android:id="@+id/month_expense_list"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
@@ -44,7 +44,6 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintVertical_bias="0.272"/>
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
