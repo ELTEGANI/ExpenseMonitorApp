@@ -26,5 +26,18 @@
         <item name="android:textSize">24sp</item>
     </style>
 
+    <style name="amountstyle">
+        <item name="android:fontFamily">@font/eczar_bold</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/expensemonitor_red_400</item>
+    </style>
+
+    <style name="expenseitemstyle">
+        <item name="android:fontFamily">@font/roboto</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+
 
 </resources>

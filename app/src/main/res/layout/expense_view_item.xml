@@ -48,46 +48,52 @@
 
                 <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/description_textView"
+                        style="@style/expenseitemstyle"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:layout_marginTop="36dp"
+                        android:layout_marginEnd="8dp"
                         android:maxLines="2"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                        app:autoSizeTextType="uniform"
                         app:expenseDescription="@{expensesProperties}"
                         app:layout_constraintBottom_toTopOf="@+id/category_textView"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="@+id/amount_textView" />
 
                 <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/category_textView"
+                        style="@style/expenseitemstyle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="8dp"
+                        app:autoSizeTextType="uniform"
                         app:expenseCategory="@{expensesProperties}"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="@+id/amount_textView"
                         app:layout_constraintVertical_bias="1.0" />
 
                 <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/amount_textView"
+                        style="@style/amountstyle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Title"
-                        android:textColor="@color/expensemonitor_red_400"
+                        app:autoSizeTextType="uniform"
                         app:expenseAmount="@{expensesProperties}"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
                 <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/date_textView"
+                        style="@style/expenseitemstyle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="8dp"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                        app:autoSizeTextType="uniform"
                         app:expenseDate="@{expensesProperties}"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
