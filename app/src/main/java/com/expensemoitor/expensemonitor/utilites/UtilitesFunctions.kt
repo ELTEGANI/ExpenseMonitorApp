@@ -1,8 +1,11 @@
 package com.expensemoitor.expensemonitor.utilites
 
 import android.annotation.SuppressLint
+import android.util.Log
 import java.text.SimpleDateFormat
 import java.util.*
+
+
 
 
 
@@ -52,7 +55,7 @@ fun getStartAndEndOfTheWeek():String{
     val year = calendar.get(Calendar.YEAR)
 
     calendar.clear()
-    calendar.firstDayOfWeek = Calendar.SATURDAY
+    calendar.firstDayOfWeek = Calendar.MONDAY
     calendar.set(Calendar.WEEK_OF_MONTH, weekn)
     calendar.set(Calendar.MONTH, month)
     calendar.set(Calendar.YEAR, year)
@@ -81,4 +84,22 @@ fun getStartAndEndOfTheWeek():String{
     val startDate = firtdate.toString()
 
     return "$startDate*$endDate"
+}
+
+
+
+fun getTheStartAndTheEndOfTheMonth():String{
+    val calendar = Calendar.getInstance()
+    calendar.add(Calendar.MONTH, 0)
+    calendar.set(Calendar.DATE, calendar.getActualMinimum(Calendar.DAY_OF_MONTH))
+    val monthFirstDay = calendar.time
+    calendar.set(Calendar.DATE, calendar.getActualMaximum(Calendar.DAY_OF_MONTH))
+    val monthLastDay = calendar.time
+
+    val df = SimpleDateFormat("yyyy-MM-dd")
+    val startDateStr = df.format(monthFirstDay)
+    val endDateStr = df.format(monthLastDay)
+
+    Log.e("DateFirstLast", "$startDateStr $endDateStr")
+    return startDateStr+endDateStr
 }

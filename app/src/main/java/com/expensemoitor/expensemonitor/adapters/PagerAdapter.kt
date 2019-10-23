@@ -1,9 +1,6 @@
 package com.expensemoitor.expensemonitor.utilites
 
-import android.content.Context
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentPagerAdapter
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.expensemoitor.expensemonitor.monthexpense.MonthExpenseFragment
 import com.expensemoitor.expensemonitor.todayexpense.TodayExpenseFragment
