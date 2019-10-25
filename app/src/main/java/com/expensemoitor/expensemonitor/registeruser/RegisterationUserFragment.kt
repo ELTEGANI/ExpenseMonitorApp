@@ -16,6 +16,7 @@ import androidx.navigation.fragment.findNavController
 
 import com.expensemoitor.expensemonitor.R
 import com.expensemoitor.expensemonitor.databinding.RegisterationUserFragmentBinding
+import com.expensemoitor.expensemonitor.utilites.PrefManager
 
 
 class RegisterationUserFragment : Fragment() {
@@ -24,6 +25,7 @@ class RegisterationUserFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
+
 
         binding = DataBindingUtil.inflate(inflater,R.layout.registeration_user_fragment,container,false)
 
@@ -37,7 +39,6 @@ class RegisterationUserFragment : Fragment() {
 
 
         binding.viewModel = viewModel
-
         binding.lifecycleOwner = this
 
 

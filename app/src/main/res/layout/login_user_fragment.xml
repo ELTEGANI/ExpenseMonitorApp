@@ -2,6 +2,9 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools">
     <data>
+        <variable
+                name="viewModel"
+                type="com.expensemoitor.expensemonitor.loginuser.LoginUserViewModel" />
 
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -10,6 +13,17 @@
             tools:context=".loginuser.LoginUserFragment">
 
 
-
+        <Button
+                android:id="@+id/login_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:text="login using Gmail"
+                android:textColor="#000000"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -3,14 +3,20 @@
             xmlns:app="http://schemas.android.com/apk/res-auto"
             xmlns:tools="http://schemas.android.com/tools"
             android:id="@+id/navigation"
-        app:startDestination="@id/registerationUserFragment">
+        app:startDestination="@id/loginUserFragment">
     <fragment
             android:id="@+id/registerationUserFragment"
             android:name="com.expensemoitor.expensemonitor.registeruser.RegisterationUserFragment"
             android:label="RegisterationUserFragment" >
         <action
                 android:id="@+id/action_registerationUserFragment_to_myExpenseFragment"
-                app:destination="@id/myExpenseFragment" />
+                app:destination="@id/myExpenseFragment"
+                app:enterAnim="@anim/fade_in"
+                app:exitAnim="@anim/fade_out"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right"
+                app:popUpTo="@+id/registerationUserFragment"
+                app:popUpToInclusive="true" />
     </fragment>
     <fragment
             android:id="@+id/myExpenseFragment"
@@ -18,7 +24,11 @@
             android:label="MyExpenseFragment" >
         <action
                 android:id="@+id/action_myExpenseFragment_to_createNewExpenseFragment"
-                app:destination="@id/createNewExpenseFragment" />
+                app:destination="@id/createNewExpenseFragment"
+                app:enterAnim="@anim/fade_in"
+                app:exitAnim="@anim/fade_out"
+                app:popEnterAnim="@anim/slide_in_right"
+                app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
             android:id="@+id/createNewExpenseFragment"
@@ -26,6 +36,33 @@
             android:label="CreateNewExpenseFragment" >
         <action
                 android:id="@+id/action_createNewExpenseFragment_to_myExpenseFragment"
-                app:destination="@id/myExpenseFragment" />
+                app:destination="@id/myExpenseFragment"
+                app:enterAnim="@anim/fade_in"
+                app:exitAnim="@anim/fade_out"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+            android:id="@+id/loginUserFragment"
+            android:name="com.expensemoitor.expensemonitor.loginuser.LoginUserFragment"
+            android:label="LoginUserFragment" >
+        <action
+                android:id="@+id/action_loginUserFragment_to_registerationUserFragment"
+                app:destination="@id/registerationUserFragment"
+                app:enterAnim="@anim/fade_in"
+                app:exitAnim="@anim/fade_out"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right"
+                app:popUpTo="@+id/loginUserFragment"
+                app:popUpToInclusive="true" />
+        <action
+                android:id="@+id/action_loginUserFragment_to_myExpenseFragment"
+                app:destination="@id/myExpenseFragment"
+                app:enterAnim="@anim/fade_in"
+                app:exitAnim="@anim/fade_out"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right"
+                app:popUpTo="@+id/loginUserFragment"
+                app:popUpToInclusive="true" />
     </fragment>
 </navigation>

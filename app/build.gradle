@@ -83,8 +83,8 @@ dependencies {
 
 
     //Okhttp3
-    implementation 'com.squareup.okhttp3:okhttp:4.2.0'
-    implementation 'com.squareup.okhttp3:logging-interceptor:4.2.0'
+    implementation 'com.squareup.okhttp3:okhttp:4.2.2'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.2.2'
 
     //google play services auth
     implementation 'com.google.android.gms:play-services-auth:17.0.0'

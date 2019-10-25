@@ -65,16 +65,16 @@ class MyExpenseFragment : Fragment() {
                 super.onPageSelected(position)
                 when(position.toString()){
                     "0"->{
-                       binding.expenseTextView.text = expenseFormat("234000")
-                       binding.dateTextView.text = displayCurrentDate()
+//                       binding.expenseTextView.text = expenseFormat("234000")
+//                       binding.dateTextView.text = displayCurrentDate()
                     }
                     "1"->{
-                        binding.expenseTextView.text = expenseFormat("4344000")
-                        binding.dateTextView.text = PrefManager.getStartOfWeek(application)+" "+"/"+" "+PrefManager.getEndOfWeek(application)
+//                        binding.expenseTextView.text = expenseFormat("4344000")
+//                        binding.dateTextView.text = PrefManager.getStartOfWeek(application)+" "+"/"+" "+PrefManager.getEndOfWeek(application)
                     }
                     "2"->{
-                        binding.expenseTextView.text = expenseFormat("63445000")
-                        binding.dateTextView.text = "27-09-2019 - 27-10-2019"
+//                        binding.expenseTextView.text = expenseFormat("63445000")
+//                        binding.dateTextView.text = "27-09-2019 - 27-10-2019"
                     }
                 }
             }

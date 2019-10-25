@@ -96,7 +96,7 @@ fun getTheStartAndTheEndOfTheMonth():String{
     calendar.set(Calendar.DATE, calendar.getActualMaximum(Calendar.DAY_OF_MONTH))
     val monthLastDay = calendar.time
 
-    val df = SimpleDateFormat("yyyy-MM-dd")
+    val df = SimpleDateFormat("yyyy-MM-dd",Locale.US)
     val startDateStr = df.format(monthFirstDay)
     val endDateStr = df.format(monthLastDay)
 

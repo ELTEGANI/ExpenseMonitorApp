@@ -12,12 +12,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        getTheStartAndTheEndOfTheMonth()
-
-
-        val weekDates = getStartAndEndOfTheWeek().split("*")
-        PrefManager.saveStartOfWeek(applicationContext,weekDates[0])
-        PrefManager.saveEndOfWeek(applicationContext,weekDates[1])
+//        getTheStartAndTheEndOfTheMonth()
+//
+//
+//        val weekDates = getStartAndEndOfTheWeek().split("*")
+//        PrefManager.saveStartOfWeek(applicationContext,weekDates[0])
+//        PrefManager.saveEndOfWeek(applicationContext,weekDates[1])
 
 
     }
