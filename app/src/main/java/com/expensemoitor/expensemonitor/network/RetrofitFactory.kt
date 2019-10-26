@@ -23,7 +23,6 @@ object RetrofitFactory {
             .newBuilder()
             .addHeader("Content-Type", "application/json")
             .addHeader("Authorization","Bearer "+MyApp.context?.let { PrefManager.getAccessToken(it) })
-            .addHeader("Connection","close")
             .url(newUrl)
             .build()
 
@@ -40,6 +39,7 @@ object RetrofitFactory {
             OkHttpClient().newBuilder()
                 .addInterceptor(authInterceptor)
                 .addInterceptor(loggingInterceptor)
+                .retryOnConnectionFailure(true)
                 .build()
         }else{
             OkHttpClient().newBuilder()

@@ -1,12 +1,14 @@
 package com.expensemoitor.expensemonitor.todayexpense
 
 import android.util.Log
+import android.view.View
+import android.widget.AdapterView
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.expensemoitor.expensemonitor.network.ApiFactory
 import com.expensemoitor.expensemonitor.network.DurationTag
-import com.expensemoitor.expensemonitor.network.GetExpensesResponse
+import com.expensemoitor.expensemonitor.network.ExpensesResponse
 import com.expensemoitor.expensemonitor.utilites.progressStatus
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -26,13 +28,14 @@ class TodayExpenseFragmentViewModel : ViewModel() {
         get() = _status
 
 
-    private val _expensesProperties = MutableLiveData<List<GetExpensesResponse>>()
-    val expensesProperties:LiveData<List<GetExpensesResponse>>
+    private val _expensesProperties = MutableLiveData<List<ExpensesResponse>>()
+    val expensesProperties:LiveData<List<ExpensesResponse>>
        get() = _expensesProperties
 
-    private val _navigateToUpdateExpense = MutableLiveData<String>()
-    val navigateToUpdateExpense
-        get() = _navigateToUpdateExpense
+
+    fun onSelectExpenseFormOrCategoryItem(parent: AdapterView<*>, view: View?, pos: Int, id: Long) {
+
+    }
 
 
 
@@ -64,11 +67,4 @@ class TodayExpenseFragmentViewModel : ViewModel() {
         viewModelJob.cancel()
     }
 
-    fun onGetExpenseClicked(id:String){
-        _navigateToUpdateExpense.value = id
-    }
-
-    fun onGetExpenseNavigated(){
-        _navigateToUpdateExpense.value = null
-    }
 }

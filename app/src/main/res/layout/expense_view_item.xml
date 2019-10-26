@@ -5,7 +5,11 @@
         <data>
              <variable
                      name="expensesProperties"
-                     type="com.expensemoitor.expensemonitor.network.GetExpensesResponse" />
+                     type="com.expensemoitor.expensemonitor.network.ExpensesResponse" />
+
+            <variable
+                    name="clickListener"
+                    type="com.expensemoitor.expensemonitor.utilites.ExpenseListener" />
 
         </data>
 
@@ -21,6 +25,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
+                android:onClick="@{() -> clickListener.onClick(expensesProperties)}"
                 android:clickable="true"
                 android:focusable="true"
                 android:foreground="?android:attr/selectableItemBackground"

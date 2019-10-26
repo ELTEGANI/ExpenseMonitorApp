@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.expensemoitor.expensemonitor.network.ApiFactory
 import com.expensemoitor.expensemonitor.network.DurationTag
-import com.expensemoitor.expensemonitor.network.GetExpensesResponse
+import com.expensemoitor.expensemonitor.network.ExpensesResponse
 import com.expensemoitor.expensemonitor.utilites.progressStatus
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -24,8 +24,8 @@ class MonthExpenseViewModel : ViewModel() {
         get() = _status
 
 
-    private val _expensesProperties = MutableLiveData<List<GetExpensesResponse>>()
-    val expensesProperties: LiveData<List<GetExpensesResponse>>
+    private val _expensesProperties = MutableLiveData<List<ExpensesResponse>>()
+    val expensesProperties: LiveData<List<ExpensesResponse>>
         get() = _expensesProperties
 
 

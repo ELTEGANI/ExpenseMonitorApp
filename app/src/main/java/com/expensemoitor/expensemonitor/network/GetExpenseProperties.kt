@@ -9,7 +9,7 @@ data class DurationTag(
 
 
 
-data class GetExpensesResponse(
+data class ExpensesResponse(
     val id :String,
     val amount :String,
     val description:String,

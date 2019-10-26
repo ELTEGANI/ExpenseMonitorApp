@@ -10,6 +10,8 @@ import java.util.*
 
 
 
+
+
 @SuppressLint("SimpleDateFormat")
 fun displayCurrentDate():String {
     val calendar = Calendar.getInstance()
@@ -103,3 +105,5 @@ fun getTheStartAndTheEndOfTheMonth():String{
     Log.e("DateFirstLast", "$startDateStr $endDateStr")
     return startDateStr+endDateStr
 }
+
+

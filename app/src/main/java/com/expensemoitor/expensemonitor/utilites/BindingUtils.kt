@@ -5,7 +5,7 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.expensemoitor.expensemonitor.network.GetExpensesResponse
+import com.expensemoitor.expensemonitor.network.ExpensesResponse
 
 
 @BindingAdapter("progressStatus")
@@ -24,29 +24,29 @@ fun bindingStatus(progressBar: ProgressBar,status: progressStatus?){
 }
 
 @BindingAdapter("listData")
-fun bindRecyclerView(recyclerView: RecyclerView,data:List<GetExpensesResponse>?){
+fun bindRecyclerView(recyclerView: RecyclerView,data:List<ExpensesResponse>?){
     val adapter = recyclerView.adapter as DurationsExpenseAdapter
     adapter.submitList(data)
 }
 
 @BindingAdapter("expenseAmount")
-fun TextView.setExpenseAmount(getExpensesResponse:GetExpensesResponse?){
-     getExpensesResponse?.let {
-         text = PrefManager.getCurrency(context)+" "+ expenseFormat(getExpensesResponse.amount)
+fun TextView.setExpenseAmount(expensesResponse:ExpensesResponse?){
+     expensesResponse?.let {
+         text = PrefManager.getCurrency(context)+" "+ expenseFormat(expensesResponse.amount)
      }
 }
 
 @BindingAdapter("expenseCategory")
-fun TextView.setExpensecategory(getExpensesResponse:GetExpensesResponse?){
-    getExpensesResponse?.let {
-        text = getExpensesResponse.expenseCategory
+fun TextView.setExpensecategory(expensesResponse:ExpensesResponse?){
+    expensesResponse?.let {
+        text = expensesResponse.expenseCategory
     }
 }
 
 @BindingAdapter("expenseDescription")
-fun TextView.setExpenseDescription(getExpensesResponse:GetExpensesResponse?){
-    getExpensesResponse?.let {
-        text = getExpensesResponse.description
+fun TextView.setExpenseDescription(expensesResponse:ExpensesResponse?){
+    expensesResponse?.let {
+        text = expensesResponse.description
     }
 }
 

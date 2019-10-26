@@ -15,9 +15,6 @@ const val MONTH_EXPENSE_INDEX =2
 
 class PagerAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
 
-    /**
-     * Mapping of the ViewPager page indexes to their respective Fragments
-     */
     private val tabFragmentsCreators: Map<Int, () -> Fragment> = mapOf(
         TODAY_EXPENSE_INDEX to {
             TodayExpenseFragment()
