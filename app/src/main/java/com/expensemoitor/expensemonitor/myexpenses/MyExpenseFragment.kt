@@ -15,9 +15,7 @@ import com.expensemoitor.expensemonitor.databinding.MyExpenseFragmentBinding
 import android.view.MenuInflater
 import com.google.android.material.tabs.TabLayoutMediator
 import androidx.viewpager2.widget.ViewPager2
-import android.util.Log
 import com.expensemoitor.expensemonitor.utilites.*
-import kotlinx.android.synthetic.main.my_expense_fragment.*
 
 
 class MyExpenseFragment : Fragment() {
@@ -65,16 +63,16 @@ class MyExpenseFragment : Fragment() {
                 super.onPageSelected(position)
                 when(position.toString()){
                     "0"->{
-//                       binding.expenseTextView.text = expenseFormat("234000")
-//                       binding.dateTextView.text = displayCurrentDate()
+                       binding.expenseTextView.text = PrefManager.getCurrency(context)+" "+expenseFormat(PrefManager.getTodayExpenses(context)?.toString())
+                       binding.dateTextView.text = displayCurrentDate()
                     }
                     "1"->{
-//                        binding.expenseTextView.text = expenseFormat("4344000")
-//                        binding.dateTextView.text = PrefManager.getStartOfWeek(application)+" "+"/"+" "+PrefManager.getEndOfWeek(application)
+                        binding.expenseTextView.text = PrefManager.getCurrency(context)+" "+expenseFormat(PrefManager.getWeeKExpenses(context)?.toString())
+                        binding.dateTextView.text = PrefManager.getStartOfWeek(application)+" "+"/"+" "+PrefManager.getEndOfWeek(application)
                     }
                     "2"->{
-//                        binding.expenseTextView.text = expenseFormat("63445000")
-//                        binding.dateTextView.text = "27-09-2019 - 27-10-2019"
+                        binding.expenseTextView.text = PrefManager.getCurrency(context)+" "+expenseFormat(PrefManager.getMonthExpenses(context)?.toString())
+                        binding.dateTextView.text = PrefManager.getStartOfMonth(application)+" "+"/"+" "+PrefManager.getEndOfMonth(application)
                     }
                 }
             }

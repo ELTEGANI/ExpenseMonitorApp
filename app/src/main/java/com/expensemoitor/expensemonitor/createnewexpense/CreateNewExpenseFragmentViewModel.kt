@@ -11,12 +11,10 @@ import android.widget.AdapterView
 import com.expensemoitor.expensemonitor.R
 import com.expensemoitor.expensemonitor.network.ApiFactory
 import com.expensemoitor.expensemonitor.network.ExpenseData
+import com.expensemoitor.expensemonitor.utilites.MyApp.Companion.context
 import com.expensemoitor.expensemonitor.utilites.PrefManager
 import com.expensemoitor.expensemonitor.utilites.progressStatus
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 
 
 class CreateNewExpenseFragmentViewModel(var application: Application) : ViewModel() {
@@ -82,7 +80,12 @@ class CreateNewExpenseFragmentViewModel(var application: Application) : ViewMode
             try {
                 _status.value = progressStatus.LOADING
                 val expensResponse = getResponse.await()
-                PrefManager.saveUpdatedTodayExpense(application,expensResponse.Expense)
+                val newTodayExpense = PrefManager.getTodayExpenses(context)?.plus(amount.toInt())
+                val newWeekExpense = PrefManager.getWeeKExpenses(context)?.plus(amount.toInt())
+                val newMonthExpense = PrefManager.getMonthExpenses(context)?.plus(amount.toInt())
+                PrefManager.saveUpdatedTodayExpense(application,newTodayExpense)
+                PrefManager.saveUpdatedWeekExpense(application,newWeekExpense)
+                PrefManager.saveUpdatedMonthExpense(application,newMonthExpense)
                 _navigateToMyExpenseFragment.value = true
                 _status.value = progressStatus.DONE
             }catch (t:Throwable){

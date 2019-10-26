@@ -12,6 +12,8 @@ import java.util.*
 
 
 
+
+
 @SuppressLint("SimpleDateFormat")
 fun displayCurrentDate():String {
     val calendar = Calendar.getInstance()
@@ -21,11 +23,11 @@ fun displayCurrentDate():String {
 
 
 
-fun expenseFormat(amount:String): String {
+fun expenseFormat(amount: String?): String {
     var amountFormatted= ""
     try {
-        val value = amount.replace(",", "")
-        val reverseValue = StringBuilder(value).reverse()
+        val value = amount?.replace(",", "")
+        val reverseValue = StringBuilder(value.toString()).reverse()
             .toString()
         val finalValue = StringBuilder()
         for (i in 1..reverseValue.length)
@@ -43,6 +45,7 @@ fun expenseFormat(amount:String): String {
     }
     return amountFormatted
 }
+
 
 
 fun getStartAndEndOfTheWeek():String{
@@ -103,7 +106,7 @@ fun getTheStartAndTheEndOfTheMonth():String{
     val endDateStr = df.format(monthLastDay)
 
     Log.e("DateFirstLast", "$startDateStr $endDateStr")
-    return startDateStr+endDateStr
+    return "$startDateStr*$endDateStr"
 }
 
 

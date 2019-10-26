@@ -4,7 +4,9 @@ package com.expensemoitor.expensemonitor.network
 
 
 data class DurationTag(
-    val duration :String
+    val duration:String,
+    val startDate: String?,
+    val endDate: String?
 )
 
 

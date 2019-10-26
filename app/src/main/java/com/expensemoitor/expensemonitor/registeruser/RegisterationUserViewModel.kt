@@ -11,6 +11,7 @@ import androidx.lifecycle.MutableLiveData
 import com.expensemoitor.expensemonitor.network.UserData
 import com.expensemoitor.expensemonitor.R
 import com.expensemoitor.expensemonitor.network.ApiFactory
+import com.expensemoitor.expensemonitor.utilites.MyApp.Companion.context
 import com.expensemoitor.expensemonitor.utilites.PrefManager
 import com.expensemoitor.expensemonitor.utilites.progressStatus
 import kotlinx.coroutines.CoroutineScope
@@ -85,14 +86,18 @@ class RegisterationUserViewModel(var application: Application) :ViewModel() {
 
     private fun registerUser(userName:String,userEmail:String,gender:String) {
         coroutineJob.launch {
-            val userData = UserData(userName,userEmail,gender)
+            val userData = UserData(userName,userEmail,gender,
+                PrefManager.getStartOfWeek(context),
+                PrefManager.getEndOfWeek(context),
+                PrefManager.getStartOfMonth(context),
+                PrefManager.getEndOfMonth(context)
+                )
             val getUserResponse =  ApiFactory.REGISTERATION_SERVICE.registerationUser(userData)
             try {
                 _status.value = progressStatus.LOADING
                 val userResponse = getUserResponse.await()
-                 PrefManager.saveAccessTokenAndCurrentExpense(application,userResponse.accesstoken,userResponse.userCurrentExpense.toInt(),userResponse.weekExpense.toInt(),userResponse.monthExpense.toInt())
-                 PrefManager.setUserRegistered(application,true)
-                 Log.d("accessToken",PrefManager.getAccessToken(application)+"\n"+PrefManager.getUserExpenses(application))
+                 PrefManager.saveAccessTokenAndCurrentExpense(context,userResponse.accesstoken,userResponse.userCurrentExpense.toInt(),userResponse.weekExpense.toInt(),userResponse.monthExpense.toInt())
+                 PrefManager.setUserRegistered(context,true)
                 _navigateToMyExpenseFragment.value = true
                 _status.value = progressStatus.DONE
             }catch (t:Throwable){

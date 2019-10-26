@@ -12,7 +12,10 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.DefaultItemAnimator
 import com.expensemoitor.expensemonitor.R
+import com.expensemoitor.expensemonitor.databinding.RegisterationUserFragmentBinding
 import com.expensemoitor.expensemonitor.databinding.WeekExpenseFragmentBinding
+import com.expensemoitor.expensemonitor.registeruser.RegisterationUserViewModel
+import com.expensemoitor.expensemonitor.registeruser.RegisterationUserViewModelFactory
 import com.expensemoitor.expensemonitor.utilites.DurationsExpenseAdapter
 import com.expensemoitor.expensemonitor.utilites.ExpenseListener
 import kotlinx.android.synthetic.main.update_delete_expense_custom_dailog.view.*
@@ -20,14 +23,21 @@ import kotlinx.android.synthetic.main.update_delete_expense_custom_dailog.view.*
 class WeekExpenseFragment : Fragment() {
 
 
-    private val viewModel:WeekExpenseFragmentViewModel by lazy {
-        ViewModelProviders.of(this).get(WeekExpenseFragmentViewModel::class.java)
-    }
-
+    private lateinit var binding: WeekExpenseFragmentBinding
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,savedInstanceState: Bundle?): View? {
-        val binding = WeekExpenseFragmentBinding.inflate(inflater)
+
+        binding = DataBindingUtil.inflate(inflater,R.layout.week_expense_fragment,container,false)
+
+        val application = requireNotNull(this.activity).application
+
+        val viewModelFactory = WeekExpenseFragmentViewModelFactory(application)
+
+        val viewModel = ViewModelProviders.of(this,viewModelFactory)
+            .get(WeekExpenseFragmentViewModel::class.java)
+
+
 
         binding.lifecycleOwner = this
         binding.viewModel = viewModel

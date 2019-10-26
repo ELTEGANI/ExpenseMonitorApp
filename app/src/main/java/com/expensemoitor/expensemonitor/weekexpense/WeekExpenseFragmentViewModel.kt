@@ -1,5 +1,6 @@
 package com.expensemoitor.expensemonitor.weekexpense
 
+import android.app.Application
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -7,13 +8,15 @@ import androidx.lifecycle.ViewModel
 import com.expensemoitor.expensemonitor.network.ApiFactory
 import com.expensemoitor.expensemonitor.network.DurationTag
 import com.expensemoitor.expensemonitor.network.ExpensesResponse
+import com.expensemoitor.expensemonitor.utilites.MyApp.Companion.context
+import com.expensemoitor.expensemonitor.utilites.PrefManager
 import com.expensemoitor.expensemonitor.utilites.progressStatus
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
-class WeekExpenseFragmentViewModel : ViewModel() {
+class WeekExpenseFragmentViewModel(val application: Application) : ViewModel() {
 
 
     private val viewModelJob = Job()
@@ -35,7 +38,7 @@ class WeekExpenseFragmentViewModel : ViewModel() {
 
     private fun getWeekExpense(duration:String) {
         coroutineScope.launch {
-            val durationTag = DurationTag(duration)
+            val durationTag = DurationTag(duration,PrefManager.getStartOfWeek(context),PrefManager.getEndOfWeek(context))
             val getResponse = ApiFactory.GET_EXPNSES_BASED_ON_DURATION_SERVICE.getExpensesBasedOnDuration(durationTag)
             try {
                 _status.value = progressStatus.LOADING

@@ -46,7 +46,7 @@ class TodayExpenseFragmentViewModel : ViewModel() {
 
     private fun getTodayExpense(duration:String) {
         coroutineScope.launch {
-          val durationTag = DurationTag(duration)
+          val durationTag = DurationTag(duration,"","")
           val getResponse = ApiFactory.GET_EXPNSES_BASED_ON_DURATION_SERVICE.getExpensesBasedOnDuration(durationTag)
             try {
                 _status.value = progressStatus.LOADING
