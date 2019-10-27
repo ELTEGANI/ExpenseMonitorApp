@@ -2,6 +2,7 @@ package com.expensemoitor.expensemonitor
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import com.expensemoitor.expensemonitor.utilites.PrefManager
 import com.expensemoitor.expensemonitor.utilites.getStartAndEndOfTheWeek
 import com.expensemoitor.expensemonitor.utilites.getTheStartAndTheEndOfTheMonth
@@ -16,6 +17,9 @@ class MainActivity : AppCompatActivity() {
 
 
         val weekDates = getStartAndEndOfTheWeek().split("*")
+
+        Log.d("startofweek","\n"+"satrtweek"+weekDates[0]+"\n"+"endweek"+weekDates[1])
+
         PrefManager.saveStartOfWeek(applicationContext,weekDates[0])
         PrefManager.saveEndOfWeek(applicationContext,weekDates[1])
 
