@@ -64,48 +64,6 @@ class PrefManager
             editor?.apply()
         }
 
-        fun saveStartOfWeek(context: Context,startWeek:String){
-            val editor = getSharedPreferences(context)?.edit()
-            editor?.putString("START_OF_THE_WEEK",startWeek)
-            editor?.apply()
-        }
-
-        fun getStartOfWeek(context: Context?): String? {
-            return context?.let { getSharedPreferences(it)?.getString("START_OF_THE_WEEK", null) }
-        }
-
-        fun saveEndOfWeek(context: Context,endWeek:String){
-            val editor = getSharedPreferences(context)?.edit()
-            editor?.putString("END_OF_THE_WEEK",endWeek)
-            editor?.apply()
-        }
-
-        fun getEndOfWeek(context: Context?): String? {
-            return context?.let { getSharedPreferences(it)?.getString("END_OF_THE_WEEK", null) }
-        }
-
-
-        fun saveStartOfTheMonth(context: Context,startOfMonth:String?){
-            val editor = getSharedPreferences(context)?.edit()
-            editor?.putString("START_OF_THE_MONTH",startOfMonth)
-            editor?.apply()
-        }
-
-
-        fun saveEndOfTheMonth(context: Context,endOfMonth:String?){
-            val editor = getSharedPreferences(context)?.edit()
-            editor?.putString("END_OF_THE_MONTH",endOfMonth)
-            editor?.apply()
-        }
-
-        fun getStartOfMonth(context: Context?): String? {
-            return context?.let { getSharedPreferences(it)?.getString("START_OF_THE_MONTH", null) }
-        }
-
-        fun getEndOfMonth(context: Context?): String? {
-            return context?.let { getSharedPreferences(it)?.getString("END_OF_THE_MONTH", null) }
-        }
-
 
         fun getCurrency(context: Context?): String? {
             return getSharedPreferences(context)?.getString("USER_CURRENCY", null)

@@ -52,12 +52,9 @@ fun getStartAndEndOfTheWeek():String {
     val calendar = Calendar.getInstance()
     calendar.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY)
     val df = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-    var startDate = ""
-    var endDate = ""
-
-    startDate = df.format(calendar.getTime())
+    val startDate = df.format(calendar.getTime())
     calendar.add(Calendar.DATE, 6)
-    endDate = df.format(calendar.time)
+    val endDate = df.format(calendar.time)
 
     return "$startDate*$endDate"
 }

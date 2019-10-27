@@ -9,6 +9,7 @@ import com.expensemoitor.expensemonitor.network.DurationTag
 import com.expensemoitor.expensemonitor.network.ExpensesResponse
 import com.expensemoitor.expensemonitor.utilites.MyApp.Companion.context
 import com.expensemoitor.expensemonitor.utilites.PrefManager
+import com.expensemoitor.expensemonitor.utilites.getTheStartAndTheEndOfTheMonth
 import com.expensemoitor.expensemonitor.utilites.progressStatus
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -38,8 +39,9 @@ class MonthExpenseViewModel : ViewModel() {
 
 
     private fun getMonthExpense(duration:String) {
+        val monthDates = getTheStartAndTheEndOfTheMonth().split("*")
         coroutineScope.launch {
-            val durationTag = DurationTag(duration,PrefManager.getStartOfMonth(context), PrefManager.getEndOfMonth(context))
+            val durationTag = DurationTag(duration,monthDates[0],monthDates[1])
             val getResponse = ApiFactory.GET_EXPNSES_BASED_ON_DURATION_SERVICE.getExpensesBasedOnDuration(durationTag)
             try {
                 _status.value = progressStatus.LOADING

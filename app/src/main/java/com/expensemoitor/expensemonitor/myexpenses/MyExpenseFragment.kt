@@ -67,12 +67,14 @@ class MyExpenseFragment : Fragment() {
                        binding.dateTextView.text = displayCurrentDate()
                     }
                     "1"->{
+                        val weekDates = getStartAndEndOfTheWeek().split("*")
                         binding.expenseTextView.text = PrefManager.getCurrency(context)+" "+expenseFormat(PrefManager.getWeeKExpenses(context)?.toString())
-                        binding.dateTextView.text = PrefManager.getStartOfWeek(application)+" "+"/"+" "+PrefManager.getEndOfWeek(application)
+                        binding.dateTextView.text = weekDates[0]+" "+"/"+" "+weekDates[1]
                     }
                     "2"->{
+                        val monthDates = getTheStartAndTheEndOfTheMonth().split("*")
                         binding.expenseTextView.text = PrefManager.getCurrency(context)+" "+expenseFormat(PrefManager.getMonthExpenses(context)?.toString())
-                        binding.dateTextView.text = PrefManager.getStartOfMonth(application)+" "+"/"+" "+PrefManager.getEndOfMonth(application)
+                        binding.dateTextView.text = monthDates[0]+" "+"/"+" "+monthDates[1]
                     }
                 }
             }

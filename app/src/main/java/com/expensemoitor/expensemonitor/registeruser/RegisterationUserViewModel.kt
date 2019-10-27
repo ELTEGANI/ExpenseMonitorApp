@@ -13,6 +13,8 @@ import com.expensemoitor.expensemonitor.R
 import com.expensemoitor.expensemonitor.network.ApiFactory
 import com.expensemoitor.expensemonitor.utilites.MyApp.Companion.context
 import com.expensemoitor.expensemonitor.utilites.PrefManager
+import com.expensemoitor.expensemonitor.utilites.getStartAndEndOfTheWeek
+import com.expensemoitor.expensemonitor.utilites.getTheStartAndTheEndOfTheMonth
 import com.expensemoitor.expensemonitor.utilites.progressStatus
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -85,12 +87,14 @@ class RegisterationUserViewModel(var application: Application) :ViewModel() {
 
 
     private fun registerUser(userName:String,userEmail:String,gender:String) {
+        val weekDates = getStartAndEndOfTheWeek().split("*")
+        val monthDates = getTheStartAndTheEndOfTheMonth().split("*")
         coroutineJob.launch {
             val userData = UserData(userName,userEmail,gender,
-                PrefManager.getStartOfWeek(context),
-                PrefManager.getEndOfWeek(context),
-                PrefManager.getStartOfMonth(context),
-                PrefManager.getEndOfMonth(context)
+                weekDates[0],
+                weekDates[1],
+                monthDates[0],
+                monthDates[1]
                 )
             val getUserResponse =  ApiFactory.REGISTERATION_SERVICE.registerationUser(userData)
             try {
