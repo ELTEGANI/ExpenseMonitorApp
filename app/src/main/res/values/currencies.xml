@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <array name="currencies_list">
-        <item name="Select Currency">Select Currency</item>
+        <item name="Select Currency">Select Your Currency</item>
         <item>AED</item>
         <item>AFN</item>
         <item>ALL</item>

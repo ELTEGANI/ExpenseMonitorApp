@@ -74,7 +74,7 @@ class RegisterationUserViewModel(var application: Application) :ViewModel() {
             }
         }
 
-        if (geneder == null || currency.equals("Select Currency")){
+        if (geneder == null || currency.equals("Select Your Currency")){
             _genderSelected.value = false
         }else{
             PrefManager.saveCurrency(application,currency)

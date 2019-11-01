@@ -75,8 +75,6 @@ class CreateNewExpenseFragmentViewModel(var application: Application) : ViewMode
     private var viewModelJob = Job()
     private val coroutineJob  = CoroutineScope(viewModelJob + Dispatchers.Main)
 
-
-
     private fun createNewExpense(amount:String,description:String,date:String,category:String){
            coroutineJob.launch {
             val expenseData = ExpenseData(amount,description,date,category)
@@ -97,7 +95,7 @@ class CreateNewExpenseFragmentViewModel(var application: Application) : ViewMode
                     }
                 }catch (t:Throwable){
                     _status.value = progressStatus.ERROR
-                    _responseMsg.value = "Poor Internet Connection"
+                    _validationMsg.value = "Poor Internet Connection"
                 }
                 }catch (httpException: HttpException){
                    Log.d("httpException",httpException.toString())

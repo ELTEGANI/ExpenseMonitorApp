@@ -51,7 +51,6 @@ class UpdateAndDeleteFragmentViewModel(expensesResponse: ExpensesResponse, appli
                     val getResponse = getDeleteExpenseResponse.await()
                     if(getResponse.message.isNotEmpty()){
                         _msgError.value = "Expense Deleted Successfully"
-                        withContext(Dispatchers.IO){
                             val todayAmount = PrefManager.getTodayExpenses(application)
                             val weekAmount = PrefManager.getWeeKExpenses(application)
                             val monthAmount = PrefManager.getMonthExpenses(application)
@@ -59,7 +58,6 @@ class UpdateAndDeleteFragmentViewModel(expensesResponse: ExpensesResponse, appli
                             PrefManager.saveUpdatedTodayExpense(application,todayAmount?.minus(amount))
                             PrefManager.saveUpdatedWeekExpense(application,weekAmount?.minus(amount))
                             PrefManager.saveUpdatedMonthExpense(application,monthAmount?.minus(amount))
-                        }
                         Log.d("getResponse",getResponse.toString())
                         _status.value = progressStatus.DONE
                     }
@@ -88,18 +86,13 @@ class UpdateAndDeleteFragmentViewModel(expensesResponse: ExpensesResponse, appli
                         val getResponse = getUpdateExpenseResponse.await()
                         if(getResponse.message.isNotEmpty()){
                             _msgError.value = "Expense Updated Successfully"
-                            withContext(Dispatchers.IO){
                                 val todayAmount = PrefManager.getTodayExpenses(application)?.minus(oldAmount.toInt())
                                 val weekAmount = PrefManager.getWeeKExpenses(application)?.minus(oldAmount.toInt())
                                 val monthAmount = PrefManager.getMonthExpenses(application)?.minus(oldAmount.toInt())
-
                                 //minus amount from duration
                                 PrefManager.saveUpdatedTodayExpense(application,todayAmount?.plus(newAmount.toInt()))
                                 PrefManager.saveUpdatedWeekExpense(application,weekAmount?.plus(newAmount.toInt()))
                                 PrefManager.saveUpdatedMonthExpense(application,monthAmount?.plus(newAmount.toInt()))
-
-
-                            }
                         }
                         Log.d("getResponse",getResponse.toString())
                         _status.value = progressStatus.DONE

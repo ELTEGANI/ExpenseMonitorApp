@@ -7,139 +7,163 @@
                 name="viewModel"
                 type="com.expensemoitor.expensemonitor.registeruser.RegisterationUserViewModel" />
     </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:context=".registeruser.RegisterationUserFragment">
+
+        <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="?attr/colorPrimary"
+                android:minHeight="?attr/actionBarSize"
+                android:theme="?attr/actionBarTheme"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0">
+
+            <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="Registeration"
+                    android:textColor="?attr/colorOnBackground"
+                    app:layout_constraintBottom_toBottomOf="@+id/toolbar"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.appcompat.widget.Toolbar>
 
 
         <EditText
                 android:id="@+id/name_editText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@={viewModel.name}"
-                android:inputType="textPersonName"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
                 android:ems="10"
-                android:layout_marginEnd="8dp"
+                android:inputType="textPersonName"
+                android:text="@={viewModel.name}"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginStart="8dp"
-                app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginTop="8dp"
-                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                android:layout_marginBottom="8dp"
-                app:layout_constraintVertical_bias="0.189"
-                app:layout_constraintBottom_toBottomOf="parent"/>
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/toolbar"
+                app:layout_constraintVertical_bias="0.186" />
+
 
         <EditText
                 android:id="@+id/email_editText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:inputType="textPersonName"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
                 android:ems="10"
+                android:inputType="textPersonName"
                 android:text="@={viewModel.email}"
-                android:layout_marginStart="8dp"
-                app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginEnd="8dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="180dp"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginBottom="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintVertical_bias="0.0"/>
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.29" />
+
+
         <Button
-                android:text="Next"
+                android:id="@+id/next_button"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/next_button"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
                 android:onClick="@{()->viewModel.onNext()}"
-                app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="8dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp"
+                android:text="Next"
                 app:layout_constraintBottom_toBottomOf="parent"
-                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintVertical_bias="0.641"/>
-
+                app:layout_constraintVertical_bias="0.695" />
 
         <RadioGroup
+                android:id="@+id/radioGroup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                tools:layout_editor_absoluteX="0dp"
-                android:layout_marginBottom="8dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:layout_marginTop="8dp"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.456"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
                 android:checkedButton="@={viewModel.radiochecked}"
-                android:id="@+id/radioGroup">
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/toolbar"
+                app:layout_constraintVertical_bias="0.434">
 
             <RadioButton
-                    android:text="Male"
+                    android:id="@+id/male_radiobutton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/male_radiobutton" app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_marginEnd="8dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    android:layout_marginTop="8dp"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintHorizontal_bias="0.024"
-                    app:layout_constraintVertical_bias="0.399"/>
-            <RadioButton
-                    android:text="Female"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/female_radiobutton"
-                    app:layout_constraintStart_toStartOf="parent"
                     android:layout_marginStart="8dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_marginEnd="8dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:text="Male"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.024"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.399" />
+
+            <RadioButton
+                    android:id="@+id/female_radiobutton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:text="Female"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.025"
-                    app:layout_constraintVertical_bias="0.461"/>
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.461" />
 
         </RadioGroup>
 
         <Spinner
-                android:layout_width="395dp"
-                android:layout_height="wrap_content"
                 android:id="@+id/categories_spinner"
-                app:layout_constraintStart_toStartOf="parent"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
                 android:entries="@array/currencies_list"
                 android:onItemSelected="@{(parent,view,pos,id)->viewModel.onSelectCurrencyItem(parent,view,pos,id)}"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginTop="392dp"
-                android:layout_marginStart="8dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintVertical_bias="0.016"/>
-
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.594" />
 
         <ProgressBar
+                android:id="@+id/progressBar"
                 style="?android:attr/progressBarStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/progressBar"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginStart="8dp"
-                app:layout_constraintBottom_toBottomOf="parent"
                 android:layout_marginTop="8dp"
                 android:visibility="gone"
-                app:progressStatus="@{viewModel.status}"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.487"
-                app:layout_constraintVertical_bias="0.334"/>
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.334"
+                app:progressStatus="@{viewModel.status}" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

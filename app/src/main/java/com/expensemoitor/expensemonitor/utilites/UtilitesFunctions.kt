@@ -55,7 +55,7 @@ fun getStartAndEndOfTheWeek():String {
 
 
 
-fun getTheStartAndTheEndOfTheMonth():String{
+fun getTheStartAndTheEndOfTheMonth(): String {
     val calendar = Calendar.getInstance()
     calendar.add(Calendar.MONTH, 0)
     calendar.set(Calendar.DATE, calendar.getActualMinimum(Calendar.DAY_OF_MONTH))
@@ -65,6 +65,7 @@ fun getTheStartAndTheEndOfTheMonth():String{
 
     val startDateStr = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(monthFirstDay)
     val endDateStr = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(monthLastDay)
+
     return "$startDateStr*$endDateStr"
 }
 
@@ -91,19 +92,17 @@ fun checkIfDurationFinished(){
         val endOfTheWeek = sdf.parse(endOfWeek)
         val endOfTheMonth = sdf.parse(endOfMonth)
 
-        Log.d("currentdate", "\n"+"today"+" "+getCurrentDate()+"\n"+"endweek"+endOfTheWeek+"\n"+"endmonth"+endOfTheMonth)
 
-        if (savedDate.compareTo(currentDate) > 0){
+        if (currentDate.compareTo(savedDate) > 0){
             PrefManager.saveUpdatedTodayExpense(context,0)
-            //update the currentdate
             PrefManager.saveCurrentDate(context, getCurrentDate())
         }
 
-        if (savedDate.compareTo(endOfTheWeek) > 0){
+        if (endOfTheWeek.compareTo(savedDate) > 0){
             PrefManager.saveUpdatedWeekExpense(context,0)
         }
 
-        if(savedDate.compareTo(endOfTheMonth) > 0){
+        if(endOfTheMonth.compareTo(savedDate) > 0){
             PrefManager.saveUpdatedMonthExpense(context,0)
         }
 
