@@ -52,6 +52,14 @@ fun TextView.setExpenseDescription(expensesResponse:ExpensesResponse?){
 
 
 
+@BindingAdapter("expenseDate")
+fun TextView.setExpenseDate(expensesResponse: ExpensesResponse?){
+    expensesResponse?.let {
+        text = expensesResponse.date
+    }
+}
+
+
 
 
 

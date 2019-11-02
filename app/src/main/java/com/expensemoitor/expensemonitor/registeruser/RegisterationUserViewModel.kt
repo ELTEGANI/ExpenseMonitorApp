@@ -11,11 +11,8 @@ import androidx.lifecycle.MutableLiveData
 import com.expensemoitor.expensemonitor.network.UserData
 import com.expensemoitor.expensemonitor.R
 import com.expensemoitor.expensemonitor.network.ApiFactory
+import com.expensemoitor.expensemonitor.utilites.*
 import com.expensemoitor.expensemonitor.utilites.MyApp.Companion.context
-import com.expensemoitor.expensemonitor.utilites.PrefManager
-import com.expensemoitor.expensemonitor.utilites.getStartAndEndOfTheWeek
-import com.expensemoitor.expensemonitor.utilites.getTheStartAndTheEndOfTheMonth
-import com.expensemoitor.expensemonitor.utilites.progressStatus
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -32,6 +29,12 @@ class RegisterationUserViewModel(var application: Application) :ViewModel() {
     var radiochecked = MutableLiveData<Int>()
     var geneder = ""
     var currency = ""
+
+
+    init {
+        //save currentDate for the first time so it can be updated later
+        PrefManager.saveCurrentDate(application, getCurrentDate())
+    }
 
 
     private val _status = MutableLiveData<progressStatus>()

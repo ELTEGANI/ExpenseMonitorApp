@@ -31,6 +31,10 @@ class WeekExpenseFragmentViewModel(val application: Application) : ViewModel() {
     val expensesProperties:LiveData<List<ExpensesResponse>>
         get() = _expensesProperties
 
+    private val _navigateToSelectedExpense = MutableLiveData<ExpensesResponse>()
+    val navigateToSelectedExpense :LiveData<ExpensesResponse>
+        get() = _navigateToSelectedExpense
+
 
     init {
         getWeekExpense("week")
@@ -56,6 +60,17 @@ class WeekExpenseFragmentViewModel(val application: Application) : ViewModel() {
             }
         }
     }
+
+
+    fun displaySelectedExpense(expensesResponse: ExpensesResponse){
+        _navigateToSelectedExpense.value = expensesResponse
+    }
+
+
+    fun displaySelectedExpenseCompleted(){
+        _navigateToSelectedExpense.value = null
+    }
+
 
     override fun onCleared() {
         super.onCleared()

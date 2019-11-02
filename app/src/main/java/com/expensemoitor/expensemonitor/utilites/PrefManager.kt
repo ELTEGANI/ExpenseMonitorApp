@@ -40,19 +40,19 @@ class PrefManager
             return getSharedPreferences(context)?.getInt("WEEK_EXPENSES",0)
         }
 
-        fun saveUpdatedTodayExpense(context: Context, updatedTodayExpenses: Int?){
+        fun saveUpdatedTodayExpense(context: Context?, updatedTodayExpenses: Int?){
             val editor = getSharedPreferences(context)?.edit()
             updatedTodayExpenses?.let { editor?.putInt("TODAY_EXPENSES", it) }
             editor?.apply()
         }
 
-        fun saveUpdatedWeekExpense(context: Context, updatedWeekExpenses: Int?){
+        fun saveUpdatedWeekExpense(context: Context?, updatedWeekExpenses: Int?){
             val editor = getSharedPreferences(context)?.edit()
             updatedWeekExpenses?.let { editor?.putInt("WEEK_EXPENSES", it) }
             editor?.apply()
         }
 
-        fun saveUpdatedMonthExpense(context: Context, updatedMonthExpenses: Int?){
+        fun saveUpdatedMonthExpense(context: Context?, updatedMonthExpenses: Int?){
             val editor = getSharedPreferences(context)?.edit()
             updatedMonthExpenses?.let { editor?.putInt("MONTH_EXPENSES", it) }
             editor?.apply()
@@ -64,9 +64,19 @@ class PrefManager
             editor?.apply()
         }
 
-
         fun getCurrency(context: Context?): String? {
             return getSharedPreferences(context)?.getString("USER_CURRENCY", null)
+        }
+
+        fun saveCurrentDate(context: Context?, currentDate:String){
+            val editor = getSharedPreferences(context)?.edit()
+            editor?.putString("CURRENT_DATE",currentDate)
+            editor?.apply()
+        }
+
+
+        fun getCurrentDate(context: Context?): String? {
+            return getSharedPreferences(context)?.getString("CURRENT_DATE", null)
         }
 
 
@@ -91,6 +101,12 @@ class PrefManager
             return getSharedPreferences(context)?.getBoolean("IS_USER_REGISTERED",false)
         }
 
+        fun clear(context: Context?){
+            val editor = getSharedPreferences(context)?.edit()
+            editor?.remove("IS_USER_AUTHENTICATED")
+            editor?.apply()
+
+        }
 
 
     }

@@ -2,6 +2,7 @@ package com.expensemoitor.expensemonitor.utilites
 
 import android.annotation.SuppressLint
 import android.util.Log
+import com.expensemoitor.expensemonitor.utilites.MyApp.Companion.context
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -10,15 +11,10 @@ import java.util.*
 
 
 
-
-
-
-
 @SuppressLint("SimpleDateFormat")
-fun displayCurrentDate():String {
-    val calendar = Calendar.getInstance()
-    val dayformat = SimpleDateFormat("yyyy-MM-dd")
-    return dayformat.format(calendar.time)
+fun getCurrentDate():String {
+    val date = Calendar.getInstance().time
+    return SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(date)
 }
 
 
@@ -50,12 +46,10 @@ fun expenseFormat(amount: String?): String {
 
 fun getStartAndEndOfTheWeek():String {
     val calendar = Calendar.getInstance()
-    calendar.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY)
-    val df = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-    val startDate = df.format(calendar.getTime())
+    calendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY)
+    val startDate = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(calendar.time)
     calendar.add(Calendar.DATE, 6)
-    val endDate = df.format(calendar.time)
-
+    val endDate = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(calendar.time)
     return "$startDate*$endDate"
 }
 
@@ -69,12 +63,51 @@ fun getTheStartAndTheEndOfTheMonth():String{
     calendar.set(Calendar.DATE, calendar.getActualMaximum(Calendar.DAY_OF_MONTH))
     val monthLastDay = calendar.time
 
-    val df = SimpleDateFormat("yyyy-MM-dd",Locale.US)
-    val startDateStr = df.format(monthFirstDay)
-    val endDateStr = df.format(monthLastDay)
-
-    Log.e("DateFirstLast", "$startDateStr $endDateStr")
+    val startDateStr = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(monthFirstDay)
+    val endDateStr = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(monthLastDay)
     return "$startDateStr*$endDateStr"
 }
 
 
+fun checkIfDurationFinished(){
+    //today
+    val savedCurrentDate = PrefManager.getCurrentDate(context)
+
+    //week
+    val weekDates = getStartAndEndOfTheWeek().split("*")
+    val endOfWeek = weekDates[1]
+
+
+    //month
+    val monthDates = getTheStartAndTheEndOfTheMonth().split("*")
+    val endOfMonth = monthDates[1]
+
+    //compare dates
+    try {
+        val sdf = SimpleDateFormat("yyyy-MM-dd",Locale.getDefault())
+
+        val savedDate = sdf.parse(savedCurrentDate)
+        val currentDate = sdf.parse(getCurrentDate())
+        val endOfTheWeek = sdf.parse(endOfWeek)
+        val endOfTheMonth = sdf.parse(endOfMonth)
+
+        Log.d("currentdate", "\n"+"today"+" "+getCurrentDate()+"\n"+"endweek"+endOfTheWeek+"\n"+"endmonth"+endOfTheMonth)
+
+        if (savedDate.compareTo(currentDate) > 0){
+            PrefManager.saveUpdatedTodayExpense(context,0)
+            //update the currentdate
+            PrefManager.saveCurrentDate(context, getCurrentDate())
+        }
+
+        if (savedDate.compareTo(endOfTheWeek) > 0){
+            PrefManager.saveUpdatedWeekExpense(context,0)
+        }
+
+        if(savedDate.compareTo(endOfTheMonth) > 0){
+            PrefManager.saveUpdatedMonthExpense(context,0)
+        }
+
+    } catch (e: Exception) {
+        e.printStackTrace()
+    }
+}

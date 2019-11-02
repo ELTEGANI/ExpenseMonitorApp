@@ -1,6 +1,7 @@
 package com.expensemoitor.expensemonitor.network
 
-
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
 
 
 data class DurationTag(
@@ -11,10 +12,10 @@ data class DurationTag(
 
 
 
+@Parcelize
 data class ExpensesResponse(
     val id :String,
     val amount :String,
     val description:String,
     val expenseCategory:String,
-    val date:String
-)
+    val date:String):Parcelable

@@ -6,94 +6,57 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import androidx.appcompat.app.AlertDialog
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
-import androidx.databinding.ViewDataBinding
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.viewpager2.widget.ViewPager2
 import com.expensemoitor.expensemonitor.R
 import com.expensemoitor.expensemonitor.databinding.TodayExpenseFragmentBinding
+import com.expensemoitor.expensemonitor.myexpenses.MyExpenseFragmentDirections
 import com.expensemoitor.expensemonitor.utilites.DurationsExpenseAdapter
 import com.expensemoitor.expensemonitor.utilites.ExpenseListener
-import kotlinx.android.synthetic.main.update_delete_expense_custom_dailog.view.*
-
-
+import com.expensemoitor.expensemonitor.utilites.TODAY_EXPENSE_INDEX
 
 
 class TodayExpenseFragment : Fragment() {
 
-   private val viewModel:TodayExpenseFragmentViewModel by lazy {
-       ViewModelProviders.of(this).get(TodayExpenseFragmentViewModel::class.java)
-   }
-
+    private lateinit var binding: TodayExpenseFragmentBinding
 
     override fun onCreateView(inflater: LayoutInflater,container: ViewGroup?,savedInstanceState: Bundle?): View? {
-        val binding = TodayExpenseFragmentBinding.inflate(inflater)
+
+        binding = DataBindingUtil.inflate(inflater,R.layout.today_expense_fragment,container,false)
+
+        val application = requireNotNull(this.activity).application
+
+        val viewModelFactory = TodayExpenseFragmentViewModelFactory(application)
+
+        val viewModel = ViewModelProviders.of(this,viewModelFactory)
+            .get(TodayExpenseFragmentViewModel::class.java)
+
+
 
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
 
         
         val adapter = DurationsExpenseAdapter(ExpenseListener {
+                  viewModel.displaySelectedExpense(it)
+        })
 
-            val dialogBuilder = context?.let { it1 -> AlertDialog.Builder(it1).create() }
-            val dailogBinding = DataBindingUtil
-                .inflate<ViewDataBinding>(LayoutInflater.from(context), R.layout.update_delete_expense_custom_dailog,
-                    null, false)
-
-
-            val expenseAmount = dailogBinding.root.amount_editText
-            val expenseDescription = dailogBinding.root.description_editText
-            val category = dailogBinding.root.category_spinner
-
-            expenseAmount.setText(it.amount)
-            expenseDescription.setText(it.description)
-
-
-
-
-            val updateExpense = dailogBinding.root.update_button
-            val deleteExpense = dailogBinding.root.delete_button
-            val cancelExpense = dailogBinding.root.cancel_button
-
-
-
-            category.setSelection((category.adapter as ArrayAdapter<String>).getPosition(it.expenseCategory))
-
-
-            updateExpense.setOnClickListener {
-
+        viewModel.navigateToSelectedExpense.observe(this, Observer {
+            if (it != null){
+                val direction = MyExpenseFragmentDirections.actionMyExpenseFragmentToUpdateAndDeleteExpenseFragment(it)
+                findNavController().navigate(direction)
+                viewModel.displaySelectedExpenseCompleted()
             }
-
-            deleteExpense.setOnClickListener {
-                val builder = context?.let { it1 -> AlertDialog.Builder(it1) }
-                builder?.setTitle("Delete Expense")
-                builder?.setMessage("Are You Sure You Want To Delete This Expense?")
-                builder?.setPositiveButton("YES"){ _, which ->
-
-                }
-
-                builder?.setNeutralButton("Cancel"){_,_ ->
-
-                }
-                val dialog: AlertDialog? = builder?.create()
-                dialog?.show()
-            }
-
-            cancelExpense.setOnClickListener {
-                dialogBuilder?.dismiss()
-            }
-
-            dialogBuilder?.setView(dailogBinding.root)
-            dialogBuilder?.show()
         })
 
 
         binding.todayExpenseList.itemAnimator = DefaultItemAnimator()
         binding.todayExpenseList.adapter = adapter
-
-
 
 
 

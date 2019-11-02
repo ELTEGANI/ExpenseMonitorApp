@@ -1,5 +1,6 @@
 package com.expensemoitor.expensemonitor.todayexpense
 
+import android.app.Application
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
@@ -8,15 +9,18 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.expensemoitor.expensemonitor.network.ApiFactory
 import com.expensemoitor.expensemonitor.network.DurationTag
+import com.expensemoitor.expensemonitor.network.ExpenseData
 import com.expensemoitor.expensemonitor.network.ExpensesResponse
+import com.expensemoitor.expensemonitor.utilites.PrefManager
 import com.expensemoitor.expensemonitor.utilites.progressStatus
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import retrofit2.HttpException
 
 
-class TodayExpenseFragmentViewModel : ViewModel() {
+class TodayExpenseFragmentViewModel(val application: Application) : ViewModel() {
 
 
     private val viewModelJob = Job()
@@ -32,11 +36,9 @@ class TodayExpenseFragmentViewModel : ViewModel() {
     val expensesProperties:LiveData<List<ExpensesResponse>>
        get() = _expensesProperties
 
-
-    fun onSelectExpenseFormOrCategoryItem(parent: AdapterView<*>, view: View?, pos: Int, id: Long) {
-
-    }
-
+    private val _navigateToSelectedExpense = MutableLiveData<ExpensesResponse>()
+    val navigateToSelectedExpense :LiveData<ExpensesResponse>
+        get() = _navigateToSelectedExpense
 
 
     init {
@@ -44,7 +46,7 @@ class TodayExpenseFragmentViewModel : ViewModel() {
     }
 
 
-    private fun getTodayExpense(duration:String) {
+     private fun getTodayExpense(duration:String) {
         coroutineScope.launch {
           val durationTag = DurationTag(duration,"","")
           val getResponse = ApiFactory.GET_EXPNSES_BASED_ON_DURATION_SERVICE.getExpensesBasedOnDuration(durationTag)
@@ -61,6 +63,19 @@ class TodayExpenseFragmentViewModel : ViewModel() {
             }
         }
     }
+
+
+
+    fun displaySelectedExpense(expensesResponse: ExpensesResponse){
+        _navigateToSelectedExpense.value = expensesResponse
+    }
+
+
+    fun displaySelectedExpenseCompleted(){
+        _navigateToSelectedExpense.value = null
+    }
+
+
 
     override fun onCleared() {
         super.onCleared()

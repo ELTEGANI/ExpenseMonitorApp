@@ -15,4 +15,11 @@ object ApiFactory {
     val GET_EXPNSES_BASED_ON_DURATION_SERVICE:GetExpenseBasedOnDurationsService = RetrofitFactory.retrofit((AppConstants.BASEURL))
         .create(GetExpenseBasedOnDurationsService::class.java)
 
+
+    val DELETE_EXPENSE:DeleteExpenseService = RetrofitFactory.retrofit(AppConstants.BASEURL)
+        .create(DeleteExpenseService::class.java)
+
+    val UPDATE_EXPENSE:UpdateExpenseService = RetrofitFactory.retrofit(AppConstants.BASEURL)
+        .create(UpdateExpenseService::class.java)
+
 }

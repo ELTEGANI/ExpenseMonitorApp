@@ -7,25 +7,21 @@
     <item
             android:id="@+id/action_change_currency"
             android:title="Change Currency"
-            app:showAsAction="never"
-            />
+            app:showAsAction="never"/>
 
     <item
             android:id="@+id/action_share"
             android:title="Share App"
-            app:showAsAction="never"
-    />
+            app:showAsAction="never"/>
 
     <item
             android:id="@+id/action_about"
             android:title="About"
-            app:showAsAction="never"
-    />
+            app:showAsAction="never"/>
 
     <item
             android:id="@+id/action_sign_out"
             android:title="SignOut"
-            app:showAsAction="never"
-    />
+            app:showAsAction="never"/>
 
 </menu>

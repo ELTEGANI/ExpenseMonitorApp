@@ -60,6 +60,7 @@
                             android:id="@+id/expense_textView"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:text="@={viewModel.expense}"
                             android:textAppearance="@style/TextAppearance.AppCompat.Title"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"

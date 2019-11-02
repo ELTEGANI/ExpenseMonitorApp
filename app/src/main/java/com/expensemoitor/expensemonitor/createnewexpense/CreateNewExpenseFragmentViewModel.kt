@@ -2,11 +2,12 @@ package com.expensemoitor.expensemonitor.createnewexpense
 
 
 import android.app.Application
+import android.util.Log
 import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.expensemoitor.expensemonitor.utilites.displayCurrentDate
+import com.expensemoitor.expensemonitor.utilites.getCurrentDate
 import android.widget.AdapterView
 import com.expensemoitor.expensemonitor.R
 import com.expensemoitor.expensemonitor.network.ApiFactory
@@ -15,6 +16,7 @@ import com.expensemoitor.expensemonitor.utilites.MyApp.Companion.context
 import com.expensemoitor.expensemonitor.utilites.PrefManager
 import com.expensemoitor.expensemonitor.utilites.progressStatus
 import kotlinx.coroutines.*
+import retrofit2.HttpException
 
 
 class CreateNewExpenseFragmentViewModel(var application: Application) : ViewModel() {
@@ -29,7 +31,7 @@ class CreateNewExpenseFragmentViewModel(var application: Application) : ViewMode
 
 
     init {
-        currentDate.value = displayCurrentDate()
+        currentDate.value = getCurrentDate()
     }
 
     private val _status = MutableLiveData<progressStatus>()
@@ -40,9 +42,11 @@ class CreateNewExpenseFragmentViewModel(var application: Application) : ViewMode
     val validationMsg: LiveData<String>
         get() = _validationMsg
 
-    private val _navigateToMyExpenseFragment = MutableLiveData<Boolean>()
-    val navigateToMyExpenseFragment : LiveData<Boolean>
-        get() = _navigateToMyExpenseFragment
+
+    private val _responseMsg = MutableLiveData<String>()
+    val responseMsg: LiveData<String>
+        get() = _responseMsg
+
 
 
     fun onSelectExpenseFormOrCategoryItem(parent: AdapterView<*>, view: View?, pos: Int, id: Long) {
@@ -78,20 +82,26 @@ class CreateNewExpenseFragmentViewModel(var application: Application) : ViewMode
             val expenseData = ExpenseData(amount,description,date,category)
             val getResponse = ApiFactory.CREATE_EXPENSE_SERVICE.createNewExpense(expenseData)
             try {
-                _status.value = progressStatus.LOADING
-                val expensResponse = getResponse.await()
-                val newTodayExpense = PrefManager.getTodayExpenses(context)?.plus(amount.toInt())
-                val newWeekExpense = PrefManager.getWeeKExpenses(context)?.plus(amount.toInt())
-                val newMonthExpense = PrefManager.getMonthExpenses(context)?.plus(amount.toInt())
-                PrefManager.saveUpdatedTodayExpense(application,newTodayExpense)
-                PrefManager.saveUpdatedWeekExpense(application,newWeekExpense)
-                PrefManager.saveUpdatedMonthExpense(application,newMonthExpense)
-                _navigateToMyExpenseFragment.value = true
-                _status.value = progressStatus.DONE
-            }catch (t:Throwable){
-                _status.value = progressStatus.ERROR
-                _navigateToMyExpenseFragment.value = false
-            }
+                try{
+                    _status.value = progressStatus.LOADING
+                    val expensResponse = getResponse.await()
+                    if (expensResponse.message.isNotEmpty()){
+                        _responseMsg.value = "Expense Created Successfully"
+                            val newTodayExpense = PrefManager.getTodayExpenses(context)?.plus(amount.toInt())
+                            val newWeekExpense = PrefManager.getWeeKExpenses(context)?.plus(amount.toInt())
+                            val newMonthExpense = PrefManager.getMonthExpenses(context)?.plus(amount.toInt())
+                            PrefManager.saveUpdatedTodayExpense(application,newTodayExpense)
+                            PrefManager.saveUpdatedWeekExpense(application,newWeekExpense)
+                            PrefManager.saveUpdatedMonthExpense(application,newMonthExpense)
+                        _status.value = progressStatus.DONE
+                    }
+                }catch (t:Throwable){
+                    _status.value = progressStatus.ERROR
+                    _responseMsg.value = "Poor Internet Connection"
+                }
+                }catch (httpException: HttpException){
+                   Log.d("httpException",httpException.toString())
+                }
            }
     }
 
@@ -99,14 +109,9 @@ class CreateNewExpenseFragmentViewModel(var application: Application) : ViewMode
 
 
     fun onNoEmptyFields(){
-        _validationMsg.value = ""
+        _validationMsg.value = null
     }
 
-
-
-    fun onNavigateToMyExpnse(){
-        _navigateToMyExpenseFragment.value = false
-    }
 
 
 

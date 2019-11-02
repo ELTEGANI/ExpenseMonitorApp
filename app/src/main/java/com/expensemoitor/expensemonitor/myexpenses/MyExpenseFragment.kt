@@ -3,6 +3,7 @@ package com.expensemoitor.expensemonitor.myexpenses
 
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -31,7 +32,9 @@ class MyExpenseFragment : Fragment() {
 
 
 
-
+        Log.d("Today",PrefManager.getTodayExpenses(context)?.toString()+"\n"+
+                "Week"+PrefManager.getWeeKExpenses(context)?.toString()+"\n"+
+                "Month"+PrefManager.getMonthExpenses(context)?.toString())
 
         val application = requireNotNull(this.activity).application
 
@@ -63,17 +66,17 @@ class MyExpenseFragment : Fragment() {
                 super.onPageSelected(position)
                 when(position.toString()){
                     "0"->{
-                       binding.expenseTextView.text = PrefManager.getCurrency(context)+" "+expenseFormat(PrefManager.getTodayExpenses(context)?.toString())
-                       binding.dateTextView.text = displayCurrentDate()
+                       viewModel.expense.value = PrefManager.getCurrency(context)+" "+expenseFormat(PrefManager.getTodayExpenses(context)?.toString())
+                       binding.dateTextView.text = getCurrentDate()
                     }
                     "1"->{
                         val weekDates = getStartAndEndOfTheWeek().split("*")
-                        binding.expenseTextView.text = PrefManager.getCurrency(context)+" "+expenseFormat(PrefManager.getWeeKExpenses(context)?.toString())
+                        viewModel.expense.value = PrefManager.getCurrency(context)+" "+expenseFormat(PrefManager.getWeeKExpenses(context)?.toString())
                         binding.dateTextView.text = weekDates[0]+" "+"/"+" "+weekDates[1]
                     }
                     "2"->{
                         val monthDates = getTheStartAndTheEndOfTheMonth().split("*")
-                        binding.expenseTextView.text = PrefManager.getCurrency(context)+" "+expenseFormat(PrefManager.getMonthExpenses(context)?.toString())
+                        viewModel.expense.value = PrefManager.getCurrency(context)+" "+expenseFormat(PrefManager.getMonthExpenses(context)?.toString())
                         binding.dateTextView.text = monthDates[0]+" "+"/"+" "+monthDates[1]
                     }
                 }
@@ -96,7 +99,7 @@ class MyExpenseFragment : Fragment() {
         }
         })
 
-
+        setHasOptionsMenu(true)
         return binding.root
 
 
@@ -117,10 +120,12 @@ class MyExpenseFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.action_share ->
-                // do stuff
+            R.id.action_sign_out ->{
+                viewModel.clearPrefs()
+                val navController = binding.root.findNavController()
+                navController.navigate(R.id.action_myExpenseFragment_to_loginUserFragment)
                 return true
-
+            }
         }
 
         return false

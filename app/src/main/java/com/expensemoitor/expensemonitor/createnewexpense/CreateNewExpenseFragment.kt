@@ -33,9 +33,7 @@ class CreateNewExpenseFragment : Fragment() {
             .get(CreateNewExpenseFragmentViewModel::class.java)
 
         binding.viewModel = viewModel
-
         binding.lifecycleOwner = this
-
 
 
         binding.newdateButton.setOnClickListener {
@@ -54,20 +52,21 @@ class CreateNewExpenseFragment : Fragment() {
         }
 
         viewModel.validationMsg.observe(this, Observer { validationMsg->
-            if (validationMsg.isNotEmpty()){
+            if (validationMsg != null){
                 Toast.makeText(context,validationMsg,Toast.LENGTH_LONG).show()
+            }
+        })
+
+
+        viewModel.responseMsg.observe(this, Observer {
+            if (it != null){
+                Toast.makeText(context,it,Toast.LENGTH_LONG).show()
+                val navController = binding.root.findNavController()
+                navController.navigate(R.id.action_createNewExpenseFragment_to_myExpenseFragment)
                 viewModel.onNoEmptyFields()
             }
         })
 
-
-        viewModel.navigateToMyExpenseFragment.observe(this, Observer { shouldNavigate->
-            if(shouldNavigate){
-                val navController = binding.root.findNavController()
-                navController.navigate(R.id.action_createNewExpenseFragment_to_myExpenseFragment)
-                viewModel.onNavigateToMyExpnse()
-            }
-        })
 
 
         return binding.root

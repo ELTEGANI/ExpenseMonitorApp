@@ -31,6 +31,9 @@ class MonthExpenseViewModel : ViewModel() {
     val expensesProperties: LiveData<List<ExpensesResponse>>
         get() = _expensesProperties
 
+    private val _navigateToSelectedExpense = MutableLiveData<ExpensesResponse>()
+    val navigateToSelectedExpense :LiveData<ExpensesResponse>
+        get() = _navigateToSelectedExpense
 
 
     init {
@@ -55,6 +58,15 @@ class MonthExpenseViewModel : ViewModel() {
                 Log.d("getExpensesResponseList",t.toString())
             }
         }
+    }
+
+    fun displaySelectedExpense(expensesResponse: ExpensesResponse){
+        _navigateToSelectedExpense.value = expensesResponse
+    }
+
+
+    fun displaySelectedExpenseCompleted(){
+        _navigateToSelectedExpense.value = null
     }
 
     override fun onCleared() {
