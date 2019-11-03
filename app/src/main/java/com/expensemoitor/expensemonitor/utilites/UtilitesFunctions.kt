@@ -98,11 +98,11 @@ fun checkIfDurationFinished(){
             PrefManager.saveCurrentDate(context, getCurrentDate())
         }
 
-        if (endOfTheWeek.compareTo(savedDate) > 0){
+        if (currentDate.compareTo(endOfTheWeek) > 0){
             PrefManager.saveUpdatedWeekExpense(context,0)
         }
 
-        if(endOfTheMonth.compareTo(savedDate) > 0){
+        if(currentDate.compareTo(endOfTheMonth) > 0){
             PrefManager.saveUpdatedMonthExpense(context,0)
         }
 
