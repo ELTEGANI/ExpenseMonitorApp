@@ -54,6 +54,7 @@ class CreateNewExpenseFragment : Fragment() {
         viewModel.validationMsg.observe(this, Observer { validationMsg->
             if (validationMsg != null){
                 Toast.makeText(context,validationMsg,Toast.LENGTH_LONG).show()
+                viewModel.onNoEmptyFields()
             }
         })
 
@@ -63,7 +64,7 @@ class CreateNewExpenseFragment : Fragment() {
                 Toast.makeText(context,it,Toast.LENGTH_LONG).show()
                 val navController = binding.root.findNavController()
                 navController.navigate(R.id.action_createNewExpenseFragment_to_myExpenseFragment)
-                viewModel.onNoEmptyFields()
+                viewModel.onResponseMsgDisplayed()
             }
         })
 

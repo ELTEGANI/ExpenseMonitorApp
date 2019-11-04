@@ -17,6 +17,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import retrofit2.HttpException
 import java.io.IOException
 
 
@@ -41,9 +42,9 @@ class RegisterationUserViewModel(var application: Application) :ViewModel() {
     val status: LiveData<progressStatus>
         get() = _status
 
-    private val _displayMsg = MutableLiveData<Boolean>()
-    val displayMsg: LiveData<Boolean>
-        get() = _displayMsg
+    private val _responseMsg = MutableLiveData<String>()
+    val responseMsg: LiveData<String>
+        get() = _responseMsg
 
 
     private val _genderSelected = MutableLiveData<Boolean>()
@@ -51,9 +52,9 @@ class RegisterationUserViewModel(var application: Application) :ViewModel() {
         get() = _genderSelected
 
 
-    private val _navigateToMyExpenseFragment = MutableLiveData<Boolean>()
-    val navigateToMyExpenseFragment : LiveData<Boolean>
-        get() = _navigateToMyExpenseFragment
+    private val _errormsg = MutableLiveData<String>()
+    val errormsg : LiveData<String>
+        get() = _errormsg
 
 
     fun onSelectCurrencyItem(parent: AdapterView<*>, view: View?, pos: Int, id: Long) {
@@ -100,20 +101,24 @@ class RegisterationUserViewModel(var application: Application) :ViewModel() {
                 monthDates[1]
                 )
             val getUserResponse =  ApiFactory.REGISTERATION_SERVICE.registerationUser(userData)
-            try {
-                _status.value = progressStatus.LOADING
-                val userResponse = getUserResponse.await()
-                 PrefManager.saveAccessTokenAndCurrentExpense(context,userResponse.accesstoken,userResponse.userCurrentExpense.toInt(),userResponse.weekExpense.toInt(),userResponse.monthExpense.toInt())
-                 PrefManager.setUserRegistered(context,true)
-                _navigateToMyExpenseFragment.value = true
-                _status.value = progressStatus.DONE
-            }catch (t:Throwable){
-                _status.value = progressStatus.ERROR
-                _navigateToMyExpenseFragment.value = false
-                if(t is IOException){
-                    _displayMsg.value = true
-                }
-            }
+           try {
+               try {
+                   _status.value = progressStatus.LOADING
+                   val userResponse = getUserResponse.await()
+                   PrefManager.saveAccessTokenAndCurrentExpense(context,userResponse.accesstoken,userResponse.userCurrentExpense.toInt(),userResponse.weekExpense.toInt(),userResponse.monthExpense.toInt())
+                   PrefManager.setUserRegistered(context,true)
+                   _responseMsg.value = "Registeration Done Successfully"
+                   _status.value = progressStatus.DONE
+               }catch (t:Throwable){
+                   _status.value = progressStatus.ERROR
+                   if(t is IOException){
+                       _errormsg.value = "Poor Internet Connections"
+                   }
+               }
+           }catch (httpException:HttpException){
+               Log.d("httpException",httpException.toString())
+           }
+
         }
     }
 
@@ -121,11 +126,13 @@ class RegisterationUserViewModel(var application: Application) :ViewModel() {
         _genderSelected.value = true
     }
 
-    fun internetIsAvailable(){
-        _displayMsg.value = false
+    fun onErrorMsgDisplayed(){
+        _errormsg.value = null
     }
 
-
+    fun onResponseMsgDisplayed(){
+        _responseMsg.value = null
+    }
 
     override fun onCleared() {
         super.onCleared()

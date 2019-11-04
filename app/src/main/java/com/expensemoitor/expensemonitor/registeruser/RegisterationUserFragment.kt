@@ -51,20 +51,19 @@ class RegisterationUserFragment : Fragment() {
             }
         )
 
-        viewModel.displayMsg.observe(
-            this,
-            Observer { displayMsg ->
-                if (displayMsg) {
-                    Toast.makeText(context,"Please Check Internet Connections",Toast.LENGTH_LONG).show()
-                    viewModel.internetIsAvailable()
+        viewModel.errormsg.observe(this, Observer {
+                if (it != null) {
+                    Toast.makeText(context,it,Toast.LENGTH_LONG).show()
+                    viewModel.onErrorMsgDisplayed()
                 }
             }
         )
 
-        viewModel.navigateToMyExpenseFragment.observe(this, Observer{shouldNavigate->
-             if(shouldNavigate){
+        viewModel.responseMsg.observe(this, Observer{
+             if(it != null){
                  val navController = binding.root.findNavController()
                  navController.navigate(R.id.action_registerationUserFragment_to_myExpenseFragment)
+                 viewModel.onResponseMsgDisplayed()
              }
         })
 

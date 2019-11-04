@@ -77,6 +77,12 @@ class UpdateAndDeleteExpenseFragment : Fragment() {
             viewModel.deleteExpense(binding.uuidEditText.text.toString(),binding.amountEditText.text.toString().toInt())
         }
 
+        viewModel.validationMsg.observe(this, Observer {
+            if (it != null){
+                Toast.makeText(context,it,Toast.LENGTH_LONG).show()
+                viewModel.onValidationErrorDisplayed()
+            }
+        })
 
         viewModel.msgError.observe(this, Observer {
             if (it != null){

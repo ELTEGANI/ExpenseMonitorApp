@@ -35,6 +35,9 @@ class UpdateAndDeleteFragmentViewModel(expensesResponse: ExpensesResponse, appli
         get() = _msgError
 
 
+    private val _validationMsg = MutableLiveData<String>()
+    val validationMsg: LiveData<String>
+        get() = _validationMsg
 
     init {
         _selectedExpense.value = expensesResponse
@@ -55,9 +58,24 @@ class UpdateAndDeleteFragmentViewModel(expensesResponse: ExpensesResponse, appli
                             val weekAmount = PrefManager.getWeeKExpenses(application)
                             val monthAmount = PrefManager.getMonthExpenses(application)
                             //minus amount from duration
-                            PrefManager.saveUpdatedTodayExpense(application,todayAmount?.minus(amount))
-                            PrefManager.saveUpdatedWeekExpense(application,weekAmount?.minus(amount))
-                            PrefManager.saveUpdatedMonthExpense(application,monthAmount?.minus(amount))
+                        if (todayAmount != null) {
+                            if (todayAmount > 0){
+                                PrefManager.saveUpdatedTodayExpense(application,todayAmount?.minus(amount))
+                            }
+                        }
+
+                        if (weekAmount != null) {
+                            if (weekAmount > 0){
+                                PrefManager.saveUpdatedWeekExpense(application,weekAmount?.minus(amount))
+                            }
+                        }
+
+                        if (monthAmount != null) {
+                            if (monthAmount > 0){
+                                PrefManager.saveUpdatedMonthExpense(application,monthAmount?.minus(amount))
+                            }
+                        }
+
                         Log.d("getResponse",getResponse.toString())
                         _status.value = progressStatus.DONE
                     }
@@ -98,7 +116,7 @@ class UpdateAndDeleteFragmentViewModel(expensesResponse: ExpensesResponse, appli
                         _status.value = progressStatus.DONE
                     }catch (t:Throwable){
                         _status.value = progressStatus.ERROR
-                        _msgError.value = "Poor Internet Connection"
+                        _validationMsg.value = "Poor Internet Connection"
                     }
                 }catch (httpException: HttpException){
                     Log.d("httpException",httpException.toString())
@@ -109,6 +127,10 @@ class UpdateAndDeleteFragmentViewModel(expensesResponse: ExpensesResponse, appli
 
     fun onMsgErrorDisplayed(){
        _msgError.value = null
+    }
+
+    fun onValidationErrorDisplayed(){
+        _validationMsg.value = null
     }
 
     override fun onCleared() {

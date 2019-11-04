@@ -110,7 +110,9 @@ class CreateNewExpenseFragmentViewModel(var application: Application) : ViewMode
         _validationMsg.value = null
     }
 
-
+    fun onResponseMsgDisplayed(){
+        _responseMsg.value = null
+    }
 
 
     override fun onCleared() {
