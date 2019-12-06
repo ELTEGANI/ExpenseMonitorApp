@@ -6,29 +6,32 @@ import android.os.Bundle
 import android.util.Log
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
+import androidx.viewpager2.widget.ViewPager2
 import com.expensemoitor.expensemonitor.R
 import com.expensemoitor.expensemonitor.databinding.MyExpenseFragmentBinding
-import android.view.MenuInflater
-import com.google.android.material.tabs.TabLayoutMediator
-import androidx.viewpager2.widget.ViewPager2
 import com.expensemoitor.expensemonitor.utilites.*
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.android.material.tabs.TabLayoutMediator
 
 
 class MyExpenseFragment : Fragment() {
 
     private lateinit var binding: MyExpenseFragmentBinding
     lateinit var viewModel: MyExpenseFragmentViewModel
+    private var mGoogleSignInClient: GoogleSignInClient? = null
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,savedInstanceState: Bundle?): View? {
 
-
-        binding = DataBindingUtil.inflate(inflater,R.layout.my_expense_fragment,container,false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.my_expense_fragment,container,false)
 
 
 
@@ -45,6 +48,12 @@ class MyExpenseFragment : Fragment() {
 
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
+
+        val gso =
+            GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build()
+        mGoogleSignInClient = context?.let { GoogleSignIn.getClient(it, gso) }
 
 
         val tabLayout = binding.tabs
@@ -122,6 +131,7 @@ class MyExpenseFragment : Fragment() {
         when (item.itemId) {
             R.id.action_sign_out ->{
                 viewModel.clearPrefs()
+                signOut()
                 val navController = binding.root.findNavController()
                 navController.navigate(R.id.action_myExpenseFragment_to_loginUserFragment)
                 return true
@@ -132,10 +142,10 @@ class MyExpenseFragment : Fragment() {
     }
 
 
+    private fun signOut() {
+        mGoogleSignInClient?.signOut()?.addOnCompleteListener{
 
-
-
-
-
+        }
+    }
 
 }

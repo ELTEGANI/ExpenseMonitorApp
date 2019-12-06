@@ -64,8 +64,35 @@ class PrefManager
             editor?.apply()
         }
 
+
+        fun saveName(context: Context,username:String){
+            val editor = getSharedPreferences(context)?.edit()
+            editor?.putString("USER_NAME",username)
+            editor?.apply()
+        }
+
+        fun saveEmail(context: Context,email:String){
+            val editor = getSharedPreferences(context)?.edit()
+            editor?.putString("USER_EMAIL",email)
+            editor?.apply()
+        }
+
+        fun savePhoto(context: Context,photo:String){
+            val editor = getSharedPreferences(context)?.edit()
+            editor?.putString("USER_PHOTO",photo)
+            editor?.apply()
+        }
+
         fun getCurrency(context: Context?): String? {
             return getSharedPreferences(context)?.getString("USER_CURRENCY", null)
+        }
+
+        fun getName(context: Context?): String? {
+            return getSharedPreferences(context)?.getString("USER_NAME", null)
+        }
+
+        fun getEmail(context: Context?): String? {
+            return getSharedPreferences(context)?.getString("USER_EMAIL", null)
         }
 
         fun saveCurrentDate(context: Context?, currentDate:String){
@@ -105,7 +132,6 @@ class PrefManager
             val editor = getSharedPreferences(context)?.edit()
             editor?.remove("IS_USER_AUTHENTICATED")
             editor?.apply()
-
         }
 
 

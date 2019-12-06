@@ -1,5 +1,6 @@
 package com.expensemoitor.expensemonitor.monthexpense
 
+import android.app.Application
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -16,7 +17,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
-class MonthExpenseViewModel : ViewModel() {
+class MonthExpenseViewModel(val application: Application) : ViewModel() {
 
     private val viewModelJob = Job()
 
@@ -44,11 +45,18 @@ class MonthExpenseViewModel : ViewModel() {
     private fun getMonthExpense(duration:String) {
         val monthDates = getTheStartAndTheEndOfTheMonth().split("*")
         coroutineScope.launch {
-            val durationTag = DurationTag(duration,monthDates[0],monthDates[1])
-            val getResponse = ApiFactory.GET_EXPNSES_BASED_ON_DURATION_SERVICE.getExpensesBasedOnDuration(durationTag)
+            val durationTag = PrefManager.getCurrency(application)?.let {
+                DurationTag(duration,
+                    it,monthDates[0],monthDates[1])
+            }
+            val getResponse = durationTag?.let {
+                ApiFactory.GET_EXPNSES_BASED_ON_DURATION_SERVICE.getExpensesBasedOnDuration(
+                    it
+                )
+            }
             try {
                 _status.value = progressStatus.LOADING
-                val getExpensesResponseList = getResponse.await()
+                val getExpensesResponseList = getResponse?.await()
                 _status.value = progressStatus.DONE
                 _expensesProperties.value = getExpensesResponseList
                 Log.d("getExpensesResponseList",getExpensesResponseList.toString())

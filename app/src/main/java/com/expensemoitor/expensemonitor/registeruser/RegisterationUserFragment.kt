@@ -10,13 +10,9 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.navigation.Navigation
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
-
 import com.expensemoitor.expensemonitor.R
 import com.expensemoitor.expensemonitor.databinding.RegisterationUserFragmentBinding
-import com.expensemoitor.expensemonitor.utilites.PrefManager
 
 
 class RegisterationUserFragment : Fragment() {
@@ -38,10 +34,15 @@ class RegisterationUserFragment : Fragment() {
 
 
 
+
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
-
+        binding.nameEditText.setText("afaf")
+        binding.emailEditText.setText("afa@gmail.com")
+        binding.nextButton.setOnClickListener {
+            viewModel.registerUser(binding.nameEditText.text.toString(),binding.emailEditText.text.toString())
+        }
 
         viewModel.genderSelected.observe(this, Observer { isSelected ->
             if (!isSelected) {
@@ -56,14 +57,14 @@ class RegisterationUserFragment : Fragment() {
                     Toast.makeText(context,it,Toast.LENGTH_LONG).show()
                     viewModel.onErrorMsgDisplayed()
                 }
-            }
-        )
+            })
 
-        viewModel.responseMsg.observe(this, Observer{
-             if(it != null){
+
+        viewModel.navigateToNextScreen.observe(this, Observer{
+             if(it){
                  val navController = binding.root.findNavController()
-                 navController.navigate(R.id.action_registerationUserFragment_to_myExpenseFragment)
-                 viewModel.onResponseMsgDisplayed()
+                 navController.navigate(R.id.action_registeration_to_myExpense)
+                 viewModel.onNavigationCompleted()
              }
         })
 

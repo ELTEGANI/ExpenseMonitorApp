@@ -9,6 +9,7 @@ import com.expensemoitor.expensemonitor.network.ApiFactory
 import com.expensemoitor.expensemonitor.network.ExpenseData
 import com.expensemoitor.expensemonitor.network.ExpensesResponse
 import com.expensemoitor.expensemonitor.utilites.PrefManager
+import com.expensemoitor.expensemonitor.utilites.calculateAfterUpdateExpenses
 import com.expensemoitor.expensemonitor.utilites.progressStatus
 import kotlinx.coroutines.*
 import retrofit2.HttpException
@@ -58,22 +59,16 @@ class UpdateAndDeleteFragmentViewModel(expensesResponse: ExpensesResponse, appli
                             val weekAmount = PrefManager.getWeeKExpenses(application)
                             val monthAmount = PrefManager.getMonthExpenses(application)
                             //minus amount from duration
-                        if (todayAmount != null) {
-                            if (todayAmount > 0){
+                        if (todayAmount != null && todayAmount > 0) {
                                 PrefManager.saveUpdatedTodayExpense(application,todayAmount?.minus(amount))
-                            }
                         }
 
-                        if (weekAmount != null) {
-                            if (weekAmount > 0){
-                                PrefManager.saveUpdatedWeekExpense(application,weekAmount?.minus(amount))
-                            }
+                        if (weekAmount != null && weekAmount > 0){
+                            PrefManager.saveUpdatedWeekExpense(application,weekAmount?.minus(amount))
                         }
 
-                        if (monthAmount != null) {
-                            if (monthAmount > 0){
+                        if (monthAmount != null && monthAmount > 0) {
                                 PrefManager.saveUpdatedMonthExpense(application,monthAmount?.minus(amount))
-                            }
                         }
 
                         Log.d("getResponse",getResponse.toString())
@@ -96,21 +91,19 @@ class UpdateAndDeleteFragmentViewModel(expensesResponse: ExpensesResponse, appli
             _msgError.value = "Please Fill Empty Field"
         }else{
             coroutineScope.launch {
-                val expenseData = ExpenseData(newAmount,description,date,category)
-                val getUpdateExpenseResponse = ApiFactory.UPDATE_EXPENSE.updateExpense(expenseId,expenseData)
+                val expenseData = PrefManager.getCurrency(application)?.let {
+                    ExpenseData(newAmount,description,date,
+                        it,category)
+                }
+                val getUpdateExpenseResponse =
+                    expenseData?.let { ApiFactory.UPDATE_EXPENSE.updateExpense(expenseId, it) }
                 try {
                     try {
                         _status.value = progressStatus.LOADING
-                        val getResponse = getUpdateExpenseResponse.await()
-                        if(getResponse.message.isNotEmpty()){
+                        val getResponse = getUpdateExpenseResponse?.await()
+                        if(getResponse?.message?.isNotEmpty()!!){
                             _msgError.value = "Expense Updated Successfully"
-                                val todayAmount = PrefManager.getTodayExpenses(application)?.minus(oldAmount.toInt())
-                                val weekAmount = PrefManager.getWeeKExpenses(application)?.minus(oldAmount.toInt())
-                                val monthAmount = PrefManager.getMonthExpenses(application)?.minus(oldAmount.toInt())
-                                //minus amount from duration
-                                PrefManager.saveUpdatedTodayExpense(application,todayAmount?.plus(newAmount.toInt()))
-                                PrefManager.saveUpdatedWeekExpense(application,weekAmount?.plus(newAmount.toInt()))
-                                PrefManager.saveUpdatedMonthExpense(application,monthAmount?.plus(newAmount.toInt()))
+                            calculateAfterUpdateExpenses(oldAmount,newAmount)
                         }
                         Log.d("getResponse",getResponse.toString())
                         _status.value = progressStatus.DONE

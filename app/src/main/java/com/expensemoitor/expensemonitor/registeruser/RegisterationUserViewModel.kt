@@ -12,21 +12,21 @@ import com.expensemoitor.expensemonitor.network.UserData
 import com.expensemoitor.expensemonitor.R
 import com.expensemoitor.expensemonitor.network.ApiFactory
 import com.expensemoitor.expensemonitor.utilites.*
-import com.expensemoitor.expensemonitor.utilites.MyApp.Companion.context
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
-import java.io.IOException
 
 
 
 
 class RegisterationUserViewModel(var application: Application) :ViewModel() {
 
-    val name = MutableLiveData<String>()
-    val email = MutableLiveData<String>()
+    private var viewModelJob = Job()
+    private val coroutineJob = CoroutineScope(viewModelJob + Dispatchers.Main)
+
+
     var radiochecked = MutableLiveData<Int>()
     var geneder = ""
     var currency = ""
@@ -42,9 +42,9 @@ class RegisterationUserViewModel(var application: Application) :ViewModel() {
     val status: LiveData<progressStatus>
         get() = _status
 
-    private val _responseMsg = MutableLiveData<String>()
-    val responseMsg: LiveData<String>
-        get() = _responseMsg
+    private val _navigateToNextScreen = MutableLiveData<Boolean>()
+    val navigateToNextScreen: LiveData<Boolean>
+        get() = _navigateToNextScreen
 
 
     private val _genderSelected = MutableLiveData<Boolean>()
@@ -61,10 +61,11 @@ class RegisterationUserViewModel(var application: Application) :ViewModel() {
             currency = parent.selectedItem.toString()
     }
 
-    fun onNext() {
-        val name = name.value
-        val email = email.value
 
+
+
+
+    fun registerUser(userName:String,emailAddress:String) {
         when(radiochecked.value){
             R.id.male_radiobutton->{
                 geneder = "male"
@@ -79,46 +80,33 @@ class RegisterationUserViewModel(var application: Application) :ViewModel() {
             _genderSelected.value = false
         }else{
             PrefManager.saveCurrency(application,currency)
-            Log.d("userCurrency",PrefManager.getCurrency(application).toString())
-            name?.let { email?.let { it1 -> registerUser(it, it1,geneder) } }
-        }
-
-    }
-
-
-    private var viewModelJob = Job()
-    private val coroutineJob = CoroutineScope(viewModelJob + Dispatchers.Main)
-
-
-    private fun registerUser(userName:String,userEmail:String,gender:String) {
-        val weekDates = getStartAndEndOfTheWeek().split("*")
-        val monthDates = getTheStartAndTheEndOfTheMonth().split("*")
-        coroutineJob.launch {
-            val userData = UserData(userName,userEmail,gender,
+            val weekDates = getStartAndEndOfTheWeek().split("*")
+            val monthDates = getTheStartAndTheEndOfTheMonth().split("*")
+            val userData = UserData(userName,emailAddress,geneder,currency,
                 weekDates[0],
                 weekDates[1],
                 monthDates[0],
                 monthDates[1]
-                )
-            val getUserResponse =  ApiFactory.REGISTERATION_SERVICE.registerationUser(userData)
-           try {
-               try {
-                   _status.value = progressStatus.LOADING
-                   val userResponse = getUserResponse.await()
-                   PrefManager.saveAccessTokenAndCurrentExpense(context,userResponse.accesstoken,userResponse.userCurrentExpense.toInt(),userResponse.weekExpense.toInt(),userResponse.monthExpense.toInt())
-                   PrefManager.setUserRegistered(context,true)
-                   _responseMsg.value = "Registeration Done Successfully"
-                   _status.value = progressStatus.DONE
-               }catch (t:Throwable){
-                   _status.value = progressStatus.ERROR
-                   if(t is IOException){
-                       _errormsg.value = "Poor Internet Connections"
-                   }
-               }
-           }catch (httpException:HttpException){
-               Log.d("httpException",httpException.toString())
-           }
-
+            )
+            coroutineJob.launch {
+                val getUserResponse =  ApiFactory.REGISTERATION_SERVICE.registerationUser(userData)
+                try {
+                    try {
+                        _status.value = progressStatus.LOADING
+                        val userResponse = getUserResponse.await()
+                        PrefManager.saveAccessTokenAndCurrentExpense(application,userResponse.accessToken,userResponse.userCurrentExpense.toInt(),userResponse.weekExpense.toInt(),userResponse.monthExpense.toInt())
+                        PrefManager.setUserRegistered(application,true)
+                        _navigateToNextScreen.value = true
+                        _status.value = progressStatus.DONE
+                    }catch (t:Throwable){
+                        Log.d("throwable",t.toString())
+                        _status.value = progressStatus.ERROR
+                        _errormsg.value = t.toString()
+                    }
+                }catch (httpException:HttpException){
+                    Log.d("httpException",httpException.message())
+                }
+            }
         }
     }
 
@@ -130,8 +118,8 @@ class RegisterationUserViewModel(var application: Application) :ViewModel() {
         _errormsg.value = null
     }
 
-    fun onResponseMsgDisplayed(){
-        _responseMsg.value = null
+    fun onNavigationCompleted(){
+        _navigateToNextScreen.value = false
     }
 
     override fun onCleared() {

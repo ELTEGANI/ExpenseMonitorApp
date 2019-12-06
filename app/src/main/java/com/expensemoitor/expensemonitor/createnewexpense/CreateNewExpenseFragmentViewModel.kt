@@ -7,14 +7,12 @@ import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.expensemoitor.expensemonitor.utilites.getCurrentDate
 import android.widget.AdapterView
 import com.expensemoitor.expensemonitor.R
 import com.expensemoitor.expensemonitor.network.ApiFactory
 import com.expensemoitor.expensemonitor.network.ExpenseData
+import com.expensemoitor.expensemonitor.utilites.*
 import com.expensemoitor.expensemonitor.utilites.MyApp.Companion.context
-import com.expensemoitor.expensemonitor.utilites.PrefManager
-import com.expensemoitor.expensemonitor.utilites.progressStatus
 import kotlinx.coroutines.*
 import retrofit2.HttpException
 
@@ -77,25 +75,27 @@ class CreateNewExpenseFragmentViewModel(var application: Application) : ViewMode
 
     private fun createNewExpense(amount:String,description:String,date:String,category:String){
            coroutineJob.launch {
-            val expenseData = ExpenseData(amount,description,date,category)
-            val getResponse = ApiFactory.CREATE_EXPENSE_SERVICE.createNewExpense(expenseData)
+            val expenseData = PrefManager.getCurrency(application)?.let {
+                ExpenseData(amount,description,date,
+                    it,category)
+            }
+            val getResponse = expenseData?.let {
+                ApiFactory.CREATE_EXPENSE_SERVICE.createNewExpense(
+                    it
+                )
+            }
             try {
                 try{
                     _status.value = progressStatus.LOADING
-                    val expensResponse = getResponse.await()
-                    if (expensResponse.message.isNotEmpty()){
+                    val expenseResponse = getResponse?.await()
+                    if (!expenseResponse?.message?.isEmpty()!!){
                         _responseMsg.value = "Expense Created Successfully"
-                            val newTodayExpense = PrefManager.getTodayExpenses(context)?.plus(amount.toInt())
-                            val newWeekExpense = PrefManager.getWeeKExpenses(context)?.plus(amount.toInt())
-                            val newMonthExpense = PrefManager.getMonthExpenses(context)?.plus(amount.toInt())
-                            PrefManager.saveUpdatedTodayExpense(application,newTodayExpense)
-                            PrefManager.saveUpdatedWeekExpense(application,newWeekExpense)
-                            PrefManager.saveUpdatedMonthExpense(application,newMonthExpense)
+                        calculateAfterCreateExpenses(amount)
                         _status.value = progressStatus.DONE
                     }
                 }catch (t:Throwable){
                     _status.value = progressStatus.ERROR
-                    _validationMsg.value = "Poor Internet Connection"
+                    _validationMsg.value = t.toString()
                 }
                 }catch (httpException: HttpException){
                    Log.d("httpException",httpException.toString())
