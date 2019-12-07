@@ -75,7 +75,7 @@ class CreateNewExpenseFragmentViewModel(var application: Application) : ViewMode
 
     private fun createNewExpense(amount:String,description:String,date:String,category:String){
            coroutineJob.launch {
-            val expenseData = PrefManager.getCurrency(application)?.let {
+            val expenseData = getCurrencyFromSettings()?.let {
                 ExpenseData(amount,description,date,
                     it,category)
             }

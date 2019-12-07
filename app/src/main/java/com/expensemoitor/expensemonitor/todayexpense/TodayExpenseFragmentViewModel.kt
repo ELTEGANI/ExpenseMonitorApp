@@ -12,6 +12,7 @@ import com.expensemoitor.expensemonitor.network.DurationTag
 import com.expensemoitor.expensemonitor.network.ExpenseData
 import com.expensemoitor.expensemonitor.network.ExpensesResponse
 import com.expensemoitor.expensemonitor.utilites.PrefManager
+import com.expensemoitor.expensemonitor.utilites.getCurrencyFromSettings
 import com.expensemoitor.expensemonitor.utilites.progressStatus
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -48,7 +49,7 @@ class TodayExpenseFragmentViewModel(val application: Application) : ViewModel() 
 
      private fun getTodayExpense(duration:String) {
         coroutineScope.launch {
-          val durationTag = PrefManager.getCurrency(application)?.let {
+          val durationTag = getCurrencyFromSettings()?.let {
               DurationTag(duration,
                   it,"","")
           }

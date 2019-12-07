@@ -2,12 +2,14 @@ package com.expensemoitor.expensemonitor.registeruser
 
 
 import android.app.Application
+import android.content.Context
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.MutableLiveData
+import androidx.preference.PreferenceManager
 import com.expensemoitor.expensemonitor.network.UserData
 import com.expensemoitor.expensemonitor.R
 import com.expensemoitor.expensemonitor.network.ApiFactory
@@ -79,7 +81,6 @@ class RegisterationUserViewModel(var application: Application) :ViewModel() {
         if (geneder == null || currency.equals("Select Your Currency")){
             _genderSelected.value = false
         }else{
-            PrefManager.saveCurrency(application,currency)
             val weekDates = getStartAndEndOfTheWeek().split("*")
             val monthDates = getTheStartAndTheEndOfTheMonth().split("*")
             val userData = UserData(userName,emailAddress,geneder,currency,
@@ -94,6 +95,7 @@ class RegisterationUserViewModel(var application: Application) :ViewModel() {
                     try {
                         _status.value = progressStatus.LOADING
                         val userResponse = getUserResponse.await()
+                        saveCurrencyForSettings(currency)
                         PrefManager.saveAccessTokenAndCurrentExpense(application,userResponse.accessToken,userResponse.userCurrentExpense.toInt(),userResponse.weekExpense.toInt(),userResponse.monthExpense.toInt())
                         PrefManager.setUserRegistered(application,true)
                         _navigateToNextScreen.value = true

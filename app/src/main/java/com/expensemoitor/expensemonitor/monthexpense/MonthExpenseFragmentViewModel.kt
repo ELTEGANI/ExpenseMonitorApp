@@ -10,6 +10,7 @@ import com.expensemoitor.expensemonitor.network.DurationTag
 import com.expensemoitor.expensemonitor.network.ExpensesResponse
 import com.expensemoitor.expensemonitor.utilites.MyApp.Companion.context
 import com.expensemoitor.expensemonitor.utilites.PrefManager
+import com.expensemoitor.expensemonitor.utilites.getCurrencyFromSettings
 import com.expensemoitor.expensemonitor.utilites.getTheStartAndTheEndOfTheMonth
 import com.expensemoitor.expensemonitor.utilites.progressStatus
 import kotlinx.coroutines.CoroutineScope
@@ -17,7 +18,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
-class MonthExpenseViewModel(val application: Application) : ViewModel() {
+class MonthExpenseFragmentViewModel(val application: Application) : ViewModel() {
 
     private val viewModelJob = Job()
 
@@ -45,14 +46,11 @@ class MonthExpenseViewModel(val application: Application) : ViewModel() {
     private fun getMonthExpense(duration:String) {
         val monthDates = getTheStartAndTheEndOfTheMonth().split("*")
         coroutineScope.launch {
-            val durationTag = PrefManager.getCurrency(application)?.let {
-                DurationTag(duration,
-                    it,monthDates[0],monthDates[1])
+            val durationTag = getCurrencyFromSettings()?.let {
+                DurationTag(duration,it,monthDates[0],monthDates[1])
             }
             val getResponse = durationTag?.let {
-                ApiFactory.GET_EXPNSES_BASED_ON_DURATION_SERVICE.getExpensesBasedOnDuration(
-                    it
-                )
+                ApiFactory.GET_EXPNSES_BASED_ON_DURATION_SERVICE.getExpensesBasedOnDuration(it)
             }
             try {
                 _status.value = progressStatus.LOADING

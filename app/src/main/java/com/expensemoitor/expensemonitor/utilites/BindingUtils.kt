@@ -32,7 +32,7 @@ fun bindRecyclerView(recyclerView: RecyclerView,data:List<ExpensesResponse>?){
 @BindingAdapter("expenseAmount")
 fun TextView.setExpenseAmount(expensesResponse:ExpensesResponse?){
      expensesResponse?.let {
-         text = PrefManager.getCurrency(context)+" "+ expenseFormat(expensesResponse.amount)
+         text = getCurrencyFromSettings()+" "+ expenseFormat(expensesResponse.amount)
      }
 }
 

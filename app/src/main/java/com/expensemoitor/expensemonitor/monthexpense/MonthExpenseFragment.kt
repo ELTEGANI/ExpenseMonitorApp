@@ -6,16 +6,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
-import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
 import com.expensemoitor.expensemonitor.R
 import com.expensemoitor.expensemonitor.databinding.MonthExpenseFragmentBinding
+import com.expensemoitor.expensemonitor.databinding.TodayExpenseFragmentBinding
 import com.expensemoitor.expensemonitor.myexpenses.MyExpenseFragmentDirections
+import com.expensemoitor.expensemonitor.todayexpense.TodayExpenseFragmentViewModel
+import com.expensemoitor.expensemonitor.todayexpense.TodayExpenseFragmentViewModelFactory
 import com.expensemoitor.expensemonitor.utilites.DurationsExpenseAdapter
 import com.expensemoitor.expensemonitor.utilites.ExpenseListener
 
@@ -23,27 +23,34 @@ class MonthExpenseFragment : Fragment() {
 
 
 
-    private val viewModel:MonthExpenseViewModel by lazy {
-        ViewModelProviders.of(this).get(MonthExpenseViewModel::class.java)
-    }
+    private lateinit var binding: MonthExpenseFragmentBinding
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val binding = MonthExpenseFragmentBinding.inflate(inflater)
+        binding = DataBindingUtil.inflate(inflater, R.layout.month_expense_fragment,container,false)
+
+        val application = requireNotNull(this.activity).application
+
+        val viewModelFactory = MonthExpenseFragmentViewModelFactory(application)
+
+        val fragmentViewModel = ViewModelProviders.of(this,viewModelFactory)
+            .get(MonthExpenseFragmentViewModel::class.java)
+
 
         binding.lifecycleOwner = this
-        binding.viewModel = viewModel
+        binding.viewModel = fragmentViewModel
+
 
         val adapter = DurationsExpenseAdapter(ExpenseListener {
-            viewModel.displaySelectedExpense(it)
+            fragmentViewModel.displaySelectedExpense(it)
         })
 
 
-        viewModel.navigateToSelectedExpense.observe(this, Observer {
+        fragmentViewModel.navigateToSelectedExpense.observe(this, Observer {
             if (it != null){
                 val direction = MyExpenseFragmentDirections.actionMyExpenseFragmentToUpdateAndDeleteExpenseFragment(it)
                 findNavController().navigate(direction)
-                viewModel.displaySelectedExpenseCompleted()
+                fragmentViewModel.displaySelectedExpenseCompleted()
             }
         })
 

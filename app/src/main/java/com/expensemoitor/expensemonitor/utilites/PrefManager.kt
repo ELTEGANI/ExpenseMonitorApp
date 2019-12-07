@@ -58,11 +58,6 @@ class PrefManager
             editor?.apply()
         }
 
-        fun saveCurrency(context: Context,userCurrency:String){
-            val editor = getSharedPreferences(context)?.edit()
-            editor?.putString("USER_CURRENCY",userCurrency)
-            editor?.apply()
-        }
 
 
         fun saveName(context: Context,username:String){
@@ -83,9 +78,6 @@ class PrefManager
             editor?.apply()
         }
 
-        fun getCurrency(context: Context?): String? {
-            return getSharedPreferences(context)?.getString("USER_CURRENCY", null)
-        }
 
         fun getName(context: Context?): String? {
             return getSharedPreferences(context)?.getString("USER_NAME", null)

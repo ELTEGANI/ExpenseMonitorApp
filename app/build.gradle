@@ -95,6 +95,7 @@ dependencies {
     implementation "com.google.android.material:material:$materialVersion"
 
     implementation 'com.google.android.gms:play-services-auth:17.0.0'
+    implementation 'androidx.preference:preference-ktx:1.1.0-rc01'
 
 
 

@@ -4,19 +4,10 @@
         xmlns:tools="http://schemas.android.com/tools"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         tools:context=".myexpenses.MyExpenseFragment">
-    <item
-            android:id="@+id/action_change_currency"
-            android:title="Change Currency"
-            app:showAsAction="never"/>
 
     <item
-            android:id="@+id/action_share"
-            android:title="Share App"
-            app:showAsAction="never"/>
-
-    <item
-            android:id="@+id/action_about"
-            android:title="About"
+            android:id="@+id/action_setting"
+            android:title="Setting"
             app:showAsAction="never"/>
 
     <item

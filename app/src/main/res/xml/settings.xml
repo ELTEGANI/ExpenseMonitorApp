@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+    <ListPreference
+            android:key="userCurrency"
+            android:title="Change Your Currency"
+            android:entries="@array/currencies_setting_list"
+            android:entryValues="@array/currencies_setting_list"
+            android:icon="@drawable/ic_attach_money"
+            app:useSimpleSummaryProvider="true"/>
+</PreferenceScreen>

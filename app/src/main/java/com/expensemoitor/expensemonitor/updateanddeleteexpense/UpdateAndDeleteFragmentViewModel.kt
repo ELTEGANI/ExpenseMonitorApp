@@ -10,6 +10,7 @@ import com.expensemoitor.expensemonitor.network.ExpenseData
 import com.expensemoitor.expensemonitor.network.ExpensesResponse
 import com.expensemoitor.expensemonitor.utilites.PrefManager
 import com.expensemoitor.expensemonitor.utilites.calculateAfterUpdateExpenses
+import com.expensemoitor.expensemonitor.utilites.getCurrencyFromSettings
 import com.expensemoitor.expensemonitor.utilites.progressStatus
 import kotlinx.coroutines.*
 import retrofit2.HttpException
@@ -91,7 +92,7 @@ class UpdateAndDeleteFragmentViewModel(expensesResponse: ExpensesResponse, appli
             _msgError.value = "Please Fill Empty Field"
         }else{
             coroutineScope.launch {
-                val expenseData = PrefManager.getCurrency(application)?.let {
+                val expenseData = getCurrencyFromSettings()?.let {
                     ExpenseData(newAmount,description,date,
                         it,category)
                 }

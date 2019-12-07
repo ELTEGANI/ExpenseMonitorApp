@@ -2,6 +2,7 @@ package com.expensemoitor.expensemonitor.utilites
 
 import android.annotation.SuppressLint
 import android.util.Log
+import androidx.preference.PreferenceManager
 import com.expensemoitor.expensemonitor.utilites.MyApp.Companion.context
 import java.text.SimpleDateFormat
 import java.util.*
@@ -128,4 +129,16 @@ fun calculateAfterUpdateExpenses(oldAmount:String,newAmount:String){
     PrefManager.saveUpdatedTodayExpense(context,todayAmount?.plus(newAmount.toInt()))
     PrefManager.saveUpdatedWeekExpense(context,weekAmount?.plus(newAmount.toInt()))
     PrefManager.saveUpdatedMonthExpense(context,monthAmount?.plus(newAmount.toInt()))
+}
+
+fun saveCurrencyForSettings(selectedCurrency:String){
+    val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
+    val editor = sharedPreferences.edit()
+    editor.putString("userCurrency",selectedCurrency)
+    editor.apply()
+}
+
+fun getCurrencyFromSettings(): String? {
+    val sharedPref = PreferenceManager.getDefaultSharedPreferences(context)
+    return sharedPref.getString("userCurrency",null)
 }

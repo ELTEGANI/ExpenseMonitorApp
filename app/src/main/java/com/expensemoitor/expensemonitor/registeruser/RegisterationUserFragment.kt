@@ -1,18 +1,20 @@
 package com.expensemoitor.expensemonitor.registeruser
 
 
+import android.os.Build.VERSION_CODES.P
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import com.expensemoitor.expensemonitor.R
 import com.expensemoitor.expensemonitor.databinding.RegisterationUserFragmentBinding
+import com.expensemoitor.expensemonitor.utilites.PrefManager
 
 
 class RegisterationUserFragment : Fragment() {
@@ -23,7 +25,9 @@ class RegisterationUserFragment : Fragment() {
         // Inflate the layout for this fragment
 
 
-        binding = DataBindingUtil.inflate(inflater,R.layout.registeration_user_fragment,container,false)
+
+        binding = DataBindingUtil.inflate(inflater,
+            R.layout.registeration_user_fragment,container,false)
 
         val application = requireNotNull(this.activity).application
 
@@ -38,8 +42,8 @@ class RegisterationUserFragment : Fragment() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
-        binding.nameEditText.setText("afaf")
-        binding.emailEditText.setText("afa@gmail.com")
+        binding.nameEditText.setText(PrefManager.getName(application))
+        binding.emailEditText.setText(PrefManager.getEmail(application))
         binding.nextButton.setOnClickListener {
             viewModel.registerUser(binding.nameEditText.text.toString(),binding.emailEditText.text.toString())
         }

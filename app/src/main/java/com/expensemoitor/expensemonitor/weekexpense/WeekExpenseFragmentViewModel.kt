@@ -10,6 +10,7 @@ import com.expensemoitor.expensemonitor.network.DurationTag
 import com.expensemoitor.expensemonitor.network.ExpensesResponse
 import com.expensemoitor.expensemonitor.utilites.MyApp.Companion.context
 import com.expensemoitor.expensemonitor.utilites.PrefManager
+import com.expensemoitor.expensemonitor.utilites.getCurrencyFromSettings
 import com.expensemoitor.expensemonitor.utilites.getStartAndEndOfTheWeek
 import com.expensemoitor.expensemonitor.utilites.progressStatus
 import kotlinx.coroutines.CoroutineScope
@@ -45,14 +46,11 @@ class WeekExpenseFragmentViewModel(val application: Application) : ViewModel() {
         val weekDates = getStartAndEndOfTheWeek().split("*")
 
         coroutineScope.launch {
-            val durationTag = PrefManager.getCurrency(application)?.let {
-                DurationTag(duration,
-                    it,weekDates[0],weekDates[1])
+            val durationTag = getCurrencyFromSettings()?.let {
+                DurationTag(duration,it,weekDates[0],weekDates[1])
             }
             val getResponse = durationTag?.let {
-                ApiFactory.GET_EXPNSES_BASED_ON_DURATION_SERVICE.getExpensesBasedOnDuration(
-                    it
-                )
+                ApiFactory.GET_EXPNSES_BASED_ON_DURATION_SERVICE.getExpensesBasedOnDuration(it)
             }
             try {
                 _status.value = progressStatus.LOADING
