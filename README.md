@@ -11,4 +11,6 @@ TODOs
 
 3-testing using (espresso and junit)
 
-4-publish to Play Store using Fastlane.
+4-buy the domain for my server so I can use SSL to guarantee secure connections 
+
+5-publish to Play Store using Fastlane.
