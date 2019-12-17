@@ -7,14 +7,14 @@ TODOs
 
 1-Materialize the app(based on google sample case studies annouced in the dev-summit-19).
 
-2-add In-app-updater.
+2-Add In-app-updater.
 
-3-testing using (espresso and junit)
+3-Testing using (espresso and junit)
 
-4-buy the domain for my server so I can use SSL to guarantee secure connections 
+4-Buy the domain for my server so I can use SSL to guarantee secure connections 
 
 5-Simplify Android Kotlin Code with Ktlint.
 
 6-mpchart android pie chart to give user report about thier expenses.
 
-7-publish to Play Store using Fastlane.
+7-Publish to Play Store using Fastlane.
