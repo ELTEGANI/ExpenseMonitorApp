@@ -13,4 +13,8 @@ TODOs
 
 4-buy the domain for my server so I can use SSL to guarantee secure connections 
 
-5-publish to Play Store using Fastlane.
+5-Simplify Android Kotlin Code with Ktlint.
+
+6-mpchart android pie chart to give user report about thier expenses.
+
+7-publish to Play Store using Fastlane.
