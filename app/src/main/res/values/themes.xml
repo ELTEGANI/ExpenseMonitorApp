@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+
+<resources>
+
+    <!--Final, top-level theme-->
+    <style name="Theme.ExpenseMonitor.DayNight" parent="Theme.ExpenseMonitor"/>
+
+    <style name="Theme.ExpenseMonitor" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+
+        <!--Color-->
+        <item name="colorPrimary">@color/expensemonitor_yellow_500</item>
+        <item name="colorPrimaryVariant">@color/expensemonitor_yellow_400</item>
+
+        <item name="colorSecondary">@color/expensemonitor_yellow_500</item>
+        <item name="colorSecondaryVariant">@color/expensemonitor_yellow_400</item>
+
+        <item name="android:colorBackground">@color/expensemonitor_yellow_500</item>
+        <item name="colorSurface">@color/expensemonitor_white_50</item>
+<!--        <item name="colorPrimarySurfaceVariant">?attr/colorPrimaryVariant</item>-->
+        <item name="colorError">@color/expensemonitor_red_400</item>
+
+        <item name="colorOnPrimary">@color/expensemonitor_white_50</item>
+        <item name="colorOnSecondary">@color/expensemonitor_yellow_500</item>
+        <item name="colorOnBackground">@color/expensemonitor_yellow_500</item>
+        <item name="colorOnSurface">@color/expensemonitor_yellow_500</item>
+        <item name="colorOnError">@color/expensemonitor_yellow_500</item>
+
+        <!--Typography-->
+        <item name="textAppearanceHeadline4">@style/TextAppearance.ExpenseMonitor.Headline4</item>
+        <item name="textAppearanceHeadline6">@style/TextAppearance.ExpenseMonitor.Headline6</item>
+
+        <!--System/Platform attributes-->
+        <item name="android:windowBackground">?android:colorBackground</item>
+    </style>
+</resources>

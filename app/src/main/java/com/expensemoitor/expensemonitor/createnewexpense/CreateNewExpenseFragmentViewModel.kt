@@ -58,9 +58,9 @@ class CreateNewExpenseFragmentViewModel(var application: Application) : ViewMode
         val expenseDescription = description.value
 
         if(expenseAmount == null || expenseDescription == null){
-            _validationMsg.value = "Please fill empty field"
+            _validationMsg.value = context?.getString(R.string.fill_empty)
         }else if(selectedCategoryItem.equals(application.getString(R.string.SelectCategory))){
-            _validationMsg.value = "Please select Expense Category"
+            _validationMsg.value = context?.getString(R.string.select_category)
         }else{
             currentDate.value?.let {
                 createNewExpense(expenseAmount,expenseDescription,
@@ -89,7 +89,7 @@ class CreateNewExpenseFragmentViewModel(var application: Application) : ViewMode
                     _status.value = progressStatus.LOADING
                     val expenseResponse = getResponse?.await()
                     if (!expenseResponse?.message?.isEmpty()!!){
-                        _responseMsg.value = "Expense Created Successfully"
+                        _responseMsg.value = context?.getString(R.string.expense_created_successfuly)
                         calculateAfterCreateExpenses(amount)
                         _status.value = progressStatus.DONE
                     }

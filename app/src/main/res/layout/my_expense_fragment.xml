@@ -14,10 +14,10 @@
     <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:clipToPadding="true"
+            android:background="?attr/colorSurface"
+            app:layoutFullscreen="@{true}"
             tools:ignore="MergeRootFrame"
-            tools:context=".myexpenses.MyExpenseFragment"
-            android:fitsSystemWindows="true">
+            tools:context=".myexpenses.MyExpenseFragment">
 
         <com.google.android.material.appbar.AppBarLayout
                 android:id="@+id/appBarLayout"
@@ -27,16 +27,16 @@
 
             <com.google.android.material.appbar.CollapsingToolbarLayout
                     android:layout_width="match_parent"
-                    android:layout_height="330dp"
+                    android:layout_height="300dp"
                     android:fitsSystemWindows="true"
-                    app:contentScrim="@color/primaryColor"
                     app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
                 <androidx.appcompat.widget.Toolbar
                         android:id="@+id/toolbar"
                         android:layout_width="match_parent"
                         android:layout_height="?attr/actionBarSize"
-                        app:layout_scrollFlags="scroll|enterAlways"></androidx.appcompat.widget.Toolbar>
+                        app:layout_scrollFlags="scroll|enterAlways">
+                </androidx.appcompat.widget.Toolbar>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
@@ -78,13 +78,12 @@
                     android:id="@+id/tabs"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:tabBackground="@color/primaryColor"
                     app:tabGravity="fill"
-                    app:tabIndicatorColor="@color/primaryDarkColor"
                     app:tabIndicatorFullWidth="true"
                     app:tabIndicatorHeight="3dp"
                     app:tabMaxWidth="0dp"
-                    app:tabMode="fixed"></com.google.android.material.tabs.TabLayout>
+                    app:tabMode="fixed">
+            </com.google.android.material.tabs.TabLayout>
 
         </com.google.android.material.appbar.AppBarLayout>
 
@@ -111,6 +110,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintVertical_bias="0.987"
+                app:srcCompat="@drawable/ic_edit"
                 android:focusable="true" />
 
 

@@ -14,6 +14,7 @@ import com.expensemoitor.expensemonitor.network.UserData
 import com.expensemoitor.expensemonitor.R
 import com.expensemoitor.expensemonitor.network.ApiFactory
 import com.expensemoitor.expensemonitor.utilites.*
+import com.expensemoitor.expensemonitor.utilites.MyApp.Companion.context
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -78,7 +79,7 @@ class RegisterationUserViewModel(var application: Application) :ViewModel() {
             }
         }
 
-        if (geneder == null || currency.equals("Select Your Currency")){
+        if (geneder == null || currency.equals(context?.getString(R.string.select_currency))){
             _genderSelected.value = false
         }else{
             val weekDates = getStartAndEndOfTheWeek().split("*")

@@ -1,14 +1,14 @@
 package com.expensemoitor.expensemonitor.utilites
 
 import android.annotation.SuppressLint
+import android.content.Context
+import android.net.ConnectivityManager
 import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceManager
 import com.expensemoitor.expensemonitor.utilites.MyApp.Companion.context
 import java.text.SimpleDateFormat
 import java.util.*
-
-
-
 
 
 

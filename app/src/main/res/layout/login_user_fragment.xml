@@ -7,9 +7,13 @@
                 type="com.expensemoitor.expensemonitor.loginuser.LoginUserViewModel" />
 
     </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            app:paddingTopSystemWindowInsets="@{true}"
+            android:clipChildren="false"
+            android:background="?attr/colorOnBackground"
             tools:context=".loginuser.LoginUserFragment">
 
 
@@ -19,11 +23,49 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
+                app:buttonSize="wide"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.461" />
+                app:layout_constraintVertical_bias="0.644" />
+
+        <TextView
+                android:id="@+id/logo_text_view"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:gravity="center"
+                android:text="@string/expense_monitor"
+                app:marginLeftSystemWindowInsets="@{true}"
+                app:marginRightSystemWindowInsets="@{true}"
+                android:textAppearance="?attr/textAppearanceHeadline4"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.3" />
+
+        <TextView
+                android:id="@+id/sub_title_text_view"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:gravity="center"
+                android:text="@string/all_your_expenses_in_one_place"
+                app:marginLeftSystemWindowInsets="@{true}"
+                app:marginRightSystemWindowInsets="@{true}"
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/logo_text_view"
+                app:layout_constraintVertical_bias="0.032" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

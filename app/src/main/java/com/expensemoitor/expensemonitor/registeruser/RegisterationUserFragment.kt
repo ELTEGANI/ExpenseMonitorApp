@@ -50,7 +50,7 @@ class RegisterationUserFragment : Fragment() {
 
         viewModel.genderSelected.observe(this, Observer { isSelected ->
             if (!isSelected) {
-                Toast.makeText(context,"Please Select Option",Toast.LENGTH_LONG).show()
+                Toast.makeText(context,getString(R.string.select_option),Toast.LENGTH_LONG).show()
                 viewModel.genderAlreadySelected()
               }
             }

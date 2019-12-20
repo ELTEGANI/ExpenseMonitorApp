@@ -1,4 +1,4 @@
-package com.expensemoitor.expensemonitor.Settings
+package com.expensemoitor.expensemonitor.settings
 
 import android.os.Bundle
 import androidx.preference.PreferenceFragmentCompat
@@ -10,9 +10,6 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
       setPreferencesFromResource(R.xml.settings,rootKey)
-
-
-
 
     }
 }

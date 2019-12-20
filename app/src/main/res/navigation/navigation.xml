@@ -110,6 +110,6 @@
 
     <fragment
             android:id="@+id/settingsFragment"
-            android:name="com.expensemoitor.expensemonitor.Settings.SettingsFragment"
+            android:name="com.expensemoitor.expensemonitor.settings.SettingsFragment"
             android:label="SettingsFragment" />
 </navigation>

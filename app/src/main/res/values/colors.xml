@@ -1,7 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="primaryColor">#ffea00</color>
-    <color name="primaryLightColor">#ffff56</color>
-    <color name="primaryDarkColor">#c7b800</color>
-    <color name="primaryTextColor">#000000</color>
+    <!--Color palette-->
+    <color name="expensemonitor_white_50">#ffffff</color>
+
+    <color name="expensemonitor_black_800">#121212</color>
+    <color name="expensemonitor_black_900">#000000</color>
+
+
+
+    <color name="expensemonitor_yellow_200">#ffeb46</color>
+    <color name="expensemonitor_yellow_400">#ffc000</color>
+    <color name="expensemonitor_yellow_500">#ffde03</color>
+
+    <color name="expensemonitor_red_200">#cf7779</color>
+    <color name="expensemonitor_red_400">#ff4c5d</color>
+
+
 </resources>

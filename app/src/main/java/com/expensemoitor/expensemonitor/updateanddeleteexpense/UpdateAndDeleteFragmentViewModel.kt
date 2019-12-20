@@ -5,9 +5,11 @@ import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.expensemoitor.expensemonitor.R
 import com.expensemoitor.expensemonitor.network.ApiFactory
 import com.expensemoitor.expensemonitor.network.ExpenseData
 import com.expensemoitor.expensemonitor.network.ExpensesResponse
+import com.expensemoitor.expensemonitor.utilites.MyApp.Companion.context
 import com.expensemoitor.expensemonitor.utilites.PrefManager
 import com.expensemoitor.expensemonitor.utilites.calculateAfterUpdateExpenses
 import com.expensemoitor.expensemonitor.utilites.getCurrencyFromSettings
@@ -55,7 +57,7 @@ class UpdateAndDeleteFragmentViewModel(expensesResponse: ExpensesResponse, appli
                     _status.value = progressStatus.LOADING
                     val getResponse = getDeleteExpenseResponse.await()
                     if(getResponse.message.isNotEmpty()){
-                        _msgError.value = "Expense Deleted Successfully"
+                        _msgError.value = context?.getString(R.string.expense_deleted_successfuly)
                             val todayAmount = PrefManager.getTodayExpenses(application)
                             val weekAmount = PrefManager.getWeeKExpenses(application)
                             val monthAmount = PrefManager.getMonthExpenses(application)
@@ -77,7 +79,7 @@ class UpdateAndDeleteFragmentViewModel(expensesResponse: ExpensesResponse, appli
                     }
                 }catch (t:Throwable){
                     _status.value = progressStatus.ERROR
-                    _msgError.value = "Poor Internet Connection"
+                    _msgError.value = context?.getString(R.string.weak_internet_connection)
                 }
             }catch (httpException: HttpException){
                 Log.d("httpException",httpException.toString())
@@ -89,7 +91,7 @@ class UpdateAndDeleteFragmentViewModel(expensesResponse: ExpensesResponse, appli
 
     fun updateExpense(oldAmount:String,expenseId:String,newAmount:String,description:String,date:String,category:String){
         if(newAmount.isEmpty() || description.isEmpty() || date.isEmpty() || category.isEmpty()){
-            _msgError.value = "Please Fill Empty Field"
+            _msgError.value =  context?.getString(R.string.fill_empty)
         }else{
             coroutineScope.launch {
                 val expenseData = getCurrencyFromSettings()?.let {
@@ -103,14 +105,14 @@ class UpdateAndDeleteFragmentViewModel(expensesResponse: ExpensesResponse, appli
                         _status.value = progressStatus.LOADING
                         val getResponse = getUpdateExpenseResponse?.await()
                         if(getResponse?.message?.isNotEmpty()!!){
-                            _msgError.value = "Expense Updated Successfully"
+                            _msgError.value = context?.getString(R.string.expense_update_successfuly)
                             calculateAfterUpdateExpenses(oldAmount,newAmount)
                         }
                         Log.d("getResponse",getResponse.toString())
                         _status.value = progressStatus.DONE
                     }catch (t:Throwable){
                         _status.value = progressStatus.ERROR
-                        _validationMsg.value = "Poor Internet Connection"
+                        _validationMsg.value = context?.getString(R.string.weak_internet_connection)
                     }
                 }catch (httpException: HttpException){
                     Log.d("httpException",httpException.toString())
