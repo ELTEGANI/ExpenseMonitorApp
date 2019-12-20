@@ -16,7 +16,7 @@
         <item name="colorSecondary">@color/expensemonitor_yellow_500</item>
         <item name="colorSecondaryVariant">@color/expensemonitor_yellow_400</item>
 
-        <item name="android:colorBackground">@color/expensemonitor_yellow_500</item>
+        <item name="android:colorBackground">@color/expensemonitor_white_50</item>
         <item name="colorSurface">@color/expensemonitor_white_50</item>
 <!--        <item name="colorPrimarySurfaceVariant">?attr/colorPrimaryVariant</item>-->
         <item name="colorError">@color/expensemonitor_red_400</item>

@@ -20,7 +20,7 @@
         <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardView"
                 android:layout_width="0dp"
-                android:layout_height="90dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
@@ -42,12 +42,23 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/category_textView"
+                <TextView
+                        android:id="@+id/description_textView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:maxLines="2"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                        app:expenseDescription="@{expensesProperties}"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/imageView"
+                        app:layout_constraintTop_toBottomOf="@+id/category_textView"
+                        app:layout_constraintVertical_bias="0.153" />
+
+                <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/category_textView"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
-                        android:layout_marginTop="8dp"
                         android:layout_marginEnd="8dp"
                         android:textAppearance="@style/TextAppearance.AppCompat.Title"
                         app:expenseCategory="@{expensesProperties}"
@@ -56,45 +67,46 @@
                         app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.0" />
+                        app:layout_constraintVertical_bias="0.059" />
 
                 <TextView
                         android:id="@+id/amount_textView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
+                        android:layout_marginStart="8dp"
                         android:layout_marginBottom="8dp"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                        android:textColor="@color/expensemonitor_red_400"
                         app:expenseAmount="@{expensesProperties}"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.129" />
-
-                <TextView
-                        android:id="@+id/description_textView"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginEnd="8dp"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                        app:expenseDescription="@{expensesProperties}"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toBottomOf="@+id/imageView"
+                        app:layout_constraintVertical_bias="0.49" />
 
                 <TextView
                         android:id="@+id/textView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="8dp"
+                        android:layout_marginBottom="8dp"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                         app:expenseDate="@{expensesProperties}"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.901" />
+                        app:layout_constraintVertical_bias="1.0" />
+
+
+                <ImageView
+                        android:id="@+id/imageView"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_marginStart="8dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/category_textView"
+                        app:layout_constraintVertical_bias="0.179"
+                        app:srcCompat="@android:drawable/btn_dialog" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
