@@ -5,7 +5,7 @@ and many more features. This app builds depend on all concepts of google android
  
 TODOs
 
-1-Materialize the app(based on google sample case studies annouced in the dev-summit-19).
+1-Materialize the app(based on google sample case studies annouced in the dev-summit-19)Inprogress.
 
 2-Add In-app-updater.
 
@@ -17,4 +17,6 @@ TODOs
 
 6-mpchart android pie chart to give user report about thier expenses.
 
-7-Publish to Play Store using Fastlane.
+7-R8
+
+8-Publish to Play Store using Fastlane.
