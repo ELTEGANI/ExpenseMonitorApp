@@ -5,7 +5,7 @@ and many more features. This app builds depend on all concepts of google android
  
 TODOs
 
-1-Materialize the app(based on google sample case studies annouced in the dev-summit-19)Inprogress.
+1-Materialize the app(based on google sample case studies annouced in the dev-summit-19)  Inprogress.
 
 2-Add In-app-updater.
 
