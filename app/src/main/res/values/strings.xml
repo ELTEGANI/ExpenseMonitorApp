@@ -9,13 +9,11 @@
     <string name="registeration">Registeration</string>
     <string name="next">Next</string>
     <string name="mange_expense">Mange Expense</string>
-    <string name="update_date">Update Date</string>
     <string name="update_expense">Update Expense</string>
     <string name="delete_expense">Delete Expense</string>
     <string name="create_expense">Create Expense</string>
     <string name="amount">Amount</string>
     <string name="description">Description</string>
-    <string name="new_date">New Date</string>
     <string name="create_new_expense">create New Expense</string>
     <string name="change_currency">Change Your Currency</string>
     <string name="setting">Setting</string>
@@ -141,4 +139,5 @@
     <string name="weak_internet_connection">Poor Internet Connection</string>
     <string name="all_your_expenses_in_one_place">All Your Expenses In One Place</string>
     <string name="expense_monitor">Expense Monitor</string>
+    <string name="date">Date</string>
 </resources>

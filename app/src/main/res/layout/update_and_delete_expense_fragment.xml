@@ -12,6 +12,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="?attr/colorSurface"
             tools:context=".updateanddeleteexpense.UpdateAndDeleteExpenseFragment">
 
         <androidx.appcompat.widget.Toolbar
@@ -26,6 +27,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.0">
+
             <TextView
                     android:id="@+id/textView2"
                     android:layout_width="wrap_content"
@@ -47,9 +49,9 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:ems="10"
-                android:visibility="gone"
-                android:text="@{viewModel.selectedExpenseMsg.id}"
                 android:inputType="number"
+                android:text="@{viewModel.selectedExpenseMsg.id}"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -61,105 +63,105 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
+                android:layout_marginTop="84dp"
                 android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
                 android:ems="10"
-                android:text="@{viewModel.selectedExpenseMsg.amount}"
                 android:inputType="number"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:text="@{viewModel.selectedExpenseMsg.amount}"
+                app:layout_constraintBottom_toTopOf="@+id/description_editText"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.119" />
+                app:layout_constraintTop_toTopOf="@+id/toolbar" />
 
         <EditText
                 android:id="@+id/description_editText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
+                android:layout_marginBottom="6dp"
                 android:ems="10"
                 android:inputType="text"
                 android:text="@{viewModel.selectedExpenseMsg.description}"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/date_button"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.454"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.209" />
+                app:layout_constraintTop_toBottomOf="@+id/amount_editText" />
 
         <Button
                 android:id="@+id/date_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:text="@string/update_date"
-                android:textAllCaps="false"
-                android:textColor="?attr/colorOnBackground"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:text="@string/date"
+                app:cornerRadius="10dp"
+                app:icon="@drawable/ic_date"
+                app:iconGravity="start"
+                app:layout_constraintBottom_toTopOf="@+id/category_spinner"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.307" />
+                app:layout_constraintTop_toBottomOf="@+id/description_editText" />
 
         <EditText
                 android:id="@+id/date_editText"
                 android:layout_width="120dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
                 android:ems="10"
                 android:inputType="date"
                 android:text="@{viewModel.selectedExpenseMsg.date}"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/category_spinner"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.31" />
+                app:layout_constraintTop_toBottomOf="@+id/description_editText" />
 
         <Spinner
                 android:id="@+id/category_spinner"
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
                 android:entries="@array/categories_list"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/update_expense_button"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.403" />
+                app:layout_constraintTop_toBottomOf="@+id/date_editText" />
 
         <Button
                 android:id="@+id/update_expense_button"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
                 android:text="@string/update_expense"
                 android:textAllCaps="false"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.522" />
+                app:layout_constraintTop_toBottomOf="@+id/category_spinner" />
 
         <Button
                 android:id="@+id/delete_expense_button"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
-                android:text="@string/delete_expense"
-                android:textColor="?attr/colorOnBackground"
                 android:backgroundTint="?attr/colorError"
+                android:text="@string/delete_expense"
                 android:textAllCaps="false"
+                android:textColor="?attr/colorOnBackground"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.61" />
+                app:layout_constraintTop_toBottomOf="@+id/update_expense_button"
+                app:layout_constraintVertical_bias="0.0" />
 
         <ProgressBar
                 android:id="@+id/progressBar"
@@ -167,12 +169,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:visibility="gone"
-                app:progressStatus="@{viewModel.status}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.168" />
+                app:layout_constraintVertical_bias="0.168"
+                app:progressStatus="@{viewModel.status}" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
