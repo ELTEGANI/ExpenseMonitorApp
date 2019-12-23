@@ -5,6 +5,7 @@ package com.expensemoitor.expensemonitor.myexpenses
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -12,6 +13,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import androidx.preference.Preference
 import androidx.preference.PreferenceManager
 import androidx.viewpager2.widget.ViewPager2
 import com.expensemoitor.expensemonitor.R
@@ -152,5 +154,7 @@ class MyExpenseFragment : Fragment() {
         mGoogleSignInClient?.signOut()?.addOnCompleteListener{
         }
     }
+
+
 
 }

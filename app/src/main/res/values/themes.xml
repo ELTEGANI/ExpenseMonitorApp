@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!--Final, top-level theme-->
     <style name="Theme.ExpenseMonitor.DayNight" parent="Theme.ExpenseMonitor"/>
@@ -17,11 +16,13 @@
         <item name="colorSecondaryVariant">@color/expensemonitor_yellow_400</item>
 
         <item name="android:colorBackground">@color/expensemonitor_white_50</item>
-        <item name="colorSurface">@color/expensemonitor_white_50</item>
-<!--        <item name="colorPrimarySurfaceVariant">?attr/colorPrimaryVariant</item>-->
-        <item name="colorError">@color/expensemonitor_red_400</item>
+        <item name="android:colorPrimaryDark">@color/expensemonitor_yellow_400</item>
 
-        <item name="colorOnPrimary">@color/expensemonitor_white_50</item>
+        <item name="colorSurface">@color/expensemonitor_white_50</item>
+        <item name="colorError">@color/expensemonitor_red_400</item>
+        <item name="android:statusBarColor">@color/expensemonitor_yellow_400</item>
+
+        <item name="colorOnPrimary">@color/expensemonitor_yellow_500</item>
         <item name="colorOnSecondary">@color/expensemonitor_yellow_500</item>
         <item name="colorOnBackground">@color/expensemonitor_yellow_500</item>
         <item name="colorOnSurface">@color/expensemonitor_yellow_500</item>
@@ -34,4 +35,7 @@
         <!--System/Platform attributes-->
         <item name="android:windowBackground">?android:colorBackground</item>
     </style>
+
+
+
 </resources>

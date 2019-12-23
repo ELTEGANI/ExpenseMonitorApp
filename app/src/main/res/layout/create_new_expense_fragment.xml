@@ -117,6 +117,7 @@
                     android:clipToPadding="false"
                     android:entries="@array/categories_list"
                     android:minHeight="48dp"
+                    android:background="?attr/colorSurface"
                     android:onItemSelected="@{(parent,view,pos,id)->viewModel.onSelectExpenseFormOrCategoryItem(parent,view,pos,id)}"
                     android:requiresFadingEdge="horizontal"
                     android:scrollbars="none"

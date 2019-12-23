@@ -3,9 +3,6 @@
     <!--Color palette-->
     <color name="expensemonitor_white_50">#ffffff</color>
 
-    <color name="expensemonitor_black_800">#121212</color>
-    <color name="expensemonitor_black_900">#000000</color>
-
 
 
     <color name="expensemonitor_yellow_200">#ffeb46</color>

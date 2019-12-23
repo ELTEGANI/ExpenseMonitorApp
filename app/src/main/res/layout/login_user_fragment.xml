@@ -11,9 +11,10 @@
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:clipChildren="false"
-            app:layoutFullscreen="@{true}"
-            android:background="?attr/colorOnBackground"
+            android:background="?android:colorPrimary"
+            app:paddingTopSystemWindowInsets="@{true}"
+            app:paddingLeftSystemWindowInsets="@{true}"
+            app:paddingRightSystemWindowInsets="@{true}"
             tools:context=".loginuser.LoginUserFragment">
 
 

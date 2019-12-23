@@ -81,19 +81,20 @@ class LoginUserFragment : Fragment() {
 
     private fun handleSignInResult(completedTask: Task<GoogleSignInAccount>) {
         try {
-            val account =
-                completedTask.getResult(ApiException::class.java)
-            context?.let { PrefManager.saveEmail(it,account?.email.toString()) }
-            context?.let { PrefManager.savePhoto(it,account?.photoUrl.toString()) }
-            context?.let { PrefManager.saveName(it,account?.givenName.toString()) }
-
-            // Signed in successfully, show authenticated UI.
-            context?.let { PrefManager.setLoggedIn(it,true) }
-            if (context?.let { PrefManager.isRegistered(it) }!!){
-                findNavController().navigate(R.id.action_loginUserFragment_to_myExpenseFragment)
-            }else{
-                findNavController().navigate(R.id.action_loginUserFragment_to_registerationUserFragment)
+            val account = completedTask.getResult(ApiException::class.java)
+            if(account != null) {
+                context?.let { PrefManager.saveEmail(it, account.email.toString()) }
+                context?.let { PrefManager.savePhoto(it,account.photoUrl.toString()) }
+                context?.let { PrefManager.saveName(it,account.givenName.toString()) }
+                // Signed in successfully, show authenticated UI.
+                context?.let { PrefManager.setLoggedIn(it,true) }
+                if (context?.let { PrefManager.isRegistered(it) }!!){
+                    findNavController().navigate(R.id.action_loginUserFragment_to_myExpenseFragment)
+                }else{
+                    findNavController().navigate(R.id.action_loginUserFragment_to_registerationUserFragment)
+                }
             }
+
         } catch (e: ApiException) { // The ApiException status code indicates the detailed failure reason.
             Log.w("tag", "signInResult:failed code=" + e.statusCode)
         }
