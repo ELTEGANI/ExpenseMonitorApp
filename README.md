@@ -19,4 +19,4 @@ TODOs
 
 7-R8
 
-8-Publish to Play Store using Fastlane
+8-Publish to Play Store using Fastlane tutorial(https://willowtreeapps.com/ideas/how-to-use-fastlane-for-android-with-examples)
