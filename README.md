@@ -15,8 +15,8 @@ TODOs
 
 5-Simplify Android Kotlin Code with Ktlint.
 
-6-mpchart android pie chart to give user report about thier expenses.
+6-Fastlane. Done initialized it in the project.
 
 7-R8
 
-8-Publish to Play Store using Fastlane.
+8-Publish to Play Store using Fastlane
