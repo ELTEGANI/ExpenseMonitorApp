@@ -1,6 +1,6 @@
 # ExpenseMonitorApp TODOs
 
-1-Materialize the app(based on google sample case studies annouced in the dev-summit-19)  Inprogress.
+1-Materialize the app(based on google sample case studies announced in the Android Dev-summit-19).
 
 2-Add In-app-updater.
 
@@ -10,8 +10,6 @@
 
 5-Simplify Android Kotlin Code with Ktlint.
 
-6-Fastlane. Done initialized it in the project.
+6-R8
 
-7-R8
-
-8-Publish to Play Store using Fastlane tutorial(https://willowtreeapps.com/ideas/how-to-use-fastlane-for-android-with-examples)
+7-Publish to Play Store using Fastlane tutorial(https://willowtreeapps.com/ideas/how-to-use-fastlane-for-android-with-examples)
