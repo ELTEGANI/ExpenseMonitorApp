@@ -3,9 +3,12 @@ package com.expensemoitor.expensemonitor.settings
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.widget.Toast
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.PreferenceManager
 import com.expensemoitor.expensemonitor.R
+import com.expensemoitor.expensemonitor.myexpenses.MyExpenseFragmentDirections
 import com.expensemoitor.expensemonitor.utilites.MyApp
 import com.expensemoitor.expensemonitor.utilites.PrefManager
 import com.expensemoitor.expensemonitor.utilites.getCurrencyFromSettings
@@ -37,13 +40,13 @@ class SettingsFragment : PreferenceFragmentCompat() , SharedPreferences.OnShared
     }
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?,key:String?) {
-        Toast.makeText(context,"old"+sharedPreferences?.getString("userCurrency",null)
-            +"new"+ key,Toast.LENGTH_LONG).show()
-//       if(!key.equals(getCurrencyFromSettings())){
-//           PrefManager.saveUpdatedTodayExpense(context,0)
-//           PrefManager.saveUpdatedWeekExpense(context,0)
-//           PrefManager.saveUpdatedMonthExpense(context,0)
-//       }
+
+
+       if(!key.equals(getCurrencyFromSettings())){
+           //navigate back to main expenses
+           val direction = SettingsFragmentDirections.actionSettingsFragmentToMyExpenseFragment()
+           findNavController().navigate(direction)
+       }
     }
 
 

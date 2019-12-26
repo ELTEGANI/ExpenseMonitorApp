@@ -14,6 +14,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.viewpager2.widget.ViewPager2
 import com.expensemoitor.expensemonitor.R
+import com.expensemoitor.expensemonitor.database.ExpenseMonitorDataBase
 import com.expensemoitor.expensemonitor.databinding.TodayExpenseFragmentBinding
 import com.expensemoitor.expensemonitor.myexpenses.MyExpenseFragmentDirections
 import com.expensemoitor.expensemonitor.utilites.DurationsExpenseAdapter
@@ -30,8 +31,8 @@ class TodayExpenseFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater,R.layout.today_expense_fragment,container,false)
 
         val application = requireNotNull(this.activity).application
-
-        val viewModelFactory = TodayExpenseFragmentViewModelFactory(application)
+        val dataBase = ExpenseMonitorDataBase.getInstance(application).expenseMonitorDao
+        val viewModelFactory = TodayExpenseFragmentViewModelFactory(dataBase,application)
 
         val viewModel = ViewModelProviders.of(this,viewModelFactory)
             .get(TodayExpenseFragmentViewModel::class.java)

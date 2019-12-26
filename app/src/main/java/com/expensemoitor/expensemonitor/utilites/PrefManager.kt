@@ -11,53 +11,16 @@ class PrefManager
             return context?.getSharedPreferences("APP_PREF", Context.MODE_PRIVATE)
         }
 
-        fun saveAccessTokenAndCurrentExpense(
-            context: Context?, accessToken: String,
-            todayExpenses:Int,
-            weekExpense:Int,
-            monthExpense:Int) {
+        fun saveAccessToken(context: Context?, accessToken: String) {
             val editor = getSharedPreferences(context)?.edit()
             editor?.putString("ACCESS_TOKEN", accessToken)
-            editor?.putInt("TODAY_EXPENSES", todayExpenses)
-            editor?.putInt("WEEK_EXPENSES", weekExpense)
-            editor?.putInt("MONTH_EXPENSES", monthExpense)
             editor?.apply()
         }
+
 
         fun getAccessToken(context: Context): String? {
             return getSharedPreferences(context)?.getString("ACCESS_TOKEN", null)
         }
-
-        fun getTodayExpenses(context: Context?):Int?{
-            return getSharedPreferences(context)?.getInt("TODAY_EXPENSES",0)
-        }
-
-        fun getMonthExpenses(context: Context?):Int?{
-            return getSharedPreferences(context)?.getInt("MONTH_EXPENSES",0)
-        }
-
-        fun getWeeKExpenses(context: Context?):Int?{
-            return getSharedPreferences(context)?.getInt("WEEK_EXPENSES",0)
-        }
-
-        fun saveUpdatedTodayExpense(context: Context?, updatedTodayExpenses: Int?){
-            val editor = getSharedPreferences(context)?.edit()
-            updatedTodayExpenses?.let { editor?.putInt("TODAY_EXPENSES", it) }
-            editor?.apply()
-        }
-
-        fun saveUpdatedWeekExpense(context: Context?, updatedWeekExpenses: Int?){
-            val editor = getSharedPreferences(context)?.edit()
-            updatedWeekExpenses?.let { editor?.putInt("WEEK_EXPENSES", it) }
-            editor?.apply()
-        }
-
-        fun saveUpdatedMonthExpense(context: Context?, updatedMonthExpenses: Int?){
-            val editor = getSharedPreferences(context)?.edit()
-            updatedMonthExpenses?.let { editor?.putInt("MONTH_EXPENSES", it) }
-            editor?.apply()
-        }
-
 
 
         fun saveName(context: Context,username:String){

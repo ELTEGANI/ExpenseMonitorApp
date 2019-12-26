@@ -12,19 +12,18 @@ import androidx.lifecycle.MutableLiveData
 import androidx.preference.PreferenceManager
 import com.expensemoitor.expensemonitor.network.UserData
 import com.expensemoitor.expensemonitor.R
+import com.expensemoitor.expensemonitor.database.ExpenseMonitorDao
+import com.expensemoitor.expensemonitor.database.UserExpenses
 import com.expensemoitor.expensemonitor.network.ApiFactory
 import com.expensemoitor.expensemonitor.utilites.*
+import com.expensemoitor.expensemonitor.utilites.Converter.Companion.toBigDecimal
 import com.expensemoitor.expensemonitor.utilites.MyApp.Companion.context
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import retrofit2.HttpException
+import java.math.BigDecimal
 
 
-
-
-class RegisterationUserViewModel(var application: Application) :ViewModel() {
+class RegisterationUserViewModel(val database: ExpenseMonitorDao, var application: Application) :ViewModel() {
 
     private var viewModelJob = Job()
     private val coroutineJob = CoroutineScope(viewModelJob + Dispatchers.Main)
@@ -97,8 +96,20 @@ class RegisterationUserViewModel(var application: Application) :ViewModel() {
                         _status.value = progressStatus.LOADING
                         val userResponse = getUserResponse.await()
                         saveCurrencyForSettings(currency)
-                        PrefManager.saveAccessTokenAndCurrentExpense(application,userResponse.accessToken,userResponse.userCurrentExpense.toInt(),userResponse.weekExpense.toInt(),userResponse.monthExpense.toInt())
                         PrefManager.setUserRegistered(application,true)
+                        PrefManager.saveAccessToken(application,userResponse.accessToken)
+                        val duration = listOf<String>("today","week","month")
+                        withContext(Dispatchers.IO) {
+                            for (i in duration.indices){
+                                database.insert(UserExpenses(
+                                    todayExpenses = toBigDecimal("0"),
+                                    weekExpenses  = toBigDecimal("0"),
+                                    monthExpenses = toBigDecimal("0"),
+                                    currency      = currency,
+                                    duration      = duration[i]
+                                ))
+                            }
+                        }
                         _navigateToNextScreen.value = true
                         _status.value = progressStatus.DONE
                     }catch (t:Throwable){

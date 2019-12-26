@@ -17,6 +17,7 @@ import androidx.preference.Preference
 import androidx.preference.PreferenceManager
 import androidx.viewpager2.widget.ViewPager2
 import com.expensemoitor.expensemonitor.R
+import com.expensemoitor.expensemonitor.database.ExpenseMonitorDataBase
 import com.expensemoitor.expensemonitor.databinding.MyExpenseFragmentBinding
 import com.expensemoitor.expensemonitor.utilites.*
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -38,13 +39,10 @@ class MyExpenseFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.my_expense_fragment,container,false)
 
 
-        Log.d("Today",PrefManager.getTodayExpenses(context)?.toString()+"\n"+
-                "Week"+PrefManager.getWeeKExpenses(context)?.toString()+"\n"+
-                "Month"+PrefManager.getMonthExpenses(context)?.toString())
 
         val application = requireNotNull(this.activity).application
-
-        val viewModelFactory = MyExpenseFragmentViewModelFactory(application)
+        val dataBase = ExpenseMonitorDataBase.getInstance(application).expenseMonitorDao
+        val viewModelFactory = MyExpenseFragmentViewModelFactory(dataBase,application)
 
         viewModel = ViewModelProviders.of(this,viewModelFactory)
             .get(MyExpenseFragmentViewModel::class.java)
@@ -80,17 +78,17 @@ class MyExpenseFragment : Fragment() {
                 super.onPageSelected(position)
                 when(position.toString()){
                     "0"->{
-                       viewModel.expense.value = getCurrencyFromSettings()+" "+expenseFormat(PrefManager.getTodayExpenses(context)?.toString())
+//                       viewModel.expense.value = getCurrencyFromSettings()+" "+expenseFormat(PrefManager.getTodayExpenses(context)?.toString())
                        binding.dateTextView.text = getCurrentDate()
                     }
                     "1"->{
                         val weekDates = getStartAndEndOfTheWeek().split("*")
-                        viewModel.expense.value = getCurrencyFromSettings()+" "+expenseFormat(PrefManager.getWeeKExpenses(context)?.toString())
+//                        viewModel.expense.value = getCurrencyFromSettings()+" "+expenseFormat(PrefManager.getWeeKExpenses(context)?.toString())
                         binding.dateTextView.text = weekDates[0]+" "+"/"+" "+weekDates[1]
                     }
                     "2"->{
                         val monthDates = getTheStartAndTheEndOfTheMonth().split("*")
-                        viewModel.expense.value = getCurrencyFromSettings()+" "+expenseFormat(PrefManager.getMonthExpenses(context)?.toString())
+//                        viewModel.expense.value = getCurrencyFromSettings()+" "+expenseFormat(PrefManager.getMonthExpenses(context)?.toString())
                         binding.dateTextView.text = monthDates[0]+" "+"/"+" "+monthDates[1]
                     }
                 }

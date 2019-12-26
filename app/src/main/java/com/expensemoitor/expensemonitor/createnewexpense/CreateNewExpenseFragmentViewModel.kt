@@ -90,7 +90,6 @@ class CreateNewExpenseFragmentViewModel(var application: Application) : ViewMode
                     val expenseResponse = getResponse?.await()
                     if (!expenseResponse?.message?.isEmpty()!!){
                         _responseMsg.value = context?.getString(R.string.expense_created_successfuly)
-                        calculateAfterCreateExpenses(amount)
                         _status.value = progressStatus.DONE
                     }
                 }catch (t:Throwable){

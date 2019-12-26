@@ -93,42 +93,22 @@ fun checkIfDurationFinished(){
         val endOfTheWeek = sdf.parse(endOfWeek)
         val endOfTheMonth = sdf.parse(endOfMonth)
 
-        if (currentDate.compareTo(savedDate) > 0){
-            PrefManager.saveUpdatedTodayExpense(context,0)
-            PrefManager.saveCurrentDate(context, getCurrentDate())
-        }
-
-        if (currentDate.compareTo(endOfTheWeek) > 0){
-            PrefManager.saveUpdatedWeekExpense(context,0)
-        }
-
-        if(currentDate.compareTo(endOfTheMonth) > 0){
-            PrefManager.saveUpdatedMonthExpense(context,0)
-        }
+//        if (currentDate.compareTo(savedDate) > 0){
+//            PrefManager.saveUpdatedTodayExpense(context,0)
+//            PrefManager.saveCurrentDate(context, getCurrentDate())
+//        }
+//
+//        if (currentDate.compareTo(endOfTheWeek) > 0){
+//            PrefManager.saveUpdatedWeekExpense(context,0)
+//        }
+//
+//        if(currentDate.compareTo(endOfTheMonth) > 0){
+//            PrefManager.saveUpdatedMonthExpense(context,0)
+//        }
 
     } catch (e: Exception) {
         e.printStackTrace()
     }
-}
-
-
-fun calculateAfterCreateExpenses(amount:String){
-    val newTodayExpense = PrefManager.getTodayExpenses(context)?.plus(amount.toInt())
-    val newWeekExpense = PrefManager.getWeeKExpenses(context)?.plus(amount.toInt())
-    val newMonthExpense = PrefManager.getMonthExpenses(context)?.plus(amount.toInt())
-    PrefManager.saveUpdatedTodayExpense(context,newTodayExpense)
-    PrefManager.saveUpdatedWeekExpense(context,newWeekExpense)
-    PrefManager.saveUpdatedMonthExpense(context,newMonthExpense)
-}
-
-fun calculateAfterUpdateExpenses(oldAmount:String,newAmount:String){
-    val todayAmount = PrefManager.getTodayExpenses(context)?.minus(oldAmount.toInt())
-    val weekAmount = PrefManager.getWeeKExpenses(context)?.minus(oldAmount.toInt())
-    val monthAmount = PrefManager.getMonthExpenses(context)?.minus(oldAmount.toInt())
-    //minus amount from duration
-    PrefManager.saveUpdatedTodayExpense(context,todayAmount?.plus(newAmount.toInt()))
-    PrefManager.saveUpdatedWeekExpense(context,weekAmount?.plus(newAmount.toInt()))
-    PrefManager.saveUpdatedMonthExpense(context,monthAmount?.plus(newAmount.toInt()))
 }
 
 fun saveCurrencyForSettings(selectedCurrency:String){

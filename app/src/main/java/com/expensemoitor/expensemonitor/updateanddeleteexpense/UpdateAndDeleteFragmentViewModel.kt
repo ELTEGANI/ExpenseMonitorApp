@@ -11,7 +11,6 @@ import com.expensemoitor.expensemonitor.network.ExpenseData
 import com.expensemoitor.expensemonitor.network.ExpensesResponse
 import com.expensemoitor.expensemonitor.utilites.MyApp.Companion.context
 import com.expensemoitor.expensemonitor.utilites.PrefManager
-import com.expensemoitor.expensemonitor.utilites.calculateAfterUpdateExpenses
 import com.expensemoitor.expensemonitor.utilites.getCurrencyFromSettings
 import com.expensemoitor.expensemonitor.utilites.progressStatus
 import kotlinx.coroutines.*
@@ -58,21 +57,7 @@ class UpdateAndDeleteFragmentViewModel(expensesResponse: ExpensesResponse, appli
                     val getResponse = getDeleteExpenseResponse.await()
                     if(getResponse.message.isNotEmpty()){
                         _msgError.value = context?.getString(R.string.expense_deleted_successfuly)
-                            val todayAmount = PrefManager.getTodayExpenses(application)
-                            val weekAmount = PrefManager.getWeeKExpenses(application)
-                            val monthAmount = PrefManager.getMonthExpenses(application)
-                            //minus amount from duration
-                        if (todayAmount != null && todayAmount > 0) {
-                                PrefManager.saveUpdatedTodayExpense(application,todayAmount?.minus(amount))
-                        }
 
-                        if (weekAmount != null && weekAmount > 0){
-                            PrefManager.saveUpdatedWeekExpense(application,weekAmount?.minus(amount))
-                        }
-
-                        if (monthAmount != null && monthAmount > 0) {
-                                PrefManager.saveUpdatedMonthExpense(application,monthAmount?.minus(amount))
-                        }
 
                         Log.d("getResponse",getResponse.toString())
                         _status.value = progressStatus.DONE
@@ -106,7 +91,6 @@ class UpdateAndDeleteFragmentViewModel(expensesResponse: ExpensesResponse, appli
                         val getResponse = getUpdateExpenseResponse?.await()
                         if(getResponse?.message?.isNotEmpty()!!){
                             _msgError.value = context?.getString(R.string.expense_update_successfuly)
-                            calculateAfterUpdateExpenses(oldAmount,newAmount)
                         }
                         Log.d("getResponse",getResponse.toString())
                         _status.value = progressStatus.DONE

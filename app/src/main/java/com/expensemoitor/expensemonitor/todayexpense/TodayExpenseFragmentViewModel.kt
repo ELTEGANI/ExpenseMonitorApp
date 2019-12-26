@@ -7,6 +7,7 @@ import android.widget.AdapterView
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.expensemoitor.expensemonitor.database.ExpenseMonitorDao
 import com.expensemoitor.expensemonitor.network.ApiFactory
 import com.expensemoitor.expensemonitor.network.DurationTag
 import com.expensemoitor.expensemonitor.network.ExpenseData
@@ -21,7 +22,7 @@ import kotlinx.coroutines.launch
 import retrofit2.HttpException
 
 
-class TodayExpenseFragmentViewModel(val application: Application) : ViewModel() {
+class TodayExpenseFragmentViewModel(val database: ExpenseMonitorDao, val application: Application) : ViewModel() {
 
 
     private val viewModelJob = Job()
@@ -54,9 +55,7 @@ class TodayExpenseFragmentViewModel(val application: Application) : ViewModel() 
                   it,"","")
           }
           val getResponse = durationTag?.let {
-              ApiFactory.GET_EXPNSES_BASED_ON_DURATION_SERVICE.getExpensesBasedOnDuration(
-                  it
-              )
+              ApiFactory.GET_EXPNSES_BASED_ON_DURATION_SERVICE.getExpensesBasedOnDuration(it)
           }
             try {
                 _status.value = progressStatus.LOADING
