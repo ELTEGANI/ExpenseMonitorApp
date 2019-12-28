@@ -5,20 +5,18 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.expensemoitor.expensemonitor.database.ExpenseMonitorDao
 import com.expensemoitor.expensemonitor.network.ApiFactory
 import com.expensemoitor.expensemonitor.network.DurationTag
 import com.expensemoitor.expensemonitor.network.ExpensesResponse
+import com.expensemoitor.expensemonitor.utilites.*
 import com.expensemoitor.expensemonitor.utilites.MyApp.Companion.context
-import com.expensemoitor.expensemonitor.utilites.PrefManager
-import com.expensemoitor.expensemonitor.utilites.getCurrencyFromSettings
-import com.expensemoitor.expensemonitor.utilites.getStartAndEndOfTheWeek
-import com.expensemoitor.expensemonitor.utilites.progressStatus
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
-class WeekExpenseFragmentViewModel(val application: Application) : ViewModel() {
+class WeekExpenseFragmentViewModel(val database: ExpenseMonitorDao, val application: Application) : ViewModel() {
 
 
     private val viewModelJob = Job()
@@ -46,6 +44,7 @@ class WeekExpenseFragmentViewModel(val application: Application) : ViewModel() {
         val weekDates = getStartAndEndOfTheWeek().split("*")
 
         coroutineScope.launch {
+            database.updateWeekExpenses(Converter.toBigDecimal("200"),getCurrencyFromSettings().toString())
             val durationTag = getCurrencyFromSettings()?.let {
                 DurationTag(duration,it,weekDates[0],weekDates[1])
             }

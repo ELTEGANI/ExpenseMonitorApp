@@ -5,20 +5,18 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.expensemoitor.expensemonitor.database.ExpenseMonitorDao
 import com.expensemoitor.expensemonitor.network.ApiFactory
 import com.expensemoitor.expensemonitor.network.DurationTag
 import com.expensemoitor.expensemonitor.network.ExpensesResponse
+import com.expensemoitor.expensemonitor.utilites.*
 import com.expensemoitor.expensemonitor.utilites.MyApp.Companion.context
-import com.expensemoitor.expensemonitor.utilites.PrefManager
-import com.expensemoitor.expensemonitor.utilites.getCurrencyFromSettings
-import com.expensemoitor.expensemonitor.utilites.getTheStartAndTheEndOfTheMonth
-import com.expensemoitor.expensemonitor.utilites.progressStatus
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
-class MonthExpenseFragmentViewModel(val application: Application) : ViewModel() {
+class MonthExpenseFragmentViewModel(val database: ExpenseMonitorDao, val application: Application) : ViewModel() {
 
     private val viewModelJob = Job()
 
@@ -46,6 +44,7 @@ class MonthExpenseFragmentViewModel(val application: Application) : ViewModel() 
     private fun getMonthExpense(duration:String) {
         val monthDates = getTheStartAndTheEndOfTheMonth().split("*")
         coroutineScope.launch {
+            database.updateMonthExpenses(Converter.toBigDecimal("300"),getCurrencyFromSettings().toString())
             val durationTag = getCurrencyFromSettings()?.let {
                 DurationTag(duration,it,monthDates[0],monthDates[1])
             }

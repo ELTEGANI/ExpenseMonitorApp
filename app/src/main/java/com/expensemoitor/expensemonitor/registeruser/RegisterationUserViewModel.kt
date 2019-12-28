@@ -98,18 +98,12 @@ class RegisterationUserViewModel(val database: ExpenseMonitorDao, var applicatio
                         saveCurrencyForSettings(currency)
                         PrefManager.setUserRegistered(application,true)
                         PrefManager.saveAccessToken(application,userResponse.accessToken)
-                        val duration = listOf<String>("today","week","month")
-                        withContext(Dispatchers.IO) {
-                            for (i in duration.indices){
-                                database.insert(UserExpenses(
+                                database.insertExpense(UserExpenses(
                                     todayExpenses = toBigDecimal("0"),
                                     weekExpenses  = toBigDecimal("0"),
                                     monthExpenses = toBigDecimal("0"),
-                                    currency      = currency,
-                                    duration      = duration[i]
+                                    currency      = currency
                                 ))
-                            }
-                        }
                         _navigateToNextScreen.value = true
                         _status.value = progressStatus.DONE
                     }catch (t:Throwable){

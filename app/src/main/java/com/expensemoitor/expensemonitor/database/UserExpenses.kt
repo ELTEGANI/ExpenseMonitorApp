@@ -22,9 +22,5 @@ data class UserExpenses(
     var monthExpenses: BigDecimal ,
 
     @ColumnInfo(name = "currency")
-    var currency: String,
-
-    @ColumnInfo(name = "duration")
-    var duration: String
-
+    var currency: String
 )

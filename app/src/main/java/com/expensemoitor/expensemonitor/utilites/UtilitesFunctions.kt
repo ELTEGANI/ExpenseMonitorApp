@@ -71,45 +71,6 @@ fun getTheStartAndTheEndOfTheMonth(): String {
 }
 
 
-fun checkIfDurationFinished(){
-    //today
-    val savedCurrentDate = PrefManager.getCurrentDate(context)
-
-    //week
-    val weekDates = getStartAndEndOfTheWeek().split("*")
-    val endOfWeek = weekDates[1]
-
-
-    //month
-    val monthDates = getTheStartAndTheEndOfTheMonth().split("*")
-    val endOfMonth = monthDates[1]
-
-    //compare dates
-    try {
-        val sdf = SimpleDateFormat("yyyy-MM-dd",Locale.getDefault())
-
-        val savedDate = sdf.parse(savedCurrentDate)
-        val currentDate = sdf.parse(getCurrentDate())
-        val endOfTheWeek = sdf.parse(endOfWeek)
-        val endOfTheMonth = sdf.parse(endOfMonth)
-
-//        if (currentDate.compareTo(savedDate) > 0){
-//            PrefManager.saveUpdatedTodayExpense(context,0)
-//            PrefManager.saveCurrentDate(context, getCurrentDate())
-//        }
-//
-//        if (currentDate.compareTo(endOfTheWeek) > 0){
-//            PrefManager.saveUpdatedWeekExpense(context,0)
-//        }
-//
-//        if(currentDate.compareTo(endOfTheMonth) > 0){
-//            PrefManager.saveUpdatedMonthExpense(context,0)
-//        }
-
-    } catch (e: Exception) {
-        e.printStackTrace()
-    }
-}
 
 fun saveCurrencyForSettings(selectedCurrency:String){
     val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)

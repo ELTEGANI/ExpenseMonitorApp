@@ -11,6 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
 import com.expensemoitor.expensemonitor.R
+import com.expensemoitor.expensemonitor.database.ExpenseMonitorDataBase
 import com.expensemoitor.expensemonitor.databinding.WeekExpenseFragmentBinding
 import com.expensemoitor.expensemonitor.myexpenses.MyExpenseFragmentDirections
 import com.expensemoitor.expensemonitor.utilites.DurationsExpenseAdapter
@@ -27,8 +28,8 @@ class WeekExpenseFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater,R.layout.week_expense_fragment,container,false)
 
         val application = requireNotNull(this.activity).application
-
-        val viewModelFactory = WeekExpenseFragmentViewModelFactory(application)
+        val dataBase = ExpenseMonitorDataBase.getInstance(application).expenseMonitorDao
+        val viewModelFactory = WeekExpenseFragmentViewModelFactory(dataBase,application)
 
         val viewModel = ViewModelProviders.of(this,viewModelFactory)
             .get(WeekExpenseFragmentViewModel::class.java)
@@ -37,6 +38,8 @@ class WeekExpenseFragment : Fragment() {
 
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
+
+
 
         val adapter = DurationsExpenseAdapter(ExpenseListener {
             viewModel.displaySelectedExpense(it)

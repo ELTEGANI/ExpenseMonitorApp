@@ -11,6 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
 import com.expensemoitor.expensemonitor.R
+import com.expensemoitor.expensemonitor.database.ExpenseMonitorDataBase
 import com.expensemoitor.expensemonitor.databinding.MonthExpenseFragmentBinding
 import com.expensemoitor.expensemonitor.databinding.TodayExpenseFragmentBinding
 import com.expensemoitor.expensemonitor.myexpenses.MyExpenseFragmentDirections
@@ -30,8 +31,8 @@ class MonthExpenseFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.month_expense_fragment,container,false)
 
         val application = requireNotNull(this.activity).application
-
-        val viewModelFactory = MonthExpenseFragmentViewModelFactory(application)
+        val dataBase = ExpenseMonitorDataBase.getInstance(application).expenseMonitorDao
+        val viewModelFactory = MonthExpenseFragmentViewModelFactory(dataBase,application)
 
         val fragmentViewModel = ViewModelProviders.of(this,viewModelFactory)
             .get(MonthExpenseFragmentViewModel::class.java)

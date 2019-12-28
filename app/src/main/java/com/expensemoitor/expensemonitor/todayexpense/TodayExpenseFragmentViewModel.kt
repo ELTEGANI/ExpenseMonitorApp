@@ -2,24 +2,17 @@ package com.expensemoitor.expensemonitor.todayexpense
 
 import android.app.Application
 import android.util.Log
-import android.view.View
-import android.widget.AdapterView
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.expensemoitor.expensemonitor.database.ExpenseMonitorDao
 import com.expensemoitor.expensemonitor.network.ApiFactory
 import com.expensemoitor.expensemonitor.network.DurationTag
-import com.expensemoitor.expensemonitor.network.ExpenseData
 import com.expensemoitor.expensemonitor.network.ExpensesResponse
-import com.expensemoitor.expensemonitor.utilites.PrefManager
+import com.expensemoitor.expensemonitor.utilites.Converter.Companion.toBigDecimal
 import com.expensemoitor.expensemonitor.utilites.getCurrencyFromSettings
 import com.expensemoitor.expensemonitor.utilites.progressStatus
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
-import retrofit2.HttpException
+import kotlinx.coroutines.*
 
 
 class TodayExpenseFragmentViewModel(val database: ExpenseMonitorDao, val application: Application) : ViewModel() {
@@ -49,8 +42,9 @@ class TodayExpenseFragmentViewModel(val database: ExpenseMonitorDao, val applica
 
 
      private fun getTodayExpense(duration:String) {
-        coroutineScope.launch {
-          val durationTag = getCurrencyFromSettings()?.let {
+         coroutineScope.launch {
+                 database.updateTodayExpenses(toBigDecimal("100"),getCurrencyFromSettings().toString())
+             val durationTag = getCurrencyFromSettings()?.let {
               DurationTag(duration,
                   it,"","")
           }
@@ -62,6 +56,7 @@ class TodayExpenseFragmentViewModel(val database: ExpenseMonitorDao, val applica
                 val getExpensesResponseList = getResponse?.await()
                 _status.value = progressStatus.DONE
                 _expensesProperties.value = getExpensesResponseList
+                //TODO get amount of today expenses from backend
                 Log.d("getExpensesResponseList",getExpensesResponseList.toString())
             }catch (t:Throwable){
                 _status.value = progressStatus.ERROR

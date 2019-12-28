@@ -9,6 +9,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleService
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
@@ -36,7 +38,9 @@ class MyExpenseFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,savedInstanceState: Bundle?): View? {
 
+
         binding = DataBindingUtil.inflate(inflater, R.layout.my_expense_fragment,container,false)
+
 
 
 
@@ -73,22 +77,29 @@ class MyExpenseFragment : Fragment() {
 
 
 
+
         viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int){
                 super.onPageSelected(position)
-                when(position.toString()){
-                    "0"->{
-//                       viewModel.expense.value = getCurrencyFromSettings()+" "+expenseFormat(PrefManager.getTodayExpenses(context)?.toString())
-                       binding.dateTextView.text = getCurrentDate()
+                when(position){
+                    0->{
+                        viewModel.todayExpense.observe(this@MyExpenseFragment, Observer {
+                               binding.expenseTextView.text = getCurrencyFromSettings()+" "+it
+                           })
+                           binding.dateTextView.text = getCurrentDate()
                     }
-                    "1"->{
+                    1->{
+                        viewModel.weekExpense.observe(this@MyExpenseFragment, Observer {
+                            binding.expenseTextView.text = getCurrencyFromSettings()+" "+it
+                        })
                         val weekDates = getStartAndEndOfTheWeek().split("*")
-//                        viewModel.expense.value = getCurrencyFromSettings()+" "+expenseFormat(PrefManager.getWeeKExpenses(context)?.toString())
                         binding.dateTextView.text = weekDates[0]+" "+"/"+" "+weekDates[1]
                     }
-                    "2"->{
+                    2->{
+                        viewModel.monthExpense.observe(this@MyExpenseFragment, Observer {
+                            binding.expenseTextView.text = getCurrencyFromSettings()+" "+it
+                        })
                         val monthDates = getTheStartAndTheEndOfTheMonth().split("*")
-//                        viewModel.expense.value = getCurrencyFromSettings()+" "+expenseFormat(PrefManager.getMonthExpenses(context)?.toString())
                         binding.dateTextView.text = monthDates[0]+" "+"/"+" "+monthDates[1]
                     }
                 }
