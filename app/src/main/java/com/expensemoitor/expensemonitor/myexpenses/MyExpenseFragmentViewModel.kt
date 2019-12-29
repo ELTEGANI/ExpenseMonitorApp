@@ -1,29 +1,23 @@
 package com.expensemoitor.expensemonitor.myexpenses
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.expensemoitor.expensemonitor.database.ExpenseMonitorDao
 import com.expensemoitor.expensemonitor.utilites.*
 import com.expensemoitor.expensemonitor.utilites.Converter.Companion.toBigDecimal
 import com.expensemoitor.expensemonitor.utilites.MyApp.Companion.context
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.flowOn
 import java.text.SimpleDateFormat
 import java.util.*
 
 
 class MyExpenseFragmentViewModel(val database:ExpenseMonitorDao,application: Application) : AndroidViewModel(application) {
 
-    private val viewModelJob = Job()
-    private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
     private val application = getApplication<Application>().applicationContext
-
-
     private val _navigateToMyExpense = MutableLiveData<Boolean>()
             val navigateToMyExpense : LiveData<Boolean>
              get() = _navigateToMyExpense
@@ -52,7 +46,7 @@ class MyExpenseFragmentViewModel(val database:ExpenseMonitorDao,application: App
 
 
     fun getTodayExpenses(){
-        uiScope.launch {
+        viewModelScope.launch {
                 database.retrieveTodayExpense(getCurrencyFromSettings().toString()).collect {
                     _todayExpense.value = it
                 }
@@ -60,7 +54,7 @@ class MyExpenseFragmentViewModel(val database:ExpenseMonitorDao,application: App
     }
 
     fun getWeekExpenses(){
-        uiScope.launch {
+        viewModelScope.launch {
             database.retrieveWeekExpense(getCurrencyFromSettings().toString()).collect {
                 _weekExpense.value = it
             }
@@ -68,12 +62,13 @@ class MyExpenseFragmentViewModel(val database:ExpenseMonitorDao,application: App
     }
 
     fun getMonthExpenses(){
-        uiScope.launch {
+        viewModelScope.launch {
             database.retrieveMonthExpense(getCurrencyFromSettings().toString()).collect {
                 _monthExpense.value = it
             }
         }
     }
+
 
 
     fun onFabClicked(){
@@ -85,10 +80,6 @@ class MyExpenseFragmentViewModel(val database:ExpenseMonitorDao,application: App
         _navigateToMyExpense.value = false
     }
 
-    override fun onCleared() {
-        super.onCleared()
-        viewModelJob.cancel()
-    }
 
 
     fun clearPrefs(){
@@ -119,20 +110,20 @@ class MyExpenseFragmentViewModel(val database:ExpenseMonitorDao,application: App
             val endOfTheMonth = sdf.parse(endOfMonth)
 
         if (currentDate.compareTo(savedDate) > 0){
-            uiScope.launch {
+            viewModelScope.launch {
                 database.updateTodayExpenses(toBigDecimal("0"), getCurrencyFromSettings().toString())
                 PrefManager.saveCurrentDate(context, getCurrentDate())
             }
         }
 
         if (currentDate.compareTo(endOfTheWeek) > 0){
-            uiScope.launch {
+            viewModelScope.launch {
                 database.updateWeekExpenses(toBigDecimal("0"), getCurrencyFromSettings().toString())
             }
         }
 
         if(currentDate.compareTo(endOfTheMonth) > 0){
-            uiScope.launch {
+            viewModelScope.launch {
                 database.updateMonthExpenses(toBigDecimal("0"), getCurrencyFromSettings().toString())
             }
         }

@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.expensemoitor.expensemonitor.R
 import com.expensemoitor.expensemonitor.network.ApiFactory
 import com.expensemoitor.expensemonitor.network.ExpenseData
@@ -24,9 +25,6 @@ class UpdateAndDeleteFragmentViewModel(expensesResponse: ExpensesResponse, appli
     val selectedExpenseMsg :LiveData<ExpensesResponse>
         get() = _selectedExpense
 
-    private val viewModelJob = Job()
-
-    private val coroutineScope = CoroutineScope(viewModelJob+ Dispatchers.Main)
 
     private val _status = MutableLiveData<progressStatus>()
     val status: LiveData<progressStatus>
@@ -49,7 +47,7 @@ class UpdateAndDeleteFragmentViewModel(expensesResponse: ExpensesResponse, appli
 
 
     fun deleteExpense(expenseId:String,amount:Int){
-        coroutineScope.launch {
+        viewModelScope.launch {
             val getDeleteExpenseResponse = ApiFactory.DELETE_EXPENSE.deleteExpense(expenseId)
             try {
                 try {
@@ -78,7 +76,7 @@ class UpdateAndDeleteFragmentViewModel(expensesResponse: ExpensesResponse, appli
         if(newAmount.isEmpty() || description.isEmpty() || date.isEmpty() || category.isEmpty()){
             _msgError.value =  context?.getString(R.string.fill_empty)
         }else{
-            coroutineScope.launch {
+            viewModelScope.launch {
                 val expenseData = getCurrencyFromSettings()?.let {
                     ExpenseData(newAmount,description,date,
                         it,category)
@@ -113,8 +111,4 @@ class UpdateAndDeleteFragmentViewModel(expensesResponse: ExpensesResponse, appli
         _validationMsg.value = null
     }
 
-    override fun onCleared() {
-        super.onCleared()
-        viewModelJob.cancel()
-    }
 }

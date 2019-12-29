@@ -5,22 +5,23 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.expensemoitor.expensemonitor.database.ExpenseMonitorDao
+import com.expensemoitor.expensemonitor.database.UserExpenses
 import com.expensemoitor.expensemonitor.network.ApiFactory
 import com.expensemoitor.expensemonitor.network.DurationTag
 import com.expensemoitor.expensemonitor.network.ExpensesResponse
 import com.expensemoitor.expensemonitor.utilites.*
+import com.expensemoitor.expensemonitor.utilites.Converter.Companion.toBigDecimal
 import com.expensemoitor.expensemonitor.utilites.MyApp.Companion.context
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class MonthExpenseFragmentViewModel(val database: ExpenseMonitorDao, val application: Application) : ViewModel() {
 
-    private val viewModelJob = Job()
-
-    private val coroutineScope = CoroutineScope(viewModelJob+ Dispatchers.Main)
 
     private val _status = MutableLiveData<progressStatus>()
     val status: LiveData<progressStatus>
@@ -43,8 +44,7 @@ class MonthExpenseFragmentViewModel(val database: ExpenseMonitorDao, val applica
 
     private fun getMonthExpense(duration:String) {
         val monthDates = getTheStartAndTheEndOfTheMonth().split("*")
-        coroutineScope.launch {
-            database.updateMonthExpenses(Converter.toBigDecimal("300"),getCurrencyFromSettings().toString())
+        viewModelScope.launch {
             val durationTag = getCurrencyFromSettings()?.let {
                 DurationTag(duration,it,monthDates[0],monthDates[1])
             }
@@ -56,6 +56,17 @@ class MonthExpenseFragmentViewModel(val database: ExpenseMonitorDao, val applica
                 val getExpensesResponseList = getResponse?.await()
                 _status.value = progressStatus.DONE
                 _expensesProperties.value = getExpensesResponseList
+                //TODO get amount of mpnth expenses from backend and recheck validation and messgaes
+                if(database.checkCurrencyExistence(getCurrencyFromSettings().toString()) == null){
+                    database.insertExpense(UserExpenses(
+                        todayExpenses  = toBigDecimal("0")
+                        ,weekExpenses   = toBigDecimal("0")
+                        ,monthExpenses  = toBigDecimal("30")//TODO should be come from server
+                        ,currency = getCurrencyFromSettings().toString()
+                    ))
+                }else{
+                    database.updateMonthExpenses(toBigDecimal("300"),getCurrencyFromSettings().toString())
+                }
                 Log.d("getExpensesResponseList",getExpensesResponseList.toString())
             }catch (t:Throwable){
                 _status.value = progressStatus.ERROR
@@ -74,9 +85,5 @@ class MonthExpenseFragmentViewModel(val database: ExpenseMonitorDao, val applica
         _navigateToSelectedExpense.value = null
     }
 
-    override fun onCleared() {
-        super.onCleared()
-        viewModelJob.cancel()
-    }
 
 }

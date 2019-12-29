@@ -8,6 +8,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import android.widget.AdapterView
+import androidx.lifecycle.viewModelScope
 import com.expensemoitor.expensemonitor.R
 import com.expensemoitor.expensemonitor.network.ApiFactory
 import com.expensemoitor.expensemonitor.network.ExpenseData
@@ -69,12 +70,8 @@ class CreateNewExpenseFragmentViewModel(var application: Application) : ViewMode
         }
     }
 
-
-    private var viewModelJob = Job()
-    private val coroutineJob  = CoroutineScope(viewModelJob + Dispatchers.Main)
-
     private fun createNewExpense(amount:String,description:String,date:String,category:String){
-           coroutineJob.launch {
+        viewModelScope.launch {
             val expenseData = getCurrencyFromSettings()?.let {
                 ExpenseData(amount,description,date,
                     it,category)
@@ -112,12 +109,5 @@ class CreateNewExpenseFragmentViewModel(var application: Application) : ViewMode
     fun onResponseMsgDisplayed(){
         _responseMsg.value = null
     }
-
-
-    override fun onCleared() {
-        super.onCleared()
-        viewModelJob.cancel()
-    }
-
 
 }

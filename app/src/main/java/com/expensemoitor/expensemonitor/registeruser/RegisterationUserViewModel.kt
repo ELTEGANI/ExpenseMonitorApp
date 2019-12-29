@@ -9,6 +9,7 @@ import android.widget.AdapterView
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import androidx.preference.PreferenceManager
 import com.expensemoitor.expensemonitor.network.UserData
 import com.expensemoitor.expensemonitor.R
@@ -24,9 +25,6 @@ import java.math.BigDecimal
 
 
 class RegisterationUserViewModel(val database: ExpenseMonitorDao, var application: Application) :ViewModel() {
-
-    private var viewModelJob = Job()
-    private val coroutineJob = CoroutineScope(viewModelJob + Dispatchers.Main)
 
 
     var radiochecked = MutableLiveData<Int>()
@@ -89,7 +87,7 @@ class RegisterationUserViewModel(val database: ExpenseMonitorDao, var applicatio
                 monthDates[0],
                 monthDates[1]
             )
-            coroutineJob.launch {
+            viewModelScope.launch {
                 val getUserResponse =  ApiFactory.REGISTERATION_SERVICE.registerationUser(userData)
                 try {
                     try {
@@ -128,11 +126,6 @@ class RegisterationUserViewModel(val database: ExpenseMonitorDao, var applicatio
 
     fun onNavigationCompleted(){
         _navigateToNextScreen.value = false
-    }
-
-    override fun onCleared() {
-        super.onCleared()
-        viewModelJob.cancel()
     }
 
 }

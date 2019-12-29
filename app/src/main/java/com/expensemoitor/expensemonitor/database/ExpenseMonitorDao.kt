@@ -37,4 +37,8 @@ interface ExpenseMonitorDao {
     @Query("SELECT month_expenses from user_expense_table WHERE currency =:currency")
     fun retrieveMonthExpense(currency: String): Flow<String>
 
+    @Query("SELECT currency from user_expense_table WHERE currency =:currency")
+    suspend fun checkCurrencyExistence(currency: String): String
+
+
 }

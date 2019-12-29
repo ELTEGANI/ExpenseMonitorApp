@@ -5,7 +5,9 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.expensemoitor.expensemonitor.database.ExpenseMonitorDao
+import com.expensemoitor.expensemonitor.database.UserExpenses
 import com.expensemoitor.expensemonitor.network.ApiFactory
 import com.expensemoitor.expensemonitor.network.DurationTag
 import com.expensemoitor.expensemonitor.network.ExpensesResponse
@@ -13,14 +15,13 @@ import com.expensemoitor.expensemonitor.utilites.Converter.Companion.toBigDecima
 import com.expensemoitor.expensemonitor.utilites.getCurrencyFromSettings
 import com.expensemoitor.expensemonitor.utilites.progressStatus
 import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.collect
 
 
 class TodayExpenseFragmentViewModel(val database: ExpenseMonitorDao, val application: Application) : ViewModel() {
 
 
-    private val viewModelJob = Job()
 
-    private val coroutineScope = CoroutineScope(viewModelJob+Dispatchers.Main)
 
     private val _status = MutableLiveData<progressStatus>()
     val status: LiveData<progressStatus>
@@ -42,8 +43,7 @@ class TodayExpenseFragmentViewModel(val database: ExpenseMonitorDao, val applica
 
 
      private fun getTodayExpense(duration:String) {
-         coroutineScope.launch {
-                 database.updateTodayExpenses(toBigDecimal("100"),getCurrencyFromSettings().toString())
+         viewModelScope.launch {
              val durationTag = getCurrencyFromSettings()?.let {
               DurationTag(duration,
                   it,"","")
@@ -56,7 +56,17 @@ class TodayExpenseFragmentViewModel(val database: ExpenseMonitorDao, val applica
                 val getExpensesResponseList = getResponse?.await()
                 _status.value = progressStatus.DONE
                 _expensesProperties.value = getExpensesResponseList
-                //TODO get amount of today expenses from backend
+               //TODO get amount of today expenses from backend and recheck validation and messgaes
+                if(database.checkCurrencyExistence(getCurrencyFromSettings().toString()) == null){
+                    database.insertExpense(UserExpenses(
+                        todayExpenses  = toBigDecimal("10")//TODO should be come from server
+                        ,weekExpenses   = toBigDecimal("0")
+                        ,monthExpenses  = toBigDecimal("0")
+                        ,currency = getCurrencyFromSettings().toString()
+                    ))
+                }else{
+                    database.updateTodayExpenses(toBigDecimal("100"),getCurrencyFromSettings().toString())
+                }
                 Log.d("getExpensesResponseList",getExpensesResponseList.toString())
             }catch (t:Throwable){
                 _status.value = progressStatus.ERROR
@@ -75,13 +85,6 @@ class TodayExpenseFragmentViewModel(val database: ExpenseMonitorDao, val applica
 
     fun displaySelectedExpenseCompleted(){
         _navigateToSelectedExpense.value = null
-    }
-
-
-
-    override fun onCleared() {
-        super.onCleared()
-        viewModelJob.cancel()
     }
 
 }
