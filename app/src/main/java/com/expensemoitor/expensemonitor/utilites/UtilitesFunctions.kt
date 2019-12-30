@@ -1,15 +1,13 @@
 package com.expensemoitor.expensemonitor.utilites
 
 import android.annotation.SuppressLint
-import android.content.Context
-import android.net.ConnectivityManager
-import android.util.Log
-import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceManager
+import com.expensemoitor.expensemonitor.network.DurationExpenseResponse
 import com.expensemoitor.expensemonitor.utilites.MyApp.Companion.context
+import java.math.BigDecimal
 import java.text.SimpleDateFormat
 import java.util.*
-
+import kotlin.collections.ArrayList
 
 
 @SuppressLint("SimpleDateFormat")
@@ -83,3 +81,20 @@ fun getCurrencyFromSettings(): String? {
     val sharedPref = PreferenceManager.getDefaultSharedPreferences(context)
     return sharedPref.getString("userCurrency",null)
 }
+
+   fun sumationOfAmount(expensesResponseList: List<DurationExpenseResponse>?): BigDecimal {
+       val amountList = arrayListOf<BigDecimal>()
+       if (expensesResponseList != null) {
+           expensesResponseList.forEach { amount ->
+               amount.amount?.toBigDecimal()?.let { amountList.add(it) }
+           }
+       }else{
+       return BigDecimal.ZERO
+       }
+       return amountList.sumByBigDecimal()
+   }
+
+fun Iterable<BigDecimal>.sumByBigDecimal(): BigDecimal {
+    return this.fold(BigDecimal.ZERO) { acc, e -> acc + e }
+}
+

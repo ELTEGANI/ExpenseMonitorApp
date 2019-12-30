@@ -79,14 +79,7 @@ class RegisterationUserViewModel(val database: ExpenseMonitorDao, var applicatio
         if (geneder == null || currency.equals(context?.getString(R.string.select_currency))){
             _genderSelected.value = false
         }else{
-            val weekDates = getStartAndEndOfTheWeek().split("*")
-            val monthDates = getTheStartAndTheEndOfTheMonth().split("*")
-            val userData = UserData(userName,emailAddress,geneder,currency,
-                weekDates[0],
-                weekDates[1],
-                monthDates[0],
-                monthDates[1]
-            )
+            val userData = UserData(userName,emailAddress,geneder,currency)
             viewModelScope.launch {
                 val getUserResponse =  ApiFactory.REGISTERATION_SERVICE.registerationUser(userData)
                 try {
@@ -96,7 +89,7 @@ class RegisterationUserViewModel(val database: ExpenseMonitorDao, var applicatio
                         saveCurrencyForSettings(currency)
                         PrefManager.setUserRegistered(application,true)
                         PrefManager.saveAccessToken(application,userResponse.accessToken)
-                                database.insertExpense(UserExpenses(
+                        database.insertExpense(UserExpenses(
                                     todayExpenses = toBigDecimal("0"),
                                     weekExpenses  = toBigDecimal("0"),
                                     monthExpenses = toBigDecimal("0"),

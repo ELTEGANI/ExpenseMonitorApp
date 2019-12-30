@@ -8,9 +8,7 @@ import android.widget.TextView
 import androidx.core.view.updateLayoutParams
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.expensemoitor.expensemonitor.network.ExpensesResponse
-import com.google.android.material.internal.ViewUtils.doOnApplyWindowInsets
-import com.google.android.material.internal.ViewUtils.requestApplyInsetsWhenAttached
+import com.expensemoitor.expensemonitor.network.DurationExpenseResponse
 
 
 @BindingAdapter("progressStatus")
@@ -29,38 +27,38 @@ fun bindingStatus(progressBar: ProgressBar,status: progressStatus?){
 }
 
 @BindingAdapter("listData")
-fun bindRecyclerView(recyclerView: RecyclerView,data:List<ExpensesResponse>?){
+fun bindRecyclerView(recyclerView: RecyclerView,data:List<DurationExpenseResponse>?){
     val adapter = recyclerView.adapter as DurationsExpenseAdapter
     adapter.submitList(data)
 }
 
 @BindingAdapter("expenseAmount")
-fun TextView.setExpenseAmount(expensesResponse:ExpensesResponse?){
-     expensesResponse?.let {
-         text = getCurrencyFromSettings()+" "+ expenseFormat(expensesResponse.amount)
+fun TextView.setExpenseAmount(durationExpenseResponse:DurationExpenseResponse?){
+    durationExpenseResponse?.let {
+         text = getCurrencyFromSettings()+" "+ expenseFormat(durationExpenseResponse.amount)
      }
 }
 
 @BindingAdapter("expenseCategory")
-fun TextView.setExpensecategory(expensesResponse:ExpensesResponse?){
-    expensesResponse?.let {
-        text = expensesResponse.expenseCategory
+fun TextView.setExpensecategory(durationExpenseResponse:DurationExpenseResponse?){
+    durationExpenseResponse?.let {
+        text = durationExpenseResponse.expenseCategory
     }
 }
 
 @BindingAdapter("expenseDescription")
-fun TextView.setExpenseDescription(expensesResponse:ExpensesResponse?){
-    expensesResponse?.let {
-        text = expensesResponse.description
+fun TextView.setExpenseDescription(durationExpenseResponse:DurationExpenseResponse?){
+    durationExpenseResponse?.let {
+        text = durationExpenseResponse.description
     }
 }
 
 
 
 @BindingAdapter("expenseDate")
-fun TextView.setExpenseDate(expensesResponse: ExpensesResponse?){
-    expensesResponse?.let {
-        text = expensesResponse.date
+fun TextView.setExpenseDate(durationExpenseResponse:DurationExpenseResponse?){
+    durationExpenseResponse?.let {
+        text = durationExpenseResponse.date
     }
 }
 

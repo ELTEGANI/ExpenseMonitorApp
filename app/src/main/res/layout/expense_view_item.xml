@@ -5,7 +5,7 @@
         <data>
              <variable
                      name="expensesProperties"
-                     type="com.expensemoitor.expensemonitor.network.ExpensesResponse" />
+                     type="com.expensemoitor.expensemonitor.network.DurationExpenseResponse" />
 
             <variable
                     name="clickListener"

@@ -12,8 +12,8 @@ object ApiFactory {
         .create(RegisterationService::class.java)
 
 
-    val GET_EXPNSES_BASED_ON_DURATION_SERVICE:GetExpenseBasedOnDurationsService = RetrofitFactory.retrofit((AppConstants.BASEURL))
-        .create(GetExpenseBasedOnDurationsService::class.java)
+    val GET_DURATION_EXPNSES_SERVICE:GetTodayExpenseService = RetrofitFactory.retrofit((AppConstants.BASEURL))
+        .create(GetTodayExpenseService::class.java)
 
 
     val DELETE_EXPENSE:DeleteExpenseService = RetrofitFactory.retrofit(AppConstants.BASEURL)

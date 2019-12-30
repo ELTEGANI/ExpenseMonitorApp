@@ -12,10 +12,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import com.expensemoitor.expensemonitor.R
 import com.expensemoitor.expensemonitor.databinding.UpdateAndDeleteExpenseFragmentBinding
-import com.expensemoitor.expensemonitor.myexpenses.MyExpenseFragmentDirections
 import java.util.*
 
 class UpdateAndDeleteExpenseFragment : Fragment() {
@@ -68,7 +66,7 @@ class UpdateAndDeleteExpenseFragment : Fragment() {
 
 
         binding.updateExpenseButton.setOnClickListener {
-           viewModel.updateExpense(expenseResponse?.amount.toString(),binding.uuidEditText.text.toString(),binding.amountEditText.text.toString(),
+           viewModel.updateExpense(expenseResponse?.amount.toString().toBigDecimal(),binding.uuidEditText.text.toString(),binding.amountEditText.text.toString().toBigDecimal(),
                binding.descriptionEditText.text.toString(),binding.dateEditText.text.toString(),binding.categorySpinner.selectedItem.toString())
         }
 

@@ -6,20 +6,17 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
-import androidx.viewpager2.widget.ViewPager2
 import com.expensemoitor.expensemonitor.R
 import com.expensemoitor.expensemonitor.database.ExpenseMonitorDataBase
 import com.expensemoitor.expensemonitor.databinding.TodayExpenseFragmentBinding
 import com.expensemoitor.expensemonitor.myexpenses.MyExpenseFragmentDirections
 import com.expensemoitor.expensemonitor.utilites.DurationsExpenseAdapter
 import com.expensemoitor.expensemonitor.utilites.ExpenseListener
-import com.expensemoitor.expensemonitor.utilites.TODAY_EXPENSE_INDEX
 
 
 class TodayExpenseFragment : Fragment() {

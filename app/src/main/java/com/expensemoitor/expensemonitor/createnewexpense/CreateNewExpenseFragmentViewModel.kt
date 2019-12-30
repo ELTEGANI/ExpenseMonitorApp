@@ -73,7 +73,7 @@ class CreateNewExpenseFragmentViewModel(var application: Application) : ViewMode
     private fun createNewExpense(amount:String,description:String,date:String,category:String){
         viewModelScope.launch {
             val expenseData = getCurrencyFromSettings()?.let {
-                ExpenseData(amount,description,date,
+                ExpenseData(amount.toBigDecimal(),description,date,
                     it,category)
             }
             val getResponse = expenseData?.let {

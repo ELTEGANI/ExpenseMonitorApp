@@ -8,21 +8,21 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.expensemoitor.expensemonitor.R
 import com.expensemoitor.expensemonitor.network.ApiFactory
+import com.expensemoitor.expensemonitor.network.DurationExpenseResponse
 import com.expensemoitor.expensemonitor.network.ExpenseData
-import com.expensemoitor.expensemonitor.network.ExpensesResponse
 import com.expensemoitor.expensemonitor.utilites.MyApp.Companion.context
-import com.expensemoitor.expensemonitor.utilites.PrefManager
 import com.expensemoitor.expensemonitor.utilites.getCurrencyFromSettings
 import com.expensemoitor.expensemonitor.utilites.progressStatus
 import kotlinx.coroutines.*
 import retrofit2.HttpException
+import java.math.BigDecimal
 
-class UpdateAndDeleteFragmentViewModel(expensesResponse: ExpensesResponse, application: Application) : AndroidViewModel(application) {
+class UpdateAndDeleteFragmentViewModel(durationExpenseResponse: DurationExpenseResponse, application: Application) : AndroidViewModel(application) {
 
     private val application = getApplication<Application>().applicationContext
 
-    private val _selectedExpense = MutableLiveData<ExpensesResponse>()
-    val selectedExpenseMsg :LiveData<ExpensesResponse>
+    private val _selectedExpense = MutableLiveData<DurationExpenseResponse>()
+    val selectedExpenseMsg :LiveData<DurationExpenseResponse>
         get() = _selectedExpense
 
 
@@ -41,7 +41,7 @@ class UpdateAndDeleteFragmentViewModel(expensesResponse: ExpensesResponse, appli
         get() = _validationMsg
 
     init {
-        _selectedExpense.value = expensesResponse
+        _selectedExpense.value = durationExpenseResponse
     }
 
 
@@ -72,8 +72,8 @@ class UpdateAndDeleteFragmentViewModel(expensesResponse: ExpensesResponse, appli
 
 
 
-    fun updateExpense(oldAmount:String,expenseId:String,newAmount:String,description:String,date:String,category:String){
-        if(newAmount.isEmpty() || description.isEmpty() || date.isEmpty() || category.isEmpty()){
+    fun updateExpense(oldAmount:BigDecimal,expenseId:String,newAmount:BigDecimal,description:String,date:String,category:String){
+        if(description.isEmpty() || date.isEmpty() || category.isEmpty()){
             _msgError.value =  context?.getString(R.string.fill_empty)
         }else{
             viewModelScope.launch {

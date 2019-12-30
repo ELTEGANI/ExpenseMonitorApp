@@ -94,7 +94,7 @@
 
         <argument
                 android:name="selectedExpense"
-                app:argType="com.expensemoitor.expensemonitor.network.ExpensesResponse"
+                app:argType="com.expensemoitor.expensemonitor.network.DurationExpenseResponse"
                 />
         <action
                 android:id="@+id/action_updateAndDeleteExpenseFragment_to_myExpenseFragment"

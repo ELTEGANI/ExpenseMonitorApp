@@ -9,16 +9,11 @@ import androidx.lifecycle.viewModelScope
 import com.expensemoitor.expensemonitor.database.ExpenseMonitorDao
 import com.expensemoitor.expensemonitor.database.UserExpenses
 import com.expensemoitor.expensemonitor.network.ApiFactory
+import com.expensemoitor.expensemonitor.network.DurationExpenseResponse
 import com.expensemoitor.expensemonitor.network.DurationTag
-import com.expensemoitor.expensemonitor.network.ExpensesResponse
 import com.expensemoitor.expensemonitor.utilites.*
-import com.expensemoitor.expensemonitor.utilites.Converter.Companion.toBigDecimal
-import com.expensemoitor.expensemonitor.utilites.MyApp.Companion.context
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import java.math.BigDecimal
 
 class WeekExpenseFragmentViewModel(val database: ExpenseMonitorDao, val application: Application) : ViewModel() {
 
@@ -27,12 +22,12 @@ class WeekExpenseFragmentViewModel(val database: ExpenseMonitorDao, val applicat
     val status: LiveData<progressStatus>
         get() = _status
 
-    private val _expensesProperties = MutableLiveData<List<ExpensesResponse>>()
-    val expensesProperties:LiveData<List<ExpensesResponse>>
+    private val _expensesProperties = MutableLiveData<List<DurationExpenseResponse>>()
+    val expensesProperties:LiveData<List<DurationExpenseResponse>>
         get() = _expensesProperties
 
-    private val _navigateToSelectedExpense = MutableLiveData<ExpensesResponse>()
-    val navigateToSelectedExpense :LiveData<ExpensesResponse>
+    private val _navigateToSelectedExpense = MutableLiveData<DurationExpenseResponse>()
+    val navigateToSelectedExpense :LiveData<DurationExpenseResponse>
         get() = _navigateToSelectedExpense
 
 
@@ -49,25 +44,24 @@ class WeekExpenseFragmentViewModel(val database: ExpenseMonitorDao, val applicat
                 DurationTag(duration,it,weekDates[0],weekDates[1])
             }
             val getResponse = durationTag?.let {
-                ApiFactory.GET_EXPNSES_BASED_ON_DURATION_SERVICE.getExpensesBasedOnDuration(it)
+                ApiFactory.GET_DURATION_EXPNSES_SERVICE.getdurationExpenses(it)
             }
             try {
                 _status.value = progressStatus.LOADING
                 val getExpensesResponseList = getResponse?.await()
                 _status.value = progressStatus.DONE
                 _expensesProperties.value = getExpensesResponseList
-                //TODO get amount of week expenses from backend and recheck validation and messgaes
+                //TODO recheck validation and messgaes
                 if(database.checkCurrencyExistence(getCurrencyFromSettings().toString()) == null){
-                    database.insertExpense(UserExpenses(
-                        todayExpenses  = toBigDecimal("0")
-                        ,weekExpenses   = toBigDecimal("20")//TODO should be come from server
-                        ,monthExpenses  = toBigDecimal("0")
+                    UserExpenses(
+                        todayExpenses   = BigDecimal.ZERO
+                        ,weekExpenses   = sumationOfAmount(getExpensesResponseList)
+                        ,monthExpenses  = BigDecimal.ZERO
                         ,currency = getCurrencyFromSettings().toString()
-                    ))
+                    )
                 }else{
-                    database.updateWeekExpenses(toBigDecimal("200"),getCurrencyFromSettings().toString())
+                    database.updateWeekExpenses(sumationOfAmount(getExpensesResponseList),getCurrencyFromSettings().toString())
                 }
-                Log.d("getExpensesResponseList",getExpensesResponseList.toString())
             }catch (t:Throwable){
                 _status.value = progressStatus.ERROR
                 _expensesProperties.value = ArrayList()
@@ -77,8 +71,8 @@ class WeekExpenseFragmentViewModel(val database: ExpenseMonitorDao, val applicat
     }
 
 
-    fun displaySelectedExpense(expensesResponse: ExpensesResponse){
-        _navigateToSelectedExpense.value = expensesResponse
+    fun displaySelectedExpense(durationExpenseResponse: DurationExpenseResponse){
+        _navigateToSelectedExpense.value = durationExpenseResponse
     }
 
 

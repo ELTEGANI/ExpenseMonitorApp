@@ -17,10 +17,11 @@ interface RegisterationService {
 }
 
 
-interface GetExpenseBasedOnDurationsService {
+interface GetTodayExpenseService {
     @POST(AppConstants.GET_EXPENSES_BASED_ON_DURATION)
-    fun getExpensesBasedOnDuration(@Body durationTag: DurationTag): Deferred<List<ExpensesResponse>>
+    fun getdurationExpenses(@Body durationTag: DurationTag): Deferred<List<DurationExpenseResponse>>
 }
+
 
 interface DeleteExpenseService{
     @DELETE(AppConstants.DELETE_EXPENSE)

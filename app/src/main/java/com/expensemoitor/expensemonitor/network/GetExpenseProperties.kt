@@ -11,12 +11,14 @@ data class DurationTag(
     val endDate: String?
 )
 
-
-
 @Parcelize
-data class ExpensesResponse(
-    val id :String,
-    val amount :String,
-    val description:String,
-    val expenseCategory:String,
-    val date:String):Parcelable
+data class DurationExpenseResponse (
+    var id: String? ,
+    var amount: String? ,
+    var description: String? ,
+    var expenseCategory: String? ,
+    var currency: String?,
+    var date: String?
+): Parcelable
+
+
