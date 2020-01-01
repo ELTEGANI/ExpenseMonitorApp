@@ -1,10 +1,9 @@
 package com.expensemoitor.expensemonitor.network
 
-import java.math.BigDecimal
 
 
 data class ExpenseData(
-    val amount: BigDecimal,
+    val amount: String,
     val description:String,
     val date:String,
     val currency:String,

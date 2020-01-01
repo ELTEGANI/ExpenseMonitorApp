@@ -46,7 +46,7 @@ class UpdateAndDeleteFragmentViewModel(durationExpenseResponse: DurationExpenseR
 
 
 
-    fun deleteExpense(expenseId:String,amount:Int){
+    fun deleteExpense(expenseId:String){
         viewModelScope.launch {
             val getDeleteExpenseResponse = ApiFactory.DELETE_EXPENSE.deleteExpense(expenseId)
             try {
@@ -72,7 +72,7 @@ class UpdateAndDeleteFragmentViewModel(durationExpenseResponse: DurationExpenseR
 
 
 
-    fun updateExpense(oldAmount:BigDecimal,expenseId:String,newAmount:BigDecimal,description:String,date:String,category:String){
+    fun updateExpense(expenseId:String,newAmount:String,description:String,date:String,category:String){
         if(description.isEmpty() || date.isEmpty() || category.isEmpty()){
             _msgError.value =  context?.getString(R.string.fill_empty)
         }else{

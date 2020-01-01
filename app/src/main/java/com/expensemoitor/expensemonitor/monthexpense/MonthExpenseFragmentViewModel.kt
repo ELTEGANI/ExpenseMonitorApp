@@ -54,12 +54,12 @@ class MonthExpenseFragmentViewModel(val database: ExpenseMonitorDao, val applica
                 _expensesProperties.value = getExpensesResponseList
                 //TODO recheck validation and messgaes
                 if(database.checkCurrencyExistence(getCurrencyFromSettings().toString()) == null){
-                    UserExpenses(
+                    database.insertExpense(UserExpenses(
                         todayExpenses   = BigDecimal.ZERO
                         ,weekExpenses   = BigDecimal.ZERO
                         ,monthExpenses  = sumationOfAmount(getExpensesResponseList)
                         ,currency = getCurrencyFromSettings().toString()
-                    )
+                    ))
                 }else{
                     database.updateMonthExpenses(sumationOfAmount(getExpensesResponseList),getCurrencyFromSettings().toString())
                 }

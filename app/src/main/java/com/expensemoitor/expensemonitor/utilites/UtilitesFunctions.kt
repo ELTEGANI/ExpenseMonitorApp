@@ -7,7 +7,6 @@ import com.expensemoitor.expensemonitor.utilites.MyApp.Companion.context
 import java.math.BigDecimal
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.collections.ArrayList
 
 
 @SuppressLint("SimpleDateFormat")
@@ -21,7 +20,7 @@ fun getCurrentDate():String {
 fun expenseFormat(amount: String?): String {
     var amountFormatted= ""
     try {
-        val value = amount?.replace(",", "")
+        val value = amount?.replace(".", "")
         val reverseValue = StringBuilder(value.toString()).reverse()
             .toString()
         val finalValue = StringBuilder()
@@ -31,7 +30,7 @@ fun expenseFormat(amount: String?): String {
             finalValue.append(`val`)
             if (i % 3 == 0 && i != reverseValue.length && i > 0)
             {
-                finalValue.append(",")
+                finalValue.append(".")
             }
         }
         amountFormatted = finalValue.reverse().toString()

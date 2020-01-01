@@ -12,6 +12,7 @@ import com.expensemoitor.expensemonitor.network.ApiFactory
 import com.expensemoitor.expensemonitor.network.DurationExpenseResponse
 import com.expensemoitor.expensemonitor.network.DurationTag
 import com.expensemoitor.expensemonitor.utilites.getCurrencyFromSettings
+import com.expensemoitor.expensemonitor.utilites.getCurrentDate
 import com.expensemoitor.expensemonitor.utilites.progressStatus
 import com.expensemoitor.expensemonitor.utilites.sumationOfAmount
 import kotlinx.coroutines.*
@@ -46,7 +47,7 @@ class TodayExpenseFragmentViewModel(val database: ExpenseMonitorDao, val applica
          viewModelScope.launch {
              val durationTag = getCurrencyFromSettings()?.let {
               DurationTag(duration,
-                  it,"","")
+                  it, getCurrentDate(),"")
           }
           val getResponse = durationTag?.let {
               ApiFactory.GET_DURATION_EXPNSES_SERVICE.getdurationExpenses(it)
@@ -58,12 +59,12 @@ class TodayExpenseFragmentViewModel(val database: ExpenseMonitorDao, val applica
                 _expensesProperties.value = getExpensesResponseList
                //TODO recheck validation and messgaes
                 if(database.checkCurrencyExistence(getCurrencyFromSettings().toString()) == null){
-                        UserExpenses(
+                        database.insertExpense(UserExpenses(
                             todayExpenses  = sumationOfAmount(getExpensesResponseList)
-                            ,weekExpenses   = "0".toBigDecimal()
-                            ,monthExpenses  = "0".toBigDecimal()
+                            ,weekExpenses   = BigDecimal.ZERO
+                            ,monthExpenses  = BigDecimal.ZERO
                             ,currency = getCurrencyFromSettings().toString()
-                        )
+                        ))
                 }else{
                     database.updateTodayExpenses(sumationOfAmount(getExpensesResponseList),getCurrencyFromSettings().toString())
                 }

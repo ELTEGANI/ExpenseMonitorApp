@@ -66,13 +66,13 @@ class UpdateAndDeleteExpenseFragment : Fragment() {
 
 
         binding.updateExpenseButton.setOnClickListener {
-           viewModel.updateExpense(expenseResponse?.amount.toString().toBigDecimal(),binding.uuidEditText.text.toString(),binding.amountEditText.text.toString().toBigDecimal(),
+           viewModel.updateExpense(binding.uuidEditText.text.toString(),binding.amountEditText.text.toString(),
                binding.descriptionEditText.text.toString(),binding.dateEditText.text.toString(),binding.categorySpinner.selectedItem.toString())
         }
 
 
         binding.deleteExpenseButton.setOnClickListener {
-            viewModel.deleteExpense(binding.uuidEditText.text.toString(),binding.amountEditText.text.toString().toInt())
+            viewModel.deleteExpense(binding.uuidEditText.text.toString())
         }
 
         viewModel.validationMsg.observe(this, Observer {
