@@ -16,7 +16,7 @@ buildscript {
         materialVersion = '1.2.0-alpha03'
         buildGradle = '3.5.2'
         gradlePlugin = '2.2.0-rc02'
-        version_room = '2.2.1'
+        version_room = '2.2.3'
 
     }
     repositories {
@@ -26,11 +26,17 @@ buildscript {
     }
 
     dependencies {
-        classpath "com.android.tools.build:gradle:$buildGradle"
+        classpath "com.android.tools.build:gradle:${buildGradle}"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$gradlePlugin"
     }
 }
+
+
+plugins {
+    id "org.jlleitschuh.gradle.ktlint" version "7.1.0"
+}
+
 
 allprojects {
     repositories {
@@ -41,6 +47,7 @@ allprojects {
              url 'https://maven.google.com'
          }
     }
+    apply plugin : "org.jlleitschuh.gradle.ktlint"
 }
 
 task clean(type: Delete) {
