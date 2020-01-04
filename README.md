@@ -9,7 +9,7 @@ TODOs
 
 3-Testing using (espresso and junit) Inprogress 
 
-4-Buy the domain for my server so I can use SSL to guarantee secure connections 
+4-Buy the domain for my server so I can use SSL to guarantee secure connections  in progress
 
 5-Simplify Android Kotlin Code with Ktlint.
 
