@@ -4,8 +4,7 @@ import androidx.preference.PreferenceManager
 import com.expensemoitor.expensemonitor.network.DurationExpenseResponse
 import com.expensemoitor.expensemonitor.utilites.MyApp.Companion.context
 import java.math.BigDecimal
-import java.text.SimpleDateFormat
-import java.util.*
+
 
 
 
@@ -31,34 +30,6 @@ fun expenseFormat(amount: String?): String {
     }
     return amountFormatted
 }
-
-
-
-   fun getStartAndEndOfTheWeek():String {
-    val calendar = Calendar.getInstance()
-    calendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY)
-    val startDate = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(calendar.time)
-    calendar.add(Calendar.DATE, 6)
-    val endDate = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(calendar.time)
-    return "$startDate*$endDate"
-    }
-
-
-
-   fun getTheStartAndTheEndOfTheMonth(): String {
-    val calendar = Calendar.getInstance()
-    calendar.add(Calendar.MONTH, 0)
-    calendar.set(Calendar.DATE, calendar.getActualMinimum(Calendar.DAY_OF_MONTH))
-    val monthFirstDay = calendar.time
-    calendar.set(Calendar.DATE, calendar.getActualMaximum(Calendar.DAY_OF_MONTH))
-    val monthLastDay = calendar.time
-
-    val startDateStr = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(monthFirstDay)
-    val endDateStr = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(monthLastDay)
-
-    return "$startDateStr*$endDateStr"
-   }
-
 
 
    fun saveCurrencyForSettings(selectedCurrency:String){

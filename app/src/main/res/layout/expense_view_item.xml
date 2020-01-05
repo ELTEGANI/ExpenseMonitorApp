@@ -107,7 +107,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/category_textView"
                         app:layout_constraintVertical_bias="0.179"
-                        app:srcCompat="@drawable/cashminus" />
+                        app:srcCompat="@drawable/cash" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>

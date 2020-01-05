@@ -3,11 +3,15 @@ package com.expensemoitor.expensemonitor.utilites
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowInsets
+import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.core.view.updateLayoutParams
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
+import com.expensemoitor.expensemonitor.R
 import com.expensemoitor.expensemonitor.network.DurationExpenseResponse
 
 

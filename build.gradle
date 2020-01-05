@@ -18,6 +18,8 @@ buildscript {
         gradlePlugin = '2.2.0-rc02'
         version_room = '2.2.3'
         threetenabp = '1.2.1'
+        version_glide = '4.10.0'
+        version_glide_compiler = '4.10.0'
 
     }
     repositories {

@@ -46,26 +46,41 @@ class MyExpenseFragmentViewModel(val database:ExpenseMonitorDao,application: App
 
 
 
-    fun getTodayExpenses(){
+    private fun getTodayExpenses(){
         viewModelScope.launch {
                 database.retrieveTodayExpense(getCurrencyFromSettings().toString()).collect {
-                    _todayExpense.value = it
+                    if (it == null){
+                        _todayExpense.value = "0"
+
+                    }else{
+                        _todayExpense.value = it
+                    }
                 }
         }
     }
 
-    fun getWeekExpenses(){
+    private fun getWeekExpenses(){
         viewModelScope.launch {
             database.retrieveWeekExpense(getCurrencyFromSettings().toString()).collect {
-                _weekExpense.value = it
+                if (it == null){
+                    _weekExpense.value = "0"
+
+                }else{
+                    _weekExpense.value = it
+                }
             }
         }
     }
 
-    fun getMonthExpenses(){
+    private fun getMonthExpenses(){
         viewModelScope.launch {
             database.retrieveMonthExpense(getCurrencyFromSettings().toString()).collect {
-                _monthExpense.value = it
+                if (it == null){
+                    _monthExpense.value = "0"
+
+                }else{
+                    _monthExpense.value = it
+                }
             }
         }
     }
