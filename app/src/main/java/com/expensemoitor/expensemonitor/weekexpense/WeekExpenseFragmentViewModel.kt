@@ -37,11 +37,11 @@ class WeekExpenseFragmentViewModel(val database: ExpenseMonitorDao, val applicat
 
 
     private fun getWeekExpense(duration:String) {
-        val weekDates = getStartAndEndOfTheWeek().split("*")
 
         viewModelScope.launch {
             val durationTag = getCurrencyFromSettings()?.let {
-                DurationTag(duration,it,weekDates[0],weekDates[1])
+                DurationTag(duration,it,PrefManager.getStartOfTheWeek(application),
+                    PrefManager.getEndOfTheWeek(application))
             }
             val getResponse = durationTag?.let {
                 ApiFactory.GET_DURATION_EXPNSES_SERVICE.getdurationExpenses(it)

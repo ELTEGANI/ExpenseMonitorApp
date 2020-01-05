@@ -11,8 +11,8 @@ import com.expensemoitor.expensemonitor.database.UserExpenses
 import com.expensemoitor.expensemonitor.network.ApiFactory
 import com.expensemoitor.expensemonitor.network.DurationExpenseResponse
 import com.expensemoitor.expensemonitor.network.DurationTag
+import com.expensemoitor.expensemonitor.utilites.PrefManager.Companion.getCurrentDate
 import com.expensemoitor.expensemonitor.utilites.getCurrencyFromSettings
-import com.expensemoitor.expensemonitor.utilites.getCurrentDate
 import com.expensemoitor.expensemonitor.utilites.progressStatus
 import com.expensemoitor.expensemonitor.utilites.sumationOfAmount
 import kotlinx.coroutines.*
@@ -46,8 +46,7 @@ class TodayExpenseFragmentViewModel(val database: ExpenseMonitorDao, val applica
      private fun getTodayExpense(duration:String) {
          viewModelScope.launch {
              val durationTag = getCurrencyFromSettings()?.let {
-              DurationTag(duration,
-                  it, getCurrentDate(),"")
+              DurationTag(duration,it,getCurrentDate(application),"")
           }
           val getResponse = durationTag?.let {
               ApiFactory.GET_DURATION_EXPNSES_SERVICE.getdurationExpenses(it)

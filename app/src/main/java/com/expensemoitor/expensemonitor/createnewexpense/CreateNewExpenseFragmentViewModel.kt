@@ -15,6 +15,7 @@ import com.expensemoitor.expensemonitor.network.ExpenseData
 import com.expensemoitor.expensemonitor.utilites.*
 import com.expensemoitor.expensemonitor.utilites.MyApp.Companion.context
 import kotlinx.coroutines.*
+import org.threeten.bp.LocalDate
 import retrofit2.HttpException
 
 
@@ -30,7 +31,7 @@ class CreateNewExpenseFragmentViewModel(var application: Application) : ViewMode
 
 
     init {
-        currentDate.value = getCurrentDate()
+        currentDate.value = LocalDate.now().toString()
     }
 
     private val _status = MutableLiveData<progressStatus>()

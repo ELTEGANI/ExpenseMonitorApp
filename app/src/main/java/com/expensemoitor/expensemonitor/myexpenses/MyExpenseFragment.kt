@@ -86,21 +86,19 @@ class MyExpenseFragment : Fragment() {
                         viewModel.todayExpense.observe(this@MyExpenseFragment, Observer {
                                binding.expenseTextView.text = getCurrencyFromSettings()+" "+ expenseFormat(it)
                            })
-                           binding.dateTextView.text = getCurrentDate()
+                           binding.dateTextView.text = PrefManager.getCurrentDate(context)
                     }
                     1->{
                         viewModel.weekExpense.observe(this@MyExpenseFragment, Observer {
                             binding.expenseTextView.text = getCurrencyFromSettings()+" "+expenseFormat(it)
                         })
-                        val weekDates = getStartAndEndOfTheWeek().split("*")
-                        binding.dateTextView.text = weekDates[0]+" "+"/"+" "+weekDates[1]
+                        binding.dateTextView.text = PrefManager.getStartOfTheMonth(context)+" "+"/"+" "+PrefManager.getEndOfTheWeek(context)
                     }
                     2->{
                         viewModel.monthExpense.observe(this@MyExpenseFragment, Observer {
                             binding.expenseTextView.text = getCurrencyFromSettings()+" "+expenseFormat(it)
                         })
-                        val monthDates = getTheStartAndTheEndOfTheMonth().split("*")
-                        binding.dateTextView.text = monthDates[0]+" "+"/"+" "+monthDates[1]
+                        binding.dateTextView.text = PrefManager.getStartOfTheMonth(context)+" "+"/"+" "+ PrefManager.getEndOfTheMonth(context)
                     }
                 }
             }

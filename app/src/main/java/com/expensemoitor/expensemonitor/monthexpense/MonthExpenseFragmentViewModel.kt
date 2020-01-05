@@ -39,10 +39,10 @@ class MonthExpenseFragmentViewModel(val database: ExpenseMonitorDao, val applica
 
 
     private fun getMonthExpense(duration:String) {
-        val monthDates = getTheStartAndTheEndOfTheMonth().split("*")
         viewModelScope.launch {
             val durationTag = getCurrencyFromSettings()?.let {
-                DurationTag(duration,it,monthDates[0],monthDates[1])
+                DurationTag(duration,it,PrefManager.getStartOfTheMonth(application),
+                    PrefManager.getEndOfTheMonth(application))
             }
             val getResponse = durationTag?.let {
                 ApiFactory.GET_DURATION_EXPNSES_SERVICE.getdurationExpenses(it)

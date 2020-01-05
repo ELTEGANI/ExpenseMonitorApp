@@ -10,7 +10,7 @@ android {
     defaultConfig {
         applicationId "com.expensemoitor.expensemonitor"
         minSdkVersion 21
-        targetSdkVersion 28
+        targetSdkVersion 29
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -115,6 +115,9 @@ dependencies {
 
     // optional - Kotlin Extensions and Coroutines support for Room
     implementation "androidx.room:room-ktx:$version_room"
+
+    implementation "com.jakewharton.threetenabp:threetenabp:$threetenabp"
+
 
 }
 

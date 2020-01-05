@@ -11,6 +11,7 @@ import com.expensemoitor.expensemonitor.utilites.Converter.Companion.toBigDecima
 import com.expensemoitor.expensemonitor.utilites.MyApp.Companion.context
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.collect
+import org.threeten.bp.LocalDate
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -92,39 +93,41 @@ class MyExpenseFragmentViewModel(val database:ExpenseMonitorDao,application: App
         val savedCurrentDate = PrefManager.getCurrentDate(context)
 
         //week
-        val weekDates = getStartAndEndOfTheWeek().split("*")
-        val endOfWeek = weekDates[1]
+        val endOfWeek = PrefManager.getEndOfTheWeek(context)
 
 
         //month
-        val monthDates = getTheStartAndTheEndOfTheMonth().split("*")
-        val endOfMonth = monthDates[1]
+        val endOfMonth = PrefManager.getEndOfTheMonth(context)
 
         //compare dates
         try {
             val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
 
             val savedDate = sdf.parse(savedCurrentDate)
-            val currentDate = sdf.parse(getCurrentDate())
+            val currentDate = sdf.parse(LocalDate.now().toString())
             val endOfTheWeek = sdf.parse(endOfWeek)
             val endOfTheMonth = sdf.parse(endOfMonth)
 
         if (currentDate.compareTo(savedDate) > 0){
             viewModelScope.launch {
                 database.updateTodayExpenses(toBigDecimal("0"), getCurrencyFromSettings().toString())
-                PrefManager.saveCurrentDate(context, getCurrentDate())
+                PrefManager.saveCurrentDate(context,LocalDate.now().toString())
             }
         }
 
         if (currentDate.compareTo(endOfTheWeek) > 0){
             viewModelScope.launch {
                 database.updateWeekExpenses(toBigDecimal("0"), getCurrencyFromSettings().toString())
+                PrefManager.saveStartOfTheWeek(context,LocalDate.now().toString())
+                PrefManager.saveEndOfTheWeek(application,LocalDate.now().plusDays(7).toString())
             }
         }
 
         if(currentDate.compareTo(endOfTheMonth) > 0){
             viewModelScope.launch {
                 database.updateMonthExpenses(toBigDecimal("0"), getCurrencyFromSettings().toString())
+                PrefManager.saveStartOfTheMonth(application,LocalDate.now().toString())
+                PrefManager.saveEndOfTheMonth(application,LocalDate.now().plusMonths(1).toString())
             }
         }
 

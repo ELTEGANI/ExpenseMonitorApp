@@ -2,14 +2,15 @@ package com.expensemoitor.expensemonitor
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.expensemoitor.expensemonitor.utilites.PrefManager
-import com.expensemoitor.expensemonitor.utilites.getCurrentDate
+import com.jakewharton.threetenabp.AndroidThreeTen
 
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        AndroidThreeTen.init(this)
 
 
 

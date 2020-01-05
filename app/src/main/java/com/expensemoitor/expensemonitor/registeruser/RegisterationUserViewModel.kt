@@ -2,7 +2,6 @@ package com.expensemoitor.expensemonitor.registeruser
 
 
 import android.app.Application
-import android.content.Context
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
@@ -20,8 +19,8 @@ import com.expensemoitor.expensemonitor.utilites.*
 import com.expensemoitor.expensemonitor.utilites.Converter.Companion.toBigDecimal
 import com.expensemoitor.expensemonitor.utilites.MyApp.Companion.context
 import kotlinx.coroutines.*
+import org.threeten.bp.LocalDate
 import retrofit2.HttpException
-import java.math.BigDecimal
 
 
 class RegisterationUserViewModel(val database: ExpenseMonitorDao, var application: Application) :ViewModel() {
@@ -33,8 +32,8 @@ class RegisterationUserViewModel(val database: ExpenseMonitorDao, var applicatio
 
 
     init {
-        //save currentDate for the first time so it can be updated later
-        PrefManager.saveCurrentDate(application, getCurrentDate())
+        //save dates for the first time so it can be updated later
+        saveAllDates()
     }
 
 
@@ -106,6 +105,16 @@ class RegisterationUserViewModel(val database: ExpenseMonitorDao, var applicatio
                     Log.d("httpException",httpException.message())
                 }
             }
+        }
+    }
+
+    fun saveAllDates(){
+        viewModelScope.launch {
+            PrefManager.saveCurrentDate(application,LocalDate.now().toString())
+            PrefManager.saveStartOfTheWeek(application,LocalDate.now().toString())
+            PrefManager.saveStartOfTheMonth(application,LocalDate.now().toString())
+            PrefManager.saveEndOfTheWeek(application,LocalDate.now().plusDays(7).toString())
+            PrefManager.saveEndOfTheMonth(application,LocalDate.now().plusMonths(1).toString())
         }
     }
 

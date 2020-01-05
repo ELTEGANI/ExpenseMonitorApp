@@ -12,13 +12,13 @@ data class UserExpenses(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
 
-    @ColumnInfo(name = "today_expenses")
+    @ColumnInfo(name = "today_expenses",defaultValue = "0")
     val todayExpenses: BigDecimal ,
 
-    @ColumnInfo(name = "week_expenses")
+    @ColumnInfo(name = "week_expenses",defaultValue = "0")
     var weekExpenses:  BigDecimal,
 
-    @ColumnInfo(name = "month_expenses")
+    @ColumnInfo(name = "month_expenses",defaultValue = "0")
     var monthExpenses: BigDecimal ,
 
     @ColumnInfo(name = "currency")
