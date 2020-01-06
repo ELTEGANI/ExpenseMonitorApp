@@ -11,7 +11,7 @@ import java.math.BigDecimal
 interface ExpenseMonitorDao {
 
     @Insert
-    suspend fun insertExpense(userExpenses: UserExpenses)
+     suspend fun insertExpense(userExpenses: UserExpenses)
 
 
     @Query("UPDATE user_expense_table SET today_expenses=:todayExpense WHERE currency =:currency")
