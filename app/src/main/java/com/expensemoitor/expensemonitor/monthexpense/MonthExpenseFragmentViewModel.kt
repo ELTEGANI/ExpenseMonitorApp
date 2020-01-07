@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.expensemoitor.expensemonitor.R
 import com.expensemoitor.expensemonitor.database.ExpenseMonitorDao
 import com.expensemoitor.expensemonitor.database.UserExpenses
 import com.expensemoitor.expensemonitor.network.ApiFactory
@@ -13,6 +14,7 @@ import com.expensemoitor.expensemonitor.network.DurationExpenseResponse
 import com.expensemoitor.expensemonitor.network.DurationTag
 import com.expensemoitor.expensemonitor.utilites.*
 import com.expensemoitor.expensemonitor.utilites.Converter.Companion.toBigDecimal
+import com.expensemoitor.expensemonitor.utilites.MyApp.Companion.context
 import kotlinx.coroutines.launch
 import java.math.BigDecimal
 
@@ -66,13 +68,13 @@ class MonthExpenseFragmentViewModel(val database: ExpenseMonitorDao, val applica
                         database.updateMonthExpenses(sumationOfAmount(getExpensesResponseList),getCurrencyFromSettings().toString())
                     }
                 }else{
-                    noExpeneseFound.value = "There Are No Monthly Expenses"
+                    noExpeneseFound.value = context?.getString(R.string.no_monthly_expenses)
                 }
 
             }catch (t:Throwable){
                 _status.value = progressStatus.ERROR
                 _expensesProperties.value = ArrayList()
-                noExpeneseFound.value = "Please Check Internet Connection"
+                noExpeneseFound.value = context?.getString(R.string.weak_internet_connection)
             }
         }
     }

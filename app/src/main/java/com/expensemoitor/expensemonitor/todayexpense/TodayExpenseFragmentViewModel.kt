@@ -6,11 +6,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.expensemoitor.expensemonitor.R
 import com.expensemoitor.expensemonitor.database.ExpenseMonitorDao
 import com.expensemoitor.expensemonitor.database.UserExpenses
 import com.expensemoitor.expensemonitor.network.ApiFactory
 import com.expensemoitor.expensemonitor.network.DurationExpenseResponse
 import com.expensemoitor.expensemonitor.network.DurationTag
+import com.expensemoitor.expensemonitor.utilites.MyApp.Companion.context
 import com.expensemoitor.expensemonitor.utilites.PrefManager.Companion.getCurrentDate
 import com.expensemoitor.expensemonitor.utilites.getCurrencyFromSettings
 import com.expensemoitor.expensemonitor.utilites.progressStatus
@@ -76,12 +78,12 @@ class TodayExpenseFragmentViewModel(val database: ExpenseMonitorDao, val applica
                              )
                          }
                      } else {
-                         noExpeneseFound.value = "There Are No Daily Expenses"
+                         noExpeneseFound.value = context?.getString(R.string.no_daily_expenses)
                      }
                  } catch (t: Throwable) {
                      _status.value = progressStatus.ERROR
                      _expensesProperties.value = ArrayList()
-                     noExpeneseFound.value = "Please Check Internet Connection"
+                     noExpeneseFound.value = context?.getString(R.string.weak_internet_connection)
                      Log.d("Throwable", t.toString())
                  }
              } catch (http: HttpException){

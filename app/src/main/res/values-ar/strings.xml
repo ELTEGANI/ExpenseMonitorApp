@@ -12,12 +12,12 @@
     <string name="mange_expense">إدراة منصرف</string>
     <string name="update_date">تحديث تاريخ</string>
     <string name="update_expense">تحديث منصرف</string>
-    <string name="delete_expense">حذف منصرف</string>
-    <string name="create_expense">إنشاء منصرف</string>
+    <string name="delete_expense">حذف مصروف</string>
+    <string name="create_expense">إنشاء مصروف</string>
     <string name="amount">مبلغ</string>
     <string name="description">وصف</string>
     <string name="new_date">تاريخ جديد</string>
-    <string name="create_new_expense">إنشاء منصرف جديد</string>
+    <string name="create_new_expense">إنشاء مصروف جديد</string>
     <string name="change_currency">تغيير العملة</string>
     <string name="setting">إعدادات</string>
     <string name="signout">تسجيل خروج</string>
@@ -96,10 +96,10 @@
     <string name="OnlineRetailpurchases">مشتريات التجزئة عبر الإنترنت</string>
     <string name="OnlineServices">خدمات عبر الانترنت</string>
     <string name="Otherinsuranceexpenses">مصاريف تأمين أخرى</string>
-    <string name="Other_investments">استثمارات أخرى</string>
-    <string name="Other_personal_transfers">تحويلات شخصية أخرى</string>
-    <string name="Property_taxes">الضرائب العقارية</string>
-    <string name="Parking_fees">رسوم وقوف السيارات</string>
+    <string name="Otherinvestments">استثمارات أخرى</string>
+    <string name="Otherpersonaltransfers">تحويلات شخصية أخرى</string>
+    <string name="Propertytaxes">الضرائب العقارية</string>
+    <string name="Parkingfees">رسوم وقوف السيارات</string>
     <string name="Phones">هواتف</string>
     <string name="Primarycare">الرعاية الصحية الأولية</string>
     <string name="Petfood">طعام الحيوانات الاليفة</string>
@@ -134,4 +134,16 @@
     <string name="Vehiclepurchase">شراء سيارة</string>
     <string name="Water">ماء</string>
     <string name="Wedding">عرس</string>
+    <string name="weak_internet_connection">اتصال إنترنت ضعيف</string>
+    <string name="select_option">يرجي الاختيار</string>
+    <string name="select_currency">اختر عملتك</string>
+    <string name="select_category">اختر فئة الصرف</string>
+    <string name="no_daily_expenses">لم تقم بإضافة مصروفات يومية</string>
+    <string name="no_monthly_expenses">لم تقم بإضافة مصروفات شهرية</string>
+    <string name="no_weekly_expenses">لم تقم بإضافة مصروفات اسبوعية</string>
+    <string name="fill_empty">يرجى ملء الحقل الفارغ</string>
+    <string name="date">تاريخ</string>
+    <string name="expense_created_successfuly">تم إنشاء مصروف بنجاح</string>
+    <string name="expense_deleted_successfuly">تم حذف مصروف بنجاح</string>
+    <string name="expense_update_successfuly">تم تحديث مصروف بنجاح</string>
 </resources>

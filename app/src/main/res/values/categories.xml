@@ -2,116 +2,116 @@
 <resources>
     <array name="categories_list">
         <item name="Select Category">@string/SelectCategory</item>
-         <item>Adults’ clothing</item>
-         <item>Adults’ shoes</item>
-         <item>Auto insurance</item>
-         <item>Alcohol/Bars</item>
-         <item>Anniversary</item>
-         <item>Administrative violations</item>
-         <item>Alimony and child support</item>
-         <item>Birthday</item>
-         <item>Babysitter</item>
-         <item>Big purchases</item>
-         <item>Books</item>
-         <item>Beauty</item>
-         <item>Cafes</item>
-         <item>Car payment </item>
-         <item>Car warranty</item>
-         <item>Cable</item>
-         <item>Children’s clothing</item>
-         <item>Children’s shoes</item>
-         <item>Cleaning supplies</item>
-         <item>Christmas</item>
-         <item>Credit cards</item>
-         <item>Cosmetics</item>
-         <item>Charities</item>
-         <item>Channel Subscriptions</item>
-         <item>Concerts</item>
-         <item>Cinema</item>
-         <item>Consumer loans</item>
-         <item>Car Leasing</item>
-         <item>Casino</item>
-         <item>Cheque</item>
-         <item>Currency exchange</item>
-         <item>Disability insurance</item>
-         <item>Dishwasher detergent</item>
-         <item>Dental care</item>
-         <item>Enquiries</item>
-         <item>Emergency Fund</item>
-         <item>Electricity</item>
-         <item>Education and courses</item>
-         <item>Financial planning</item>
-         <item>Fuel</item>
-         <item>Gifts</item>
-         <item>Gym memberships</item>
-         <item>Gas</item>
-         <item>Garbage</item>
-         <item>Games</item>
-         <item>Groceries</item>
-         <item>Hobbies</item>
-         <item>Household repairs</item>
-         <item>Haircuts</item>
-         <item>Health insurance</item>
-         <item>Health and pharmaceuticals</item>
-         <item>Home fees</item>
-         <item>Internet</item>
-         <item>Investments</item>
-         <item>Invoices</item>
-         <item>Leisure Time Activities</item>
-         <item>Life insurance</item>
-         <item>Lottery</item>
-         <item>Laundry detergent</item>
-         <item>Loans between individuals</item>
-         <item>Magazines</item>
-         <item>Newspapers</item>
-         <item>Medications</item>
-         <item>Medical devices</item>
-         <item>Mortgage</item>
-         <item>Maintenance</item>
-         <item>Movies</item>
-         <item>Music</item>
-         <item>Other savings</item>
-         <item>Oil Changes</item>
-         <item>Online Retail purchases</item>
-         <item>Online Services</item>
-         <item>Other insurance expenses</item>
-         <item>Other investments</item>
-         <item>Other personal transfers</item>
-         <item>Property taxes</item>
-         <item>Parking fees</item>
-         <item>Phones</item>
-         <item>Primary care</item>
-         <item>Pet food</item>
-         <item>protection plan</item>
-         <item>Personal loans</item>
-         <item>Postal services</item>
-         <item>Rent</item>
-         <item>Repairs</item>
-         <item>Registration Fees</item>
-         <item>Restaurants</item>
-         <item>Sport</item>
-         <item>Special occasion</item>
-         <item>Salon services </item>
-         <item>Subscriptions</item>
-         <item>Student loans</item>
-         <item>School Supplies</item>
-         <item>Savings</item>
-         <item>Specialty care</item>
-         <item>Theatre</item>
-         <item>Travel expenses</item>
-         <item>Tires</item>
-         <item>Toiletries</item>
-         <item>Tools</item>
-         <item>Tobacco</item>
-         <item>To account of relatives</item>
-         <item>To own account</item>
-         <item>Transportation expenses</item>
-         <item>Unions and associations</item>
-         <item>Utilities</item>
-         <item>Urgent care</item>
-         <item>Vacations</item>
-         <item>Vehicle purchase</item>
-         <item>Water</item>
-         <item>Wedding</item>
+         <item>@string/Adultsclothing</item>
+         <item>@string/Adultsshoes</item>
+         <item>@string/Autoinsurance</item>
+         <item>@string/AlcoholBars</item>
+         <item>@string/Anniversary</item>
+         <item>@string/Administrativeviolations</item>
+         <item>@string/Alimonyandchildsupport</item>
+         <item>@string/Birthday</item>
+         <item>@string/Babysitter</item>
+         <item>@string/Bigpurchases</item>
+         <item>@string/Books</item>
+         <item>@string/Beauty</item>
+         <item>@string/Cafes</item>
+         <item>@string/Carpayment</item>
+         <item>@string/Carwarranty</item>
+         <item>@string/Cable</item>
+         <item>@string/Childrensclothing</item>
+         <item>@string/Childrensshoes</item>
+         <item>@string/Cleaningsupplies</item>
+         <item>@string/Christmas</item>
+         <item>@string/Creditcards</item>
+         <item>@string/Cosmetics</item>
+         <item>@string/Charities</item>
+         <item>@string/ChannelSubscriptions</item>
+         <item>@string/Concerts</item>
+         <item>@string/Cinema</item>
+         <item>@string/Consumerloans</item>
+         <item>@string/CarLeasing</item>
+         <item>@string/Casino</item>
+         <item>@string/Cheque</item>
+         <item>@string/Currencyexchange</item>
+         <item>@string/Disabilityinsurance</item>
+         <item>@string/Dishwasherdetergent</item>
+         <item>@string/Dentalcare</item>
+         <item>@string/Enquiries</item>
+         <item>@string/EmergencyFund</item>
+         <item>@string/Electricity</item>
+         <item>@string/Educationandcourses</item>
+         <item>@string/Financialplanning</item>
+         <item>@string/Fuel</item>
+         <item>@string/Gifts</item>
+         <item>@string/Gymmemberships</item>
+         <item>@string/Gas</item>
+         <item>@string/Garbage</item>
+         <item>@string/Games</item>
+         <item>@string/Groceries</item>
+         <item>@string/Hobbies</item>
+         <item>@string/Householdrepairs</item>
+         <item>@string/Haircuts</item>
+         <item>@string/Healthinsurance</item>
+         <item>@string/Healthandpharmaceuticals</item>
+         <item>@string/Homefees</item>
+         <item>@string/Internet</item>
+         <item>@string/Investments</item>
+         <item>@string/Invoices</item>
+         <item>@string/LeisureTimeActivities</item>
+         <item>@string/Lifeinsurance</item>
+         <item>@string/Lottery</item>
+         <item>@string/Laundrydetergent</item>
+         <item>@string/Loansbetweenindividuals</item>
+         <item>@string/Magazines</item>
+         <item>@string/Newspapers</item>
+         <item>@string/Medications</item>
+         <item>@string/Medicaldevices</item>
+         <item>@string/Mortgage</item>
+         <item>@string/Maintenance</item>
+         <item>@string/Movies</item>
+         <item>@string/Music</item>
+         <item>@string/Othersavings</item>
+         <item>@string/OilChanges</item>
+         <item>@string/OnlineRetailpurchases</item>
+         <item>@string/OnlineServices</item>
+         <item>@string/Otherinsuranceexpenses</item>
+         <item>@string/Otherinvestments</item>
+         <item>@string/Otherpersonaltransfers</item>
+         <item>@string/Propertytaxes</item>
+         <item>@string/Parkingfees</item>
+         <item>@string/Phones</item>
+         <item>@string/Primarycare</item>
+         <item>@string/Petfood</item>
+         <item>@string/protectionplan</item>
+         <item>@string/Personalloans</item>
+         <item>@string/Postalservices</item>
+         <item>@string/Rent</item>
+         <item>@string/Repairs</item>
+         <item>@string/RegistrationFees</item>
+         <item>@string/Restaurants</item>
+         <item>@string/Sport</item>
+         <item>@string/Specialoccasion</item>
+         <item>@string/Salonservices</item>
+         <item>@string/Subscriptions</item>
+         <item>@string/Studentloans</item>
+         <item>@string/SchoolSupplies</item>
+         <item>@string/Savings</item>
+         <item>@string/Specialtycare</item>
+         <item>@string/Theatre</item>
+         <item>@string/Travelexpenses</item>
+         <item>@string/Tires</item>
+         <item>@string/Toiletries</item>
+         <item>@string/Tools</item>
+         <item>@string/Tobacco</item>
+         <item>@string/Toaccountofrelatives</item>
+         <item>@string/Toownaccount</item>
+         <item>@string/Transportationexpenses</item>
+         <item>@string/Unionsandassociations</item>
+         <item>@string/Utilities</item>
+         <item>@string/Urgentcare</item>
+         <item>@string/Vacations</item>
+         <item>@string/Vehiclepurchase</item>
+         <item>@string/Water</item>
+         <item>@string/Wedding</item>
     </array>
 </resources>

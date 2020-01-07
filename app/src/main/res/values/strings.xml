@@ -91,10 +91,10 @@
     <string name="OnlineRetailpurchases">Online Retail purchases</string>
     <string name="OnlineServices">Online Services</string>
     <string name="Otherinsuranceexpenses">Other insurance expenses</string>
-    <string name="Other_investments">Other investments</string>
-    <string name="Other_personal_transfers">Other personal transfers</string>
-    <string name="Property_taxes">Property taxes</string>
-    <string name="Parking_fees">Parking fees</string>
+    <string name="Otherinvestments">Other investments</string>
+    <string name="Otherpersonaltransfers">Other personal transfers</string>
+    <string name="Propertytaxes">Property taxes</string>
+    <string name="Parkingfees">Parking fees</string>
     <string name="Phones">Phones</string>
     <string name="Primarycare">Primary care</string>
     <string name="Petfood">Pet food</string>
@@ -129,10 +129,10 @@
     <string name="Vehiclepurchase">Vehicle purchase</string>
     <string name="Water">Water</string>
     <string name="Wedding">Wedding</string>
-    <string name="fill_empty">Please fill empty field</string>
-    <string name="select_category">Please Select Expense Category</string>
+    <string name="fill_empty">Please Fill The Empty Field</string>
+    <string name="select_category">Select Expense Category</string>
     <string name="expense_created_successfuly">Expense Created Successfully</string>
-    <string name="select_option">Please Select Option</string>
+    <string name="select_option">Please Make A Selection</string>
     <string name="select_currency">Select Your Currency</string>
     <string name="expense_update_successfuly">Expense Updated Successfully</string>
     <string name="expense_deleted_successfuly">Expense Deleted Successfully</string>
@@ -140,4 +140,9 @@
     <string name="all_your_expenses_in_one_place">All Your Expenses In One Place</string>
     <string name="expense_monitor">Expense Monitor</string>
     <string name="date">Date</string>
+    <string name="no_daily_expenses">You Didn\'t Add Daily Expenses</string>
+    <string name="no_weekly_expenses">You Did Not Add Weekly Expenses</string>
+    <string name="no_monthly_expenses">You Didn\'t Add Monthly Expenses</string>
+    <string name="new_date">New Date</string>
+    <string name="update_date">Update Date</string>
 </resources>
