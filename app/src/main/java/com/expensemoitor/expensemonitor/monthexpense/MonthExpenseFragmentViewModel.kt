@@ -32,6 +32,8 @@ class MonthExpenseFragmentViewModel(val database: ExpenseMonitorDao, val applica
     val navigateToSelectedExpense :LiveData<DurationExpenseResponse>
         get() = _navigateToSelectedExpense
 
+    val noExpeneseFound = MutableLiveData<String>()
+
 
     init {
         getMonthExpense("month")
@@ -51,22 +53,26 @@ class MonthExpenseFragmentViewModel(val database: ExpenseMonitorDao, val applica
                 _status.value = progressStatus.LOADING
                 val getExpensesResponseList = getResponse?.await()
                 _status.value = progressStatus.DONE
-                _expensesProperties.value = getExpensesResponseList
-                //TODO recheck validation and messgaes
-                if(database.checkCurrencyExistence(getCurrencyFromSettings().toString()) == null){
-                    database.insertExpense(UserExpenses(
-                        todayExpenses   = BigDecimal.ZERO
-                        ,weekExpenses   = BigDecimal.ZERO
-                        ,monthExpenses  = sumationOfAmount(getExpensesResponseList)
-                        ,currency = getCurrencyFromSettings().toString()
-                    ))
+                if(getExpensesResponseList?.size != 0){
+                    _expensesProperties.value = getExpensesResponseList
+                    if(database.checkCurrencyExistence(getCurrencyFromSettings().toString()) == null){
+                        database.insertExpense(UserExpenses(
+                            todayExpenses   = BigDecimal.ZERO
+                            ,weekExpenses   = BigDecimal.ZERO
+                            ,monthExpenses  = sumationOfAmount(getExpensesResponseList)
+                            ,currency = getCurrencyFromSettings().toString()
+                        ))
+                    }else{
+                        database.updateMonthExpenses(sumationOfAmount(getExpensesResponseList),getCurrencyFromSettings().toString())
+                    }
                 }else{
-                    database.updateMonthExpenses(sumationOfAmount(getExpensesResponseList),getCurrencyFromSettings().toString())
+                    noExpeneseFound.value = "There Are No Monthly Expenses"
                 }
+
             }catch (t:Throwable){
                 _status.value = progressStatus.ERROR
                 _expensesProperties.value = ArrayList()
-                Log.d("getExpensesResponseList",t.toString())
+                noExpeneseFound.value = "Please Check Internet Connection"
             }
         }
     }

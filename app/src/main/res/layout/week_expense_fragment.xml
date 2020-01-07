@@ -15,10 +15,28 @@
             android:layout_height="match_parent"
             tools:context=".weekexpense.WeekExpenseFragment">
 
-        <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/week_expense_list"
+
+        <TextView
+                android:id="@+id/textView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:gravity="center"
+                android:text="@{viewModel.noExpeneseFound}"
+                android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                android:textColor="@color/design_default_color_on_secondary"
+                app:layout_constraintBottom_toBottomOf="@+id/week_expense_list"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/week_expense_list"
+                app:layout_constraintVertical_bias="0.26999998" />
+
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/week_expense_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginRight="8dp"
@@ -33,22 +51,22 @@
                 tools:listitem="@layout/expense_view_item" />
 
         <ProgressBar
+                android:id="@+id/progressBar2"
                 style="?android:attr/progressBarStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:visibility="gone"
-                android:id="@+id/progressBar2"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginEnd="8dp"
-                app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                app:progressStatus="@{viewModel.status}"
-                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.498"
-                app:layout_constraintVertical_bias="0.272"/>
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.272"
+                app:progressStatus="@{viewModel.status}" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

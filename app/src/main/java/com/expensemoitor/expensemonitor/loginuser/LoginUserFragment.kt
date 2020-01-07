@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
@@ -15,6 +16,7 @@ import androidx.navigation.fragment.findNavController
 import com.expensemoitor.expensemonitor.R
 import com.expensemoitor.expensemonitor.databinding.LoginUserFragmentBinding
 import com.expensemoitor.expensemonitor.utilites.PrefManager
+import com.expensemoitor.expensemonitor.utilites.hasNetworkConnection
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -63,7 +65,11 @@ class LoginUserFragment : Fragment() {
         binding.lifecycleOwner = this
 
         binding.loginButton.setOnClickListener {
-            signIn()
+            if(hasNetworkConnection()){
+                signIn()
+            }else{
+                Toast.makeText(context,getString(R.string.weak_internet_connection),Toast.LENGTH_LONG).show()
+            }
         }
 
         return binding.root

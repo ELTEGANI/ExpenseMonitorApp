@@ -14,10 +14,28 @@
             android:layout_height="match_parent"
             tools:context=".todayexpense.TodayExpenseFragment">
 
-        <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/today_expense_list"
+
+        <TextView
+                android:id="@+id/textView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:gravity="center"
+                android:text="@{viewModel.noExpeneseFound}"
+                android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                android:textColor="@color/design_default_color_on_secondary"
+                app:layout_constraintBottom_toBottomOf="@+id/today_expense_list"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/today_expense_list"
+                app:layout_constraintVertical_bias="0.274" />
+
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/today_expense_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginRight="8dp"
@@ -48,6 +66,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintVertical_bias="0.272"/>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

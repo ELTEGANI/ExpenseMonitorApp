@@ -1,5 +1,7 @@
 package com.expensemoitor.expensemonitor.utilites
 
+import android.content.Context.CONNECTIVITY_SERVICE
+import android.net.ConnectivityManager
 import androidx.preference.PreferenceManager
 import com.expensemoitor.expensemonitor.network.DurationExpenseResponse
 import com.expensemoitor.expensemonitor.utilites.MyApp.Companion.context
@@ -56,7 +58,15 @@ fun expenseFormat(amount: String?): String {
        return amountList.sumByBigDecimal()
    }
 
+
+
 fun Iterable<BigDecimal>.sumByBigDecimal(): BigDecimal {
     return this.fold(BigDecimal.ZERO) { acc, e -> acc + e }
 }
 
+fun hasNetworkConnection(): Boolean {
+    val connectivityManager =
+        context?.getSystemService(CONNECTIVITY_SERVICE) as ConnectivityManager
+    val activeNetworkInfo = connectivityManager.activeNetworkInfo
+    return activeNetworkInfo != null && activeNetworkInfo.isConnectedOrConnecting
+}

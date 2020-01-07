@@ -92,7 +92,7 @@ class MyExpenseFragment : Fragment() {
                         viewModel.weekExpense.observe(this@MyExpenseFragment, Observer {
                         binding.expenseTextView.text = getCurrencyFromSettings()+" "+expenseFormat(it)
                         })
-                        binding.dateTextView.text = PrefManager.getStartOfTheMonth(context)+" "+"/"+" "+PrefManager.getEndOfTheWeek(context)
+                        binding.dateTextView.text = PrefManager.getStartOfTheWeek(context)+" "+"/"+" "+PrefManager.getEndOfTheWeek(context)
                     }
                     2->{
                         viewModel.monthExpense.observe(this@MyExpenseFragment, Observer {

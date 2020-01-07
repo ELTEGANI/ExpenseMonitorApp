@@ -27,9 +27,10 @@ object RetrofitFactory {
             .build()
 
         chain.proceed(newRequest)
+        
     }
 
-    private val loggingInterceptor =  HttpLoggingInterceptor().apply {
+    private val loggingInterceptor =  HttpLoggingInterceptor().apply{
         level = HttpLoggingInterceptor.Level.BODY
     }
 

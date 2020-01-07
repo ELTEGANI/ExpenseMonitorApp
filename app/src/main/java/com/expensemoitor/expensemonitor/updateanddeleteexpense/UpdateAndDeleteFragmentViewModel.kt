@@ -55,8 +55,6 @@ class UpdateAndDeleteFragmentViewModel(durationExpenseResponse: DurationExpenseR
                     val getResponse = getDeleteExpenseResponse.await()
                     if(getResponse.message.isNotEmpty()){
                         _msgError.value = context?.getString(R.string.expense_deleted_successfuly)
-
-
                         Log.d("getResponse",getResponse.toString())
                         _status.value = progressStatus.DONE
                     }
@@ -87,10 +85,11 @@ class UpdateAndDeleteFragmentViewModel(durationExpenseResponse: DurationExpenseR
                     try {
                         _status.value = progressStatus.LOADING
                         val getResponse = getUpdateExpenseResponse?.await()
-                        if(getResponse?.message?.isNotEmpty()!!){
-                            _msgError.value = context?.getString(R.string.expense_update_successfuly)
+                        if (getResponse != null) {
+                            if(getResponse.message.isNotEmpty()){
+                                _msgError.value = context?.getString(R.string.expense_update_successfuly)
+                            }
                         }
-                        Log.d("getResponse",getResponse.toString())
                         _status.value = progressStatus.DONE
                     }catch (t:Throwable){
                         _status.value = progressStatus.ERROR

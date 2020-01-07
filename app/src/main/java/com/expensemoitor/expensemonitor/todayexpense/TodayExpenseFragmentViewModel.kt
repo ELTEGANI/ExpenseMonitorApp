@@ -16,6 +16,7 @@ import com.expensemoitor.expensemonitor.utilites.getCurrencyFromSettings
 import com.expensemoitor.expensemonitor.utilites.progressStatus
 import com.expensemoitor.expensemonitor.utilites.sumationOfAmount
 import kotlinx.coroutines.*
+import retrofit2.HttpException
 import java.math.BigDecimal
 
 
@@ -28,6 +29,7 @@ class TodayExpenseFragmentViewModel(val database: ExpenseMonitorDao, val applica
     val status: LiveData<progressStatus>
         get() = _status
 
+    val noExpeneseFound = MutableLiveData<String>()
 
     private val _expensesProperties = MutableLiveData<List<DurationExpenseResponse>>()
     val expensesProperties:LiveData<List<DurationExpenseResponse>>
@@ -51,27 +53,41 @@ class TodayExpenseFragmentViewModel(val database: ExpenseMonitorDao, val applica
           val getResponse = durationTag?.let {
               ApiFactory.GET_DURATION_EXPNSES_SERVICE.getdurationExpenses(it)
           }
-            try {
-                _status.value = progressStatus.LOADING
-                val getExpensesResponseList = getResponse?.await()
-                _status.value = progressStatus.DONE
-                _expensesProperties.value = getExpensesResponseList
-               //TODO recheck validation and messgaes
-                if(database.checkCurrencyExistence(getCurrencyFromSettings().toString()) == null){
-                        database.insertExpense(UserExpenses(
-                            todayExpenses  = sumationOfAmount(getExpensesResponseList)
-                            ,weekExpenses   = BigDecimal.ZERO
-                            ,monthExpenses  = BigDecimal.ZERO
-                            ,currency = getCurrencyFromSettings().toString()
-                        ))
-                }else{
-                    database.updateTodayExpenses(sumationOfAmount(getExpensesResponseList),getCurrencyFromSettings().toString())
-                }
-            }catch (t:Throwable){
-                _status.value = progressStatus.ERROR
-                _expensesProperties.value = ArrayList()
-                Log.d("getExpensesResponseList",t.toString())
-            }
+             try {
+                 try {
+                     _status.value = progressStatus.LOADING
+                     val getExpensesResponseList = getResponse?.await()
+                     _status.value = progressStatus.DONE
+                     if (getExpensesResponseList?.size != 0) {
+                         _expensesProperties.value = getExpensesResponseList
+                         if (database.checkCurrencyExistence(getCurrencyFromSettings().toString()) == null) {
+                             database.insertExpense(
+                                 UserExpenses(
+                                     todayExpenses = sumationOfAmount(getExpensesResponseList)
+                                     , weekExpenses = BigDecimal.ZERO
+                                     , monthExpenses = BigDecimal.ZERO
+                                     , currency = getCurrencyFromSettings().toString()
+                                 )
+                             )
+                         } else {
+                             database.updateTodayExpenses(
+                                 sumationOfAmount(getExpensesResponseList),
+                                 getCurrencyFromSettings().toString()
+                             )
+                         }
+                     } else {
+                         noExpeneseFound.value = "There Are No Daily Expenses"
+                     }
+                 } catch (t: Throwable) {
+                     _status.value = progressStatus.ERROR
+                     _expensesProperties.value = ArrayList()
+                     noExpeneseFound.value = "Please Check Internet Connection"
+                     Log.d("Throwable", t.toString())
+                 }
+             } catch (http: HttpException){
+                 Log.d("http", http.message())
+                 http.code()
+             }
         }
     }
 
