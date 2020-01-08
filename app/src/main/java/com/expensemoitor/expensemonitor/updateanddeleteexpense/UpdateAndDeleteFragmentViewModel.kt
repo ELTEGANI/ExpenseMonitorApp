@@ -73,6 +73,8 @@ class UpdateAndDeleteFragmentViewModel(durationExpenseResponse: DurationExpenseR
     fun updateExpense(expenseId:String,newAmount:String,description:String,date:String,category:String){
         if(description.isEmpty() || date.isEmpty() || category.isEmpty()){
             _msgError.value =  context?.getString(R.string.fill_empty)
+        }else if(category.equals(application.getString(R.string.SelectCategory))){
+            _validationMsg.value = context?.getString(R.string.select_category)
         }else{
             viewModelScope.launch {
                 val expenseData = getCurrencyFromSettings()?.let {

@@ -145,4 +145,9 @@
     <string name="no_monthly_expenses">You Didn\'t Add Monthly Expenses</string>
     <string name="new_date">New Date</string>
     <string name="update_date">Update Date</string>
+    <string name="about">Others</string>
+    <string name="build_version">Build Version</string>
+    <string name="general_settings">General Settings</string>
+    <string name="developed_by">Developer</string>
+    <string name="developer">EL TEGANI MOHAMED HAMMAD GABIR  Email:tiganimoh@gmail.com</string>
 </resources>

@@ -146,4 +146,9 @@
     <string name="expense_created_successfuly">تم إنشاء مصروف بنجاح</string>
     <string name="expense_deleted_successfuly">تم حذف مصروف بنجاح</string>
     <string name="expense_update_successfuly">تم تحديث مصروف بنجاح</string>
+    <string name="about">اخري</string>
+    <string name="general_settings">إعدادات عامة</string>
+    <string name="build_version">بناء الإصدار</string>
+    <string name="developed_by">المطور</string>
+    <string name="developer">" التجاني محمد حماد جابر إيميل:tiganimoh@gmail.com  "</string>
 </resources>

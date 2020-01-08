@@ -2,11 +2,34 @@
 
 <PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:android="http://schemas.android.com/apk/res/android">
-    <ListPreference
-            android:key="userCurrency"
-            android:title="@string/change_currency"
-            android:entries="@array/currencies_setting_list"
-            android:entryValues="@array/currencies_setting_list"
-            android:icon="@drawable/ic_attach_money"
-            app:useSimpleSummaryProvider="true"/>
+
+    <PreferenceCategory
+            app:title="@string/general_settings">
+        <ListPreference
+                android:key="userCurrency"
+                android:title="@string/change_currency"
+                android:entries="@array/currencies_setting_list"
+                android:entryValues="@array/currencies_setting_list"
+                android:icon="@drawable/ic_attach_money"
+                app:useSimpleSummaryProvider="true"/>
+
+    </PreferenceCategory>
+
+
+
+    <PreferenceCategory
+            app:title="@string/about">
+        <Preference
+                app:title="@string/developed_by"
+                app:summary="@string/developer"
+                app:icon="@drawable/ic_person"
+                />
+
+        <Preference
+                app:title="@string/build_version"
+                app:summary="1.0.0"
+                app:icon="@drawable/ic_build"
+                />
+    </PreferenceCategory>
+
 </PreferenceScreen>
