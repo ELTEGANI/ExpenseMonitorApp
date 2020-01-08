@@ -39,8 +39,8 @@ class RegisterationUserViewModel(val database: ExpenseMonitorDao, var applicatio
     init {
         //save dates for the first time so it can be updated later
         saveAllDates()
-        //Encrypted SharedPreference wait for google to release version work below 23
-//        initEncryptedSharedPreferences()
+         //Encrypted SharedPreference wait for google to release version work below 23
+         //initEncryptedSharedPreferences()
     }
 
 
@@ -138,7 +138,6 @@ class RegisterationUserViewModel(val database: ExpenseMonitorDao, var applicatio
     }
 
 //    private fun initEncryptedSharedPreferences() {
-//
 //        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
 //            val masterKeyAlias = MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC)
 //            sharedPreferences = EncryptedSharedPreferences.create(
@@ -149,9 +148,6 @@ class RegisterationUserViewModel(val database: ExpenseMonitorDao, var applicatio
 //                EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
 //            )
 //        }
-//
-//
-//
 //    }
 
 }
