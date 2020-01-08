@@ -2,6 +2,8 @@ package com.expensemoitor.expensemonitor.registeruser
 
 
 import android.app.Application
+import android.content.SharedPreferences
+import android.os.Build
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
@@ -10,6 +12,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import androidx.preference.PreferenceManager
+import androidx.security.crypto.EncryptedSharedPreferences
+import androidx.security.crypto.MasterKeys
 import com.expensemoitor.expensemonitor.network.UserData
 import com.expensemoitor.expensemonitor.R
 import com.expensemoitor.expensemonitor.database.ExpenseMonitorDao
@@ -30,10 +34,13 @@ class RegisterationUserViewModel(val database: ExpenseMonitorDao, var applicatio
     var geneder = ""
     var currency = ""
 
+    lateinit var sharedPreferences: SharedPreferences
 
     init {
         //save dates for the first time so it can be updated later
         saveAllDates()
+        //Encrypted SharedPreference wait for google to release version work below 23
+//        initEncryptedSharedPreferences()
     }
 
 
@@ -129,5 +136,22 @@ class RegisterationUserViewModel(val database: ExpenseMonitorDao, var applicatio
     fun onNavigationCompleted(){
         _navigateToNextScreen.value = false
     }
+
+//    private fun initEncryptedSharedPreferences() {
+//
+//        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
+//            val masterKeyAlias = MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC)
+//            sharedPreferences = EncryptedSharedPreferences.create(
+//                "APP_PREF",
+//                masterKeyAlias,
+//                application,
+//                EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+//                EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
+//            )
+//        }
+//
+//
+//
+//    }
 
 }
