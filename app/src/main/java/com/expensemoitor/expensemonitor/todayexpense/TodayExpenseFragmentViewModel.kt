@@ -24,9 +24,6 @@ import java.math.BigDecimal
 
 class TodayExpenseFragmentViewModel(val database: ExpenseMonitorDao, val application: Application) : ViewModel() {
 
-
-
-
     private val _status = MutableLiveData<progressStatus>()
     val status: LiveData<progressStatus>
         get() = _status

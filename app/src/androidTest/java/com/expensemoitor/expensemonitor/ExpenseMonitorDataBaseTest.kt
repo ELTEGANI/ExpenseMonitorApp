@@ -5,15 +5,10 @@ import androidx.test.InstrumentationRegistry
 import androidx.test.runner.AndroidJUnit4
 import com.expensemoitor.expensemonitor.database.ExpenseMonitorDao
 import com.expensemoitor.expensemonitor.database.ExpenseMonitorDataBase
-import com.expensemoitor.expensemonitor.database.UserExpenses
-import org.hamcrest.core.IsEqual.equalTo
 import org.junit.After
-import org.junit.Assert.assertEquals
 import org.junit.Before
-import org.junit.Test
 import org.junit.runner.RunWith
 import java.io.IOException
-import java.math.BigDecimal
 
 @RunWith(AndroidJUnit4::class)
 class ExpenseMonitorDataBaseTest {

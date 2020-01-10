@@ -27,6 +27,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.tabs.TabLayoutMediator
+import org.threeten.bp.LocalDate
 
 
 class MyExpenseFragment : Fragment() {
@@ -86,7 +87,7 @@ class MyExpenseFragment : Fragment() {
                         viewModel.todayExpense.observe(this@MyExpenseFragment, Observer {
                         binding.expenseTextView.text = getCurrencyFromSettings()+" "+ expenseFormat(it)
                         })
-                        binding.dateTextView.text = PrefManager.getCurrentDate(context)
+                        binding.dateTextView.text = LocalDate.now().toString()
                     }
                     1->{
                         viewModel.weekExpense.observe(this@MyExpenseFragment, Observer {
