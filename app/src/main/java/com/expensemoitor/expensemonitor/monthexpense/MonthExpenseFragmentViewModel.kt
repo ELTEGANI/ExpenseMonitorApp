@@ -68,6 +68,11 @@ class MonthExpenseFragmentViewModel(val database: ExpenseMonitorDao, val applica
                         database.updateMonthExpenses(sumationOfAmount(getExpensesResponseList),getCurrencyFromSettings().toString())
                     }
                 }else{
+                    getCurrencyFromSettings()?.let {
+                        database.updateMonthExpenses(BigDecimal.ZERO,
+                            it
+                        )
+                    }
                     noExpeneseFound.value = context?.getString(R.string.no_monthly_expenses)
                 }
 

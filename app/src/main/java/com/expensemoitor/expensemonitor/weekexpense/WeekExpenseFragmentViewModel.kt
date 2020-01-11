@@ -67,6 +67,11 @@ class WeekExpenseFragmentViewModel(val database: ExpenseMonitorDao, val applicat
                         database.updateWeekExpenses(sumationOfAmount(getExpensesResponseList),getCurrencyFromSettings().toString())
                     }
                 }else{
+                    getCurrencyFromSettings()?.let {
+                        database.updateWeekExpenses(BigDecimal.ZERO,
+                            it
+                        )
+                    }
                     noExpeneseFound.value = context?.getString(R.string.no_weekly_expenses)
                 }
 

@@ -75,6 +75,11 @@ class TodayExpenseFragmentViewModel(val database: ExpenseMonitorDao, val applica
                              )
                          }
                      } else {
+                         getCurrencyFromSettings()?.let {
+                             database.updateTodayExpenses(BigDecimal.ZERO,
+                                 it
+                             )
+                         }
                          noExpeneseFound.value = context?.getString(R.string.no_daily_expenses)
                      }
                  } catch (t: Throwable) {
