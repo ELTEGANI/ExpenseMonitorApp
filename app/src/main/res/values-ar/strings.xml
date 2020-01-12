@@ -134,7 +134,7 @@
     <string name="Vehiclepurchase">شراء سيارة</string>
     <string name="Water">ماء</string>
     <string name="Wedding">عرس</string>
-    <string name="weak_internet_connection">اتصال إنترنت ضعيف</string>
+    <string name="weak_internet_connection">لا يوجد اتصال إنترنت.</string>
     <string name="select_option">يرجي الاختيار</string>
     <string name="select_currency">اختر عملتك</string>
     <string name="select_category">اختر فئة الصرف</string>

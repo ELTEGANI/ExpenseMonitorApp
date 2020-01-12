@@ -86,13 +86,13 @@ class CreateNewExpenseFragmentViewModel(var application: Application) : ViewMode
                 try{
                     _status.value = progressStatus.LOADING
                     val expenseResponse = getResponse?.await()
-                    if (!expenseResponse?.message?.isEmpty()!!){
+                    if (expenseResponse?.message != null){
                         _responseMsg.value = context?.getString(R.string.expense_created_successfuly)
                         _status.value = progressStatus.DONE
                     }
                 }catch (t:Throwable){
                     _status.value = progressStatus.ERROR
-                    _validationMsg.value = t.toString()
+                    _validationMsg.value =context?.getString(R.string.weak_internet_connection)
                 }
                 }catch (httpException: HttpException){
                    Log.d("httpException",httpException.toString())

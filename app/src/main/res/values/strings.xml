@@ -136,12 +136,12 @@
     <string name="select_currency">Select Your Currency</string>
     <string name="expense_update_successfuly">Expense Updated Successfully</string>
     <string name="expense_deleted_successfuly">Expense Deleted Successfully</string>
-    <string name="weak_internet_connection">Poor Internet Connection</string>
+    <string name="weak_internet_connection">No Internet Connection</string>
     <string name="all_your_expenses_in_one_place">All Your Expenses In One Place</string>
     <string name="expense_monitor">Expense Monitor</string>
     <string name="date">Date</string>
     <string name="no_daily_expenses">You Didn\'t Add Daily Expenses</string>
-    <string name="no_weekly_expenses">You Did Not Add Weekly Expenses</string>
+    <string name="no_weekly_expenses">You Didn\'t Add Weekly Expenses</string>
     <string name="no_monthly_expenses">You Didn\'t Add Monthly Expenses</string>
     <string name="new_date">New Date</string>
     <string name="update_date">Update Date</string>

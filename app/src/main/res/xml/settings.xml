@@ -23,13 +23,18 @@
                 app:title="@string/developed_by"
                 app:summary="@string/developer"
                 app:icon="@drawable/ic_person"
+                app:singleLineTitle="true"
                 />
 
         <Preference
+                app:key="buildversion"
                 app:title="@string/build_version"
-                app:summary="1.0.0"
                 app:icon="@drawable/ic_build"
+                app:useSimpleSummaryProvider="true"
+                app:summary="1.0"
                 />
+
+
     </PreferenceCategory>
 
 </PreferenceScreen>

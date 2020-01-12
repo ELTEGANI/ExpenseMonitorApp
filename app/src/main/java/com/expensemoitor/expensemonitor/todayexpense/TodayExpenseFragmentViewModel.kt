@@ -44,7 +44,7 @@ class TodayExpenseFragmentViewModel(val database: ExpenseMonitorDao, val applica
     }
 
 
-     private fun getTodayExpense(duration:String) {
+      fun getTodayExpense(duration:String) {
          viewModelScope.launch {
              val durationTag = getCurrencyFromSettings()?.let {
               DurationTag(duration,it,getCurrentDate(application),"")
@@ -105,5 +105,7 @@ class TodayExpenseFragmentViewModel(val database: ExpenseMonitorDao, val applica
     fun displaySelectedExpenseCompleted(){
         _navigateToSelectedExpense.value = null
     }
+
+
 
 }

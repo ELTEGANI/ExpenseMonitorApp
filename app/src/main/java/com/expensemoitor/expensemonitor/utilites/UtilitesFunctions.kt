@@ -2,6 +2,7 @@ package com.expensemoitor.expensemonitor.utilites
 
 import android.content.Context.CONNECTIVITY_SERVICE
 import android.net.ConnectivityManager
+import androidx.databinding.library.BuildConfig
 import androidx.preference.PreferenceManager
 import com.expensemoitor.expensemonitor.network.DurationExpenseResponse
 import com.expensemoitor.expensemonitor.utilites.MyApp.Companion.context
@@ -70,3 +71,4 @@ fun hasNetworkConnection(): Boolean {
     val activeNetworkInfo = connectivityManager.activeNetworkInfo
     return activeNetworkInfo != null && activeNetworkInfo.isConnectedOrConnecting
 }
+
