@@ -4,7 +4,6 @@ import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.expensemoitor.expensemonitor.database.ExpenseMonitorDao
-import com.expensemoitor.expensemonitor.database.ExpenseMonitorDataBase
 
 class MyExpenseFragmentViewModelFactory(private val dataBase: ExpenseMonitorDao,private val application: Application):ViewModelProvider.Factory {
     @Suppress("unchecked_cast")

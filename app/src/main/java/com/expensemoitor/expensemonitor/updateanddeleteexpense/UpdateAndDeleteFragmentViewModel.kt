@@ -12,10 +12,9 @@ import com.expensemoitor.expensemonitor.network.DurationExpenseResponse
 import com.expensemoitor.expensemonitor.network.ExpenseData
 import com.expensemoitor.expensemonitor.utilites.MyApp.Companion.context
 import com.expensemoitor.expensemonitor.utilites.getCurrencyFromSettings
-import com.expensemoitor.expensemonitor.utilites.progressStatus
+import com.expensemoitor.expensemonitor.utilites.ProgressStatus
 import kotlinx.coroutines.*
 import retrofit2.HttpException
-import java.math.BigDecimal
 
 class UpdateAndDeleteFragmentViewModel(durationExpenseResponse: DurationExpenseResponse, application: Application) : AndroidViewModel(application) {
 
@@ -26,8 +25,8 @@ class UpdateAndDeleteFragmentViewModel(durationExpenseResponse: DurationExpenseR
         get() = _selectedExpense
 
 
-    private val _status = MutableLiveData<progressStatus>()
-    val status: LiveData<progressStatus>
+    private val _status = MutableLiveData<ProgressStatus>()
+    val status: LiveData<ProgressStatus>
         get() = _status
 
 
@@ -48,18 +47,18 @@ class UpdateAndDeleteFragmentViewModel(durationExpenseResponse: DurationExpenseR
 
     fun deleteExpense(expenseId:String){
         viewModelScope.launch {
-            val getDeleteExpenseResponse = ApiFactory.DELETE_EXPENSE.deleteExpense(expenseId)
+            val getDeleteExpenseResponse = ApiFactory.DELETE_EXPENSE.deleteExpenseAsync(expenseId)
             try {
                 try {
-                    _status.value = progressStatus.LOADING
+                    _status.value = ProgressStatus.LOADING
                     val getResponse = getDeleteExpenseResponse.await()
                     if(getResponse.message.isNotEmpty()){
                         _msgError.value = context?.getString(R.string.expense_deleted_successfuly)
                         Log.d("getResponse",getResponse.toString())
-                        _status.value = progressStatus.DONE
+                        _status.value = ProgressStatus.DONE
                     }
                 }catch (t:Throwable){
-                    _status.value = progressStatus.ERROR
+                    _status.value = ProgressStatus.ERROR
                     _msgError.value = context?.getString(R.string.weak_internet_connection)
                 }
             }catch (httpException: HttpException){
@@ -73,7 +72,7 @@ class UpdateAndDeleteFragmentViewModel(durationExpenseResponse: DurationExpenseR
     fun updateExpense(expenseId:String,newAmount:String,description:String,date:String,category:String){
         if(description.isEmpty() || date.isEmpty() || category.isEmpty()){
             _msgError.value =  context?.getString(R.string.fill_empty)
-        }else if(category.equals(application.getString(R.string.SelectCategory))){
+        }else if(category == application.getString(R.string.SelectCategory)){
             _validationMsg.value = context?.getString(R.string.select_category)
         }else{
             viewModelScope.launch {
@@ -82,19 +81,19 @@ class UpdateAndDeleteFragmentViewModel(durationExpenseResponse: DurationExpenseR
                         it,category)
                 }
                 val getUpdateExpenseResponse =
-                    expenseData?.let { ApiFactory.UPDATE_EXPENSE.updateExpense(expenseId, it) }
+                    expenseData?.let { ApiFactory.UPDATE_EXPENSE.updateExpenseAsync(expenseId, it) }
                 try {
                     try {
-                        _status.value = progressStatus.LOADING
+                        _status.value = ProgressStatus.LOADING
                         val getResponse = getUpdateExpenseResponse?.await()
                         if (getResponse != null) {
                             if(getResponse.message.isNotEmpty()){
                                 _msgError.value = context?.getString(R.string.expense_update_successfuly)
                             }
                         }
-                        _status.value = progressStatus.DONE
+                        _status.value = ProgressStatus.DONE
                     }catch (t:Throwable){
-                        _status.value = progressStatus.ERROR
+                        _status.value = ProgressStatus.ERROR
                         _validationMsg.value = context?.getString(R.string.weak_internet_connection)
                     }
                 }catch (httpException: HttpException){

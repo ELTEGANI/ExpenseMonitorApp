@@ -1,5 +1,6 @@
 package com.expensemoitor.expensemonitor.updateanddeleteexpense
 
+import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -22,7 +23,8 @@ class UpdateAndDeleteExpenseFragment : Fragment() {
     private lateinit var binding:UpdateAndDeleteExpenseFragmentBinding
 
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,savedInstanceState: Bundle?): View? {
+    @SuppressLint("SetTextI18n")
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         val application = requireNotNull(activity).application
         binding = DataBindingUtil.inflate(inflater,R.layout.update_and_delete_expense_fragment,container,false)

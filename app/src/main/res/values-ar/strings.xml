@@ -7,16 +7,13 @@
     <string name="today">اليوم</string>
     <string name="week">الاسبوع</string>
     <string name="month">الشهر</string>
-    <string name="registeration">التسجيل</string>
     <string name="next">التالي</string>
     <string name="mange_expense">إدراة منصرف</string>
-    <string name="update_date">تحديث تاريخ</string>
     <string name="update_expense">تحديث منصرف</string>
     <string name="delete_expense">حذف مصروف</string>
     <string name="create_expense">إنشاء مصروف</string>
     <string name="amount">مبلغ</string>
     <string name="description">وصف</string>
-    <string name="new_date">تاريخ جديد</string>
     <string name="create_new_expense">إنشاء مصروف جديد</string>
     <string name="change_currency">تغيير العملة</string>
     <string name="setting">إعدادات</string>

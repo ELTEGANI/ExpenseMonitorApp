@@ -1,30 +1,28 @@
 package com.expensemoitor.expensemonitor.utilites
 
+import android.annotation.SuppressLint
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowInsets
-import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.core.view.updateLayoutParams
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
-import com.expensemoitor.expensemonitor.R
+import com.expensemoitor.expensemonitor.adapters.DurationsExpenseAdapter
 import com.expensemoitor.expensemonitor.network.DurationExpenseResponse
 
 
 @BindingAdapter("progressStatus")
-fun bindingStatus(progressBar: ProgressBar,status: progressStatus?){
+fun bindingStatus(progressBar: ProgressBar,status: ProgressStatus?){
     when(status){
-        progressStatus.LOADING->{
+        ProgressStatus.LOADING->{
            progressBar.visibility = View.VISIBLE
         }
-        progressStatus.DONE->{
+        ProgressStatus.DONE->{
             progressBar.visibility = View.GONE
         }
-        progressStatus.ERROR->{
+        ProgressStatus.ERROR->{
             progressBar.visibility = View.GONE
         }
     }
@@ -36,6 +34,7 @@ fun bindRecyclerView(recyclerView: RecyclerView,data:List<DurationExpenseRespons
     adapter.submitList(data)
 }
 
+@SuppressLint("SetTextI18n")
 @BindingAdapter("expenseAmount")
 fun TextView.setExpenseAmount(durationExpenseResponse:DurationExpenseResponse?){
     durationExpenseResponse?.let {

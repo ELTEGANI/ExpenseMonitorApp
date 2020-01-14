@@ -1,7 +1,6 @@
 package com.expensemoitor.expensemonitor.registeruser
 
 
-import android.os.Build.VERSION_CODES.P
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View

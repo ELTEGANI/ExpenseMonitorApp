@@ -1,7 +1,6 @@
 package com.expensemoitor.expensemonitor.monthexpense
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -13,7 +12,6 @@ import com.expensemoitor.expensemonitor.network.ApiFactory
 import com.expensemoitor.expensemonitor.network.DurationExpenseResponse
 import com.expensemoitor.expensemonitor.network.DurationTag
 import com.expensemoitor.expensemonitor.utilites.*
-import com.expensemoitor.expensemonitor.utilites.Converter.Companion.toBigDecimal
 import com.expensemoitor.expensemonitor.utilites.MyApp.Companion.context
 import kotlinx.coroutines.launch
 import java.math.BigDecimal
@@ -21,8 +19,8 @@ import java.math.BigDecimal
 class MonthExpenseFragmentViewModel(val database: ExpenseMonitorDao, val application: Application) : ViewModel() {
 
 
-    private val _status = MutableLiveData<progressStatus>()
-    val status: LiveData<progressStatus>
+    private val _status = MutableLiveData<ProgressStatus>()
+    val status: LiveData<ProgressStatus>
         get() = _status
 
 
@@ -49,12 +47,12 @@ class MonthExpenseFragmentViewModel(val database: ExpenseMonitorDao, val applica
                     PrefManager.getEndOfTheMonth(application))
             }
             val getResponse = durationTag?.let {
-                ApiFactory.GET_DURATION_EXPNSES_SERVICE.getdurationExpenses(it)
+                ApiFactory.GET_DURATION_EXPNSES_SERVICE.getdurationExpensesAsync(it)
             }
             try {
-                _status.value = progressStatus.LOADING
+                _status.value = ProgressStatus.LOADING
                 val getExpensesResponseList = getResponse?.await()
-                _status.value = progressStatus.DONE
+                _status.value = ProgressStatus.DONE
                 if(getExpensesResponseList?.size != 0){
                     _expensesProperties.value = getExpensesResponseList
                     if(database.checkCurrencyExistence(getCurrencyFromSettings().toString()) == null){
@@ -77,7 +75,7 @@ class MonthExpenseFragmentViewModel(val database: ExpenseMonitorDao, val applica
                 }
 
             }catch (t:Throwable){
-                _status.value = progressStatus.ERROR
+                _status.value = ProgressStatus.ERROR
                 _expensesProperties.value = ArrayList()
                 noExpeneseFound.value = context?.getString(R.string.weak_internet_connection)
             }

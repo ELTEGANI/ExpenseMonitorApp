@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools">
+        xmlns:app="http://schemas.android.com/apk/res-auto">
         <data>
              <variable
                      name="expensesProperties"
@@ -9,7 +8,7 @@
 
             <variable
                     name="clickListener"
-                    type="com.expensemoitor.expensemonitor.utilites.ExpenseListener" />
+                    type="com.expensemoitor.expensemonitor.adapters.ExpenseListener" />
 
         </data>
 
@@ -51,7 +50,7 @@
                         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                         app:expenseDescription="@{expensesProperties}"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/imageView"
+                        app:layout_constraintEnd_toEndOf="@+id/category_textView"
                         app:layout_constraintTop_toBottomOf="@+id/category_textView"
                         app:layout_constraintVertical_bias="0.153" />
 
@@ -81,7 +80,6 @@
                         app:expenseAmount="@{expensesProperties}"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/imageView"
                         app:layout_constraintVertical_bias="0.49" />
 
                 <TextView
@@ -98,16 +96,7 @@
                         app:layout_constraintVertical_bias="1.0" />
 
 
-                <ImageView
-                        android:id="@+id/imageView"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
-                        android:layout_marginStart="8dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/category_textView"
-                        app:layout_constraintVertical_bias="0.179"
-                        app:srcCompat="@drawable/cash" />
+
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>

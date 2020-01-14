@@ -1,4 +1,4 @@
-package com.expensemoitor.expensemonitor.utilites
+package com.expensemoitor.expensemonitor.adapters
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter

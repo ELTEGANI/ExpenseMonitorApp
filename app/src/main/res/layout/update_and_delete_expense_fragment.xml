@@ -56,7 +56,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.119" />
+                app:layout_constraintVertical_bias="0.119"
+                android:importantForAutofill="no" />
 
         <EditText
                 android:id="@+id/amount_editText"
@@ -72,7 +73,8 @@
                 app:layout_constraintBottom_toTopOf="@+id/description_editText"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/toolbar" />
+                app:layout_constraintTop_toTopOf="@+id/toolbar"
+                android:importantForAutofill="no" />
 
         <EditText
                 android:id="@+id/description_editText"
@@ -88,7 +90,8 @@
                 app:layout_constraintBottom_toTopOf="@+id/date_button"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/amount_editText" />
+                app:layout_constraintTop_toBottomOf="@+id/amount_editText"
+                android:importantForAutofill="no" />
 
         <Button
                 android:id="@+id/date_button"
@@ -116,7 +119,8 @@
                 android:text="@{viewModel.selectedExpenseMsg.date}"
                 app:layout_constraintBottom_toTopOf="@+id/category_spinner"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/description_editText" />
+                app:layout_constraintTop_toBottomOf="@+id/description_editText"
+                android:importantForAutofill="no" />
 
         <Spinner
                 android:id="@+id/category_spinner"

@@ -64,7 +64,8 @@
                     app:layout_constraintBottom_toTopOf="@+id/EditTextDescription"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/toolbar" />
+                    app:layout_constraintTop_toTopOf="@+id/toolbar"
+                    android:importantForAutofill="no" />
 
             <EditText
                     android:id="@+id/EditTextDescription"
@@ -86,7 +87,8 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.343"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/EditTextAmount" />
+                    app:layout_constraintTop_toBottomOf="@+id/EditTextAmount"
+                    android:importantForAutofill="no" />
 
             <com.google.android.material.button.MaterialButton
                     android:id="@+id/button"
@@ -159,7 +161,8 @@
                     android:text="@={viewModel.currentDate}"
                     app:layout_constraintBottom_toTopOf="@+id/button"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/categories_spinner" />
+                    app:layout_constraintTop_toBottomOf="@+id/categories_spinner"
+                    android:importantForAutofill="no" />
 
             <ProgressBar
                     android:id="@+id/progressBar2"

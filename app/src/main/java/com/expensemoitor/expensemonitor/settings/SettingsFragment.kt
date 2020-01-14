@@ -2,15 +2,9 @@ package com.expensemoitor.expensemonitor.settings
 
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.widget.Toast
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.preference.PreferenceFragmentCompat
-import androidx.preference.PreferenceManager
 import com.expensemoitor.expensemonitor.R
-import com.expensemoitor.expensemonitor.myexpenses.MyExpenseFragmentDirections
-import com.expensemoitor.expensemonitor.utilites.MyApp
-import com.expensemoitor.expensemonitor.utilites.PrefManager
 import com.expensemoitor.expensemonitor.utilites.getCurrencyFromSettings
 
 

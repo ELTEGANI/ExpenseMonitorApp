@@ -1,4 +1,4 @@
-package com.expensemoitor.expensemonitor.utilites
+package com.expensemoitor.expensemonitor.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -8,8 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.expensemoitor.expensemonitor.databinding.ExpenseViewItemBinding
 import com.expensemoitor.expensemonitor.network.DurationExpenseResponse
 
-class DurationsExpenseAdapter(val expenseListener:ExpenseListener) : ListAdapter<DurationExpenseResponse,DurationsExpenseAdapter.ViewHolder>(
-    GetExpensesResponseDiffCallback()){
+class DurationsExpenseAdapter(private val expenseListener: ExpenseListener) : ListAdapter<DurationExpenseResponse, DurationsExpenseAdapter.ViewHolder>(
+    GetExpensesResponseDiffCallback()
+){
 
 
     override fun onCreateViewHolder(parent: ViewGroup,viewType:Int): ViewHolder {

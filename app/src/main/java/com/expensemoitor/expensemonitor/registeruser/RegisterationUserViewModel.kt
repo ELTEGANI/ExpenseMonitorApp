@@ -2,8 +2,6 @@ package com.expensemoitor.expensemonitor.registeruser
 
 
 import android.app.Application
-import android.content.SharedPreferences
-import android.os.Build
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
@@ -11,7 +9,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import androidx.preference.PreferenceManager
 import com.expensemoitor.expensemonitor.network.UserData
 import com.expensemoitor.expensemonitor.R
 import com.expensemoitor.expensemonitor.database.ExpenseMonitorDao
@@ -29,10 +26,9 @@ class RegisterationUserViewModel(val database: ExpenseMonitorDao, var applicatio
 
 
     var radiochecked = MutableLiveData<Int>()
-    var geneder = ""
+    private var geneder = ""
     var currency = ""
 
-    lateinit var sharedPreferences: SharedPreferences
 
     init {
         //save dates for the first time so it can be updated later
@@ -42,8 +38,8 @@ class RegisterationUserViewModel(val database: ExpenseMonitorDao, var applicatio
     }
 
 
-    private val _status = MutableLiveData<progressStatus>()
-    val status: LiveData<progressStatus>
+    private val _status = MutableLiveData<ProgressStatus>()
+    val status: LiveData<ProgressStatus>
         get() = _status
 
     private val _navigateToNextScreen = MutableLiveData<Boolean>()
@@ -80,15 +76,15 @@ class RegisterationUserViewModel(val database: ExpenseMonitorDao, var applicatio
             }
         }
 
-        if (geneder == null || currency.equals(context?.getString(R.string.select_currency))){
+        if (geneder == null || currency == context?.getString(R.string.select_currency)){
             _genderSelected.value = false
         }else{
             val userData = UserData(userName,emailAddress,geneder,currency)
             viewModelScope.launch {
-                val getUserResponse =  ApiFactory.REGISTERATION_SERVICE.registerationUser(userData)
+                val getUserResponse =  ApiFactory.REGISTERATION_SERVICE.registerationUserAsync(userData)
                 try {
                     try {
-                        _status.value = progressStatus.LOADING
+                        _status.value = ProgressStatus.LOADING
                         val userResponse = getUserResponse.await()
                         saveCurrencyForSettings(currency)
                         PrefManager.setUserRegistered(application,true)
@@ -100,10 +96,10 @@ class RegisterationUserViewModel(val database: ExpenseMonitorDao, var applicatio
                                     currency      = currency
                                 ))
                         _navigateToNextScreen.value = true
-                        _status.value = progressStatus.DONE
+                        _status.value = ProgressStatus.DONE
                     }catch (t:Throwable){
                         Log.d("throwable",t.toString())
-                        _status.value = progressStatus.ERROR
+                        _status.value = ProgressStatus.ERROR
                         _errormsg.value = context?.getString(R.string.weak_internet_connection)
                     }
                 }catch (httpException:HttpException){
@@ -113,7 +109,7 @@ class RegisterationUserViewModel(val database: ExpenseMonitorDao, var applicatio
         }
     }
 
-    fun saveAllDates(){
+    private fun saveAllDates(){
         viewModelScope.launch {
             PrefManager.saveCurrentDate(application,LocalDate.now().toString())
             PrefManager.saveStartOfTheWeek(application,LocalDate.now().toString())

@@ -7,7 +7,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -29,7 +28,7 @@ class LoginUserFragment : Fragment() {
 
 
     private lateinit var binding: LoginUserFragmentBinding
-    private val RC_SIGN_IN = 9001
+    private val SignIn = 9001
     private var mGoogleSignInClient: GoogleSignInClient? = null
 
 
@@ -78,7 +77,7 @@ class LoginUserFragment : Fragment() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == RC_SIGN_IN) {
+        if (requestCode == SignIn) {
             val task =
                 GoogleSignIn.getSignedInAccountFromIntent(data)
             handleSignInResult(task)
@@ -108,7 +107,7 @@ class LoginUserFragment : Fragment() {
 
     private fun signIn() {
         val signInIntent = mGoogleSignInClient!!.signInIntent
-        startActivityForResult(signInIntent, RC_SIGN_IN)
+        startActivityForResult(signInIntent, SignIn)
     }
 
 

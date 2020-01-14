@@ -30,17 +30,4 @@
     </style>
 
 
-    <style name="TextAppearance.ExpenseMonitor.Body1" parent="TextAppearance.MaterialComponents.Body1">
-        <item name="android:textStyle">normal</item>
-        <item name="fontFamily">@font/rubik_bold</item>
-        <item name="android:textColor">?android:attr/textColorPrimary</item>
-    </style>
-
-    <style name="TextAppearance.ExpenseMonitor.Headline5" parent="TextAppearance.MaterialComponents.Headline5">
-        <item name="android:textStyle">bold</item>
-        <item name="fontFamily">@font/eczar</item>
-        <item name="android:textColor">?android:attr/textColorPrimary</item>
-    </style>
-
-
 </resources>

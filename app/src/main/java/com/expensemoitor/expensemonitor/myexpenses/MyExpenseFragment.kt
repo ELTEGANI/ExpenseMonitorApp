@@ -2,8 +2,8 @@ package com.expensemoitor.expensemonitor.myexpenses
 
 
 
+import android.annotation.SuppressLint
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.content.IntentSender
 import android.os.Bundle
@@ -14,23 +14,22 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleService
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
-import androidx.preference.Preference
-import androidx.preference.PreferenceManager
 import androidx.viewpager2.widget.ViewPager2
 import com.expensemoitor.expensemonitor.R
+import com.expensemoitor.expensemonitor.adapters.MONTH_EXPENSE_INDEX
+import com.expensemoitor.expensemonitor.adapters.PagerAdapter
+import com.expensemoitor.expensemonitor.adapters.TODAY_EXPENSE_INDEX
+import com.expensemoitor.expensemonitor.adapters.WEEK_EXPENSE_INDEX
 import com.expensemoitor.expensemonitor.database.ExpenseMonitorDataBase
 import com.expensemoitor.expensemonitor.databinding.MyExpenseFragmentBinding
 import com.expensemoitor.expensemonitor.utilites.*
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayoutMediator
 import com.google.android.play.core.appupdate.AppUpdateManager
@@ -109,6 +108,7 @@ class MyExpenseFragment : Fragment() {
 
 
         viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            @SuppressLint("SetTextI18n")
             override fun onPageSelected(position: Int){
                 super.onPageSelected(position)
                 when(position){

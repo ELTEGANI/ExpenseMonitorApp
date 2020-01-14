@@ -26,7 +26,7 @@ class CreateNewExpenseFragmentViewModel(var application: Application) : ViewMode
     val amount = MutableLiveData<String>()
     val description = MutableLiveData<String>()
     val currentDate = MutableLiveData<String>()
-    var selectedCategoryItem = ""
+    private var selectedCategoryItem = ""
 
 
 
@@ -34,8 +34,8 @@ class CreateNewExpenseFragmentViewModel(var application: Application) : ViewMode
         currentDate.value = LocalDate.now().toString()
     }
 
-    private val _status = MutableLiveData<progressStatus>()
-    val status: LiveData<progressStatus>
+    private val _status = MutableLiveData<ProgressStatus>()
+    val status: LiveData<ProgressStatus>
         get() = _status
 
     private val _validationMsg = MutableLiveData<String>()
@@ -61,7 +61,7 @@ class CreateNewExpenseFragmentViewModel(var application: Application) : ViewMode
 
         if(expenseAmount == null || expenseDescription == null){
             _validationMsg.value = context?.getString(R.string.fill_empty)
-        }else if(selectedCategoryItem.equals(application.getString(R.string.SelectCategory))){
+        }else if(selectedCategoryItem == application.getString(R.string.SelectCategory)){
             _validationMsg.value = context?.getString(R.string.select_category)
         }else{
             currentDate.value?.let {
@@ -78,20 +78,20 @@ class CreateNewExpenseFragmentViewModel(var application: Application) : ViewMode
                     it,category)
             }
             val getResponse = expenseData?.let {
-                ApiFactory.CREATE_EXPENSE_SERVICE.createNewExpense(
+                ApiFactory.CREATE_EXPENSE_SERVICE.createNewExpenseAsync(
                     it
                 )
             }
             try {
                 try{
-                    _status.value = progressStatus.LOADING
+                    _status.value = ProgressStatus.LOADING
                     val expenseResponse = getResponse?.await()
                     if (expenseResponse?.message != null){
                         _responseMsg.value = context?.getString(R.string.expense_created_successfuly)
-                        _status.value = progressStatus.DONE
+                        _status.value = ProgressStatus.DONE
                     }
                 }catch (t:Throwable){
-                    _status.value = progressStatus.ERROR
+                    _status.value = ProgressStatus.ERROR
                     _validationMsg.value =context?.getString(R.string.weak_internet_connection)
                 }
                 }catch (httpException: HttpException){

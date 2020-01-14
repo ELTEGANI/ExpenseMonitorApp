@@ -6,7 +6,6 @@
     <string name="today">Today</string>
     <string name="week">Week</string>
     <string name="month">Month</string>
-    <string name="registeration">Registeration</string>
     <string name="next">Next</string>
     <string name="mange_expense">Mange Expense</string>
     <string name="update_expense">Update Expense</string>
@@ -137,14 +136,12 @@
     <string name="expense_update_successfuly">Expense Updated Successfully</string>
     <string name="expense_deleted_successfuly">Expense Deleted Successfully</string>
     <string name="weak_internet_connection">No Internet Connection</string>
-    <string name="all_your_expenses_in_one_place">All Your Expenses In One Place</string>
-    <string name="expense_monitor">Expense Monitor</string>
+    <string name="all_your_expenses_in_one_place" translatable="false">All Your Expenses In One Place</string>
+    <string name="expense_monitor" translatable="false">Expense Monitor</string>
     <string name="date">Date</string>
     <string name="no_daily_expenses">You Didn\'t Add Daily Expenses</string>
     <string name="no_weekly_expenses">You Didn\'t Add Weekly Expenses</string>
     <string name="no_monthly_expenses">You Didn\'t Add Monthly Expenses</string>
-    <string name="new_date">New Date</string>
-    <string name="update_date">Update Date</string>
     <string name="about">Others</string>
     <string name="build_version">Build Version</string>
     <string name="general_settings">General Settings</string>

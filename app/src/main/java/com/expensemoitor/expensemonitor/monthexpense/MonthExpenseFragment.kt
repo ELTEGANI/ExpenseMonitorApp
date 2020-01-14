@@ -14,8 +14,8 @@ import com.expensemoitor.expensemonitor.R
 import com.expensemoitor.expensemonitor.database.ExpenseMonitorDataBase
 import com.expensemoitor.expensemonitor.databinding.MonthExpenseFragmentBinding
 import com.expensemoitor.expensemonitor.myexpenses.MyExpenseFragmentDirections
-import com.expensemoitor.expensemonitor.utilites.DurationsExpenseAdapter
-import com.expensemoitor.expensemonitor.utilites.ExpenseListener
+import com.expensemoitor.expensemonitor.adapters.DurationsExpenseAdapter
+import com.expensemoitor.expensemonitor.adapters.ExpenseListener
 
 class MonthExpenseFragment : Fragment() {
 

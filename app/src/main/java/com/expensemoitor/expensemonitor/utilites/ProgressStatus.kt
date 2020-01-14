@@ -1,3 +1,3 @@
 package com.expensemoitor.expensemonitor.utilites
 
-enum class progressStatus {LOADING,ERROR,DONE}
+enum class ProgressStatus {LOADING,ERROR,DONE}
