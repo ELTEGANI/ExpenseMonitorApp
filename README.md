@@ -5,10 +5,8 @@ TODOs
 
 1-Materialize the app(based on google sample case studies announced in the Android Dev-summit-19).
 
-2-Add In-app-updater.
+2-Testing using (espresso and junit)
 
-3-Testing using (espresso and junit) Inprogress 
+3-R8
 
-5-R8
-
-7-Publish to Play Store using Fastlane tutorial(https://willowtreeapps.com/ideas/how-to-use-fastlane-for-android-with-examples)
+4-Publish to Play Store using Fastlane tutorial(https://willowtreeapps.com/ideas/how-to-use-fastlane-for-android-with-examples)

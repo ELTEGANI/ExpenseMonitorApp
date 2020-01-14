@@ -104,7 +104,7 @@ class RegisterationUserViewModel(val database: ExpenseMonitorDao, var applicatio
                     }catch (t:Throwable){
                         Log.d("throwable",t.toString())
                         _status.value = progressStatus.ERROR
-                        _errormsg.value = t.toString()
+                        _errormsg.value = context?.getString(R.string.weak_internet_connection)
                     }
                 }catch (httpException:HttpException){
                     Log.d("httpException",httpException.message())

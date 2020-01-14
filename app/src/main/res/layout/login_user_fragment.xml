@@ -11,10 +11,9 @@
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="?android:colorPrimary"
+            android:background="?attr/colorPrimarySurface"
             app:paddingTopSystemWindowInsets="@{true}"
-            app:paddingLeftSystemWindowInsets="@{true}"
-            app:paddingRightSystemWindowInsets="@{true}"
+            android:clipChildren="false"
             tools:context=".loginuser.LoginUserFragment">
 
 
@@ -22,51 +21,48 @@
                 android:id="@+id/login_button"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/grid_2"
                 android:layout_marginEnd="16dp"
                 app:buttonSize="wide"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.644" />
+                app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-                android:id="@+id/logo_text_view"
+                android:id="@+id/main_title_text_view"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="@dimen/grid_2"
                 android:layout_marginEnd="16dp"
                 android:gravity="center"
                 android:text="@string/expense_monitor"
-                app:marginLeftSystemWindowInsets="@{true}"
-                app:marginRightSystemWindowInsets="@{true}"
                 android:textAppearance="?attr/textAppearanceHeadline4"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.3" />
+                app:layout_constraintVertical_bias="0.265"
+                app:marginLeftSystemWindowInsets="@{true}"
+                app:marginRightSystemWindowInsets="@{true}" />
 
         <TextView
                 android:id="@+id/sub_title_text_view"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="@dimen/grid_2"
                 android:layout_marginEnd="16dp"
                 android:gravity="center"
                 android:text="@string/all_your_expenses_in_one_place"
-                app:marginLeftSystemWindowInsets="@{true}"
-                app:marginRightSystemWindowInsets="@{true}"
                 android:textAppearance="?attr/textAppearanceHeadline6"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/logo_text_view"
-                app:layout_constraintVertical_bias="0.032" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.359"
+                app:marginLeftSystemWindowInsets="@{true}"
+                app:marginRightSystemWindowInsets="@{true}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
