@@ -10,27 +10,32 @@ import java.math.BigDecimal
 
 
 
-fun expenseFormat(amount: String?): String {
+fun expenseAmountFormatWithComma(amount: String?): String {
     var amountFormatted= ""
-    try {
-        val value = amount?.replace(",", "")
-        val reverseValue = StringBuilder(value.toString()).reverse()
-            .toString()
-        val finalValue = StringBuilder()
-        for (i in 1..reverseValue.length)
-        {
-            val `val` = reverseValue[i - 1]
-            finalValue.append(`val`)
-            if (i % 3 == 0 && i != reverseValue.length && i > 0)
+    if (amount != null){
+        try {
+            val value = amount?.replace(",", "")
+            val reverseValue = StringBuilder(value.toString()).reverse()
+                .toString()
+            val finalValue = StringBuilder()
+            for (i in 1..reverseValue.length)
             {
-                finalValue.append(",")
+                val `val` = reverseValue[i - 1]
+                finalValue.append(`val`)
+                if (i % 3 == 0 && i != reverseValue.length && i > 0)
+                {
+                    finalValue.append(",")
+                }
             }
+            amountFormatted = finalValue.reverse().toString()
+        } catch (e: Exception) {
+            // Do nothing since not a number
         }
-        amountFormatted = finalValue.reverse().toString()
-    } catch (e: Exception) {
-        // Do nothing since not a number
+        return amountFormatted
+    }else{
+        return "0"
     }
-    return amountFormatted
+
 }
 
 
@@ -48,14 +53,14 @@ fun expenseFormat(amount: String?): String {
 
    fun sumationOfAmount(expensesResponseList: List<DurationExpenseResponse>?): BigDecimal {
        val amountList = arrayListOf<BigDecimal>()
-       if (expensesResponseList != null) {
+       return if (expensesResponseList != null) {
            expensesResponseList.forEach { amount ->
                amount.amount?.toBigDecimal()?.let { amountList.add(it) }
            }
+           amountList.sumByBigDecimal()
        }else{
-       return BigDecimal.ZERO
+           BigDecimal.ZERO
        }
-       return amountList.sumByBigDecimal()
    }
 
 
