@@ -86,7 +86,7 @@ class RegisterationUserViewModel(val database: ExpenseMonitorDao, var applicatio
                     try {
                         _status.value = ProgressStatus.LOADING
                         val userResponse = getUserResponse.await()
-                        saveCurrencyForSettings(currency)
+                        saveCurrencyForSettings(currency.split(" ")[0])
                         PrefManager.setUserRegistered(application,true)
                         PrefManager.saveAccessToken(application,userResponse.accessToken)
                         database.insertExpense(UserExpenses(

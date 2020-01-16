@@ -48,7 +48,7 @@ fun expenseAmountFormatWithComma(amount: String?): String {
 
    fun getCurrencyFromSettings(): String? {
     val sharedPref = PreferenceManager.getDefaultSharedPreferences(context)
-    return sharedPref.getString("userCurrency",null)
+    return sharedPref.getString("userCurrency",null)?.split(" ")?.get(0)
    }
 
    fun sumationOfAmount(expensesResponseList: List<DurationExpenseResponse>?): BigDecimal {

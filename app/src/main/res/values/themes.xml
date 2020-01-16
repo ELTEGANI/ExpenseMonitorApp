@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!--Final, top-level theme-->
     <style name="Theme.ExpenseMonitor.DayNight" parent="Theme.ExpenseMonitor"/>
@@ -31,9 +31,11 @@
         <!--Typography-->
         <item name="textAppearanceHeadline4">@style/TextAppearance.ExpenseMonitor.Headline4</item>
         <item name="textAppearanceHeadline6">@style/TextAppearance.ExpenseMonitor.Headline6</item>
+        <item name="textAppearanceBody1">@style/TextAppearance.ExpenseMonitor.Body1</item>
 
         <!--System/Platform attributes-->
         <item name="android:windowBackground">?android:colorBackground</item>
+        <item name="android:windowLightStatusBar" tools:ignore="NewApi">true</item>
     </style>
 
 

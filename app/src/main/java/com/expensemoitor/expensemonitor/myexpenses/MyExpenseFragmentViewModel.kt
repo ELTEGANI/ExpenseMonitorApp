@@ -20,8 +20,8 @@ class MyExpenseFragmentViewModel(val database:ExpenseMonitorDao,application: App
 
     private val application = getApplication<Application>().applicationContext
     private val _navigateToMyExpense = MutableLiveData<Boolean>()
-            val navigateToMyExpense : LiveData<Boolean>
-             get() = _navigateToMyExpense
+    val navigateToMyExpense : LiveData<Boolean>
+    get() = _navigateToMyExpense
 
 
     private val _todayExpense = MutableLiveData<String>()
@@ -36,6 +36,8 @@ class MyExpenseFragmentViewModel(val database:ExpenseMonitorDao,application: App
     private val _monthExpense = MutableLiveData<String>()
     val monthExpense : LiveData<String>
         get() = _monthExpense
+    
+    
 
     init {
         checkIfDurationFinished()
@@ -49,12 +51,7 @@ class MyExpenseFragmentViewModel(val database:ExpenseMonitorDao,application: App
     private fun getTodayExpenses(){
         viewModelScope.launch {
                 database.retrieveTodayExpense(getCurrencyFromSettings().toString()).collect {
-                    if (it == null){
-                        _todayExpense.value = "0"
-
-                    }else{
                         _todayExpense.value = it
-                    }
                 }
         }
     }
@@ -62,12 +59,7 @@ class MyExpenseFragmentViewModel(val database:ExpenseMonitorDao,application: App
     private fun getWeekExpenses(){
         viewModelScope.launch {
             database.retrieveWeekExpense(getCurrencyFromSettings().toString()).collect {
-                if (it == null){
-                    _weekExpense.value = "0"
-
-                }else{
                     _weekExpense.value = it
-                }
             }
         }
     }
@@ -75,12 +67,7 @@ class MyExpenseFragmentViewModel(val database:ExpenseMonitorDao,application: App
     private fun getMonthExpenses(){
         viewModelScope.launch {
             database.retrieveMonthExpense(getCurrencyFromSettings().toString()).collect {
-                if (it == null){
-                    _monthExpense.value = "0"
-
-                }else{
                     _monthExpense.value = it
-                }
             }
         }
     }
@@ -104,6 +91,7 @@ class MyExpenseFragmentViewModel(val database:ExpenseMonitorDao,application: App
 
 
     private fun checkIfDurationFinished(){
+        //TODO test this function
         //today
         val savedCurrentDate = PrefManager.getCurrentDate(context)
 
