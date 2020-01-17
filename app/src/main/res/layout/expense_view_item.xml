@@ -48,7 +48,7 @@
 
                 <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/description_textView"
-                        style="@style/expenseitemstyle"
+                        style="@style/expenseItemStyle"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
@@ -64,7 +64,7 @@
 
                 <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/category_textView"
-                        style="@style/expenseitemstyle"
+                        style="@style/expenseItemStyle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
@@ -78,7 +78,7 @@
 
                 <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/amount_textView"
-                        style="@style/amountstyle"
+                        style="@style/amountStyle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
@@ -89,7 +89,7 @@
 
                 <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/date_textView"
-                        style="@style/expenseitemstyle"
+                        style="@style/expenseItemStyle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="8dp"

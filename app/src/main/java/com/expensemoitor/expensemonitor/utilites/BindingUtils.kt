@@ -1,16 +1,19 @@
 package com.expensemoitor.expensemonitor.utilites
 
 import android.annotation.SuppressLint
+import android.graphics.drawable.ColorDrawable
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowInsets
 import android.widget.ProgressBar
+import android.widget.Spinner
 import android.widget.TextView
 import androidx.core.view.updateLayoutParams
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.expensemoitor.expensemonitor.adapters.DurationsExpenseAdapter
 import com.expensemoitor.expensemonitor.network.DurationExpenseResponse
+import com.google.android.material.elevation.ElevationOverlayProvider
 
 
 @BindingAdapter("progressStatus")
@@ -205,4 +208,16 @@ fun View.bindLayoutFullscreen(previousFullscreen: Boolean, fullscreen: Boolean) 
                 View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or
                 View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
     }
+}
+
+@BindingAdapter(
+    "popupElevationOverlay"
+)
+fun Spinner.bindPopupElevationOverlay(popupElevationOverlay: Float) {
+    setPopupBackgroundDrawable(
+        ColorDrawable(
+            ElevationOverlayProvider(context)
+                .compositeOverlayWithThemeSurfaceColorIfNeeded(popupElevationOverlay)
+        )
+    )
 }

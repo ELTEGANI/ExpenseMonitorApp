@@ -15,4 +15,10 @@
 <resources>
     <dimen name="grid_0_25">2dp</dimen>
     <dimen name="grid_0_5">4dp</dimen>
+
+    <!--8dp grid-->
+    <dimen name="grid_1">8dp</dimen>
+    <dimen name="grid_3">24dp</dimen>
+    <dimen name="grid_4">32dp</dimen>
+
 </resources>

@@ -2,37 +2,38 @@
 <resources>
 
 
-    <style name="button_style" parent="Widget.MaterialComponents.Button" >
+    <style name="buttonStyle" parent="Widget.MaterialComponents.Button" >
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">52dp</item>
         <item name="android:layout_marginStart">@dimen/grid_2</item>
         <item name="android:layout_marginEnd">16dp</item>
-        <item name="android:textAppearance">?attr/textAppearanceBody1</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textAllCaps">false</item>
         <item name="android:textColor">@android:color/black</item>
-        <item name="android:fontFamily">@font/rubik_bold</item>
+        <item name="android:fontFamily">@font/roboto</item>
     </style>
 
-    <style name="expense_amount">
+    <style name="expenseAmountStyle">
         <item name="android:gravity">center</item>
         <item name="android:fontFamily">@font/eczar</item>
         <item name="android:textColor">@android:color/black</item>
         <item name="android:textSize">30sp</item>
     </style>
 
-    <style name="expense_date">
+    <style name="expenseDateStyle">
         <item name="android:gravity">center</item>
         <item name="android:fontFamily">@font/eczar</item>
         <item name="android:textColor">@android:color/black</item>
         <item name="android:textSize">24sp</item>
     </style>
 
-    <style name="amountstyle">
+    <style name="amountStyle">
         <item name="android:fontFamily">@font/eczar_bold</item>
         <item name="android:textSize">18sp</item>
         <item name="android:textColor">@color/expensemonitor_red_400</item>
     </style>
 
-    <style name="expenseitemstyle">
+    <style name="expenseItemStyle">
         <item name="android:fontFamily">@font/roboto</item>
         <item name="android:textStyle">normal</item>
         <item name="android:textSize">16sp</item>

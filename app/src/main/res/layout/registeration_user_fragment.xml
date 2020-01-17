@@ -9,145 +9,163 @@
     </data>
 
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.core.widget.NestedScrollView
+            android:id="@+id/nested_scroll_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:fillViewport="true"
+            android:paddingHorizontal="@dimen/grid_0_5"
+            android:paddingTop="@dimen/grid_0_25"
+            android:clipToPadding="false"
+            android:background="?android:colorBackground"
             app:paddingTopSystemWindowInsets="@{true}"
-            android:clipChildren="false"
-            tools:context=".registeruser.RegisterationUserFragment">
+            tools:targetApi="o">
 
+    <com.google.android.material.card.MaterialCardView
+            android:id="@+id/email_card_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <EditText
-                android:id="@+id/name_edit_Text"
-                android:layout_width="0dp"
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/email_edit_Text"
-                app:layout_constraintVertical_bias="0.59"
-                android:importantForAutofill="no"
-                tools:ignore="LabelFor" />
+                android:layout_marginTop="@dimen/grid_4"
+                tools:context=".registeruser.RegisterationUserFragment">
 
-        <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/email_edit_Text"
-                android:layout_width="0dp"
-                android:layout_height="52dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                android:inputType="textPersonName"
-                android:textAppearance="?attr/textAppearanceBody1"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.136" />
 
-        <com.google.android.material.button.MaterialButton
-                android:id="@+id/next_button"
-                style="@style/button_style"
-                android:layout_marginTop="24dp"
-                android:layout_marginBottom="260dp"
-                android:text="@string/next"
-                app:cornerRadius="15dp"
-                app:elevation="5dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/categories_spinner" />
+            <EditText
+                    android:id="@+id/name_edit_Text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:ems="10"
+                    android:importantForAutofill="no"
+                    android:inputType="textPersonName"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/email_edit_Text"
+                    app:layout_constraintVertical_bias="0.59"
+                    tools:ignore="LabelFor" />
 
-        <RadioGroup
-                android:id="@+id/radioGroup"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="180dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="24dp"
-                android:checkedButton="@={viewModel.radiochecked}"
-                app:layout_constraintBottom_toTopOf="@+id/categories_spinner"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+            <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/email_edit_Text"
+                    style="@style/expenseItemStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="52dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="50dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="8dp"
+                    android:inputType="text"
+                    app:layout_constraintBottom_toTopOf="@+id/radio_group"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <RadioButton
-                    android:id="@+id/male_radiobutton"
+            <com.google.android.material.button.MaterialButton
+                    android:id="@+id/next_button"
+                    style="@style/buttonStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="52dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:text="@string/next"
+                    app:cornerRadius="15dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/categories_spinner" />
+
+            <RadioGroup
+                    android:id="@+id/radio_group"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="8dp"
+                    android:checkedButton="@={viewModel.radiochecked}"
+                    app:layout_constraintBottom_toTopOf="@+id/categories_spinner"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/email_edit_Text">
+
+                <RadioButton
+                        android:id="@+id/male_radio_button"
+                        style="@style/expenseItemStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:text="@string/male"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.024"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.399" />
+
+                <RadioButton
+                        android:id="@+id/female_radio_button"
+                        style="@style/expenseItemStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:text="@string/female"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.025"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.461" />
+
+            </RadioGroup>
+
+            <Spinner
+                    android:id="@+id/categories_spinner"
+                    style="@style/expenseItemStyle"
+                    android:layout_width="371dp"
+                    android:layout_height="52dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="8dp"
+                    android:entries="@array/currencies_list"
+                    app:popupElevationOverlay="@{@dimen/plane_16}"
+                    android:onItemSelected="@{(parent,view,pos,id)->viewModel.onSelectCurrencyItem(parent,view,pos,id)}"
+                    app:layout_constraintBottom_toTopOf="@+id/next_button"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/radio_group" />
+
+            <androidx.core.widget.ContentLoadingProgressBar
+                    android:id="@+id/progressBar"
+                    style="?android:attr/progressBarStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:text="@string/male"
-                    android:textAppearance="?attr/textAppearanceBody1"
+                    android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.024"
+                    app:layout_constraintHorizontal_bias="0.487"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.399" />
-
-            <RadioButton
-                    android:id="@+id/female_radiobutton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:text="@string/female"
-                    android:textAppearance="?attr/textAppearanceBody1"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.025"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.461" />
-
-        </RadioGroup>
-
-        <Spinner
-                android:id="@+id/categories_spinner"
-                android:layout_width="0dp"
-                android:layout_height="52dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="24dp"
-                android:entries="@array/currencies_list"
-                android:onItemSelected="@{(parent,view,pos,id)->viewModel.onSelectCurrencyItem(parent,view,pos,id)}"
-                android:textAppearance="?attr/textAppearanceBody1"
-                app:layout_constraintBottom_toTopOf="@+id/next_button"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
-
-        <androidx.core.widget.ContentLoadingProgressBar
-                android:id="@+id/progressBar"
-                style="?android:attr/progressBarStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.487"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.334"
-                app:progressStatus="@{viewModel.status}" />
+                    app:layout_constraintVertical_bias="0.334"
+                    app:progressStatus="@{viewModel.status}" />
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
 
+    </androidx.core.widget.NestedScrollView>
 
 </layout>

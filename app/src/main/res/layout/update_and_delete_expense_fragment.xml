@@ -9,177 +9,174 @@
                 type="com.expensemoitor.expensemonitor.updateanddeleteexpense.UpdateAndDeleteFragmentViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.core.widget.NestedScrollView
+            android:id="@+id/nested_scroll_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="?attr/colorSurface"
-            tools:context=".updateanddeleteexpense.UpdateAndDeleteExpenseFragment">
+            android:fillViewport="true"
+            android:paddingHorizontal="@dimen/grid_0_5"
+            android:paddingTop="@dimen/grid_0_25"
+            android:clipToPadding="false"
+            android:background="?android:colorBackground"
+            app:paddingTopSystemWindowInsets="@{true}"
+            tools:targetApi="o">
 
-        <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="0dp"
+    <com.google.android.material.card.MaterialCardView
+            android:id="@+id/email_card_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="?attr/colorPrimary"
-                android:minHeight="?attr/actionBarSize"
-                android:theme="?attr/actionBarTheme"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0">
+                android:layout_marginTop="@dimen/grid_4">
 
-            <TextView
-                    android:id="@+id/textView2"
-                    android:layout_width="wrap_content"
+            <EditText
+                    android:id="@+id/uuid_editText"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:text="@string/mange_expense"
-                    android:textColor="?attr/colorOnBackground"
-                    app:layout_constraintBottom_toBottomOf="@+id/toolbar"
+                    android:layout_marginStart="160dp"
+                    android:layout_marginEnd="30dp"
+                    android:layout_marginBottom="7dp"
+                    android:ems="10"
+                    android:importantForAutofill="no"
+                    android:inputType="number"
+                    android:text="@{viewModel.selectedExpenseMsg.id}"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toTopOf="@+id/amount_edit_Text"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-        </androidx.appcompat.widget.Toolbar>
+            <EditText
+                    android:id="@+id/amount_edit_Text"
+                    android:layout_width="0dp"
+                    android:layout_height="52dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="50dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="8dp"
+                    android:ems="10"
+                    android:importantForAutofill="no"
+                    android:inputType="number"
+                    android:text="@{viewModel.selectedExpenseMsg.amount}"
+                    app:layout_constraintBottom_toTopOf="@+id/description_edit_text"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
+            <EditText
+                    android:id="@+id/description_edit_text"
+                    android:layout_width="0dp"
+                    android:layout_height="52dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="8dp"
+                    android:ems="10"
+                    android:importantForAutofill="no"
+                    android:inputType="text"
+                    android:text="@{viewModel.selectedExpenseMsg.description}"
+                    app:layout_constraintBottom_toTopOf="@+id/date_button"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/amount_edit_Text" />
 
-        <EditText
-                android:id="@+id/uuid_editText"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                android:ems="10"
-                android:inputType="number"
-                android:text="@{viewModel.selectedExpenseMsg.id}"
-                android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.119"
-                android:importantForAutofill="no" />
+            <Button
+                    android:id="@+id/date_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="8dp"
+                    android:text="@string/date"
+                    app:cornerRadius="15dp"
+                    style="@style/buttonStyle"
+                    app:layout_constraintBottom_toTopOf="@+id/category_spinner"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/description_edit_text" />
 
-        <EditText
-                android:id="@+id/amount_editText"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="84dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="16dp"
-                android:ems="10"
-                android:inputType="number"
-                android:text="@{viewModel.selectedExpenseMsg.amount}"
-                app:layout_constraintBottom_toTopOf="@+id/description_editText"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/toolbar"
-                android:importantForAutofill="no" />
+            <EditText
+                    android:id="@+id/date_edit_text"
+                    android:layout_width="0dp"
+                    android:layout_height="52dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="8dp"
+                    android:ems="10"
+                    android:importantForAutofill="no"
+                    android:inputType="date"
+                    android:text="@{viewModel.selectedExpenseMsg.date}"
+                    app:layout_constraintBottom_toTopOf="@+id/category_spinner"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/description_edit_text" />
 
-        <EditText
-                android:id="@+id/description_editText"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="6dp"
-                android:ems="10"
-                android:inputType="text"
-                android:text="@{viewModel.selectedExpenseMsg.description}"
-                app:layout_constraintBottom_toTopOf="@+id/date_button"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/amount_editText"
-                android:importantForAutofill="no" />
+            <Spinner
+                    android:id="@+id/category_spinner"
+                    android:layout_width="0dp"
+                    android:layout_height="52dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="?attr/colorSurface"
+                    android:entries="@array/categories_list"
+                    app:popupElevationOverlay="@{@dimen/plane_16}"
+                    app:layout_constraintBottom_toTopOf="@+id/update_expense_button"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/date_button" />
 
-        <Button
-                android:id="@+id/date_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="16dp"
-                android:text="@string/date"
-                app:cornerRadius="10dp"
-                app:icon="@drawable/ic_date"
-                app:iconGravity="start"
-                app:layout_constraintBottom_toTopOf="@+id/category_spinner"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/description_editText" />
+            <com.google.android.material.button.MaterialButton
+                    android:id="@+id/update_expense_button"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="8dp"
+                    android:text="@string/update_expense"
+                    style="@style/buttonStyle"
+                    app:cornerRadius="15dp"
+                    app:layout_constraintBottom_toTopOf="@+id/delete_expense_button"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/category_spinner" />
 
-        <EditText
-                android:id="@+id/date_editText"
-                android:layout_width="120dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:ems="10"
-                android:inputType="date"
-                android:text="@{viewModel.selectedExpenseMsg.date}"
-                app:layout_constraintBottom_toTopOf="@+id/category_spinner"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/description_editText"
-                android:importantForAutofill="no" />
+            <com.google.android.material.button.MaterialButton
+                    android:id="@+id/delete_expense_button"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:backgroundTint="?attr/colorError"
+                    android:text="@string/delete_expense"
+                    style="@style/buttonStyle"
+                    app:cornerRadius="15dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/update_expense_button" />
 
-        <Spinner
-                android:id="@+id/category_spinner"
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="16dp"
-                android:entries="@array/categories_list"
-                android:background="?attr/colorSurface"
-                app:layout_constraintBottom_toTopOf="@+id/update_expense_button"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/date_editText" />
+            <androidx.core.widget.ContentLoadingProgressBar
+                    android:id="@+id/progressBar"
+                    style="?android:attr/progressBarStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.498"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.388"
+                    app:progressStatus="@{viewModel.status}" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <Button
-                android:id="@+id/update_expense_button"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:text="@string/update_expense"
-                android:textAllCaps="false"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/category_spinner" />
+    </com.google.android.material.card.MaterialCardView>
 
-        <Button
-                android:id="@+id/delete_expense_button"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:backgroundTint="?attr/colorError"
-                android:text="@string/delete_expense"
-                android:textAllCaps="false"
-                android:textColor="?attr/colorOnBackground"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/update_expense_button"
-                app:layout_constraintVertical_bias="0.0" />
-
-        <ProgressBar
-                android:id="@+id/progressBar"
-                style="?android:attr/progressBarStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.498"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.168"
-                app:progressStatus="@{viewModel.status}" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
 </layout>

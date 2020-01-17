@@ -36,7 +36,7 @@ class CreateNewExpenseFragment : Fragment() {
         binding.lifecycleOwner = this
 
 
-        binding.newdateButton.setOnClickListener {
+        binding.newDateButton.setOnClickListener {
             val c = Calendar.getInstance()
             val year = c.get(Calendar.YEAR)
             val month = c.get(Calendar.MONTH)
