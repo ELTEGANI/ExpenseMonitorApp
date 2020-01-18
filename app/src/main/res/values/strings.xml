@@ -13,7 +13,7 @@
     <string name="create_expense">Create Expense</string>
     <string name="amount">Amount</string>
     <string name="description">Description</string>
-    <string name="create_new_expense">create New Expense</string>
+    <string name="create_new_expense">Create New Expense</string>
     <string name="change_currency">Change Your Currency</string>
     <string name="setting">Setting</string>
     <string name="signout">Sign Out</string>

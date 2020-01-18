@@ -67,11 +67,11 @@ class RegisterationUserViewModel(val database: ExpenseMonitorDao, var applicatio
 
     fun registerUser(userName:String,emailAddress:String) {
         when(radiochecked.value){
-            R.id.male_radiobutton->{
+            R.id.male_radio_button->{
                 geneder = "male"
             }
 
-            R.id.female_radiobutton->{
+            R.id.female_radio_button->{
                 geneder ="female"
             }
         }

@@ -33,9 +33,14 @@
         <item name="textAppearanceHeadline6">@style/TextAppearance.ExpenseMonitor.Headline6</item>
         <item name="textAppearanceBody1">@style/TextAppearance.ExpenseMonitor.Body1</item>
 
+
+        <item name="emphasisHighAlpha">0.87</item>
+
         <!--System/Platform attributes-->
         <item name="android:windowBackground">?android:colorBackground</item>
         <item name="android:windowLightStatusBar" tools:ignore="NewApi">true</item>
+
+
     </style>
 
 

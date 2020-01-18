@@ -17,7 +17,7 @@
             android:paddingHorizontal="@dimen/grid_0_5"
             android:paddingTop="@dimen/grid_0_25"
             android:clipToPadding="false"
-            android:background="?android:colorBackground"
+            android:background="?attr/colorSurface"
             app:paddingTopSystemWindowInsets="@{true}"
             tools:targetApi="o">
 
@@ -120,7 +120,6 @@
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="16dp"
                     android:layout_marginBottom="8dp"
-                    android:background="?attr/colorSurface"
                     android:entries="@array/categories_list"
                     app:popupElevationOverlay="@{@dimen/plane_16}"
                     app:layout_constraintBottom_toTopOf="@+id/update_expense_button"
@@ -130,14 +129,14 @@
 
             <com.google.android.material.button.MaterialButton
                     android:id="@+id/update_expense_button"
+                    style="@style/buttonStyle"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="52dp"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="16dp"
                     android:layout_marginBottom="8dp"
                     android:text="@string/update_expense"
-                    style="@style/buttonStyle"
                     app:cornerRadius="15dp"
                     app:layout_constraintBottom_toTopOf="@+id/delete_expense_button"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -149,7 +148,7 @@
                     android:id="@+id/delete_expense_button"
                     style="@style/buttonStyle"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="52dp"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="16dp"
