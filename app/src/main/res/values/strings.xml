@@ -10,14 +10,13 @@
     <string name="mange_expense">Mange Expense</string>
     <string name="update_expense">Update Expense</string>
     <string name="delete_expense">Delete Expense</string>
-    <string name="create_expense">Create Expense</string>
     <string name="amount">Amount</string>
     <string name="description">Description</string>
     <string name="create_new_expense">Create New Expense</string>
     <string name="change_currency">Change Your Currency</string>
     <string name="setting">Setting</string>
     <string name="signout">Sign Out</string>
-    <string name="Adultsclothing">Clothing</string>
+    <string name="Adultsclothing" translatable="false">Clothing</string>
     <string name="Adultsshoes">Shoes</string>
     <string name="Autoinsurance">Auto insurance</string>
     <string name="AlcoholBars">Alcohol/Bars</string>
@@ -129,9 +128,9 @@
     <string name="Water">Water</string>
     <string name="Wedding">Wedding</string>
     <string name="fill_empty">Please Fill The Empty Field</string>
-    <string name="select_category">Select Expense Category</string>
+    <string name="select_category">Please Select Expense Category</string>
     <string name="expense_created_successfuly">Expense Created Successfully</string>
-    <string name="select_option">Please Make A Selection</string>
+    <string name="select_option">Please Choose an Option</string>
     <string name="select_currency">Select Your Currency</string>
     <string name="expense_update_successfuly">Expense Updated Successfully</string>
     <string name="expense_deleted_successfuly">Expense Deleted Successfully</string>
@@ -147,4 +146,6 @@
     <string name="general_settings">General Settings</string>
     <string name="developed_by">Developer</string>
     <string name="developer">EL TEGANI MOHAMED HAMMAD GABIR  Email:tiganimoh@gmail.com</string>
+    <string name="registeration">Registeration</string>
+    <string name="create_expense">Create Expense</string>
 </resources>

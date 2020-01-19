@@ -42,7 +42,7 @@ class WeekExpenseFragmentViewModel(val database: ExpenseMonitorDao, val applicat
     private fun getWeekExpense(duration:String) {
 
         viewModelScope.launch {
-            val durationTag = getCurrencyFromSettings()?.let {
+            val durationTag = PrefManager.getCurrencyFromSettings()?.let {
                 DurationTag(duration,it,PrefManager.getStartOfTheWeek(application),
                     PrefManager.getEndOfTheWeek(application))
             }
@@ -55,18 +55,18 @@ class WeekExpenseFragmentViewModel(val database: ExpenseMonitorDao, val applicat
                 _status.value = ProgressStatus.DONE
                 if(getExpensesResponseList?.size != 0){
                     _expensesProperties.value = getExpensesResponseList
-                    if(database.checkCurrencyExistence(getCurrencyFromSettings().toString()) == null){
+                    if(database.checkCurrencyExistence(PrefManager.getCurrencyFromSettings().toString()) == null){
                         database.insertExpense(UserExpenses(
                             todayExpenses   = BigDecimal.ZERO
                             ,weekExpenses   = sumationOfAmount(getExpensesResponseList)
                             ,monthExpenses  = BigDecimal.ZERO
-                            ,currency = getCurrencyFromSettings().toString()
+                            ,currency = PrefManager.getCurrencyFromSettings().toString()
                         ))
                     }else{
-                        database.updateWeekExpenses(sumationOfAmount(getExpensesResponseList),getCurrencyFromSettings().toString())
+                        database.updateWeekExpenses(sumationOfAmount(getExpensesResponseList),PrefManager.getCurrencyFromSettings().toString())
                     }
                 }else{
-                    getCurrencyFromSettings()?.let {
+                    PrefManager.getCurrencyFromSettings()?.let {
                         database.updateWeekExpenses(BigDecimal.ZERO,
                             it
                         )

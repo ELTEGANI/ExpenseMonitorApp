@@ -2,6 +2,8 @@ package com.expensemoitor.expensemonitor.utilites
 
 import android.content.Context
 import android.content.SharedPreferences
+import androidx.preference.PreferenceManager
+import com.expensemoitor.expensemonitor.utilites.MyApp.Companion.context
 
 class PrefManager
 {
@@ -81,6 +83,7 @@ class PrefManager
             editor?.apply()
         }
 
+
         fun getCurrentDate(context: Context?): String? {
             return getSharedPreferences(context)?.getString("CURRENT_DATE", null)
         }
@@ -101,6 +104,16 @@ class PrefManager
 
         fun getStartOfTheMonth(context: Context?): String? {
             return getSharedPreferences(context)?.getString("START_OF_THE_MONTH", null)
+        }
+
+        fun saveCurrencyForSettings(selectedCurrency:String){
+            val editor = getSharedPreferences(context)?.edit()
+            editor?.putString("userCurrency",selectedCurrency)
+            editor?.apply()
+        }
+
+        fun getCurrencyFromSettings(): String? {
+            return getSharedPreferences(context)?.getString("userCurrency", null)
         }
 
 
@@ -130,6 +143,7 @@ class PrefManager
             editor?.remove("IS_USER_AUTHENTICATED")
             editor?.apply()
         }
+
 
 
     }

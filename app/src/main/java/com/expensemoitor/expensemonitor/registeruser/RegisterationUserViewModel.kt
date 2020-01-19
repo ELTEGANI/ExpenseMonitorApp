@@ -66,6 +66,7 @@ class RegisterationUserViewModel(val database: ExpenseMonitorDao, var applicatio
 
 
     fun registerUser(userName:String,emailAddress:String) {
+
         when(radiochecked.value){
             R.id.male_radio_button->{
                 geneder = "male"
@@ -76,7 +77,9 @@ class RegisterationUserViewModel(val database: ExpenseMonitorDao, var applicatio
             }
         }
 
-        if (geneder == null || currency == context?.getString(R.string.select_currency)){
+        if (geneder.isEmpty()){
+            _genderSelected.value = false
+        }else if(currency == context?.getString(R.string.select_currency)){
             _genderSelected.value = false
         }else{
             val userData = UserData(userName,emailAddress,geneder,currency)
@@ -86,15 +89,15 @@ class RegisterationUserViewModel(val database: ExpenseMonitorDao, var applicatio
                     try {
                         _status.value = ProgressStatus.LOADING
                         val userResponse = getUserResponse.await()
-                        saveCurrencyForSettings(currency.split(" ")[0])
+                        PrefManager.saveCurrencyForSettings(currency.substring(range = 0..2))
                         PrefManager.setUserRegistered(application,true)
                         PrefManager.saveAccessToken(application,userResponse.accessToken)
                         database.insertExpense(UserExpenses(
-                                    todayExpenses = toBigDecimal("0"),
-                                    weekExpenses  = toBigDecimal("0"),
-                                    monthExpenses = toBigDecimal("0"),
-                                    currency      = currency
-                                ))
+                            todayExpenses = toBigDecimal("0"),
+                            weekExpenses  = toBigDecimal("0"),
+                            monthExpenses = toBigDecimal("0"),
+                            currency      = currency
+                        ))
                         _navigateToNextScreen.value = true
                         _status.value = ProgressStatus.DONE
                     }catch (t:Throwable){
@@ -107,7 +110,8 @@ class RegisterationUserViewModel(val database: ExpenseMonitorDao, var applicatio
                 }
             }
         }
-    }
+        }
+
 
     private fun saveAllDates(){
         viewModelScope.launch {

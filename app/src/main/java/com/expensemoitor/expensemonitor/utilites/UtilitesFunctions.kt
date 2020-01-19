@@ -39,18 +39,6 @@ fun expenseAmountFormatWithComma(amount: String?): String {
 }
 
 
-   fun saveCurrencyForSettings(selectedCurrency:String){
-    val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
-    val editor = sharedPreferences.edit()
-    editor.putString("userCurrency",selectedCurrency)
-    editor.apply()
-   }
-
-   fun getCurrencyFromSettings(): String? {
-    val sharedPref = PreferenceManager.getDefaultSharedPreferences(context)
-    return sharedPref.getString("userCurrency",null)?.split(" ")?.get(0)
-   }
-
    fun sumationOfAmount(expensesResponseList: List<DurationExpenseResponse>?): BigDecimal {
        val amountList = arrayListOf<BigDecimal>()
        return if (expensesResponseList != null) {

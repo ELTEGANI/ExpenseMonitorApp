@@ -13,8 +13,8 @@ import com.expensemoitor.expensemonitor.network.ApiFactory
 import com.expensemoitor.expensemonitor.network.DurationExpenseResponse
 import com.expensemoitor.expensemonitor.network.DurationTag
 import com.expensemoitor.expensemonitor.utilites.MyApp.Companion.context
+import com.expensemoitor.expensemonitor.utilites.PrefManager
 import com.expensemoitor.expensemonitor.utilites.PrefManager.Companion.getCurrentDate
-import com.expensemoitor.expensemonitor.utilites.getCurrencyFromSettings
 import com.expensemoitor.expensemonitor.utilites.ProgressStatus
 import com.expensemoitor.expensemonitor.utilites.sumationOfAmount
 import kotlinx.coroutines.*
@@ -46,7 +46,7 @@ class TodayExpenseFragmentViewModel(val database: ExpenseMonitorDao, val applica
 
       private fun getTodayExpense(duration:String) {
          viewModelScope.launch {
-             val durationTag = getCurrencyFromSettings()?.let {
+             val durationTag = PrefManager.getCurrencyFromSettings()?.let {
               DurationTag(duration,it,getCurrentDate(application),"")
           }
           val getResponse = durationTag?.let {
@@ -59,23 +59,23 @@ class TodayExpenseFragmentViewModel(val database: ExpenseMonitorDao, val applica
                      _status.value = ProgressStatus.DONE
                      if (getExpensesResponseList?.size != 0) {
                          _expensesProperties.value = getExpensesResponseList
-                         if (database.checkCurrencyExistence(getCurrencyFromSettings().toString()) ==null) {
+                         if (database.checkCurrencyExistence(PrefManager.getCurrencyFromSettings().toString()) ==null) {
                              database.insertExpense(
                                  UserExpenses(
                                      todayExpenses = sumationOfAmount(getExpensesResponseList)
                                      , weekExpenses = BigDecimal.ZERO
                                      , monthExpenses = BigDecimal.ZERO
-                                     , currency = getCurrencyFromSettings().toString()
+                                     , currency = PrefManager.getCurrencyFromSettings().toString()
                                  )
                              )
                          } else {
                              database.updateTodayExpenses(
                                  sumationOfAmount(getExpensesResponseList),
-                                 getCurrencyFromSettings().toString()
+                                 PrefManager.getCurrencyFromSettings().toString()
                              )
                          }
                      } else {
-                         getCurrencyFromSettings()?.let {
+                         PrefManager.getCurrencyFromSettings()?.let {
                              database.updateTodayExpenses(BigDecimal.ZERO,
                                  it
                              )

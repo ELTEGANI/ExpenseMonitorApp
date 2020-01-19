@@ -11,7 +11,7 @@ import com.expensemoitor.expensemonitor.network.ApiFactory
 import com.expensemoitor.expensemonitor.network.DurationExpenseResponse
 import com.expensemoitor.expensemonitor.network.ExpenseData
 import com.expensemoitor.expensemonitor.utilites.MyApp.Companion.context
-import com.expensemoitor.expensemonitor.utilites.getCurrencyFromSettings
+import com.expensemoitor.expensemonitor.utilites.PrefManager
 import com.expensemoitor.expensemonitor.utilites.ProgressStatus
 import kotlinx.coroutines.*
 import retrofit2.HttpException
@@ -76,7 +76,7 @@ class UpdateAndDeleteFragmentViewModel(durationExpenseResponse: DurationExpenseR
             _validationMsg.value = context?.getString(R.string.select_category)
         }else{
             viewModelScope.launch {
-                val expenseData = getCurrencyFromSettings()?.let {
+                val expenseData = PrefManager.getCurrencyFromSettings()?.let {
                     ExpenseData(newAmount,description,date,
                         it,category)
                 }

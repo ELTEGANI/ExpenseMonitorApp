@@ -6,12 +6,13 @@
     <PreferenceCategory
             app:title="@string/general_settings">
         <ListPreference
-                android:key="userCurrency"
+                android:key="currency"
                 android:title="@string/change_currency"
                 android:entries="@array/currencies_setting_list"
                 android:entryValues="@array/currencies_setting_list"
                 android:icon="@drawable/ic_attach_money"
-                app:useSimpleSummaryProvider="true"/>
+                app:useSimpleSummaryProvider="true"
+                />
 
     </PreferenceCategory>
 
@@ -30,8 +31,6 @@
                 app:key="buildversion"
                 app:title="@string/build_version"
                 app:icon="@drawable/ic_build"
-                app:useSimpleSummaryProvider="true"
-                app:summary="1.0"
                 />
 
 
