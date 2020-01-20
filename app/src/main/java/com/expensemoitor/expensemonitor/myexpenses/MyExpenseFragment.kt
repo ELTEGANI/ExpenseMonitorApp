@@ -81,7 +81,7 @@ class MyExpenseFragment : Fragment() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
-
+        
         checkForAppUpdate()
 
         val gso =
@@ -115,19 +115,19 @@ class MyExpenseFragment : Fragment() {
                 when(position){
                     0->{
                         viewModel.todayExpense.observe(this@MyExpenseFragment, Observer {
-                        binding.expenseTextView.text = PrefManager.getCurrencyFromSettings()+" "+ expenseAmountFormatWithComma(it)
+                        binding.expenseTextView.text = PrefManager.getCurrency(application)+" "+ expenseAmountFormatWithComma(it)
                         })
                         binding.dateTextView.text = LocalDate.now().toString()
                     }
                     1->{
                         viewModel.weekExpense.observe(this@MyExpenseFragment, Observer {
-                        binding.expenseTextView.text = PrefManager.getCurrencyFromSettings()+" "+expenseAmountFormatWithComma(it)
+                        binding.expenseTextView.text = PrefManager.getCurrency(application)+" "+expenseAmountFormatWithComma(it)
                         })
                         binding.dateTextView.text = PrefManager.getStartOfTheWeek(context)+" "+"/"+" "+PrefManager.getEndOfTheWeek(context)
                     }
                     2->{
                         viewModel.monthExpense.observe(this@MyExpenseFragment, Observer {
-                        binding.expenseTextView.text = PrefManager.getCurrencyFromSettings()+" "+expenseAmountFormatWithComma(it)
+                        binding.expenseTextView.text = PrefManager.getCurrency(application)+" "+expenseAmountFormatWithComma(it)
                         })
                         binding.dateTextView.text = PrefManager.getStartOfTheMonth(context)+" "+"/"+" "+ PrefManager.getEndOfTheMonth(context)
                     }
@@ -191,7 +191,7 @@ class MyExpenseFragment : Fragment() {
         if (requestCode == APP_UPDATE_REQUEST_CODE) {
             if (resultCode != Activity.RESULT_OK) {
                 Toast.makeText(context,
-                    "App Update failed, please try again on the next app launch.",
+                    getString(R.string.app_failed_to_update),
                     Toast.LENGTH_SHORT)
                     .show()
             }
@@ -200,9 +200,9 @@ class MyExpenseFragment : Fragment() {
 
     private fun popupSnackbarForCompleteUpdate() {
         val snackbar = Snackbar.make(binding.coordinatorlayout,
-            "An update has just been downloaded.",
+            getString(R.string.update_download),
             Snackbar.LENGTH_INDEFINITE)
-        snackbar.setAction("RESTART") { appUpdateManager.completeUpdate() }
+        snackbar.setAction(getString(R.string.restart)) { appUpdateManager.completeUpdate() }
         context?.let { ContextCompat.getColor(it, R.color.color_on_surface_emphasis_high) }?.let {
             snackbar.setActionTextColor(
                 it
@@ -257,6 +257,9 @@ class MyExpenseFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
+            R.id.action_share_app->{
+                shareApp()
+            }
             R.id.action_setting->{
                 val action = MyExpenseFragmentDirections.actionMyExpenseFragmentToSettingsFragment()
                 findNavController().navigate(action)
@@ -278,6 +281,16 @@ class MyExpenseFragment : Fragment() {
         }
     }
 
+    private fun shareApp(){
+        val sendIntent: Intent = Intent().apply {
+            action = Intent.ACTION_SEND
+            putExtra(Intent.EXTRA_TEXT, "https://play.google.com/store/apps/details?id=com.expensemoitor.expensemonitor")
+            type = "text/plain"
+        }
+
+        val shareIntent = Intent.createChooser(sendIntent, null)
+        startActivity(shareIntent)
+    }
 
 
 }

@@ -50,7 +50,7 @@ class MyExpenseFragmentViewModel(val database:ExpenseMonitorDao,application: App
 
     private fun getTodayExpenses(){
         viewModelScope.launch {
-                database.retrieveTodayExpense(PrefManager.getCurrencyFromSettings().toString()).collect {
+                database.retrieveTodayExpense(PrefManager.getCurrency(application).toString()).collect {
                         _todayExpense.value = it
                 }
         }
@@ -58,7 +58,7 @@ class MyExpenseFragmentViewModel(val database:ExpenseMonitorDao,application: App
 
     private fun getWeekExpenses(){
         viewModelScope.launch {
-            database.retrieveWeekExpense(PrefManager.getCurrencyFromSettings().toString()).collect {
+            database.retrieveWeekExpense(PrefManager.getCurrency(application).toString()).collect {
                     _weekExpense.value = it
             }
         }
@@ -66,7 +66,7 @@ class MyExpenseFragmentViewModel(val database:ExpenseMonitorDao,application: App
 
     private fun getMonthExpenses(){
         viewModelScope.launch {
-            database.retrieveMonthExpense(PrefManager.getCurrencyFromSettings().toString()).collect {
+            database.retrieveMonthExpense(PrefManager.getCurrency(application).toString()).collect {
                     _monthExpense.value = it
             }
         }
@@ -113,14 +113,14 @@ class MyExpenseFragmentViewModel(val database:ExpenseMonitorDao,application: App
 
         if (currentDate > savedDate){
             viewModelScope.launch {
-                database.updateTodayExpenses(toBigDecimal("0"),PrefManager.getCurrencyFromSettings().toString())
+                database.updateTodayExpenses(toBigDecimal("0"),PrefManager.getCurrency(application).toString())
                 PrefManager.saveCurrentDate(context,LocalDate.now().toString())
             }
         }
 
         if (currentDate > endOfTheWeek){
             viewModelScope.launch {
-                database.updateWeekExpenses(toBigDecimal("0"),PrefManager.getCurrencyFromSettings().toString())
+                database.updateWeekExpenses(toBigDecimal("0"),PrefManager.getCurrency(application).toString())
                 PrefManager.saveStartOfTheWeek(context,LocalDate.now().toString())
                 PrefManager.saveEndOfTheWeek(application,LocalDate.now().plusDays(7).toString())
             }
@@ -128,7 +128,7 @@ class MyExpenseFragmentViewModel(val database:ExpenseMonitorDao,application: App
 
         if(currentDate > endOfTheMonth){
             viewModelScope.launch {
-                database.updateMonthExpenses(toBigDecimal("0"),PrefManager.getCurrencyFromSettings().toString())
+                database.updateMonthExpenses(toBigDecimal("0"),PrefManager.getCurrency(application).toString())
                 PrefManager.saveStartOfTheMonth(application,LocalDate.now().toString())
                 PrefManager.saveEndOfTheMonth(application,LocalDate.now().plusMonths(1).toString())
             }
@@ -138,6 +138,7 @@ class MyExpenseFragmentViewModel(val database:ExpenseMonitorDao,application: App
             e.printStackTrace()
         }
     }
+
 
 
 }

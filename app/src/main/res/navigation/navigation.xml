@@ -24,16 +24,15 @@
                 app:destination="@id/createNewExpenseFragment"
                 app:enterAnim="@anim/fade_in"
                 app:exitAnim="@anim/fade_out"
-                app:popEnterAnim="@anim/slide_in_right"
-                app:popExitAnim="@anim/slide_out_right" />
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_in_right" />
         <action
                 android:id="@+id/action_myExpenseFragment_to_updateAndDeleteExpenseFragment"
                 app:destination="@id/updateAndDeleteExpenseFragment"
                 app:enterAnim="@anim/fade_in"
                 app:exitAnim="@anim/fade_out"
                 app:popEnterAnim="@anim/slide_in_left"
-                app:popExitAnim="@anim/slide_out_right"
-                />
+                app:popExitAnim="@anim/slide_in_right" />
         <action
                 android:id="@+id/action_myExpenseFragment_to_loginUserFragment"
                 app:destination="@id/loginUserFragment"
@@ -58,7 +57,7 @@
                 app:enterAnim="@anim/fade_in"
                 app:exitAnim="@anim/fade_out"
                 app:popEnterAnim="@anim/slide_in_left"
-                app:popExitAnim="@anim/slide_out_right"
+                app:popExitAnim="@anim/slide_in_right"
                 app:popUpTo="@+id/myExpenseFragment"
                 app:popUpToInclusive="true" />
     </fragment>

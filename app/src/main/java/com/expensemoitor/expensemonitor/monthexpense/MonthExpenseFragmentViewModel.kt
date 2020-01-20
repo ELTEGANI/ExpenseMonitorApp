@@ -42,7 +42,7 @@ class MonthExpenseFragmentViewModel(val database: ExpenseMonitorDao, val applica
 
     private fun getMonthExpense(duration:String) {
         viewModelScope.launch {
-            val durationTag = PrefManager.getCurrencyFromSettings()?.let {
+            val durationTag = PrefManager.getCurrency(application)?.let {
                 DurationTag(duration,it,PrefManager.getStartOfTheMonth(application),
                     PrefManager.getEndOfTheMonth(application))
             }
@@ -55,18 +55,18 @@ class MonthExpenseFragmentViewModel(val database: ExpenseMonitorDao, val applica
                 _status.value = ProgressStatus.DONE
                 if(getExpensesResponseList?.size != 0){
                     _expensesProperties.value = getExpensesResponseList
-                    if(database.checkCurrencyExistence(PrefManager.getCurrencyFromSettings().toString()) == null){
+                    if(database.checkCurrencyExistence(PrefManager.getCurrency(application).toString()) == null){
                         database.insertExpense(UserExpenses(
                             todayExpenses   = BigDecimal.ZERO
                             ,weekExpenses   = BigDecimal.ZERO
                             ,monthExpenses  = sumationOfAmount(getExpensesResponseList)
-                            ,currency = PrefManager.getCurrencyFromSettings().toString()
+                            ,currency = PrefManager.getCurrency(application).toString()
                         ))
                     }else{
-                        database.updateMonthExpenses(sumationOfAmount(getExpensesResponseList),PrefManager.getCurrencyFromSettings().toString())
+                        database.updateMonthExpenses(sumationOfAmount(getExpensesResponseList),PrefManager.getCurrency(application).toString())
                     }
                 }else{
-                    PrefManager.getCurrencyFromSettings()?.let {
+                    PrefManager.getCurrency(application)?.let {
                         database.updateMonthExpenses(BigDecimal.ZERO,
                             it
                         )

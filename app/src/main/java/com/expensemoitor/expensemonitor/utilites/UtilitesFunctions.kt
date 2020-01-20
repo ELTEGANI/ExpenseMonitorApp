@@ -63,4 +63,3 @@ fun hasNetworkConnection(): Boolean {
     val activeNetworkInfo = connectivityManager.activeNetworkInfo
     return activeNetworkInfo != null && activeNetworkInfo.isConnectedOrConnecting
 }
-

@@ -12,7 +12,5 @@ class MainActivity : AppCompatActivity() {
 
         AndroidThreeTen.init(this)
 
-
-
     }
 }

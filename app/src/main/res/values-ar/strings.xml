@@ -36,4 +36,8 @@
     <string name="developed_by">المطور</string>
     <string name="developer">" التجاني محمد حماد جابر إيميل:tiganimoh@gmail.com  "</string>
     <string name="registeration">التسجيل</string>
+    <string name="share_application">مشاركة التطبيق</string>
+    <string name="update_download">تم تنزيل التحديث للتو</string>
+    <string name="restart">اعادة البدء</string>
+    <string name="app_failed_to_update">أخفق تحديث التطبيق ، يرجى المحاولة مرة أخرى عند بدء تشغيل التطبيق التالي.</string>
 </resources>

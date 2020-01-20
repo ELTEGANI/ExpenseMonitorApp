@@ -76,7 +76,7 @@ class UpdateAndDeleteFragmentViewModel(durationExpenseResponse: DurationExpenseR
             _validationMsg.value = context?.getString(R.string.select_category)
         }else{
             viewModelScope.launch {
-                val expenseData = PrefManager.getCurrencyFromSettings()?.let {
+                val expenseData = PrefManager.getCurrency(application)?.let {
                     ExpenseData(newAmount,description,date,
                         it,category)
                 }

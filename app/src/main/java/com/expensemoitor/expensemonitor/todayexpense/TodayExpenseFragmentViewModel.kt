@@ -46,7 +46,7 @@ class TodayExpenseFragmentViewModel(val database: ExpenseMonitorDao, val applica
 
       private fun getTodayExpense(duration:String) {
          viewModelScope.launch {
-             val durationTag = PrefManager.getCurrencyFromSettings()?.let {
+             val durationTag = PrefManager.getCurrency(application)?.let {
               DurationTag(duration,it,getCurrentDate(application),"")
           }
           val getResponse = durationTag?.let {
@@ -59,23 +59,23 @@ class TodayExpenseFragmentViewModel(val database: ExpenseMonitorDao, val applica
                      _status.value = ProgressStatus.DONE
                      if (getExpensesResponseList?.size != 0) {
                          _expensesProperties.value = getExpensesResponseList
-                         if (database.checkCurrencyExistence(PrefManager.getCurrencyFromSettings().toString()) ==null) {
+                         if (database.checkCurrencyExistence(PrefManager.getCurrency(application).toString()) ==null) {
                              database.insertExpense(
                                  UserExpenses(
                                      todayExpenses = sumationOfAmount(getExpensesResponseList)
                                      , weekExpenses = BigDecimal.ZERO
                                      , monthExpenses = BigDecimal.ZERO
-                                     , currency = PrefManager.getCurrencyFromSettings().toString()
+                                     , currency = PrefManager.getCurrency(application).toString()
                                  )
                              )
                          } else {
                              database.updateTodayExpenses(
                                  sumationOfAmount(getExpensesResponseList),
-                                 PrefManager.getCurrencyFromSettings().toString()
+                                 PrefManager.getCurrency(application).toString()
                              )
                          }
                      } else {
-                         PrefManager.getCurrencyFromSettings()?.let {
+                         PrefManager.getCurrency(application)?.let {
                              database.updateTodayExpenses(BigDecimal.ZERO,
                                  it
                              )

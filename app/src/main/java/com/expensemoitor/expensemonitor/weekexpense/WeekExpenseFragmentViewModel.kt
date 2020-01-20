@@ -42,7 +42,7 @@ class WeekExpenseFragmentViewModel(val database: ExpenseMonitorDao, val applicat
     private fun getWeekExpense(duration:String) {
 
         viewModelScope.launch {
-            val durationTag = PrefManager.getCurrencyFromSettings()?.let {
+            val durationTag = PrefManager.getCurrency(application)?.let {
                 DurationTag(duration,it,PrefManager.getStartOfTheWeek(application),
                     PrefManager.getEndOfTheWeek(application))
             }
@@ -55,18 +55,18 @@ class WeekExpenseFragmentViewModel(val database: ExpenseMonitorDao, val applicat
                 _status.value = ProgressStatus.DONE
                 if(getExpensesResponseList?.size != 0){
                     _expensesProperties.value = getExpensesResponseList
-                    if(database.checkCurrencyExistence(PrefManager.getCurrencyFromSettings().toString()) == null){
+                    if(database.checkCurrencyExistence(PrefManager.getCurrency(application).toString()) == null){
                         database.insertExpense(UserExpenses(
                             todayExpenses   = BigDecimal.ZERO
                             ,weekExpenses   = sumationOfAmount(getExpensesResponseList)
                             ,monthExpenses  = BigDecimal.ZERO
-                            ,currency = PrefManager.getCurrencyFromSettings().toString()
+                            ,currency = PrefManager.getCurrency(application).toString()
                         ))
                     }else{
-                        database.updateWeekExpenses(sumationOfAmount(getExpensesResponseList),PrefManager.getCurrencyFromSettings().toString())
+                        database.updateWeekExpenses(sumationOfAmount(getExpensesResponseList),PrefManager.getCurrency(application).toString())
                     }
                 }else{
-                    PrefManager.getCurrencyFromSettings()?.let {
+                    PrefManager.getCurrency(application)?.let {
                         database.updateWeekExpenses(BigDecimal.ZERO,
                             it
                         )
