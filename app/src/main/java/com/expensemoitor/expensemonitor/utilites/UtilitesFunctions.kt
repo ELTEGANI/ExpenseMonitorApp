@@ -10,7 +10,7 @@ import java.math.BigDecimal
 
 
 
-fun expenseAmountFormatWithComma(amount: String?): String {
+fun expenseAmountFormater(amount: String?): String {
     var amountFormatted= ""
     if (amount != null){
         try {
@@ -51,6 +51,12 @@ fun expenseAmountFormatWithComma(amount: String?): String {
        }
    }
 
+fun saveCurrencyForSettings(selectedCurrency:String){
+    val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
+    val editor = sharedPreferences.edit()
+    editor.putString("userCurrency",selectedCurrency)
+    editor.apply()
+}
 
 
 fun Iterable<BigDecimal>.sumByBigDecimal(): BigDecimal {

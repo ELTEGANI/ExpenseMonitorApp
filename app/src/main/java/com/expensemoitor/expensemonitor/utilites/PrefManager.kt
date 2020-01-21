@@ -106,13 +106,13 @@ class PrefManager
             return getSharedPreferences(context)?.getString("START_OF_THE_MONTH", null)
         }
 
-        fun saveCurrencyForSettings(context: Context,selectedCurrency:String){
+        fun saveCurrency(context: Context?, selectedCurrency:String){
             val editor = getSharedPreferences(context)?.edit()
             editor?.putString("userCurrency",selectedCurrency)
             editor?.apply()
         }
 
-        fun getCurrency(context: Context): String? {
+        fun getCurrency(context: Context?): String? {
             return getSharedPreferences(context)?.getString("userCurrency", null)
         }
 

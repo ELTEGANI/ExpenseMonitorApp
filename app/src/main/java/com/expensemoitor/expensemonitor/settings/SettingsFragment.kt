@@ -15,8 +15,6 @@ class SettingsFragment : PreferenceFragmentCompat() , SharedPreferences.OnShared
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
       setPreferencesFromResource(R.xml.settings,rootKey)
-
-
     }
 
 
@@ -24,8 +22,6 @@ class SettingsFragment : PreferenceFragmentCompat() , SharedPreferences.OnShared
         super.onCreate(savedInstanceState)
         preferenceManager.sharedPreferences.registerOnSharedPreferenceChangeListener(this)
 
-        val userCurrency = findPreference<Preference>("userCurrency")
-        userCurrency?.summary = context?.let { PrefManager.getCurrency(it) }
 
         val buildVersion = findPreference<Preference>("buildversion")
         buildVersion?.summary = BuildConfig.VERSION_NAME
@@ -44,24 +40,17 @@ class SettingsFragment : PreferenceFragmentCompat() , SharedPreferences.OnShared
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?,key:String?) {
 
-       if(!sharedPreferences?.getString(key,null).equals(context?.let {
-               PrefManager.getCurrency(
+       if(sharedPreferences?.getString(key,null) != null){
+           sharedPreferences.getString(key, null)?.substring(range = 0..2)?.let {
+               PrefManager.saveCurrency(context,
                    it
                )
-           })){
-           sharedPreferences?.getString(key,null)?.let {
-               context?.let { it1 ->
-                   PrefManager.saveCurrencyForSettings(
-                       it1,
-                       it.substring(range = 0..2)
-                   )
-               }
            }
            //navigate back to main expenses
            val direction = SettingsFragmentDirections.actionSettingsFragmentToMyExpenseFragment()
            findNavController().navigate(direction)
+
        }
     }
-
-
 }
+

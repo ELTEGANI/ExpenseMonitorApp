@@ -14,7 +14,7 @@
     <string name="description">Description</string>
     <string name="create_new_expense">Create New Expense</string>
     <string name="change_currency">Change Your Currency</string>
-    <string name="setting">Setting</string>
+    <string name="setting">Settings</string>
     <string name="signout">Sign Out</string>
     <string name="Adultsclothing" translatable="false">Clothing</string>
     <string name="Adultsshoes">Shoes</string>

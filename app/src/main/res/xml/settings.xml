@@ -11,7 +11,7 @@
                 android:entries="@array/currencies_setting_list"
                 android:entryValues="@array/currencies_setting_list"
                 android:icon="@drawable/ic_attach_money"
-                app:defaultValue="true"
+                app:useSimpleSummaryProvider="true"
                 />
 
     </PreferenceCategory>

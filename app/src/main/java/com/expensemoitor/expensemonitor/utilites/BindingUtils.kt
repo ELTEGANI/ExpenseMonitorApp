@@ -41,7 +41,7 @@ fun bindRecyclerView(recyclerView: RecyclerView,data:List<DurationExpenseRespons
 @BindingAdapter("expenseAmount")
 fun TextView.setExpenseAmount(durationExpenseResponse:DurationExpenseResponse?){
     durationExpenseResponse?.let {
-         text = PrefManager.getCurrency(context)+" "+ expenseAmountFormatWithComma(durationExpenseResponse.amount)
+         text = PrefManager.getCurrency(context)+" "+ expenseAmountFormater(durationExpenseResponse.amount)
      }
 }
 

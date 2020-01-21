@@ -115,19 +115,19 @@ class MyExpenseFragment : Fragment() {
                 when(position){
                     0->{
                         viewModel.todayExpense.observe(this@MyExpenseFragment, Observer {
-                        binding.expenseTextView.text = PrefManager.getCurrency(application)+" "+ expenseAmountFormatWithComma(it)
+                        binding.expenseTextView.text = PrefManager.getCurrency(context)+" "+ expenseAmountFormater(it)
                         })
                         binding.dateTextView.text = LocalDate.now().toString()
                     }
                     1->{
                         viewModel.weekExpense.observe(this@MyExpenseFragment, Observer {
-                        binding.expenseTextView.text = PrefManager.getCurrency(application)+" "+expenseAmountFormatWithComma(it)
+                        binding.expenseTextView.text = PrefManager.getCurrency(context)+" "+expenseAmountFormater(it)
                         })
                         binding.dateTextView.text = PrefManager.getStartOfTheWeek(context)+" "+"/"+" "+PrefManager.getEndOfTheWeek(context)
                     }
                     2->{
                         viewModel.monthExpense.observe(this@MyExpenseFragment, Observer {
-                        binding.expenseTextView.text = PrefManager.getCurrency(application)+" "+expenseAmountFormatWithComma(it)
+                        binding.expenseTextView.text = PrefManager.getCurrency(context)+" "+expenseAmountFormater(it)
                         })
                         binding.dateTextView.text = PrefManager.getStartOfTheMonth(context)+" "+"/"+" "+ PrefManager.getEndOfTheMonth(context)
                     }

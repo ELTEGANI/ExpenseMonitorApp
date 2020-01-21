@@ -2,8 +2,6 @@ package com.expensemoitor.expensemonitor.registeruser
 
 
 import android.app.Application
-import android.content.Context
-import android.content.Context.MODE_PRIVATE
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
@@ -11,7 +9,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import androidx.preference.PreferenceManager
 import com.expensemoitor.expensemonitor.network.UserData
 import com.expensemoitor.expensemonitor.R
 import com.expensemoitor.expensemonitor.database.ExpenseMonitorDao
@@ -92,7 +89,8 @@ class RegisterationUserViewModel(val database: ExpenseMonitorDao, var applicatio
                     try {
                         _status.value = ProgressStatus.LOADING
                         val userResponse = getUserResponse.await()
-                        context?.let { PrefManager.saveCurrencyForSettings(it,currency.substring(range = 0..2)) }
+                        PrefManager.saveCurrency(application,currency.substring(range = 0..2))
+                        saveCurrencyForSettings(currency)
                         PrefManager.setUserRegistered(application,true)
                         PrefManager.saveAccessToken(application,userResponse.accessToken)
                         database.insertExpense(UserExpenses(

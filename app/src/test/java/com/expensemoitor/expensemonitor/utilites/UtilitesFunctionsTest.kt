@@ -68,7 +68,7 @@ class UtilitesFunctionsTest{
         val amount = "1000000000"
 
         //WHEN call expenseAmountFormatWithComma
-        val result =  expenseAmountFormatWithComma(amount)
+        val result =  expenseAmountFormater(amount)
 
 
         //THEN is a number with comma
@@ -82,7 +82,7 @@ class UtilitesFunctionsTest{
         val amount = null
 
         //WHEN call expenseAmountFormatWithComma
-        val result =  expenseAmountFormatWithComma(amount)
+        val result =  expenseAmountFormater(amount)
 
 
         //THEN is a number with comma

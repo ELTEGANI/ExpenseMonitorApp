@@ -5,6 +5,8 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import androidx.preference.PreferenceManager
+import com.expensemoitor.expensemonitor.R
 import com.expensemoitor.expensemonitor.database.ExpenseMonitorDao
 import com.expensemoitor.expensemonitor.utilites.*
 import com.expensemoitor.expensemonitor.utilites.Converter.Companion.toBigDecimal
