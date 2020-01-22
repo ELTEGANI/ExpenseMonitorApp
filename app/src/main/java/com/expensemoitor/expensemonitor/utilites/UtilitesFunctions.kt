@@ -10,12 +10,12 @@ import java.math.BigDecimal
 
 
 
-fun expenseAmountFormater(amount: String?): String {
+fun expenseAmountFormatter(amount: String?): String {
     var amountFormatted= ""
     if (amount != null){
         try {
-            val value = amount?.replace(",", "")
-            val reverseValue = StringBuilder(value.toString()).reverse()
+            val value = amount.replace(",", "")
+            val reverseValue = StringBuilder(value).reverse()
                 .toString()
             val finalValue = StringBuilder()
             for (i in 1..reverseValue.length)
@@ -63,7 +63,7 @@ fun Iterable<BigDecimal>.sumByBigDecimal(): BigDecimal {
     return this.fold(BigDecimal.ZERO) { acc, e -> acc + e }
 }
 
-fun hasNetworkConnection(): Boolean {
+fun isConnected(): Boolean {
     val connectivityManager =
         context?.getSystemService(CONNECTIVITY_SERVICE) as ConnectivityManager
     val activeNetworkInfo = connectivityManager.activeNetworkInfo

@@ -16,7 +16,7 @@
 
     <!--Shape-->
 
-    <style name="ShapeAppearanceOverlay.ExpnesMonitor.MediumComponent.Marked" parent="">
+    <style name="ShapeAppearanceOverlay.ExpenesMonitor.MediumComponent.Marked" parent="">
         <item name="cornerSizeTopLeft">@dimen/expensemonitor_small_component_corner_radius</item>
     </style>
 

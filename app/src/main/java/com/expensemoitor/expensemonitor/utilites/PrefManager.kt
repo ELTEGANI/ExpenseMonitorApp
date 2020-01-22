@@ -2,8 +2,6 @@ package com.expensemoitor.expensemonitor.utilites
 
 import android.content.Context
 import android.content.SharedPreferences
-import androidx.preference.PreferenceManager
-import com.expensemoitor.expensemonitor.utilites.MyApp.Companion.context
 
 class PrefManager
 {

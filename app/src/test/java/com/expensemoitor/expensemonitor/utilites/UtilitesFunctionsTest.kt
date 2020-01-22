@@ -12,7 +12,7 @@ class UtilitesFunctionsTest{
     fun getSumationOfExpenseAmount_listOfAmount_totalAmounts(){
 
      //GIVEN a list of expense with its amount
-     val amounts = listOf<DurationExpenseResponse>(
+     val amounts = listOf(
          DurationExpenseResponse(id = "1",amount = "3000000000",description = "new",expenseCategory = "test",currency = "SDG",date = "2020-1-1"),
          DurationExpenseResponse(id = "1",amount = "4000000000",description = "new",expenseCategory = "test",currency = "SDG",date = "2020-1-1"),
          DurationExpenseResponse(id = "1",amount = "5000000000",description = "new",expenseCategory = "test",currency = "SDG",date = "2020-1-1")
@@ -68,7 +68,7 @@ class UtilitesFunctionsTest{
         val amount = "1000000000"
 
         //WHEN call expenseAmountFormatWithComma
-        val result =  expenseAmountFormater(amount)
+        val result =  expenseAmountFormatter(amount)
 
 
         //THEN is a number with comma
@@ -82,7 +82,7 @@ class UtilitesFunctionsTest{
         val amount = null
 
         //WHEN call expenseAmountFormatWithComma
-        val result =  expenseAmountFormater(amount)
+        val result =  expenseAmountFormatter(amount)
 
 
         //THEN is a number with comma

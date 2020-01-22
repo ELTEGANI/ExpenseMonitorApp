@@ -15,7 +15,7 @@ import androidx.navigation.fragment.findNavController
 import com.expensemoitor.expensemonitor.R
 import com.expensemoitor.expensemonitor.databinding.LoginUserFragmentBinding
 import com.expensemoitor.expensemonitor.utilites.PrefManager
-import com.expensemoitor.expensemonitor.utilites.hasNetworkConnection
+import com.expensemoitor.expensemonitor.utilites.isConnected
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -28,7 +28,7 @@ class LoginUserFragment : Fragment() {
 
 
     private lateinit var binding: LoginUserFragmentBinding
-    private val SignIn = 9001
+    private val signIn = 9001
     private var mGoogleSignInClient: GoogleSignInClient? = null
 
 
@@ -64,7 +64,7 @@ class LoginUserFragment : Fragment() {
         binding.lifecycleOwner = this
 
         binding.loginButton.setOnClickListener {
-            if(hasNetworkConnection()){
+            if(isConnected()){
                 signIn()
             }else{
                 Toast.makeText(context,getString(R.string.weak_internet_connection),Toast.LENGTH_LONG).show()
@@ -77,7 +77,7 @@ class LoginUserFragment : Fragment() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == SignIn) {
+        if (requestCode == signIn) {
             val task =
                 GoogleSignIn.getSignedInAccountFromIntent(data)
             handleSignInResult(task)
@@ -107,7 +107,7 @@ class LoginUserFragment : Fragment() {
 
     private fun signIn() {
         val signInIntent = mGoogleSignInClient!!.signInIntent
-        startActivityForResult(signInIntent, SignIn)
+        startActivityForResult(signInIntent, signIn)
     }
 
 

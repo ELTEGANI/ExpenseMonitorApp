@@ -16,8 +16,8 @@
     <string name="change_currency">Change Your Currency</string>
     <string name="setting">Settings</string>
     <string name="signout">Sign Out</string>
-    <string name="Adultsclothing" translatable="false">Clothing</string>
-    <string name="Adultsshoes">Shoes</string>
+    <string name="Adultsclothing">Adults clothing</string>
+    <string name="Adultsshoes">Adults Shoes</string>
     <string name="Autoinsurance">Auto insurance</string>
     <string name="AlcoholBars">Alcohol/Bars</string>
     <string name="Anniversary">Anniversary</string>

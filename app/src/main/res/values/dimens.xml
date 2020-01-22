@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="grid_2">16dp</dimen>
-    <dimen name="bottom_app_bar_height">56dp</dimen>
 
 </resources>

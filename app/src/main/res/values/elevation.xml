@@ -14,7 +14,6 @@
   -->
 <resources>
     <dimen name="plane_00">0dp</dimen>
-    <dimen name="plane_01">1dp</dimen>
     <dimen name="plane_02">2dp</dimen>
     <dimen name="plane_06">6dp</dimen>
     <dimen name="plane_08">8dp</dimen>

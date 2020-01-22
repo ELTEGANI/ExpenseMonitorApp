@@ -32,7 +32,7 @@
                 android:layout_marginBottom="8dp"
                 android:onClick="@{() -> clickListener.onClick(expensesProperties)}"
                 app:cardPreventCornerOverlap="false"
-                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.ExpnesMonitor.MediumComponent.Marked"
+                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.ExpenesMonitor.MediumComponent.Marked"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"

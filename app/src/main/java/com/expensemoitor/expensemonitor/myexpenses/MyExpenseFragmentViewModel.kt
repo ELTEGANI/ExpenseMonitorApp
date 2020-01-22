@@ -5,15 +5,13 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import androidx.preference.PreferenceManager
-import com.expensemoitor.expensemonitor.R
 import com.expensemoitor.expensemonitor.database.ExpenseMonitorDao
 import com.expensemoitor.expensemonitor.utilites.*
-import com.expensemoitor.expensemonitor.utilites.Converter.Companion.toBigDecimal
 import com.expensemoitor.expensemonitor.utilites.MyApp.Companion.context
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.collect
 import org.threeten.bp.LocalDate
+import java.math.BigDecimal
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -53,7 +51,7 @@ class MyExpenseFragmentViewModel(val database:ExpenseMonitorDao,application: App
     private fun getTodayExpenses(){
         viewModelScope.launch {
                 database.retrieveTodayExpense(PrefManager.getCurrency(application).toString()).collect {
-                        _todayExpense.value = it
+                        _todayExpense.value = expenseAmountFormatter(it)
                 }
         }
     }
@@ -61,7 +59,7 @@ class MyExpenseFragmentViewModel(val database:ExpenseMonitorDao,application: App
     private fun getWeekExpenses(){
         viewModelScope.launch {
             database.retrieveWeekExpense(PrefManager.getCurrency(application).toString()).collect {
-                    _weekExpense.value = it
+                    _weekExpense.value = expenseAmountFormatter(it)
             }
         }
     }
@@ -69,7 +67,7 @@ class MyExpenseFragmentViewModel(val database:ExpenseMonitorDao,application: App
     private fun getMonthExpenses(){
         viewModelScope.launch {
             database.retrieveMonthExpense(PrefManager.getCurrency(application).toString()).collect {
-                    _monthExpense.value = it
+                    _monthExpense.value = expenseAmountFormatter(it)
             }
         }
     }
@@ -93,7 +91,6 @@ class MyExpenseFragmentViewModel(val database:ExpenseMonitorDao,application: App
 
 
     private fun checkIfDurationFinished(){
-        //TODO test this function
         //today
         val savedCurrentDate = PrefManager.getCurrentDate(context)
 
@@ -113,16 +110,18 @@ class MyExpenseFragmentViewModel(val database:ExpenseMonitorDao,application: App
             val endOfTheWeek = sdf.parse(endOfWeek)
             val endOfTheMonth = sdf.parse(endOfMonth)
 
+
+
         if (currentDate > savedDate){
             viewModelScope.launch {
-                database.updateTodayExpenses(toBigDecimal("0"),PrefManager.getCurrency(application).toString())
+                database.updateTodayExpenses(BigDecimal.ZERO,PrefManager.getCurrency(application).toString())
                 PrefManager.saveCurrentDate(context,LocalDate.now().toString())
             }
         }
 
         if (currentDate > endOfTheWeek){
             viewModelScope.launch {
-                database.updateWeekExpenses(toBigDecimal("0"),PrefManager.getCurrency(application).toString())
+                database.updateWeekExpenses(BigDecimal.ZERO,PrefManager.getCurrency(application).toString())
                 PrefManager.saveStartOfTheWeek(context,LocalDate.now().toString())
                 PrefManager.saveEndOfTheWeek(application,LocalDate.now().plusDays(7).toString())
             }
@@ -130,7 +129,7 @@ class MyExpenseFragmentViewModel(val database:ExpenseMonitorDao,application: App
 
         if(currentDate > endOfTheMonth){
             viewModelScope.launch {
-                database.updateMonthExpenses(toBigDecimal("0"),PrefManager.getCurrency(application).toString())
+                database.updateMonthExpenses(BigDecimal.ZERO,PrefManager.getCurrency(application).toString())
                 PrefManager.saveStartOfTheMonth(application,LocalDate.now().toString())
                 PrefManager.saveEndOfTheMonth(application,LocalDate.now().plusMonths(1).toString())
             }
