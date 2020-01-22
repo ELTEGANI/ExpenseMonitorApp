@@ -6,7 +6,7 @@
     <data>
         <variable
                 name="viewModel"
-                type="com.expensemoitor.expensemonitor.updateanddeleteexpense.UpdateAndDeleteFragmentViewModel" />
+                type="com.monitoryourexpenses.expenses.updateanddeleteexpense.UpdateAndDeleteFragmentViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

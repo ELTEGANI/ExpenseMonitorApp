@@ -6,7 +6,7 @@
     <data>
         <variable
                 name="viewModel"
-                type="com.expensemoitor.expensemonitor.todayexpense.TodayExpenseFragmentViewModel" />
+                type="com.monitoryourexpenses.expenses.todayexpense.TodayExpenseFragmentViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -4,7 +4,7 @@
     <data>
         <variable
                 name="viewModel"
-                type="com.expensemoitor.expensemonitor.loginuser.LoginUserViewModel" />
+                type="com.monitoryourexpenses.expenses.loginuser.LoginUserViewModel" />
 
     </data>
 

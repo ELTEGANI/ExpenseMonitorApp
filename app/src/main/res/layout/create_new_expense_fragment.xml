@@ -3,7 +3,7 @@
         xmlns:tools="http://schemas.android.com/tools">
     <data>
        <variable name="viewModel"
-                 type="com.expensemoitor.expensemonitor.createnewexpense.CreateNewExpenseFragmentViewModel"/>
+                 type="com.monitoryourexpenses.expenses.createnewexpense.CreateNewExpenseFragmentViewModel"/>
     </data>
 
 

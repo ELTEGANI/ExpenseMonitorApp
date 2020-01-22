@@ -5,7 +5,7 @@
         app:startDestination="@id/loginUserFragment">
     <fragment
             android:id="@+id/registerationUserFragment"
-            android:name="com.expensemoitor.expensemonitor.registeruser.RegisterationUserFragment"
+            android:name="com.monitoryourexpenses.expenses.registeruser.RegisterationUserFragment"
             android:label="RegisterationUserFragment" >
         <action
                 android:id="@+id/action_registeration_to_myExpense"
@@ -17,7 +17,7 @@
 
     <fragment
             android:id="@+id/myExpenseFragment"
-            android:name="com.expensemoitor.expensemonitor.myexpenses.MyExpenseFragment"
+            android:name="com.monitoryourexpenses.expenses.myexpenses.MyExpenseFragment"
             android:label="MyExpenseFragment" >
         <action
                 android:id="@+id/action_myExpenseFragment_to_createNewExpenseFragment"
@@ -49,7 +49,7 @@
     </fragment>
     <fragment
             android:id="@+id/createNewExpenseFragment"
-            android:name="com.expensemoitor.expensemonitor.createnewexpense.CreateNewExpenseFragment"
+            android:name="com.monitoryourexpenses.expenses.createnewexpense.CreateNewExpenseFragment"
             android:label="CreateNewExpenseFragment" >
         <action
                 android:id="@+id/action_createNewExpenseFragment_to_myExpenseFragment"
@@ -63,7 +63,7 @@
     </fragment>
     <fragment
             android:id="@+id/loginUserFragment"
-            android:name="com.expensemoitor.expensemonitor.loginuser.LoginUserFragment"
+            android:name="com.monitoryourexpenses.expenses.loginuser.LoginUserFragment"
             android:label="LoginUserFragment" >
         <action
                 android:id="@+id/action_loginUserFragment_to_registerationUserFragment"
@@ -87,12 +87,12 @@
 
     <fragment
             android:id="@+id/updateAndDeleteExpenseFragment"
-            android:name="com.expensemoitor.expensemonitor.updateanddeleteexpense.UpdateAndDeleteExpenseFragment"
+            android:name="com.monitoryourexpenses.expenses.updateanddeleteexpense.UpdateAndDeleteExpenseFragment"
             android:label="UpdateAndDeleteExpenseFragment">
 
         <argument
                 android:name="selectedExpense"
-                app:argType="com.expensemoitor.expensemonitor.network.DurationExpenseResponse"
+                app:argType="com.monitoryourexpenses.expenses.network.DurationExpenseResponse"
                 />
         <action
                 android:id="@+id/action_updateAndDeleteExpenseFragment_to_myExpenseFragment"
@@ -108,7 +108,7 @@
 
     <fragment
             android:id="@+id/settingsFragment"
-            android:name="com.expensemoitor.expensemonitor.settings.SettingsFragment"
+            android:name="com.monitoryourexpenses.expenses.settings.SettingsFragment"
             android:label="SettingsFragment" >
         <action
                 android:id="@+id/action_settingsFragment_to_myExpenseFragment"

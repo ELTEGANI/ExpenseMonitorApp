@@ -6,7 +6,7 @@
     <data>
         <variable
                 name="viewModel"
-                type="com.expensemoitor.expensemonitor.weekexpense.WeekExpenseFragmentViewModel" />
+                type="com.monitoryourexpenses.expenses.weekexpense.WeekExpenseFragmentViewModel" />
 
     </data>
 

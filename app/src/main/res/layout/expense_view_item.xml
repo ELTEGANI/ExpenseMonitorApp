@@ -5,10 +5,10 @@
         <data>
              <variable
                      name="expensesProperties"
-                     type="com.expensemoitor.expensemonitor.network.DurationExpenseResponse" />
+                     type="com.monitoryourexpenses.expenses.network.DurationExpenseResponse" />
             <variable
                     name="clickListener"
-                    type="com.expensemoitor.expensemonitor.adapters.ExpenseListener" />
+                    type="com.monitoryourexpenses.expenses.adapters.ExpenseListener" />
         </data>
 
     <FrameLayout
