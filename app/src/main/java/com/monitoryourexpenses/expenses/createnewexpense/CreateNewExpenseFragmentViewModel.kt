@@ -50,9 +50,8 @@ class CreateNewExpenseFragmentViewModel(var application: Application) : ViewMode
 
 
     fun onSelectExpenseFormOrCategoryItem(parent: AdapterView<*>, view: View?, pos: Int, id: Long) {
-            selectedCategoryItem = parent.selectedItem.toString()
+        selectedCategoryItem = parent.selectedItem.toString()
     }
-
 
 
     fun createExpenseClick(){

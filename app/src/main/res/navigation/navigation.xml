@@ -22,23 +22,23 @@
         <action
                 android:id="@+id/action_myExpenseFragment_to_createNewExpenseFragment"
                 app:destination="@id/createNewExpenseFragment"
-                app:enterAnim="@anim/fade_in"
-                app:exitAnim="@anim/fade_out"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"
                 app:popEnterAnim="@anim/slide_in_left"
-                app:popExitAnim="@anim/slide_in_right" />
+                app:popExitAnim="@anim/slide_out_right"/>
         <action
                 android:id="@+id/action_myExpenseFragment_to_updateAndDeleteExpenseFragment"
                 app:destination="@id/updateAndDeleteExpenseFragment"
-                app:enterAnim="@anim/fade_in"
-                app:exitAnim="@anim/fade_out"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"
                 app:popEnterAnim="@anim/slide_in_left"
-                app:popExitAnim="@anim/slide_in_right" />
+                app:popExitAnim="@anim/slide_out_right" />
         <action
                 android:id="@+id/action_myExpenseFragment_to_loginUserFragment"
                 app:destination="@id/loginUserFragment"
                 app:popUpTo="@+id/myExpenseFragment"
-                app:enterAnim="@anim/fade_in"
-                app:exitAnim="@anim/fade_out"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"
                 app:popEnterAnim="@anim/slide_in_left"
                 app:popExitAnim="@anim/slide_out_right"
                 app:popUpToInclusive="true" />
@@ -54,10 +54,10 @@
         <action
                 android:id="@+id/action_createNewExpenseFragment_to_myExpenseFragment"
                 app:destination="@id/myExpenseFragment"
-                app:enterAnim="@anim/fade_in"
-                app:exitAnim="@anim/fade_out"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"
                 app:popEnterAnim="@anim/slide_in_left"
-                app:popExitAnim="@anim/slide_in_right"
+                app:popExitAnim="@anim/slide_out_right"
                 app:popUpTo="@+id/myExpenseFragment"
                 app:popUpToInclusive="true" />
     </fragment>
@@ -68,8 +68,8 @@
         <action
                 android:id="@+id/action_loginUserFragment_to_registerationUserFragment"
                 app:destination="@id/registerationUserFragment"
-                app:enterAnim="@anim/fade_in"
-                app:exitAnim="@anim/fade_out"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"
                 app:popEnterAnim="@anim/slide_in_left"
                 app:popExitAnim="@anim/slide_out_right"
                 app:popUpTo="@+id/loginUserFragment"
@@ -77,8 +77,8 @@
         <action
                 android:id="@+id/action_loginUserFragment_to_myExpenseFragment"
                 app:destination="@id/myExpenseFragment"
-                app:enterAnim="@anim/fade_in"
-                app:exitAnim="@anim/fade_out"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"
                 app:popEnterAnim="@anim/slide_in_left"
                 app:popExitAnim="@anim/slide_out_right"
                 app:popUpTo="@+id/loginUserFragment"
@@ -97,8 +97,8 @@
         <action
                 android:id="@+id/action_updateAndDeleteExpenseFragment_to_myExpenseFragment"
                 app:destination="@id/myExpenseFragment"
-                app:enterAnim="@anim/fade_in"
-                app:exitAnim="@anim/fade_out"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"
                 app:popEnterAnim="@anim/slide_in_left"
                 app:popExitAnim="@anim/slide_out_right"
                 app:popUpTo="@+id/myExpenseFragment"

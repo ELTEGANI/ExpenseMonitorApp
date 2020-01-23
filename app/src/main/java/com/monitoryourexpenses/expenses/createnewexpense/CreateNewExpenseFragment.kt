@@ -44,7 +44,7 @@ class CreateNewExpenseFragment : Fragment() {
             val datePickerDialog = context?.let { it1 ->
                 DatePickerDialog(
                     it1,
-                    DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+                    DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
                         viewModel.currentDate.value = year.toString() + "-" + (monthOfYear + 1) + "-" + dayOfMonth.toString()
                     },year,month,day)
             }

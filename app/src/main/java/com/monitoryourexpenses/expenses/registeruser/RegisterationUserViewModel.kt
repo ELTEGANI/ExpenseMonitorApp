@@ -56,7 +56,7 @@ class RegisterationUserViewModel(val database: ExpenseMonitorDao, var applicatio
 
 
     fun onSelectCurrencyItem(parent: AdapterView<*>, view: View?, pos: Int, id: Long) {
-            currency = parent.selectedItem.toString()
+        currency = parent.selectedItem.toString()
     }
 
 
