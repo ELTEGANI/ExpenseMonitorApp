@@ -20,7 +20,7 @@ import java.util.*
 class UpdateAndDeleteExpenseFragment : Fragment() {
 
 
-    private lateinit var binding:UpdateAndDeleteExpenseFragmentBinding
+    private lateinit var binding: UpdateAndDeleteExpenseFragmentBinding
 
 
     @SuppressLint("SetTextI18n")

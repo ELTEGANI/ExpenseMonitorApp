@@ -19,3 +19,7 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+
+-printusage /home/etegani/Documents/ExpenseMonitorApp/app/usage.txt
+-printseeds /home/etegani/Documents/ExpenseMonitorApp/app/seeds.txt

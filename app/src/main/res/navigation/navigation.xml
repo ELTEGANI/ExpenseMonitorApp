@@ -89,7 +89,6 @@
             android:id="@+id/updateAndDeleteExpenseFragment"
             android:name="com.monitoryourexpenses.expenses.updateanddeleteexpense.UpdateAndDeleteExpenseFragment"
             android:label="UpdateAndDeleteExpenseFragment">
-
         <argument
                 android:name="selectedExpense"
                 app:argType="com.monitoryourexpenses.expenses.network.DurationExpenseResponse"

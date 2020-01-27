@@ -282,13 +282,7 @@ class MyExpenseFragment : Fragment() {
     }
 
     private fun shareApp(){
-        val sendIntent: Intent = Intent().apply {
-            action = Intent.ACTION_SEND
-            putExtra(Intent.EXTRA_TEXT, "https://play.google.com/store/apps/details?id=com.monitoryourexpenses.expenses")
-            type = "text/plain"
-        }
-        val shareIntent = Intent.createChooser(sendIntent, null)
-        startActivity(shareIntent)
+
     }
 
 
