@@ -7583,19 +7583,6 @@ kotlin.collections.AbstractMutableSet
 org.jetbrains.annotations.Nls
 com.bumptech.glide.manager.Lifecycle
 androidx.appcompat.resources.R
-com.monitoryourexpenses.expenses.network.ExpenseData
-    public static synthetic com.monitoryourexpenses.expenses.network.ExpenseData copy$default(com.monitoryourexpenses.expenses.network.ExpenseData,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,int,java.lang.Object)
-    public final java.lang.String getAmount()
-    public final java.lang.String getDescription()
-    public final java.lang.String getDate()
-    public final java.lang.String getCurrency()
-    public final java.lang.String getCategory()
-    public final java.lang.String component1()
-    public final java.lang.String component2()
-    public final java.lang.String component3()
-    public final java.lang.String component4()
-    public final java.lang.String component5()
-    public final com.monitoryourexpenses.expenses.network.ExpenseData copy(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
 com.google.android.gms.internal.auth.zzs
 kotlin.reflect.full.KTypes$withNullability$2
 androidx.appcompat.app.ActionBarDrawerToggle$Delegate
@@ -13184,11 +13171,6 @@ androidx.preference.ListPreferenceDialogFragment
 com.google.android.gms.auth.api.accounttransfer.zzk
 com.google.android.gms.auth.UserRecoverableNotifiedException
 okio.Buffer$outputStream$1
-com.monitoryourexpenses.expenses.network.DeleteAndUpdateResponse
-    public void <init>(java.lang.String)
-    public static synthetic com.monitoryourexpenses.expenses.network.DeleteAndUpdateResponse copy$default(com.monitoryourexpenses.expenses.network.DeleteAndUpdateResponse,java.lang.String,int,java.lang.Object)
-    public final java.lang.String component1()
-    public final com.monitoryourexpenses.expenses.network.DeleteAndUpdateResponse copy(java.lang.String)
 kotlinx.coroutines.flow.FlowKt__MergeKt$unsafeTransform$$inlined$unsafeFlow$1$1
 androidx.navigation.fragment.ktx.R$dimen
 androidx.lifecycle.viewmodel.ktx.R
@@ -13490,11 +13472,6 @@ androidx.core.app.NotificationCompat$Action
     public static final int SEMANTIC_ACTION_CALL
     static final java.lang.String EXTRA_SHOWS_USER_INTERFACE
     static final java.lang.String EXTRA_SEMANTIC_ACTION
-com.monitoryourexpenses.expenses.network.ExpenseResponseMsg
-    public void <init>(java.lang.String)
-    public static synthetic com.monitoryourexpenses.expenses.network.ExpenseResponseMsg copy$default(com.monitoryourexpenses.expenses.network.ExpenseResponseMsg,java.lang.String,int,java.lang.Object)
-    public final java.lang.String component1()
-    public final com.monitoryourexpenses.expenses.network.ExpenseResponseMsg copy(java.lang.String)
 androidx.appcompat.R$style
     private void <init>()
 kotlinx.coroutines.flow.FlowKt__MergeKt$unsafeTransform$$inlined$unsafeFlow$2$1
@@ -14409,17 +14386,6 @@ kotlin.OptionalExpectation
 kotlinx.coroutines.internal.ProbesSupportKt
 androidx.transition.Styleable$Fade
 com.bumptech.glide.util.pool.StateVerifier$DefaultStateVerifier
-com.monitoryourexpenses.expenses.network.DurationTag
-    public static synthetic com.monitoryourexpenses.expenses.network.DurationTag copy$default(com.monitoryourexpenses.expenses.network.DurationTag,java.lang.String,java.lang.String,java.lang.String,java.lang.String,int,java.lang.Object)
-    public final java.lang.String getDuration()
-    public final java.lang.String getCurrency()
-    public final java.lang.String getStartDate()
-    public final java.lang.String getEndDate()
-    public final java.lang.String component1()
-    public final java.lang.String component2()
-    public final java.lang.String component3()
-    public final java.lang.String component4()
-    public final com.monitoryourexpenses.expenses.network.DurationTag copy(java.lang.String,java.lang.String,java.lang.String,java.lang.String)
 androidx.appcompat.view.menu.StandardMenuPopup
     public android.os.Parcelable onSaveInstanceState()
     public void onRestoreInstanceState(android.os.Parcelable)
@@ -15167,6 +15133,8 @@ androidx.fragment.app.Fragment
     public void setUserVisibleHint(boolean)
     public boolean getUserVisibleHint()
     public androidx.loader.app.LoaderManager getLoaderManager()
+    public void startActivity(android.content.Intent)
+    public void startActivity(android.content.Intent,android.os.Bundle)
     public void startIntentSenderForResult(android.content.IntentSender,int,android.content.Intent,int,int,int,android.os.Bundle)
     public final void requestPermissions(java.lang.String[],int)
     public boolean shouldShowRequestPermissionRationale(java.lang.String)
@@ -17043,17 +17011,6 @@ androidx.media.R$string
 com.google.android.play.core.splitinstall.model.SplitInstallSessionStatus
 com.google.android.play.core.internal.e
 androidx.media.MediaBrowserCompatUtils
-com.monitoryourexpenses.expenses.network.UserData
-    public static synthetic com.monitoryourexpenses.expenses.network.UserData copy$default(com.monitoryourexpenses.expenses.network.UserData,java.lang.String,java.lang.String,java.lang.String,java.lang.String,int,java.lang.Object)
-    public final java.lang.String getUserName()
-    public final java.lang.String getEmailAddress()
-    public final java.lang.String getGender()
-    public final java.lang.String getCurrency()
-    public final java.lang.String component1()
-    public final java.lang.String component2()
-    public final java.lang.String component3()
-    public final java.lang.String component4()
-    public final com.monitoryourexpenses.expenses.network.UserData copy(java.lang.String,java.lang.String,java.lang.String,java.lang.String)
 com.google.android.gms.common.util.HttpUtils
 kotlinx.coroutines.sync.MutexImpl$TryLockDesc
 com.bumptech.glide.load.engine.prefill.PreFillQueue
@@ -17958,11 +17915,6 @@ androidx.core.view.MenuItemCompat$1
 kotlinx.coroutines.internal.ArrayQueue
     public final void clear()
 android.support.v4.media.MediaBrowserCompat$MediaBrowserImplBase$4
-com.monitoryourexpenses.expenses.network.RegisterationResponse
-    public void <init>(java.lang.String)
-    public static synthetic com.monitoryourexpenses.expenses.network.RegisterationResponse copy$default(com.monitoryourexpenses.expenses.network.RegisterationResponse,java.lang.String,int,java.lang.Object)
-    public final java.lang.String component1()
-    public final com.monitoryourexpenses.expenses.network.RegisterationResponse copy(java.lang.String)
 com.google.android.gms.dynamic.zae
 com.bumptech.glide.manager.DefaultConnectivityMonitor$1
 kotlin.internal.PureReifiable
@@ -24358,8 +24310,6 @@ com.google.android.gms.common.internal.BaseGmsClient
     public final android.os.Looper zzca
     public final com.google.android.gms.common.GoogleApiAvailabilityLight zzcc
     public static final java.lang.String[] GOOGLE_PLUS_REQUIRED_FEATURES
-com.monitoryourexpenses.expenses.network.DeleteAndUpdateResponse
-    public final java.lang.String getMessage()
 androidx.appcompat.widget.AlertDialogLayout
     private void setChildFrame(android.view.View,int,int,int,int)
     public final boolean tryOnMeasure(int,int)
@@ -24737,8 +24687,6 @@ androidx.core.app.NotificationCompat$Action
     public int getSemanticAction()
     public androidx.core.app.RemoteInput[] getDataOnlyRemoteInputs()
     public boolean getShowsUserInterface()
-com.monitoryourexpenses.expenses.network.ExpenseResponseMsg
-    public final java.lang.String getMessage()
 com.google.android.gms.tasks.zzu
     private void constructor$com$google$android$gms$tasks$Task()
     public final com.google.android.gms.tasks.zzu addOnCompleteListener(com.google.android.gms.tasks.OnCompleteListener)
@@ -24849,7 +24797,6 @@ com.monitoryourexpenses.expenses.myexpenses.MyExpenseFragment
     public final void checkForAppUpdate()
     public final void popupSnackbarForCompleteUpdate()
     public final void signOut()
-    public final void shareApp()
     public static final com.monitoryourexpenses.expenses.myexpenses.MyExpenseFragment$Companion Companion
 org.threeten.bp.chrono.HijrahDate
     public static void checkValidYearOfEra(int)
@@ -31036,8 +30983,6 @@ kotlinx.coroutines.internal.ArrayQueue
     public final void addLast(java.lang.Object)
     public final java.lang.Object removeFirstOrNull()
     public final void ensureCapacity()
-com.monitoryourexpenses.expenses.network.RegisterationResponse
-    public final java.lang.String getAccessToken()
 retrofit2.Invocation
     public java.lang.reflect.Method method()
 com.google.android.material.animation.TransformationCallback

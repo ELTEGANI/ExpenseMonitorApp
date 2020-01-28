@@ -257,9 +257,6 @@ class MyExpenseFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.action_share_app->{
-                shareApp()
-            }
             R.id.action_setting->{
                 val action = MyExpenseFragmentDirections.actionMyExpenseFragmentToSettingsFragment()
                 findNavController().navigate(action)
@@ -281,9 +278,6 @@ class MyExpenseFragment : Fragment() {
         }
     }
 
-    private fun shareApp(){
-       Toast.makeText(context,"Not Available Please share the Invitation Testing Link send By El Tegani",Toast.LENGTH_LONG).show()
-    }
 
 
 }

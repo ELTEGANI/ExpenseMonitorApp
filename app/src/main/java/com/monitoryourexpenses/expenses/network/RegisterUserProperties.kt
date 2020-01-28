@@ -10,7 +10,6 @@ data class UserData(
 
 
 
-
 data class RegisterationResponse (
     val accessToken:String
 )

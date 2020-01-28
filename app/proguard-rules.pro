@@ -20,6 +20,21 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 
+-keep class com.monitoryourexpenses.expenses.** { *; }
+-keep class com.squareup.okhttp.** { *; }
+-keep interface com.squareup.okhttp.** { *; }
+
+-dontwarn com.squareup.okhttp.**
+-dontwarn okio.**
+
+-keepattributes Signature
+-keepattributes *Annotation*
+-keep class okhttp3.** { *; }
+-keep interface okhttp3.** { *; }
+
+-dontwarn okhttp3.**
+
+-keep,allowobfuscation @interface retrofit2.http.*
 
 -printusage /home/etegani/Documents/ExpenseMonitorApp/app/usage.txt
 -printseeds /home/etegani/Documents/ExpenseMonitorApp/app/seeds.txt

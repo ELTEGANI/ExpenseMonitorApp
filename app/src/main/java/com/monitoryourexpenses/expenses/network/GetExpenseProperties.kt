@@ -1,9 +1,7 @@
 package com.monitoryourexpenses.expenses.network
 
 import android.os.Parcelable
-import androidx.annotation.Keep
 import kotlinx.android.parcel.Parcelize
-
 
 data class DurationTag(
     val duration:String,
@@ -12,7 +10,6 @@ data class DurationTag(
     val endDate: String?
 )
 
-@Keep
 @Parcelize
 data class DurationExpenseResponse (
     var id: String? ,
