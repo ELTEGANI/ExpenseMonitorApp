@@ -64,5 +64,25 @@
                 app:marginLeftSystemWindowInsets="@{true}"
                 app:marginRightSystemWindowInsets="@{true}" />
 
+        <TextView
+                android:id="@+id/privacy_policy_text_view"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="8dp"
+                android:gravity="center"
+                android:maxLines="1"
+                android:text="@string/privacy_policy"
+                android:textAppearance="?attr/textAppearanceBody1"
+                app:autoSizeTextType="uniform"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/login_button"
+                app:layout_constraintVertical_bias="0.971" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

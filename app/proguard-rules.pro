@@ -20,21 +20,36 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 
--keep class com.monitoryourexpenses.expenses.** { *; }
--keep class com.squareup.okhttp.** { *; }
--keep interface com.squareup.okhttp.** { *; }
+-keep class *{
+  public private *;
+}
 
--dontwarn com.squareup.okhttp.**
--dontwarn okio.**
+# Retrofit does reflection on generic parameters. InnerClasses is required to use Signature and
+# EnclosingMethod is required to use InnerClasses.
+-keepattributes Signature, InnerClasses, EnclosingMethod
 
--keepattributes Signature
--keepattributes *Annotation*
--keep class okhttp3.** { *; }
--keep interface okhttp3.** { *; }
+# Retrofit does reflection on method and parameter annotations.
+-keepattributes RuntimeVisibleAnnotations, RuntimeVisibleParameterAnnotations
 
--dontwarn okhttp3.**
+# Retain service method parameters when optimizing.
+-keepclassmembers,allowshrinking,allowobfuscation interface * {
+    @retrofit2.http.* <methods>;
+}
 
--keep,allowobfuscation @interface retrofit2.http.*
+# Ignore annotation used for build tooling.
+-dontwarn org.codehaus.mojo.animal_sniffer.IgnoreJRERequirement
+
+# Ignore JSR 305 annotations for embedding nullability information.
+-dontwarn javax.annotation.**
+
+# Guarded by a NoClassDefFoundError try/catch and only used when on the classpath.
+-dontwarn kotlin.Unit
+
+# Top-level functions that can only be used by Kotlin.
+-dontwarn retrofit2.KotlinExtensions
+-dontwarn retrofit2.KotlinExtensions$*
+
+
 
 -printusage /home/etegani/Documents/ExpenseMonitorApp/app/usage.txt
 -printseeds /home/etegani/Documents/ExpenseMonitorApp/app/seeds.txt

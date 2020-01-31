@@ -2,27 +2,32 @@ package com.monitoryourexpenses.expenses.loginuser
 
 
 import android.content.Intent
+import android.graphics.Color
+import android.net.Uri
 import android.os.Bundle
+import android.text.SpannableString
+import android.text.Spanned
+import android.text.style.ClickableSpan
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.annotation.Keep
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
-import com.monitoryourexpenses.expenses.R
-import com.monitoryourexpenses.expenses.databinding.LoginUserFragmentBinding
-import com.monitoryourexpenses.expenses.utilites.PrefManager
-import com.monitoryourexpenses.expenses.utilites.isConnected
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
+import com.monitoryourexpenses.expenses.R
+import com.monitoryourexpenses.expenses.databinding.LoginUserFragmentBinding
+import com.monitoryourexpenses.expenses.utilites.PrefManager
+import com.monitoryourexpenses.expenses.utilites.isConnected
+import com.monitoryourexpenses.expenses.utilites.makeTextLink
 
 
 class LoginUserFragment : Fragment() {
@@ -71,6 +76,12 @@ class LoginUserFragment : Fragment() {
             }
         }
 
+
+        makeTextLink(binding.privacyPolicyTextView,"Privacy Policy", true,Color.BLACK, action = {
+            openPrivacyPolicyPage("https://expensemonitor.app/privacy_policy.html")
+        })
+
+
         return binding.root
     }
 
@@ -111,5 +122,11 @@ class LoginUserFragment : Fragment() {
     }
 
 
-
+    fun openPrivacyPolicyPage(url: String) {
+        val webpage: Uri = Uri.parse(url)
+        val intent = Intent(Intent.ACTION_VIEW, webpage)
+        if (context?.packageManager?.let { intent.resolveActivity(it) } != null) {
+            startActivity(intent)
+        }
+    }
 }

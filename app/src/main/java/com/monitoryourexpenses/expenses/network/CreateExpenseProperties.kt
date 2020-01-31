@@ -10,7 +10,6 @@ data class ExpenseData(
     val category:String
 )
 
-
 data class ExpenseResponseMsg(
     val message:String
 )

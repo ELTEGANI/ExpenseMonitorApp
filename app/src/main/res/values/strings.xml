@@ -152,4 +152,5 @@
     <string name="app_failed_to_update">App Update failed, please try again on the next app launch.</string>
     <string name="update_download">An update has just been downloaded.</string>
     <string name="restart">RESTART</string>
+    <string name="privacy_policy">By Proceeding To SignIn You Agree With Privacy Policy</string>
 </resources>
