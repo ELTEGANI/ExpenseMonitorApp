@@ -55,7 +55,7 @@ class WeekExpenseFragmentViewModel(val database: ExpenseMonitorDao, val applicat
                 _status.value = ProgressStatus.DONE
                 if(getExpensesResponseList?.size != 0){
                     _expensesProperties.value = getExpensesResponseList
-                    if(database.checkCurrencyExistence(PrefManager.getCurrency(application).toString()).isEmpty()){
+                    if(database.checkCurrencyExistence(PrefManager.getCurrency(application).toString()) == null){
                         database.insertExpense(UserExpenses(
                             todayExpenses   = BigDecimal.ZERO
                             ,weekExpenses   = sumationOfAmount(getExpensesResponseList)
