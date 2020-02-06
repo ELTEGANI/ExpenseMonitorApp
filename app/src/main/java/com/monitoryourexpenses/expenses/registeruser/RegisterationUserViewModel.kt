@@ -5,21 +5,24 @@ import android.app.Application
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
+import android.widget.TextView
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.monitoryourexpenses.expenses.network.UserData
 import com.monitoryourexpenses.expenses.R
 import com.monitoryourexpenses.expenses.database.ExpenseMonitorDao
 import com.monitoryourexpenses.expenses.database.UserExpenses
 import com.monitoryourexpenses.expenses.network.ApiFactory
-import com.monitoryourexpenses.expenses.utilites.*
-import com.monitoryourexpenses.expenses.utilites.Converter.Companion.toBigDecimal
+import com.monitoryourexpenses.expenses.network.UserData
 import com.monitoryourexpenses.expenses.utilites.MyApp.Companion.context
-import kotlinx.coroutines.*
+import com.monitoryourexpenses.expenses.utilites.PrefManager
+import com.monitoryourexpenses.expenses.utilites.ProgressStatus
+import com.monitoryourexpenses.expenses.utilites.saveCurrencyForSettings
+import kotlinx.coroutines.launch
 import org.threeten.bp.LocalDate
 import retrofit2.HttpException
+import java.math.BigDecimal
 
 
 class RegisterationUserViewModel(val database: ExpenseMonitorDao, var application: Application) :ViewModel() {
@@ -61,12 +64,7 @@ class RegisterationUserViewModel(val database: ExpenseMonitorDao, var applicatio
 
 
 
-
-
     fun registerUser(userName:String,emailAddress:String) {
-
-
-
         when(radiochecked.value){
             R.id.male_radio_button->{
                 geneder = "male"
@@ -94,9 +92,9 @@ class RegisterationUserViewModel(val database: ExpenseMonitorDao, var applicatio
                         PrefManager.setUserRegistered(application,true)
                         PrefManager.saveAccessToken(application,userResponse.accessToken)
                         database.insertExpense(UserExpenses(
-                            todayExpenses = toBigDecimal("0"),
-                            weekExpenses  = toBigDecimal("0"),
-                            monthExpenses = toBigDecimal("0"),
+                            todayExpenses = BigDecimal.ZERO,
+                            weekExpenses  = BigDecimal.ZERO,
+                            monthExpenses = BigDecimal.ZERO,
                             currency      = currency
                         ))
                         _navigateToNextScreen.value = true

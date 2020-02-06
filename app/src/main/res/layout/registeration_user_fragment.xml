@@ -154,8 +154,8 @@
 
             </RadioGroup>
 
-            <Spinner
-                    android:id="@+id/categories_spinner"
+            <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                    android:id="@+id/spinner"
                     style="@style/expenseItemStyle"
                     android:layout_width="0dp"
                     android:layout_height="52dp"

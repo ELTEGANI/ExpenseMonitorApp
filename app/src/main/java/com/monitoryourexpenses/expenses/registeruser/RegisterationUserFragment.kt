@@ -15,6 +15,7 @@ import com.monitoryourexpenses.expenses.R
 import com.monitoryourexpenses.expenses.database.ExpenseMonitorDataBase
 import com.monitoryourexpenses.expenses.databinding.RegisterationUserFragmentBinding
 import com.monitoryourexpenses.expenses.utilites.PrefManager
+import com.toptoche.searchablespinnerlibrary.SearchableSpinner
 
 
 class RegisterationUserFragment : Fragment() {
@@ -41,6 +42,10 @@ class RegisterationUserFragment : Fragment() {
 
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
+
+
+        binding.spinner.setTitle(getString(R.string.search_select_currency))
+
 
         binding.nameEditText.setText(PrefManager.getName(application))
         binding.emailEditText.setText(PrefManager.getEmail(application))

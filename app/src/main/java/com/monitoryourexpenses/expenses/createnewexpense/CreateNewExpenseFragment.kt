@@ -35,6 +35,8 @@ class CreateNewExpenseFragment : Fragment() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
+        binding.spinner.setTitle("Search or Select Category")
+
 
         binding.newDateButton.setOnClickListener {
             val c = Calendar.getInstance()

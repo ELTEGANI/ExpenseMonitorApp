@@ -13,7 +13,6 @@
                 android:icon="@drawable/ic_attach_money"
                 app:useSimpleSummaryProvider="true"
                 />
-
     </PreferenceCategory>
 
 
@@ -32,8 +31,7 @@
                 app:title="@string/build_version"
                 app:icon="@drawable/ic_build"
                 />
-
-
     </PreferenceCategory>
+
 
 </PreferenceScreen>
