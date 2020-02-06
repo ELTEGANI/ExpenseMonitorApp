@@ -154,4 +154,5 @@
     <string name="restart">RESTART</string>
     <string name="privacy_policy">By Proceeding To SignIn You Agree With Privacy Policy</string>
     <string name="search_select_currency">Search or Select Your Currency</string>
+    <string name="select_or_category">Search or Select Category</string>
 </resources>

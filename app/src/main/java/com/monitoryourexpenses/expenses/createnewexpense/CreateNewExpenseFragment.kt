@@ -35,7 +35,7 @@ class CreateNewExpenseFragment : Fragment() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
-        binding.spinner.setTitle("Search or Select Category")
+        binding.spinner.setTitle(getString(R.string.select_or_category))
 
 
         binding.newDateButton.setOnClickListener {

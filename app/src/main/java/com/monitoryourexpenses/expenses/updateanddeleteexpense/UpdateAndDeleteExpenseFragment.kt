@@ -48,7 +48,8 @@ class UpdateAndDeleteExpenseFragment : Fragment() {
         binding.lifecycleOwner =  this
 
 
-        binding.categorySpinner.setSelection((binding.categorySpinner.adapter as ArrayAdapter<String>).getPosition(expenseResponse?.expenseCategory))
+        binding.spinner.setTitle(getString(R.string.select_or_category))
+        binding.spinner.setSelection((binding.spinner.adapter as ArrayAdapter<String>).getPosition(expenseResponse?.expenseCategory))
 
 
         binding.dateButton.setOnClickListener {
@@ -69,7 +70,7 @@ class UpdateAndDeleteExpenseFragment : Fragment() {
 
         binding.updateExpenseButton.setOnClickListener {
            viewModel.updateExpense(binding.uuidEditText.text.toString(),binding.amountEditText.text.toString(),
-               binding.descriptionEditText.text.toString(),binding.dateEditText.text.toString(),binding.categorySpinner.selectedItem.toString())
+               binding.descriptionEditText.text.toString(),binding.dateEditText.text.toString(),binding.spinner.selectedItem.toString())
         }
 
 
