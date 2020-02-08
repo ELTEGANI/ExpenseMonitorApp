@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <array name="currencies_list">
-        <item name="Select Currency">Select Your Currency</item>
+        <item name="Select Currency">@string/select_currency</item>
         <item>AED UAE Dirham</item>
         <item>AFN Afghan afghani</item>
         <item>ALL Albanian lek</item>

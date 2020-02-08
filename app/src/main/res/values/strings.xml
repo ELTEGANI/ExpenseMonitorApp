@@ -134,25 +134,25 @@
     <string name="select_currency">Select Your Currency</string>
     <string name="expense_update_successfuly">Expense Updated Successfully</string>
     <string name="expense_deleted_successfuly">Expense Deleted Successfully</string>
-    <string name="weak_internet_connection">No Internet Connection</string>
-    <string name="all_your_expenses_in_one_place" translatable="false">All Your Expenses In One Place</string>
+    <string name="weak_internet_connection">There is No Internet Connection :(</string>
+    <string name="all_your_expenses_in_one_place">All Your Expenses In One Place</string>
     <string name="expense_monitor" translatable="false">Expense Monitor</string>
     <string name="date">Date</string>
-    <string name="no_daily_expenses">You Didn\'t Add Daily Expenses</string>
-    <string name="no_weekly_expenses">You Didn\'t Add Weekly Expenses</string>
-    <string name="no_monthly_expenses">You Didn\'t Add Monthly Expenses</string>
+    <string name="no_daily_expenses">No Daily Expenses Added</string>
+    <string name="no_weekly_expenses">No Weekly Expenses Added</string>
+    <string name="no_monthly_expenses">No Monthly Expenses Added</string>
     <string name="about">Others</string>
     <string name="build_version">Build Version</string>
     <string name="general_settings">General Settings</string>
-    <string name="developed_by">Developer</string>
-    <string name="developer">EL TEGANI MOHAMED HAMMAD GABIR  Email:tiganimoh@gmail.com</string>
     <string name="registeration">Registeration</string>
     <string name="create_expense">Create Expense</string>
     <string name="share_application">Share Application</string>
     <string name="app_failed_to_update">App Update failed, please try again on the next app launch.</string>
     <string name="update_download">An update has just been downloaded.</string>
     <string name="restart">RESTART</string>
-    <string name="privacy_policy">By Proceeding To SignIn You Agree With Privacy Policy</string>
-    <string name="search_select_currency">Search or Select Your Currency</string>
+    <string name="privacy_policy">By Proceeding To SignIng You Agree With Privacy Policy</string>
+    <string name="search_select_currency">Search or Select Currency</string>
     <string name="select_or_category">Search or Select Category</string>
+    <string name="close">Close</string>
+    <string name="privacy_policy_words">Privacy Policy</string>
 </resources>

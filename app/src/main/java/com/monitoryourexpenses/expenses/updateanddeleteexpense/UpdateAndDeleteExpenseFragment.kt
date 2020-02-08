@@ -49,6 +49,8 @@ class UpdateAndDeleteExpenseFragment : Fragment() {
 
 
         binding.spinner.setTitle(getString(R.string.select_or_category))
+        binding.spinner.setPositiveButton(getString(R.string.close))
+
         binding.spinner.setSelection((binding.spinner.adapter as ArrayAdapter<String>).getPosition(expenseResponse?.expenseCategory))
 
 

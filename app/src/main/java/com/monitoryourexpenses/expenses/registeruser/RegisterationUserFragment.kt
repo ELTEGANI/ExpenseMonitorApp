@@ -45,6 +45,7 @@ class RegisterationUserFragment : Fragment() {
 
 
         binding.spinner.setTitle(getString(R.string.search_select_currency))
+        binding.spinner.setPositiveButton(getString(R.string.close))
 
 
         binding.nameEditText.setText(PrefManager.getName(application))

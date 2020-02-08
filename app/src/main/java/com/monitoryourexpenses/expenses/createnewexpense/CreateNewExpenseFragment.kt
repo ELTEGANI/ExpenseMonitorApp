@@ -36,6 +36,7 @@ class CreateNewExpenseFragment : Fragment() {
         binding.lifecycleOwner = this
 
         binding.spinner.setTitle(getString(R.string.select_or_category))
+        binding.spinner.setPositiveButton(getString(R.string.close))
 
 
         binding.newDateButton.setOnClickListener {

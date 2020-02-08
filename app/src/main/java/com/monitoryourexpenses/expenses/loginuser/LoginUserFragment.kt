@@ -77,7 +77,7 @@ class LoginUserFragment : Fragment() {
         }
 
 
-        makeTextLink(binding.privacyPolicyTextView,"Privacy Policy", true,Color.BLACK, action = {
+        makeTextLink(binding.privacyPolicyTextView,getString(R.string.privacy_policy_words), true,Color.BLACK, action = {
             openPrivacyPolicyPage()
         })
 
@@ -123,8 +123,8 @@ class LoginUserFragment : Fragment() {
 
 
     private fun openPrivacyPolicyPage() {
-        val webpage: Uri = Uri.parse("https://expensemonitor.app/privacy_policy.html")
-        val intent = Intent(Intent.ACTION_VIEW, webpage)
+        val webPage: Uri = Uri.parse("https://expensemonitor.app/privacy_policy.html")
+        val intent = Intent(Intent.ACTION_VIEW,webPage)
         if (context?.packageManager?.let { intent.resolveActivity(it) } != null) {
             startActivity(intent)
         }
