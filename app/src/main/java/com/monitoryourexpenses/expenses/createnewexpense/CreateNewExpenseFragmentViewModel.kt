@@ -10,6 +10,9 @@ import androidx.lifecycle.ViewModel
 import android.widget.AdapterView
 import androidx.lifecycle.viewModelScope
 import com.monitoryourexpenses.expenses.R
+import com.monitoryourexpenses.expenses.database.ExpenseMonitorDao
+import com.monitoryourexpenses.expenses.database.Expenses
+import com.monitoryourexpenses.expenses.database.LocalRepository
 import com.monitoryourexpenses.expenses.network.ApiFactory
 import com.monitoryourexpenses.expenses.network.ExpenseData
 import com.monitoryourexpenses.expenses.utilites.*
@@ -19,9 +22,10 @@ import org.threeten.bp.LocalDate
 import retrofit2.HttpException
 
 
-class CreateNewExpenseFragmentViewModel(var application: Application) : ViewModel() {
+class CreateNewExpenseFragmentViewModel(val database: ExpenseMonitorDao,var application: Application) : ViewModel() {
 
 
+    private val localRepository = LocalRepository(database)
 
     val amount = MutableLiveData<String>()
     val description = MutableLiveData<String>()
@@ -86,8 +90,18 @@ class CreateNewExpenseFragmentViewModel(var application: Application) : ViewMode
                     _status.value = ProgressStatus.LOADING
                     val expenseResponse = getResponse?.await()
                     if (expenseResponse?.message != null){
+                        //TODO bring expense from server
+                        localRepository.insertExpense(Expenses(
+                            expense_id = "1",
+                            amount = "4000",
+                            description = "test",
+                            expenseCategory = "Cable",
+                            currency = "SDG",
+                            date = "2019-02-14"
+                        ))
                         _responseMsg.value = context?.getString(R.string.expense_created_successfuly)
                         _status.value = ProgressStatus.DONE
+
                     }
                 }catch (t:Throwable){
                     _status.value = ProgressStatus.ERROR

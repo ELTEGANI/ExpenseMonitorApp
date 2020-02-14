@@ -8,7 +8,7 @@ import androidx.room.TypeConverters
 import com.monitoryourexpenses.expenses.utilites.Converter
 
 
-@Database(entities = [UserExpenses::class], version = 1, exportSchema = false)
+@Database(entities = [Expenses::class], version = 2, exportSchema = false)
 @TypeConverters(Converter::class)
 
 abstract class ExpenseMonitorDataBase : RoomDatabase() {

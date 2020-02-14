@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.monitoryourexpenses.expenses.database.ExpenseMonitorDao
+import com.monitoryourexpenses.expenses.database.LocalRepository
 import com.monitoryourexpenses.expenses.utilites.*
 import com.monitoryourexpenses.expenses.utilites.MyApp.Companion.context
 import kotlinx.coroutines.*
@@ -17,6 +18,9 @@ import java.util.*
 
 
 class MyExpenseFragmentViewModel(val database:ExpenseMonitorDao,application: Application) : AndroidViewModel(application) {
+
+    private val localRepository = LocalRepository(database)
+
 
     private val application = getApplication<Application>().applicationContext
     private val _navigateToMyExpense = MutableLiveData<Boolean>()
@@ -41,36 +45,36 @@ class MyExpenseFragmentViewModel(val database:ExpenseMonitorDao,application: App
 
     init {
         checkIfDurationFinished()
-        getTodayExpenses()
-        getWeekExpenses()
-        getMonthExpenses()
+//        getTodayExpenses()
+//        getWeekExpenses()
+//        getMonthExpenses()
     }
 
 
 
-    private fun getTodayExpenses(){
-        viewModelScope.launch {
-                database.retrieveTodayExpense(PrefManager.getCurrency(application).toString()).collect {
-                        _todayExpense.value = expenseAmountFormatter(it)
-                }
-        }
-    }
-
-    private fun getWeekExpenses(){
-        viewModelScope.launch {
-            database.retrieveWeekExpense(PrefManager.getCurrency(application).toString()).collect {
-                    _weekExpense.value = expenseAmountFormatter(it)
-            }
-        }
-    }
-
-    private fun getMonthExpenses(){
-        viewModelScope.launch {
-            database.retrieveMonthExpense(PrefManager.getCurrency(application).toString()).collect {
-                    _monthExpense.value = expenseAmountFormatter(it)
-            }
-        }
-    }
+//    private fun getTodayExpenses(){
+//        viewModelScope.launch {
+//                database.retrieveTodayExpense(PrefManager.getCurrency(application).toString()).collect {
+//                        _todayExpense.value = expenseAmountFormatter(it)
+//                }
+//        }
+//    }
+//
+//    private fun getWeekExpenses(){
+//        viewModelScope.launch {
+//            database.retrieveWeekExpense(PrefManager.getCurrency(application).toString()).collect {
+//                    _weekExpense.value = expenseAmountFormatter(it)
+//            }
+//        }
+//    }
+//
+//    private fun getMonthExpenses(){
+//        viewModelScope.launch {
+//            database.retrieveMonthExpense(PrefManager.getCurrency(application).toString()).collect {
+//                    _monthExpense.value = expenseAmountFormatter(it)
+//            }
+//        }
+//    }
 
 
 
@@ -114,14 +118,14 @@ class MyExpenseFragmentViewModel(val database:ExpenseMonitorDao,application: App
 
         if (currentDate > savedDate){
             viewModelScope.launch {
-                database.updateTodayExpenses(BigDecimal.ZERO,PrefManager.getCurrency(application).toString())
+                localRepository.clearTodayExpense(PrefManager.getCurrentDate(application).toString())
                 PrefManager.saveCurrentDate(context,LocalDate.now().toString())
             }
         }
 
         if (currentDate > endOfTheWeek){
             viewModelScope.launch {
-                database.updateWeekExpenses(BigDecimal.ZERO,PrefManager.getCurrency(application).toString())
+                localRepository.clearWeekExpenses(PrefManager.getStartOfTheWeek(application).toString(),PrefManager.getEndOfTheWeek(application).toString())
                 PrefManager.saveStartOfTheWeek(context,LocalDate.now().toString())
                 PrefManager.saveEndOfTheWeek(application,LocalDate.now().plusDays(7).toString())
             }
@@ -129,7 +133,7 @@ class MyExpenseFragmentViewModel(val database:ExpenseMonitorDao,application: App
 
         if(currentDate > endOfTheMonth){
             viewModelScope.launch {
-                database.updateMonthExpenses(BigDecimal.ZERO,PrefManager.getCurrency(application).toString())
+                localRepository.clearMonthExpenses(PrefManager.getStartOfTheMonth(application).toString(),PrefManager.getEndOfTheMonth(application).toString())
                 PrefManager.saveStartOfTheMonth(application,LocalDate.now().toString())
                 PrefManager.saveEndOfTheMonth(application,LocalDate.now().plusMonths(1).toString())
             }

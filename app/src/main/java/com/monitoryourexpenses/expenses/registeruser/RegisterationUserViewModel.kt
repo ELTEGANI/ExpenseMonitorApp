@@ -5,14 +5,12 @@ import android.app.Application
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
-import android.widget.TextView
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.monitoryourexpenses.expenses.R
 import com.monitoryourexpenses.expenses.database.ExpenseMonitorDao
-import com.monitoryourexpenses.expenses.database.UserExpenses
 import com.monitoryourexpenses.expenses.network.ApiFactory
 import com.monitoryourexpenses.expenses.network.UserData
 import com.monitoryourexpenses.expenses.utilites.MyApp.Companion.context
@@ -22,7 +20,6 @@ import com.monitoryourexpenses.expenses.utilites.saveCurrencyForSettings
 import kotlinx.coroutines.launch
 import org.threeten.bp.LocalDate
 import retrofit2.HttpException
-import java.math.BigDecimal
 
 
 class RegisterationUserViewModel(val database: ExpenseMonitorDao, var application: Application) :ViewModel() {
@@ -91,12 +88,6 @@ class RegisterationUserViewModel(val database: ExpenseMonitorDao, var applicatio
                         saveCurrencyForSettings(currency)
                         PrefManager.setUserRegistered(application,true)
                         PrefManager.saveAccessToken(application,userResponse.accessToken)
-                        database.insertExpense(UserExpenses(
-                            todayExpenses = BigDecimal.ZERO,
-                            weekExpenses  = BigDecimal.ZERO,
-                            monthExpenses = BigDecimal.ZERO,
-                            currency      = currency
-                        ))
                         _navigateToNextScreen.value = true
                         _status.value = ProgressStatus.DONE
                     }catch (t:Throwable){
