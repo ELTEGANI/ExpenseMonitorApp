@@ -20,6 +20,7 @@ import com.monitoryourexpenses.expenses.utilites.MyApp.Companion.context
 import kotlinx.coroutines.*
 import org.threeten.bp.LocalDate
 import retrofit2.HttpException
+import java.math.BigDecimal
 
 
 class CreateNewExpenseFragmentViewModel(val database: ExpenseMonitorDao,var application: Application) : ViewModel() {
@@ -90,18 +91,18 @@ class CreateNewExpenseFragmentViewModel(val database: ExpenseMonitorDao,var appl
                     _status.value = ProgressStatus.LOADING
                     val expenseResponse = getResponse?.await()
                     if (expenseResponse?.message != null){
-                        //TODO bring expense from server
-                        localRepository.insertExpense(Expenses(
-                            expense_id = "1",
-                            amount = "4000",
-                            description = "test",
-                            expenseCategory = "Cable",
-                            currency = "SDG",
-                            date = "2019-02-14"
-                        ))
+                        expenseResponse.expense?.amount?.toBigDecimal()?.let {
+                            Expenses(
+                                expense_id = expenseResponse.expense?.id.toString(),
+                                amount = it,
+                                description = expenseResponse.expense?.description.toString(),
+                                expenseCategory = expenseResponse.expense?.expenseCategory.toString(),
+                                currency = expenseResponse.expense?.currency.toString(),
+                                date = expenseResponse.expense?.date.toString()
+                            )
+                        }?.let { localRepository.insertExpense(it) }
                         _responseMsg.value = context?.getString(R.string.expense_created_successfuly)
                         _status.value = ProgressStatus.DONE
-
                     }
                 }catch (t:Throwable){
                     _status.value = ProgressStatus.ERROR

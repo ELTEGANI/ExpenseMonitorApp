@@ -13,6 +13,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import com.monitoryourexpenses.expenses.R
+import com.monitoryourexpenses.expenses.database.ExpenseMonitorDataBase
 import com.monitoryourexpenses.expenses.databinding.CreateNewExpenseFragmentBinding
 import java.util.*
 
@@ -26,8 +27,8 @@ class CreateNewExpenseFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater,R.layout.create_new_expense_fragment,container,false)
 
         val application = requireNotNull(this.activity).application
-
-        val viewModelFactory = CreateNewExpenseFragmentViewModelFactory(application)
+        val dataBase = ExpenseMonitorDataBase.getInstance(application).expenseMonitorDao
+        val viewModelFactory = CreateNewExpenseFragmentViewModelFactory(dataBase,application)
 
         val viewModel = ViewModelProviders.of(this,viewModelFactory)
             .get(CreateNewExpenseFragmentViewModel::class.java)

@@ -118,14 +118,14 @@ class MyExpenseFragmentViewModel(val database:ExpenseMonitorDao,application: App
 
         if (currentDate > savedDate){
             viewModelScope.launch {
-                localRepository.clearTodayExpense(PrefManager.getCurrentDate(application).toString())
+//                localRepository.clearTodayExpense(PrefManager.getCurrentDate(application).toString())
                 PrefManager.saveCurrentDate(context,LocalDate.now().toString())
             }
         }
 
         if (currentDate > endOfTheWeek){
             viewModelScope.launch {
-                localRepository.clearWeekExpenses(PrefManager.getStartOfTheWeek(application).toString(),PrefManager.getEndOfTheWeek(application).toString())
+//                localRepository.clearWeekExpenses(PrefManager.getStartOfTheWeek(application).toString(),PrefManager.getEndOfTheWeek(application).toString())
                 PrefManager.saveStartOfTheWeek(context,LocalDate.now().toString())
                 PrefManager.saveEndOfTheWeek(application,LocalDate.now().plusDays(7).toString())
             }
@@ -133,7 +133,7 @@ class MyExpenseFragmentViewModel(val database:ExpenseMonitorDao,application: App
 
         if(currentDate > endOfTheMonth){
             viewModelScope.launch {
-                localRepository.clearMonthExpenses(PrefManager.getStartOfTheMonth(application).toString(),PrefManager.getEndOfTheMonth(application).toString())
+//                localRepository.clearMonthExpenses(PrefManager.getStartOfTheMonth(application).toString(),PrefManager.getEndOfTheMonth(application).toString())
                 PrefManager.saveStartOfTheMonth(application,LocalDate.now().toString())
                 PrefManager.saveEndOfTheMonth(application,LocalDate.now().plusMonths(1).toString())
             }
