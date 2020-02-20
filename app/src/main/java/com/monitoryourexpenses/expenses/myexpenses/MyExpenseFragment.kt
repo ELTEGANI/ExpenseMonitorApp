@@ -112,13 +112,13 @@ class MyExpenseFragment : Fragment() {
             @SuppressLint("SetTextI18n")
             override fun onPageSelected(position: Int){
                 super.onPageSelected(position)
-//                when(position){
-//                    0->{
-//                        viewModel.todayExpense.observe(this@MyExpenseFragment, Observer {
-//                        binding.expenseTextView.text = PrefManager.getCurrency(context)+" "+ it
-//                        })
-//                        binding.dateTextView.text = LocalDate.now().toString()
-//                    }
+                when(position){
+                    0->{
+                        viewModel.todayExpense.observe(this@MyExpenseFragment, Observer {
+                        binding.expenseTextView.text = PrefManager.getCurrency(context)+" "+ it
+                        })
+                        binding.dateTextView.text = LocalDate.now().toString()
+                    }
 //                    1->{
 //                        viewModel.weekExpense.observe(this@MyExpenseFragment, Observer {
 //                        binding.expenseTextView.text = PrefManager.getCurrency(context)+" "+ it
@@ -131,7 +131,7 @@ class MyExpenseFragment : Fragment() {
 //                        })
 //                        binding.dateTextView.text = PrefManager.getStartOfTheMonth(context)+" "+"/"+" "+ PrefManager.getEndOfTheMonth(context)
 //                    }
-//                }
+                }
             }
         })
 

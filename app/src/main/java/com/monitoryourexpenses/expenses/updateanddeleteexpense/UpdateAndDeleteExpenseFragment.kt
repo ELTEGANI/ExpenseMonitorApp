@@ -14,6 +14,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import com.monitoryourexpenses.expenses.R
+import com.monitoryourexpenses.expenses.database.ExpenseMonitorDataBase
 import com.monitoryourexpenses.expenses.databinding.UpdateAndDeleteExpenseFragmentBinding
 import java.util.*
 
@@ -27,6 +28,7 @@ class UpdateAndDeleteExpenseFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         val application = requireNotNull(activity).application
+        val dataBase = ExpenseMonitorDataBase.getInstance(application).expenseMonitorDao
         binding = DataBindingUtil.inflate(inflater,R.layout.update_and_delete_expense_fragment,container,false)
 
 
@@ -36,7 +38,7 @@ class UpdateAndDeleteExpenseFragment : Fragment() {
 
 
         val viewModelFactory = expenseResponse?.let {
-            UpdateAndDeleteFragmentViewModelFactory(it,application)
+            UpdateAndDeleteFragmentViewModelFactory(it,application,dataBase)
         }
 
 

@@ -17,12 +17,6 @@ interface RegisterationService {
 }
 
 
-interface GetTodayExpenseService {
-    @POST(AppConstants.GET_EXPENSES_BASED_ON_DURATION)
-    fun getdurationExpensesAsync(@Body durationTag: DurationTag): Deferred<List<DurationExpenseResponse>>
-}
-
-
 interface DeleteExpenseService{
     @DELETE(AppConstants.DELETE_EXPENSE)
     fun deleteExpenseAsync(@Path("expenseid")expenseid:String):Deferred<DeleteAndUpdateResponse>

@@ -27,7 +27,9 @@ interface ExpenseMonitorDao {
 
     //select for sum amount
 //    @Query("SELECT SUM(amount) from expenses WHERE date=:todayDate and currency =:currency")
-//    suspend fun retrieveSumationOfTodayExpense(todayDate:String,currency: String): Flow<String>
+//    fun retrieveSumationOfTodayExpense(todayDate:String,currency: String): Flow<String>
+
+
 //
 //    @Query("SELECT SUM(amount) from expenses WHERE date between :startWeek and :endWeek and currency =:currency")
 //    suspend fun retrieveSumationOfWeekExpense(startWeek:String,endWeek:String,currency: String): Flow<String>
@@ -36,13 +38,13 @@ interface ExpenseMonitorDao {
 //    suspend fun retrieveSumationOfMonthExpense(startMonth:String,endMonth:String,currency:String): Flow<String>
 //
 //    //delete expense
-//    @Query("DELETE FROM expenses WHERE expense_id=:id")
-//    suspend fun deleteExpenses(id:String)
+    @Query("DELETE FROM expenses WHERE expense_id=:id")
+    suspend fun deleteExpenses(id:String)
 
 
     //update expense
-//    @Query("UPDATE FROM expenses WHERE expense_id=:id")
-//    suspend fun updateExpenses(id: String)
+    @Query("UPDATE expenses SET amount=:amount,description=:description,expense_category=:expensecategory,date=:date WHERE expense_id=:expense_id")
+    suspend fun updateExpenses(expense_id: String,amount:String,description:String,expensecategory:String,date:String)
 
     //clear per duration
 //    @Query("DELETE  FROM expenses WHERE date=:today")

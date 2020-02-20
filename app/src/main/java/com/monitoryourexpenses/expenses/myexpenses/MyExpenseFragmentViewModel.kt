@@ -54,7 +54,7 @@ class MyExpenseFragmentViewModel(val database:ExpenseMonitorDao,application: App
 
 //    private fun getTodayExpenses(){
 //        viewModelScope.launch {
-//                database.retrieveTodayExpense(PrefManager.getCurrency(application).toString()).collect {
+//            localRepository.getSumationOfTodayExpenses(PrefManager.getCurrentDate(application).toString(),PrefManager.getCurrency(application).toString()).collect {
 //                        _todayExpense.value = expenseAmountFormatter(it)
 //                }
 //        }

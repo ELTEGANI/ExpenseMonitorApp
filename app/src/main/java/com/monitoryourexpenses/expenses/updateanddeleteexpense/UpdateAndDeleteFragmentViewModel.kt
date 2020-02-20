@@ -7,7 +7,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.monitoryourexpenses.expenses.R
+import com.monitoryourexpenses.expenses.database.ExpenseMonitorDao
 import com.monitoryourexpenses.expenses.database.Expenses
+import com.monitoryourexpenses.expenses.database.LocalRepository
 import com.monitoryourexpenses.expenses.network.ApiFactory
 import com.monitoryourexpenses.expenses.network.ExpenseData
 import com.monitoryourexpenses.expenses.utilites.MyApp.Companion.context
@@ -16,9 +18,10 @@ import com.monitoryourexpenses.expenses.utilites.ProgressStatus
 import kotlinx.coroutines.*
 import retrofit2.HttpException
 
-class UpdateAndDeleteFragmentViewModel(expenses: Expenses, application: Application) : AndroidViewModel(application) {
+class UpdateAndDeleteFragmentViewModel(val expenses: Expenses, application: Application,val dataBase: ExpenseMonitorDao) : AndroidViewModel(application) {
 
     private val application = getApplication<Application>().applicationContext
+    private val localRepository = LocalRepository(dataBase)
 
     private val _selectedExpense = MutableLiveData<Expenses>()
     val selectedExpenseMsg :LiveData<Expenses>
@@ -54,6 +57,7 @@ class UpdateAndDeleteFragmentViewModel(expenses: Expenses, application: Applicat
                     val getResponse = getDeleteExpenseResponse.await()
                     if(getResponse.message.isNotEmpty()){
                         _msgError.value = context?.getString(R.string.expense_deleted_successfuly)
+                        localRepository.deleteExpneseUsingId(expenseId)
                         Log.d("getResponse",getResponse.toString())
                         _status.value = ProgressStatus.DONE
                     }
@@ -89,6 +93,7 @@ class UpdateAndDeleteFragmentViewModel(expenses: Expenses, application: Applicat
                         if (getResponse != null) {
                             if(getResponse.message.isNotEmpty()){
                                 _msgError.value = context?.getString(R.string.expense_update_successfuly)
+                                localRepository.updateExpenseUsingId(expenseId,newAmount,description,category,date)
                             }
                         }
                         _status.value = ProgressStatus.DONE

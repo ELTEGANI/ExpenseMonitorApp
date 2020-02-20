@@ -2,7 +2,6 @@ package com.monitoryourexpenses.expenses.database
 
 
 
-
 class LocalRepository(private val database:ExpenseMonitorDao) {
 
 
@@ -22,11 +21,11 @@ class LocalRepository(private val database:ExpenseMonitorDao) {
     suspend fun getMonthExpenses(startMonth:String, endMonth:String, currency: String): List<Expenses> {
         return  database.retrieveMonthExpense(startMonth,endMonth,currency)
     }
-//
-//    suspend fun getWeekExpenses(startWeek:String, endWeek:String, currency: String){
-//        database.retrieveWeekExpense(startWeek,endWeek,currency)
-//    }
-//
+
+
+//     suspend fun getSumationOfTodayExpenses(todayDate:String, currency: String): Flow<String> {
+//         return database.retrieveSumationOfTodayExpense(todayDate,currency)
+//     }
 
 //
 //    suspend fun getSumationOfMonthExpenses(startMonth:String, endMonth:String, currency: String){
@@ -37,9 +36,7 @@ class LocalRepository(private val database:ExpenseMonitorDao) {
 //        database.retrieveSumationOfWeekExpense(startWeek,endWeek,currency)
 //    }
 //
-//    suspend fun getSumationOfTodayExpenses(todayDate:String, currency: String){
-//        database.retrieveSumationOfTodayExpense(todayDate,currency)
-//    }
+
 //
 //    suspend fun clearTodayExpense(todayDate: String){
 //        database.clearAllTodayExpenses(todayDate)
@@ -54,13 +51,14 @@ class LocalRepository(private val database:ExpenseMonitorDao) {
 //    }
 //
 //
-//    suspend fun deleteExpnese(id:String){
-//        database.deleteExpenses(id)
-//    }
-//
-//    suspend fun updateExpense(id: String){
-//        database.updateExpenses(id)
-//    }
+    suspend fun deleteExpneseUsingId(id:String){
+        database.deleteExpenses(id)
+    }
+
+
+    suspend fun updateExpenseUsingId(expense_id: String,amount:String,description:String,expensecategory:String,date:String){
+        database.updateExpenses(expense_id,amount,description,expensecategory,date)
+    }
 
 
     suspend fun insertExpense(expenses: Expenses){

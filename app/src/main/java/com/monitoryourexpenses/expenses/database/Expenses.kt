@@ -21,7 +21,7 @@ data class Expenses(
     val amount: BigDecimal?,
 
     @ColumnInfo(name = "description")
-    var description: String,
+    var description: String?,
 
     @ColumnInfo(name = "expense_category")
     var expenseCategory: String?,
