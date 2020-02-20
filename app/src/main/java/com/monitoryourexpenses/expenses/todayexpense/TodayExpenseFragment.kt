@@ -35,7 +35,6 @@ class TodayExpenseFragment : Fragment() {
             .get(TodayExpenseFragmentViewModel::class.java)
 
 
-
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
 

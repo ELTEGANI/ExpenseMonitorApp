@@ -14,7 +14,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import com.monitoryourexpenses.expenses.R
+import com.monitoryourexpenses.expenses.database.ExpenseMonitorDataBase
 import com.monitoryourexpenses.expenses.databinding.UpdateAndDeleteExpenseFragmentBinding
+import java.text.SimpleDateFormat
 import java.util.*
 
 class UpdateAndDeleteExpenseFragment : Fragment() {
@@ -23,10 +25,11 @@ class UpdateAndDeleteExpenseFragment : Fragment() {
     private lateinit var binding: UpdateAndDeleteExpenseFragmentBinding
 
 
-    @SuppressLint("SetTextI18n")
+    @SuppressLint("SetTextI18n", "SimpleDateFormat")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         val application = requireNotNull(activity).application
+        val dataBase = ExpenseMonitorDataBase.getInstance(application).expenseMonitorDao
         binding = DataBindingUtil.inflate(inflater,R.layout.update_and_delete_expense_fragment,container,false)
 
 
@@ -36,7 +39,7 @@ class UpdateAndDeleteExpenseFragment : Fragment() {
 
 
         val viewModelFactory = expenseResponse?.let {
-            UpdateAndDeleteFragmentViewModelFactory(it,application)
+            UpdateAndDeleteFragmentViewModelFactory(it,application,dataBase)
         }
 
 
@@ -59,11 +62,14 @@ class UpdateAndDeleteExpenseFragment : Fragment() {
             val year = c.get(Calendar.YEAR)
             val month = c.get(Calendar.MONTH)
             val day = c.get(Calendar.DAY_OF_MONTH)
-            val datePickerDialog = context?.let { it1 ->
-                DatePickerDialog(
+            val datePickerDialog = context?.let { it1 -> DatePickerDialog(
                     it1,
                     DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
-                        binding.dateEditText.setText(year.toString() + "-" + (monthOfYear + 1) + "-" + dayOfMonth.toString())
+                        val c = Calendar.getInstance()
+                        c.set(year, monthOfYear, dayOfMonth)
+                        val format = SimpleDateFormat("yyyy-MM-dd")
+                        val datestring = format.format(c.time)
+                        viewModel.currentDate.value = datestring
                     },year,month,day)
             }
             datePickerDialog?.show()

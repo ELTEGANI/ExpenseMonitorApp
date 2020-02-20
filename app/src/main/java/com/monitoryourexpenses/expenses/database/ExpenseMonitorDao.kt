@@ -1,8 +1,10 @@
 package com.monitoryourexpenses.expenses.database
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
+import androidx.room.Update
 import kotlinx.coroutines.flow.Flow
 import java.math.BigDecimal
 
@@ -10,35 +12,46 @@ import java.math.BigDecimal
 @Dao
 interface ExpenseMonitorDao {
 
+
+    @Query("SELECT * from expenses WHERE date=:todayDate and currency =:currency")
+    suspend fun retrieveTodayExpense(todayDate:String,currency: String): List<Expenses>
+
+    @Query("SELECT * from expenses WHERE date between :startWeek and :endWeek and currency =:currency")
+    suspend fun retrieveWeekExpense(startWeek:String,endWeek:String,currency: String): List<Expenses>
+
+    @Query("SELECT * from expenses WHERE date between :startMonth and :endMonth and currency =:currency")
+    suspend fun retrieveMonthExpense(startMonth:String,endMonth:String,currency:String): List<Expenses>
+
+    @Query("SELECT SUM(amount) from expenses WHERE date=:todayDate and currency =:currency")
+    fun retrieveSumationOfTodayExpense(todayDate:String,currency: String): Flow<String>
+
+    @Query("SELECT SUM(amount) from expenses WHERE date between :startWeek and :endWeek and currency =:currency")
+    fun retrieveSumationOfWeekExpense(startWeek:String,endWeek:String,currency: String): Flow<String>
+
+    @Query("SELECT SUM(amount) from expenses WHERE date between :startMonth and :endMonth and currency =:currency")
+    fun retrieveSumationOfMonthExpense(startMonth:String,endMonth:String,currency:String): Flow<String>
+
+    @Query("DELETE FROM expenses WHERE expense_id=:id")
+    suspend fun deleteExpenses(id:String)
+
+    //update expense
+    @Query("UPDATE expenses SET amount=:amount,description=:description,expense_category=:expensecategory,date=:date WHERE expense_id=:expense_id")
+    suspend fun updateExpenses(expense_id: String,amount:String,description:String,expensecategory:String,date:String)
+
+    @Query("DELETE  FROM expenses WHERE date=:today")
+    suspend fun clearAllTodayExpenses(today:String)
+
+    @Query("DELETE  FROM expenses WHERE date between :startWeek and :endWeek")
+    suspend fun clearAllWeekExpenses(startWeek:String,endWeek:String)
+
+    @Query("DELETE  FROM expenses WHERE date between :startMonth and :endMonth")
+    suspend fun clearAllMonthExpenses(startMonth:String,endMonth:String)
+
+
+    //insert when create expenses
     @Insert
-     suspend fun insertExpense(userExpenses: UserExpenses)
+    suspend fun insertExpenses(expenses: Expenses)
 
-
-    @Query("UPDATE user_expense_table SET today_expenses=:todayExpense WHERE currency =:currency")
-    suspend fun updateTodayExpenses(todayExpense: BigDecimal, currency:String)
-
-
-    @Query("UPDATE user_expense_table SET week_expenses=:weekExpense WHERE currency =:currency")
-    suspend fun updateWeekExpenses(weekExpense: BigDecimal, currency:String)
-
-
-    @Query("UPDATE user_expense_table SET month_expenses=:monthExpenses WHERE currency =:currency")
-    suspend fun updateMonthExpenses(monthExpenses: BigDecimal, currency:String)
-
-
-    @Query("SELECT today_expenses from user_expense_table WHERE currency =:currency")
-    fun retrieveTodayExpense(currency: String): Flow<String>
-
-
-    @Query("SELECT week_expenses from user_expense_table WHERE currency =:currency")
-    fun retrieveWeekExpense(currency: String): Flow<String>
-
-
-    @Query("SELECT month_expenses from user_expense_table WHERE currency =:currency")
-    fun retrieveMonthExpense(currency: String): Flow<String>
-
-    @Query("SELECT currency from user_expense_table WHERE currency =:currency")
-    suspend fun checkCurrencyExistence(currency: String): String
 
 
 }

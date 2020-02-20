@@ -5,10 +5,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.monitoryourexpenses.expenses.database.Expenses
 import com.monitoryourexpenses.expenses.databinding.ExpenseViewItemBinding
 import com.monitoryourexpenses.expenses.network.DurationExpenseResponse
+import com.monitoryourexpenses.expenses.network.Expense
 
-class DurationsExpenseAdapter(private val expenseListener: ExpenseListener) : ListAdapter<DurationExpenseResponse, DurationsExpenseAdapter.ViewHolder>(
+class DurationsExpenseAdapter(private val expenseListener: ExpenseListener) : ListAdapter<Expenses, DurationsExpenseAdapter.ViewHolder>(
     GetExpensesResponseDiffCallback()
 ){
 
@@ -25,10 +27,10 @@ class DurationsExpenseAdapter(private val expenseListener: ExpenseListener) : Li
 
     class ViewHolder private constructor(val binding: ExpenseViewItemBinding):RecyclerView.ViewHolder(binding.root) {
         fun bind(
-            durationExpenseResponse: DurationExpenseResponse,
+            expense: Expenses,
             expenseListener: ExpenseListener
         ) {
-          binding.expensesProperties = durationExpenseResponse
+          binding.expensesProperties = expense
           binding.clickListener = expenseListener
           binding.executePendingBindings()
         }
@@ -49,11 +51,11 @@ class DurationsExpenseAdapter(private val expenseListener: ExpenseListener) : Li
 
 
 
-class GetExpensesResponseDiffCallback:DiffUtil.ItemCallback<DurationExpenseResponse>(){
-    override fun areItemsTheSame(oldItem: DurationExpenseResponse, newItem: DurationExpenseResponse): Boolean {
-        return oldItem.id == newItem.id
+class GetExpensesResponseDiffCallback:DiffUtil.ItemCallback<Expenses>(){
+    override fun areItemsTheSame(oldItem: Expenses, newItem: Expenses): Boolean {
+        return oldItem.expense_id == newItem.expense_id
     }
-    override fun areContentsTheSame(oldItem: DurationExpenseResponse, newItem: DurationExpenseResponse): Boolean {
+    override fun areContentsTheSame(oldItem: Expenses, newItem: Expenses): Boolean {
         return oldItem == newItem
     }
 }
@@ -61,6 +63,6 @@ class GetExpensesResponseDiffCallback:DiffUtil.ItemCallback<DurationExpenseRespo
 
 
 
-class ExpenseListener(val onClickListener:(durationExpenseResponse:DurationExpenseResponse)->Unit){
-    fun onClick(durationExpenseResponse:DurationExpenseResponse) = onClickListener(durationExpenseResponse)
+class ExpenseListener(val onClickListener:(expense:Expenses)->Unit){
+    fun onClick(expense: Expenses) = onClickListener(expense)
 }

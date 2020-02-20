@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.monitoryourexpenses.expenses.adapters.DurationsExpenseAdapter
 import com.monitoryourexpenses.expenses.network.DurationExpenseResponse
 import com.google.android.material.elevation.ElevationOverlayProvider
+import com.monitoryourexpenses.expenses.database.Expenses
 
 
 @BindingAdapter("progressStatus")
@@ -32,39 +33,39 @@ fun bindingStatus(progressBar: ProgressBar,status: ProgressStatus?){
 }
 
 @BindingAdapter("listData")
-fun bindRecyclerView(recyclerView: RecyclerView,data:List<DurationExpenseResponse>?){
+fun bindRecyclerView(recyclerView: RecyclerView,data:List<Expenses>?){
     val adapter = recyclerView.adapter as DurationsExpenseAdapter
     adapter.submitList(data)
 }
 
 @SuppressLint("SetTextI18n")
 @BindingAdapter("expenseAmount")
-fun TextView.setExpenseAmount(durationExpenseResponse:DurationExpenseResponse?){
-    durationExpenseResponse?.let {
-         text = PrefManager.getCurrency(context)+" "+ expenseAmountFormatter(durationExpenseResponse.amount)
+fun TextView.setExpenseAmount(expenses:Expenses?){
+    expenses?.let {
+         text = PrefManager.getCurrency(context)+" "+ expenseAmountFormatter(expenses.amount.toString())
      }
 }
 
 @BindingAdapter("expenseCategory")
-fun TextView.setExpensecategory(durationExpenseResponse:DurationExpenseResponse?){
-    durationExpenseResponse?.let {
-        text = durationExpenseResponse.expenseCategory
+fun TextView.setExpensecategory(expenses:Expenses?){
+    expenses?.let {
+        text = expenses.expenseCategory
     }
 }
 
 @BindingAdapter("expenseDescription")
-fun TextView.setExpenseDescription(durationExpenseResponse:DurationExpenseResponse?){
-    durationExpenseResponse?.let {
-        text = durationExpenseResponse.description
+fun TextView.setExpenseDescription(expenses:Expenses?){
+    expenses?.let {
+        text = expenses.description
     }
 }
 
 
 
 @BindingAdapter("expenseDate")
-fun TextView.setExpenseDate(durationExpenseResponse:DurationExpenseResponse?){
-    durationExpenseResponse?.let {
-        text = durationExpenseResponse.date
+fun TextView.setExpenseDate(expenses:Expenses?){
+    expenses?.let {
+        text = expenses.date
     }
 }
 
