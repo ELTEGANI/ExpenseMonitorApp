@@ -5,7 +5,7 @@
         <data>
              <variable
                      name="expensesProperties"
-                     type="com.monitoryourexpenses.expenses.network.DurationExpenseResponse" />
+                     type="com.monitoryourexpenses.expenses.database.Expenses" />
             <variable
                     name="clickListener"
                     type="com.monitoryourexpenses.expenses.adapters.ExpenseListener" />

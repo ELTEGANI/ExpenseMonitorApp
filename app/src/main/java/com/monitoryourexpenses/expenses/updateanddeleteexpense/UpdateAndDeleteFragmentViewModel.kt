@@ -7,8 +7,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.monitoryourexpenses.expenses.R
+import com.monitoryourexpenses.expenses.database.Expenses
 import com.monitoryourexpenses.expenses.network.ApiFactory
-import com.monitoryourexpenses.expenses.network.DurationExpenseResponse
 import com.monitoryourexpenses.expenses.network.ExpenseData
 import com.monitoryourexpenses.expenses.utilites.MyApp.Companion.context
 import com.monitoryourexpenses.expenses.utilites.PrefManager
@@ -16,12 +16,12 @@ import com.monitoryourexpenses.expenses.utilites.ProgressStatus
 import kotlinx.coroutines.*
 import retrofit2.HttpException
 
-class UpdateAndDeleteFragmentViewModel(durationExpenseResponse: DurationExpenseResponse, application: Application) : AndroidViewModel(application) {
+class UpdateAndDeleteFragmentViewModel(expenses: Expenses, application: Application) : AndroidViewModel(application) {
 
     private val application = getApplication<Application>().applicationContext
 
-    private val _selectedExpense = MutableLiveData<DurationExpenseResponse>()
-    val selectedExpenseMsg :LiveData<DurationExpenseResponse>
+    private val _selectedExpense = MutableLiveData<Expenses>()
+    val selectedExpenseMsg :LiveData<Expenses>
         get() = _selectedExpense
 
 
@@ -40,7 +40,7 @@ class UpdateAndDeleteFragmentViewModel(durationExpenseResponse: DurationExpenseR
         get() = _validationMsg
 
     init {
-        _selectedExpense.value = durationExpenseResponse
+        _selectedExpense.value = expenses
     }
 
 

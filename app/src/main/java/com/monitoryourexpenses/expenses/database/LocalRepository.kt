@@ -2,20 +2,32 @@ package com.monitoryourexpenses.expenses.database
 
 
 
+
 class LocalRepository(private val database:ExpenseMonitorDao) {
 
 
-//    suspend fun getMonthExpenses(startMonth:String, endMonth:String, currency: String){
-//        database.retrieveMonthExpense(startMonth,endMonth,currency)
-//    }
+
+
+    suspend fun getTodayExpenses(todayDate:String, currency: String): List<Expenses> {
+        return database.retrieveTodayExpense(todayDate,currency)
+    }
+
+
+
+    suspend fun getWeekExpenses(startWeek:String,endWeek:String,currency: String): List<Expenses> {
+        return database.retrieveWeekExpense(startWeek,endWeek,currency)
+    }
+
+
+    suspend fun getMonthExpenses(startMonth:String, endMonth:String, currency: String): List<Expenses> {
+        return  database.retrieveMonthExpense(startMonth,endMonth,currency)
+    }
 //
 //    suspend fun getWeekExpenses(startWeek:String, endWeek:String, currency: String){
 //        database.retrieveWeekExpense(startWeek,endWeek,currency)
 //    }
 //
-//    suspend fun getTodayExpenses(todayDate:String, currency: String){
-//        database.retrieveTodayExpense(todayDate,currency)
-//    }
+
 //
 //    suspend fun getSumationOfMonthExpenses(startMonth:String, endMonth:String, currency: String){
 //       database.retrieveSumationOfMonthExpense(startMonth,endMonth,currency)

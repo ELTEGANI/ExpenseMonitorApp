@@ -20,7 +20,6 @@ import com.monitoryourexpenses.expenses.utilites.MyApp.Companion.context
 import kotlinx.coroutines.*
 import org.threeten.bp.LocalDate
 import retrofit2.HttpException
-import java.math.BigDecimal
 
 
 class CreateNewExpenseFragmentViewModel(val database: ExpenseMonitorDao,var application: Application) : ViewModel() {

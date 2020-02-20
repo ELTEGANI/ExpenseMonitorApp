@@ -14,14 +14,15 @@ interface ExpenseMonitorDao {
 
 
     //select for tab list
-//    @Query("SELECT * from expenses WHERE date=:todayDate and currency =:currency")
-//    suspend fun retrieveTodayExpense(todayDate:String,currency: String): LiveData<List<String>>
+    @Query("SELECT * from expenses WHERE date=:todayDate and currency =:currency")
+    suspend fun retrieveTodayExpense(todayDate:String,currency: String): List<Expenses>
 
-//    @Query("SELECT * from expenses WHERE date between :startWeek and :endWeek and currency =:currency")
-//    suspend fun retrieveWeekExpense(startWeek:String,endWeek:String,currency: String): LiveData<List<String>>
-//
-//    @Query("SELECT * from expenses WHERE date between :startMonth and :endMonth and currency =:currency")
-//    suspend fun retrieveMonthExpense(startMonth:String,endMonth:String,currency:String): LiveData<List<String>>
+
+    @Query("SELECT * from expenses WHERE date between :startWeek and :endWeek and currency =:currency")
+    suspend fun retrieveWeekExpense(startWeek:String,endWeek:String,currency: String): List<Expenses>
+
+    @Query("SELECT * from expenses WHERE date between :startMonth and :endMonth and currency =:currency")
+    suspend fun retrieveMonthExpense(startMonth:String,endMonth:String,currency:String): List<Expenses>
 
 
     //select for sum amount
