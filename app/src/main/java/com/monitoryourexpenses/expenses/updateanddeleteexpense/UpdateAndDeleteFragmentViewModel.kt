@@ -42,8 +42,12 @@ class UpdateAndDeleteFragmentViewModel(val expenses: Expenses, application: Appl
     val validationMsg: LiveData<String>
         get() = _validationMsg
 
+    val currentDate = MutableLiveData<String>()
+
+
     init {
         _selectedExpense.value = expenses
+        currentDate.value = expenses.date
     }
 
 

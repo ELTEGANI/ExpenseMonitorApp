@@ -45,36 +45,38 @@ class MyExpenseFragmentViewModel(val database:ExpenseMonitorDao,application: App
 
     init {
         checkIfDurationFinished()
-//        getTodayExpenses()
-//        getWeekExpenses()
-//        getMonthExpenses()
+        getTodayExpenses()
+        getWeekExpenses()
+        getMonthExpenses()
     }
 
 
 
-//    private fun getTodayExpenses(){
-//        viewModelScope.launch {
-//            localRepository.getSumationOfTodayExpenses(PrefManager.getCurrentDate(application).toString(),PrefManager.getCurrency(application).toString()).collect {
-//                        _todayExpense.value = expenseAmountFormatter(it)
-//                }
-//        }
-//    }
-//
-//    private fun getWeekExpenses(){
-//        viewModelScope.launch {
-//            database.retrieveWeekExpense(PrefManager.getCurrency(application).toString()).collect {
-//                    _weekExpense.value = expenseAmountFormatter(it)
-//            }
-//        }
-//    }
-//
-//    private fun getMonthExpenses(){
-//        viewModelScope.launch {
-//            database.retrieveMonthExpense(PrefManager.getCurrency(application).toString()).collect {
-//                    _monthExpense.value = expenseAmountFormatter(it)
-//            }
-//        }
-//    }
+    private fun getTodayExpenses(){
+        viewModelScope.launch {
+            localRepository.getSumationOfTodayExpenses(PrefManager.getCurrentDate(application).toString(),PrefManager.getCurrency(application).toString()).collect {
+                        _todayExpense.value = expenseAmountFormatter(it)
+                }
+        }
+    }
+
+    private fun getWeekExpenses(){
+        viewModelScope.launch {
+            localRepository.getSumationOfWeekExpenses(PrefManager.getStartOfTheWeek(application).toString(),
+                PrefManager.getEndOfTheWeek(application).toString(),PrefManager.getCurrency(application).toString()).collect {
+                    _weekExpense.value = expenseAmountFormatter(it)
+            }
+        }
+    }
+
+    private fun getMonthExpenses(){
+        viewModelScope.launch {
+            localRepository.getSumationOfMonthExpenses(PrefManager.getStartOfTheMonth(application).toString(),
+                PrefManager.getEndOfTheMonth(application).toString(),PrefManager.getCurrency(application).toString()).collect {
+                    _monthExpense.value = expenseAmountFormatter(it)
+            }
+        }
+    }
 
 
 
@@ -118,14 +120,14 @@ class MyExpenseFragmentViewModel(val database:ExpenseMonitorDao,application: App
 
         if (currentDate > savedDate){
             viewModelScope.launch {
-//                localRepository.clearTodayExpense(PrefManager.getCurrentDate(application).toString())
+                localRepository.clearTodayExpense(PrefManager.getCurrentDate(application).toString())
                 PrefManager.saveCurrentDate(context,LocalDate.now().toString())
             }
         }
 
         if (currentDate > endOfTheWeek){
             viewModelScope.launch {
-//                localRepository.clearWeekExpenses(PrefManager.getStartOfTheWeek(application).toString(),PrefManager.getEndOfTheWeek(application).toString())
+               localRepository.clearWeekExpenses(PrefManager.getStartOfTheWeek(application).toString(),PrefManager.getEndOfTheWeek(application).toString())
                 PrefManager.saveStartOfTheWeek(context,LocalDate.now().toString())
                 PrefManager.saveEndOfTheWeek(application,LocalDate.now().plusDays(7).toString())
             }
@@ -133,7 +135,7 @@ class MyExpenseFragmentViewModel(val database:ExpenseMonitorDao,application: App
 
         if(currentDate > endOfTheMonth){
             viewModelScope.launch {
-//                localRepository.clearMonthExpenses(PrefManager.getStartOfTheMonth(application).toString(),PrefManager.getEndOfTheMonth(application).toString())
+               localRepository.clearMonthExpenses(PrefManager.getStartOfTheMonth(application).toString(),PrefManager.getEndOfTheMonth(application).toString())
                 PrefManager.saveStartOfTheMonth(application,LocalDate.now().toString())
                 PrefManager.saveEndOfTheMonth(application,LocalDate.now().plusMonths(1).toString())
             }

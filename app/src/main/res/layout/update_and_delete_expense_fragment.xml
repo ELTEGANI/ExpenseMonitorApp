@@ -129,9 +129,9 @@
                     android:layout_marginEnd="16dp"
                     android:layout_marginBottom="8dp"
                     android:ems="10"
-                    android:importantForAutofill="no"
+                    android:importantForAutofill="yes"
                     android:inputType="date"
-                    android:text="@{viewModel.selectedExpenseMsg.date}"
+                    android:text="@={viewModel.currentDate}"
                     app:layout_constraintBottom_toTopOf="@+id/spinner"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/description_edit_text" />

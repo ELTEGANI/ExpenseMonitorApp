@@ -1,5 +1,6 @@
 package com.monitoryourexpenses.expenses.database
 
+import kotlinx.coroutines.flow.Flow
 
 
 class LocalRepository(private val database:ExpenseMonitorDao) {
@@ -23,34 +24,34 @@ class LocalRepository(private val database:ExpenseMonitorDao) {
     }
 
 
-//     suspend fun getSumationOfTodayExpenses(todayDate:String, currency: String): Flow<String> {
-//         return database.retrieveSumationOfTodayExpense(todayDate,currency)
-//     }
+      fun getSumationOfTodayExpenses(todayDate:String, currency: String): Flow<String> {
+        return database.retrieveSumationOfTodayExpense(todayDate,currency)
+     }
 
-//
-//    suspend fun getSumationOfMonthExpenses(startMonth:String, endMonth:String, currency: String){
-//       database.retrieveSumationOfMonthExpense(startMonth,endMonth,currency)
-//    }
-//
-//    suspend fun getSumationOfWeekExpenses(startWeek:String, endWeek:String, currency: String){
-//        database.retrieveSumationOfWeekExpense(startWeek,endWeek,currency)
-//    }
-//
 
-//
-//    suspend fun clearTodayExpense(todayDate: String){
-//        database.clearAllTodayExpenses(todayDate)
-//    }
-//
-//    suspend fun clearWeekExpenses(startWeek: String,endWeek: String){
-//        database.clearAllWeekExpenses(startWeek,endWeek)
-//    }
-//
-//    suspend fun clearMonthExpenses(startMonth: String,endMonth: String){
-//       database.clearAllMonthExpenses(startMonth,endMonth)
-//    }
-//
-//
+      fun getSumationOfMonthExpenses(startMonth:String, endMonth:String, currency: String):Flow<String>{
+          return database.retrieveSumationOfMonthExpense(startMonth,endMonth,currency)
+    }
+
+     fun getSumationOfWeekExpenses(startWeek:String, endWeek:String, currency: String):Flow<String>{
+         return database.retrieveSumationOfWeekExpense(startWeek,endWeek,currency)
+    }
+
+
+
+    suspend fun clearTodayExpense(todayDate: String){
+        database.clearAllTodayExpenses(todayDate)
+    }
+
+    suspend fun clearWeekExpenses(startWeek: String,endWeek: String){
+        database.clearAllWeekExpenses(startWeek,endWeek)
+    }
+
+    suspend fun clearMonthExpenses(startMonth: String,endMonth: String){
+       database.clearAllMonthExpenses(startMonth,endMonth)
+    }
+
+
     suspend fun deleteExpneseUsingId(id:String){
         database.deleteExpenses(id)
     }
