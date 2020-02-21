@@ -11,7 +11,8 @@ object ApiFactory {
     val REGISTERATION_SERVICE:RegisterationService = RetrofitFactory.retrofit((AppConstants.BASEURL))
         .create(RegisterationService::class.java)
 
-
+    val ALL_EXPENSES:AllExpensesService = RetrofitFactory.retrofit((AppConstants.BASEURL))
+        .create(AllExpensesService::class.java)
 
     val DELETE_EXPENSE:DeleteExpenseService = RetrofitFactory.retrofit(AppConstants.BASEURL)
         .create(DeleteExpenseService::class.java)

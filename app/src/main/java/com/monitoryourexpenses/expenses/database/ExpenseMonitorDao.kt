@@ -47,11 +47,11 @@ interface ExpenseMonitorDao {
     @Query("DELETE  FROM expenses WHERE date between :startMonth and :endMonth")
     suspend fun clearAllMonthExpenses(startMonth:String,endMonth:String)
 
-
-    //insert when create expenses
     @Insert
     suspend fun insertExpenses(expenses: Expenses)
 
+    @Query("SELECT * from expenses WHERE date between :startMonth and :endMonth")
+    suspend fun selectAllExpenses(startMonth:String,endMonth:String): List<Expenses>
 
 
 }

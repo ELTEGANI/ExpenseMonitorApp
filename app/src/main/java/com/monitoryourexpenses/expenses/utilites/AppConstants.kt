@@ -6,6 +6,7 @@ object AppConstants {
     const val CREATE_NEW_EXPENSE = "api/expense/createexpense"
     const val DELETE_EXPENSE = "api/expense/deleteexpense/{expenseid}"
     const val UPDATE_EXPENSE = "api/expense/updateexpense/{expenseid}"
+    const val ALL_EXPENSES = "api/expense/getExpensesBasedOnDuration"
 }
 
 

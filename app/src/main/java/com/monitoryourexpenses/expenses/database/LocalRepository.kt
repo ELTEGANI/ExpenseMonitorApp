@@ -1,6 +1,11 @@
 package com.monitoryourexpenses.expenses.database
 
+import android.content.Context
+import com.monitoryourexpenses.expenses.network.ApiFactory
+import com.monitoryourexpenses.expenses.utilites.PrefManager
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.withContext
 
 
 class LocalRepository(private val database:ExpenseMonitorDao) {
@@ -65,6 +70,19 @@ class LocalRepository(private val database:ExpenseMonitorDao) {
     suspend fun insertExpense(expenses: Expenses){
         database.insertExpenses(expenses)
     }
+
+
+    suspend fun checkIfExpensesIsEmpty(startMonth: String, endMonth: String):List<Expenses>{
+        return database.selectAllExpenses(startMonth,endMonth)
+    }
+
+    suspend fun getAllExpensesFromServer(startMonth: String,endMonth: String){
+        withContext(Dispatchers.IO){
+            val expensesList =  ApiFactory.ALL_EXPENSES.allExpensesAsync(startMonth,endMonth).await()
+            database.insertExpenses(expensesList)
+        }
+    }
+
 
 
 

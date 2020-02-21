@@ -24,6 +24,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
 import com.monitoryourexpenses.expenses.R
+import com.monitoryourexpenses.expenses.database.ExpenseMonitorDataBase
 import com.monitoryourexpenses.expenses.databinding.LoginUserFragmentBinding
 import com.monitoryourexpenses.expenses.utilites.PrefManager
 import com.monitoryourexpenses.expenses.utilites.isConnected
@@ -50,6 +51,8 @@ class LoginUserFragment : Fragment() {
 
 
         binding = DataBindingUtil.inflate(inflater, R.layout.login_user_fragment,container,false)
+        val application = requireNotNull(this.activity).application
+        val dataBase = ExpenseMonitorDataBase.getInstance(application).expenseMonitorDao
 
         val gso: GoogleSignInOptions = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestEmail()
@@ -58,8 +61,7 @@ class LoginUserFragment : Fragment() {
         mGoogleSignInClient = context?.let { GoogleSignIn.getClient(it, gso) }
 
 
-        val application = requireNotNull(this.activity).application
-        val viewModelFactory = LoginUserViewModelFactory(application)
+        val viewModelFactory = LoginUserViewModelFactory(application,dataBase)
         val viewModel = ViewModelProviders.of(this,viewModelFactory)
             .get(LoginUserViewModel::class.java)
 

@@ -27,7 +27,6 @@ class MyExpenseFragmentViewModel(val database:ExpenseMonitorDao,application: App
     val navigateToMyExpense : LiveData<Boolean>
     get() = _navigateToMyExpense
 
-
     private val _todayExpense = MutableLiveData<String>()
     val todayExpense : LiveData<String>
         get() = _todayExpense
@@ -36,11 +35,9 @@ class MyExpenseFragmentViewModel(val database:ExpenseMonitorDao,application: App
     val weekExpense : LiveData<String>
         get() = _weekExpense
 
-
     private val _monthExpense = MutableLiveData<String>()
     val monthExpense : LiveData<String>
         get() = _monthExpense
-    
     
 
     init {
