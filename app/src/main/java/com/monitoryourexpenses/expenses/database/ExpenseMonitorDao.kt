@@ -50,8 +50,8 @@ interface ExpenseMonitorDao {
     @Insert
     suspend fun insertExpenses(expenses: Expenses)
 
-    @Query("SELECT * from expenses WHERE date between :startMonth and :endMonth")
-    suspend fun selectAllExpenses(startMonth:String,endMonth:String): List<Expenses>
+    @Query("SELECT * from expenses")
+    suspend fun selectAllExpenses(): List<Expenses>
 
 
 }

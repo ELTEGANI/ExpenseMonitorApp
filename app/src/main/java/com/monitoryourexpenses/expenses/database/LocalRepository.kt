@@ -72,8 +72,8 @@ class LocalRepository(private val database:ExpenseMonitorDao) {
     }
 
 
-    suspend fun checkIfExpensesIsEmpty(startMonth: String, endMonth: String):List<Expenses>{
-        return database.selectAllExpenses(startMonth,endMonth)
+    suspend fun checkIfExpensesIsEmpty():List<Expenses>{
+        return database.selectAllExpenses()
     }
 
     suspend fun getAllExpensesFromServer(startMonth: String,endMonth: String){

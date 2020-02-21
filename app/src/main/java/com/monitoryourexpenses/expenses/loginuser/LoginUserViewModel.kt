@@ -16,12 +16,7 @@ class LoginUserViewModel (var application: Application,val database: ExpenseMoni
 
     init {
         viewModelScope.launch {
-            if(localRepository.checkIfExpensesIsEmpty(
-                    PrefManager.getStartOfTheMonth(application).toString(),
-                    PrefManager.getEndOfTheMonth(application).toString()
-                ).isEmpty()
-            ){
-                //caches is empty request the server
+            if(localRepository.checkIfExpensesIsEmpty().isEmpty()){
                localRepository.getAllExpensesFromServer(PrefManager.getStartOfTheMonth(application).toString(),PrefManager.getEndOfTheMonth(application).toString())
             }
         }
