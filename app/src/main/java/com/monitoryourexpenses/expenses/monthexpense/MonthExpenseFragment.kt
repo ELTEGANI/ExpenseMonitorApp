@@ -59,8 +59,11 @@ class MonthExpenseFragment : Fragment() {
 
         viewModel.monthExpenses.observe(viewLifecycleOwner, Observer {
             it?.let {
-                adapter.submitList(it)
-            }
+                if (it.isNotEmpty()){
+                    adapter.submitList(it)
+                }else{
+                    binding.noExpensesTextView.text = getString(R.string.no_monthly_expenses)
+                }            }
         })
 
         return  binding.root

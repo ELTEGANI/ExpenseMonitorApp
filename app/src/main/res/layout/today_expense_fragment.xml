@@ -16,7 +16,7 @@
 
 
         <TextView
-                android:id="@+id/textView"
+                android:id="@+id/no_expenses_text_view"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"

@@ -60,7 +60,11 @@ class WeekExpenseFragment : Fragment() {
 
         viewModel.weekExpenses.observe(viewLifecycleOwner, Observer {
             it?.let {
-                adapter.submitList(it)
+                if (it.isNotEmpty()){
+                    adapter.submitList(it)
+                }else{
+                    binding.noExpensesTextView.text = getString(R.string.no_weekly_expenses)
+                }
             }
         })
 
