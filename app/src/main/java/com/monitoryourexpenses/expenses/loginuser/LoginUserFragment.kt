@@ -52,7 +52,6 @@ class LoginUserFragment : Fragment() {
 
         binding = DataBindingUtil.inflate(inflater, R.layout.login_user_fragment,container,false)
         val application = requireNotNull(this.activity).application
-        val dataBase = ExpenseMonitorDataBase.getInstance(application).expenseMonitorDao
 
         val gso: GoogleSignInOptions = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestEmail()
@@ -61,7 +60,7 @@ class LoginUserFragment : Fragment() {
         mGoogleSignInClient = context?.let { GoogleSignIn.getClient(it, gso) }
 
 
-        val viewModelFactory = LoginUserViewModelFactory(application,dataBase)
+        val viewModelFactory = LoginUserViewModelFactory(application)
         val viewModel = ViewModelProviders.of(this,viewModelFactory)
             .get(LoginUserViewModel::class.java)
 

@@ -2,24 +2,12 @@ package com.monitoryourexpenses.expenses.loginuser
 
 import android.app.Application
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.monitoryourexpenses.expenses.database.ExpenseMonitorDao
-import com.monitoryourexpenses.expenses.database.LocalRepository
-import com.monitoryourexpenses.expenses.utilites.PrefManager
-import kotlinx.coroutines.launch
 
 
-class LoginUserViewModel (var application: Application,val database: ExpenseMonitorDao) : ViewModel(){
 
-    private val localRepository = LocalRepository(database)
+class LoginUserViewModel (var application: Application) : ViewModel(){
 
 
-    init {
-        viewModelScope.launch {
-            if(localRepository.checkIfExpensesIsEmpty().isEmpty()){
-               localRepository.getAllExpensesFromServer(PrefManager.getStartOfTheMonth(application).toString(),PrefManager.getEndOfTheMonth(application).toString())
-            }
-        }
-    }
+
 
 }

@@ -31,24 +31,24 @@ class MonthExpenseFragment : Fragment() {
         val dataBase = ExpenseMonitorDataBase.getInstance(application).expenseMonitorDao
         val viewModelFactory = MonthExpenseFragmentViewModelFactory(dataBase,application)
 
-        val fragmentViewModel = ViewModelProviders.of(this,viewModelFactory)
+        val viewModel = ViewModelProviders.of(this,viewModelFactory)
             .get(MonthExpenseFragmentViewModel::class.java)
 
 
         binding.lifecycleOwner = this
-        binding.viewModel = fragmentViewModel
+        binding.viewModel = viewModel
 
 
         val adapter = DurationsExpenseAdapter(ExpenseListener {
-            fragmentViewModel.displaySelectedExpense(it)
+            viewModel.displaySelectedExpense(it)
         })
 
 
-        fragmentViewModel.navigateToSelectedExpense.observe(this, Observer {
+        viewModel.navigateToSelectedExpense.observe(this, Observer {
             if (it != null){
                 val direction = MyExpenseFragmentDirections.actionMyExpenseFragmentToUpdateAndDeleteExpenseFragment(it)
                 findNavController().navigate(direction)
-                fragmentViewModel.displaySelectedExpenseCompleted()
+                viewModel.displaySelectedExpenseCompleted()
             }
         })
 
@@ -57,7 +57,11 @@ class MonthExpenseFragment : Fragment() {
         binding.monthExpenseList.itemAnimator = DefaultItemAnimator()
         binding.monthExpenseList.adapter = adapter
 
-
+        viewModel.monthExpenses.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                adapter.submitList(it)
+            }
+        })
 
         return  binding.root
 

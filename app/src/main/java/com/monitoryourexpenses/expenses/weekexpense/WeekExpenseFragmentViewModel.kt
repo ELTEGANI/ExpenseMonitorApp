@@ -17,22 +17,11 @@ class WeekExpenseFragmentViewModel(val database: ExpenseMonitorDao, val applicat
     private val localRepository = LocalRepository(database)
 
 
-    private val _expensesProperties = MutableLiveData<List<Expenses>>()
-    val expensesProperties:LiveData<List<Expenses>>
-        get() = _expensesProperties
-
     private val _navigateToSelectedExpense = MutableLiveData<Expenses>()
     val navigateToSelectedExpense :LiveData<Expenses>
         get() = _navigateToSelectedExpense
 
-
-    init {
-        viewModelScope.launch {
-            _expensesProperties.value = localRepository.getWeekExpenses(PrefManager.getStartOfTheWeek(application).toString(),
-                PrefManager.getEndOfTheWeek(application).toString(),PrefManager.getCurrency(application).toString())
-        }
-    }
-
+    val weekExpenses = localRepository.getWeekExpenses(PrefManager.getStartOfTheWeek(application).toString(),PrefManager.getEndOfTheWeek(application).toString(),PrefManager.getCurrency(application).toString())
 
     fun displaySelectedExpense(expenses: Expenses){
         _navigateToSelectedExpense.value = expenses

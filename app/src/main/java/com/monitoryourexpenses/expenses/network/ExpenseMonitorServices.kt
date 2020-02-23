@@ -19,7 +19,7 @@ interface RegisterationService {
 
 interface AllExpensesService{
     @POST(AppConstants.ALL_EXPENSES)
-    fun allExpensesAsync(startMonth:String,endMonth:String): Deferred<Expenses>
+    fun allExpensesAsync(@Body duration: Duration): Deferred<List<Expenses>>
 }
 
 interface DeleteExpenseService{

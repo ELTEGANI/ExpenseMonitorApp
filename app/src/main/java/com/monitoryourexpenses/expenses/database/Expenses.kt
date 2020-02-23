@@ -12,10 +12,10 @@ import java.math.BigDecimal
 @Parcelize
 data class Expenses(
     @PrimaryKey(autoGenerate = true)
-    var id: Int = 0,
+    var expense_id: Int = 0,
 
-    @ColumnInfo(name = "expense_id")
-    val expense_id: String?,
+    @ColumnInfo(name = "id")
+    val id: String?,
 
     @ColumnInfo(name = "amount")
     val amount: BigDecimal?,

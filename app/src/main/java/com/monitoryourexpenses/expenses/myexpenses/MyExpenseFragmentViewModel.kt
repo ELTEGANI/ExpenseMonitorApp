@@ -45,9 +45,17 @@ class MyExpenseFragmentViewModel(val database:ExpenseMonitorDao,application: App
         getTodayExpenses()
         getWeekExpenses()
         getMonthExpenses()
+        getAllExpensesForCache()
     }
 
 
+    private fun getAllExpensesForCache(){
+        viewModelScope.launch {
+            localRepository.getAllExpensesFromServer(
+                PrefManager.getStartOfTheMonth(application).toString(),
+                PrefManager.getEndOfTheMonth(application).toString())
+        }
+    }
 
     private fun getTodayExpenses(){
         viewModelScope.launch {
@@ -117,14 +125,12 @@ class MyExpenseFragmentViewModel(val database:ExpenseMonitorDao,application: App
 
         if (currentDate > savedDate){
             viewModelScope.launch {
-                localRepository.clearTodayExpense(PrefManager.getCurrentDate(application).toString())
                 PrefManager.saveCurrentDate(context,LocalDate.now().toString())
             }
         }
 
         if (currentDate > endOfTheWeek){
             viewModelScope.launch {
-               localRepository.clearWeekExpenses(PrefManager.getStartOfTheWeek(application).toString(),PrefManager.getEndOfTheWeek(application).toString())
                 PrefManager.saveStartOfTheWeek(context,LocalDate.now().toString())
                 PrefManager.saveEndOfTheWeek(application,LocalDate.now().plusDays(7).toString())
             }

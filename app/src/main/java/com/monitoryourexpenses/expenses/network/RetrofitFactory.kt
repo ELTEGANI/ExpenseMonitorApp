@@ -4,6 +4,7 @@ import com.monitoryourexpenses.expenses.BuildConfig
 import com.monitoryourexpenses.expenses.utilites.MyApp
 import com.monitoryourexpenses.expenses.utilites.PrefManager
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
+import com.monitoryourexpenses.expenses.utilites.BigDecimalAdapter
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.Interceptor
@@ -57,6 +58,7 @@ object RetrofitFactory {
 
 
     private val moshi = Moshi.Builder()
+        .add(BigDecimalAdapter)
         .add(KotlinJsonAdapterFactory())
         .build()
 

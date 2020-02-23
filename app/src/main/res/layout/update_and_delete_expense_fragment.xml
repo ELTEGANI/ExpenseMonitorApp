@@ -64,7 +64,7 @@
                     android:ems="10"
                     android:importantForAutofill="no"
                     android:inputType="number"
-                    android:text="@{viewModel.selectedExpenseMsg.expense_id}"
+                    android:text="@{viewModel.selectedExpenseMsg.id}"
                     android:visibility="gone"
                     app:layout_constraintBottom_toTopOf="@+id/amount_edit_Text"
                     app:layout_constraintEnd_toEndOf="parent"
