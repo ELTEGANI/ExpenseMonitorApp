@@ -58,6 +58,11 @@ class WeekExpenseFragment : Fragment() {
         binding.weekExpenseList.itemAnimator = DefaultItemAnimator()
         binding.weekExpenseList.adapter = adapter
 
+        viewModel.weekExpenses.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                adapter.submitList(it)
+            }
+        })
 
         return  binding.root
 

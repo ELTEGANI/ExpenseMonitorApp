@@ -13,6 +13,8 @@ import android.widget.TextView
 import androidx.preference.PreferenceManager
 import com.monitoryourexpenses.expenses.network.DurationExpenseResponse
 import com.monitoryourexpenses.expenses.utilites.MyApp.Companion.context
+import com.squareup.moshi.FromJson
+import com.squareup.moshi.ToJson
 import java.math.BigDecimal
 
 
@@ -96,4 +98,12 @@ fun isConnected(): Boolean {
     textView.text = spannableString
     textView.movementMethod = LinkMovementMethod.getInstance()
     textView.highlightColor = Color.TRANSPARENT
+}
+
+object BigDecimalAdapter {
+    @FromJson
+    fun fromJson(string: String) = BigDecimal(string)
+
+    @ToJson
+    fun toJson(value: BigDecimal) = value.toString()
 }

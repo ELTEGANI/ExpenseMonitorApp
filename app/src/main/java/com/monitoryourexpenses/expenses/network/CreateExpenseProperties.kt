@@ -1,10 +1,8 @@
 package com.monitoryourexpenses.expenses.network
 
+import com.monitoryourexpenses.expenses.database.Expenses
 import com.squareup.moshi.Json
-
-
-
-
+import java.math.BigDecimal
 
 
 data class ExpenseData(
@@ -32,7 +30,7 @@ data class Expense (
     @Json(name = "id")
     var id: String? ,
     @Json(name = "amount")
-    var amount: String? ,
+    var amount: BigDecimal? ,
     @Json(name = "description")
     var description: String? ,
     @Json(name = "expenseCategory")
@@ -47,4 +45,20 @@ data class Expense (
     var updatedAt: String? ,
     @Json(name = "createdAt")
     var createdAt: String?
+)
+
+
+data class AllExpense (
+    @Json(name = "id")
+    var id: String? ,
+    @Json(name = "amount")
+    var amount: BigDecimal? ,
+    @Json(name = "description")
+    var description: String? ,
+    @Json(name = "expenseCategory")
+    var expenseCategory: String? ,
+    @Json(name = "currency")
+    var currency: String? ,
+    @Json(name = "date")
+    var date: String?
 )

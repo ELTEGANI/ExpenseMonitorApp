@@ -39,9 +39,7 @@ class TodayExpenseFragment : Fragment() {
         binding.viewModel = viewModel
 
         
-        val adapter = DurationsExpenseAdapter(ExpenseListener {
-                  viewModel.displaySelectedExpense(it)
-        })
+
 
         viewModel.navigateToSelectedExpense.observe(this, Observer {
             if (it != null){
@@ -51,11 +49,18 @@ class TodayExpenseFragment : Fragment() {
             }
         })
 
+        val adapter = DurationsExpenseAdapter(ExpenseListener {
+            viewModel.displaySelectedExpense(it)
+        })
 
         binding.todayExpenseList.itemAnimator = DefaultItemAnimator()
         binding.todayExpenseList.adapter = adapter
 
-
+        viewModel.todayExpenses.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                adapter.submitList(it)
+            }
+        })
 
         return  binding.root
 

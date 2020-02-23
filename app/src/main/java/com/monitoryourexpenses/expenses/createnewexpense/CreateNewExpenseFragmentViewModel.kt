@@ -90,9 +90,9 @@ class CreateNewExpenseFragmentViewModel(val database: ExpenseMonitorDao,var appl
                     _status.value = ProgressStatus.LOADING
                     val expenseResponse = getResponse?.await()
                     if (expenseResponse?.message != null){
-                        expenseResponse.expense?.amount?.toBigDecimal()?.let {
+                        expenseResponse.expense?.amount?.let {
                             Expenses(
-                                expense_id = expenseResponse.expense?.id.toString(),
+                                id = expenseResponse.expense?.id.toString(),
                                 amount = it,
                                 description = expenseResponse.expense?.description.toString(),
                                 expenseCategory = expenseResponse.expense?.expenseCategory.toString(),

@@ -24,14 +24,7 @@ class MonthExpenseFragmentViewModel(val database: ExpenseMonitorDao, val applica
     val navigateToSelectedExpense :LiveData<Expenses>
         get() = _navigateToSelectedExpense
 
-
-    init {
-        viewModelScope.launch {
-            _expensesProperties.value = localRepository.getMonthExpenses(
-                PrefManager.getStartOfTheMonth(application).toString(),
-                PrefManager.getEndOfTheMonth(application).toString(), PrefManager.getCurrency(application).toString())
-        }
-    }
+    val monthExpenses = localRepository.getMonthExpenses(PrefManager.getStartOfTheMonth(application).toString(),PrefManager.getEndOfTheMonth(application).toString(),PrefManager.getCurrency(application).toString())
 
     fun displaySelectedExpense(expenses: Expenses){
         _navigateToSelectedExpense.value = expenses

@@ -17,34 +17,15 @@ class TodayExpenseFragmentViewModel(val database: ExpenseMonitorDao,val applicat
 
     private val localRepository = LocalRepository(database)
 
-
-    private val _expensesProperties = MutableLiveData<List<Expenses>>()
-    val expensesProperties:LiveData<List<Expenses>>
-        get() = _expensesProperties
-
-
     private val _navigateToSelectedExpense = MutableLiveData<Expenses>()
     val navigateToSelectedExpense :LiveData<Expenses>
         get() = _navigateToSelectedExpense
 
-
-    init {
-        viewModelScope.launch {
-            _expensesProperties.value = localRepository.getTodayExpenses(
-                   PrefManager.getCurrentDate(application).toString()
-                , PrefManager.getCurrency(application).toString())
-        }
-    }
-
-
-
-
-
+    val todayExpenses = localRepository.getTodayExpenses(PrefManager.getCurrentDate(application).toString(),PrefManager.getCurrency(application).toString())
 
     fun displaySelectedExpense(expense: Expenses){
         _navigateToSelectedExpense.value = expense
     }
-
 
     fun displaySelectedExpenseCompleted(){
         _navigateToSelectedExpense.value = null

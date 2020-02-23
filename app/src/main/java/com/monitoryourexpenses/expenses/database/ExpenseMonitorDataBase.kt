@@ -21,10 +21,9 @@ abstract class ExpenseMonitorDataBase : RoomDatabase() {
                 var instance = INSTANCE
                 if (instance == null) {
                     instance = Room.databaseBuilder(
-                        context.applicationContext,
-                        ExpenseMonitorDataBase::class.java,
-                        "expense_monitor_database"
-                    )
+                         context.applicationContext,
+                         ExpenseMonitorDataBase::class.java,
+                        "expense_monitor_database")
                         .fallbackToDestructiveMigration()
                         .build()
                     INSTANCE = instance
