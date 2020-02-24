@@ -22,6 +22,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 style="@style/noConnectionStyle"
+                android:text="@string/no_daily_expenses"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.25"
