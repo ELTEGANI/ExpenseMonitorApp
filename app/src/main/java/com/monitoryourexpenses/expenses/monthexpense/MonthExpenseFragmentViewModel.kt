@@ -16,9 +16,6 @@ class MonthExpenseFragmentViewModel(val database: ExpenseMonitorDao, val applica
 
     private val localRepository = LocalRepository(database)
 
-    private val _expensesProperties = MutableLiveData<List<Expenses>>()
-    val expensesProperties: LiveData<List<Expenses>>
-        get() = _expensesProperties
 
     private val _navigateToSelectedExpense = MutableLiveData<Expenses>()
     val navigateToSelectedExpense :LiveData<Expenses>
