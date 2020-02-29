@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
-import com.monitoryourexpenses.expenses.network.AllExpense
 import kotlinx.coroutines.flow.Flow
 
 
@@ -31,14 +30,14 @@ interface ExpenseMonitorDao {
     fun retrieveSumationOfMonthExpense(startMonth:String,endMonth:String,currency:String): Flow<String>
 
     @Query("DELETE FROM expenses WHERE id=:id")
-    suspend fun deleteExpenses(id:String)
+    suspend fun deleteExpenses(id:String):Int
 
     //update expense
     @Query("UPDATE expenses SET amount=:amount,description=:description,expense_category=:expensecategory,date=:date WHERE id=:id")
-    suspend fun updateExpenses(id: String,amount:String,description:String,expensecategory:String,date:String)
+    suspend fun updateExpense(id: String, amount:String, description:String, expensecategory:String, date:String):Int
 
     @Query("DELETE  FROM expenses WHERE date between :startMonth and :endMonth")
-    suspend fun clearAllMonthExpenses(startMonth:String,endMonth:String)
+    suspend fun clearAllMonthExpenses(startMonth:String,endMonth:String):Int
 
     @Insert
     suspend fun insertExpenses(expenses: Expenses)

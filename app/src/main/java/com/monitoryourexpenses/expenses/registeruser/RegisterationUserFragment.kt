@@ -38,8 +38,6 @@ class RegisterationUserFragment : Fragment() {
             .get(RegisterationUserViewModel::class.java)
 
 
-
-
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 

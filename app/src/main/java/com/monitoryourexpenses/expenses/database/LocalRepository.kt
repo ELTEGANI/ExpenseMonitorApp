@@ -1,6 +1,5 @@
 package com.monitoryourexpenses.expenses.database
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import com.monitoryourexpenses.expenses.network.ApiFactory
 import com.monitoryourexpenses.expenses.network.Duration
@@ -12,7 +11,7 @@ import kotlinx.coroutines.withContext
 class LocalRepository(private val database:ExpenseMonitorDao) {
 
 
-    fun getTodayExpenses(todayDate:String, currency: String): LiveData<List<Expenses>> {
+    suspend fun getTodayExpenses(todayDate:String, currency: String): LiveData<List<Expenses>> {
         return database.retrieveTodayExpense(todayDate,currency)
     }
 
@@ -24,15 +23,15 @@ class LocalRepository(private val database:ExpenseMonitorDao) {
         return  database.retrieveMonthExpense(startMonth,endMonth,currency)
     }
 
-      fun getSumationOfTodayExpenses(todayDate:String, currency: String): Flow<String> {
+    fun getSumationOfTodayExpenses(todayDate:String, currency: String): Flow<String> {
         return database.retrieveSumationOfTodayExpense(todayDate,currency)
      }
 
-      fun getSumationOfMonthExpenses(startMonth:String, endMonth:String, currency: String):Flow<String>{
+    fun getSumationOfMonthExpenses(startMonth:String, endMonth:String, currency: String):Flow<String>{
           return database.retrieveSumationOfMonthExpense(startMonth,endMonth,currency)
     }
 
-     fun getSumationOfWeekExpenses(startWeek:String, endWeek:String, currency: String):Flow<String>{
+    fun getSumationOfWeekExpenses(startWeek:String, endWeek:String, currency: String):Flow<String>{
          return database.retrieveSumationOfWeekExpense(startWeek,endWeek,currency)
     }
 
@@ -48,7 +47,7 @@ class LocalRepository(private val database:ExpenseMonitorDao) {
 
 
     suspend fun updateExpenseUsingId(expense_id: String,amount:String,description:String,expensecategory:String,date:String){
-        database.updateExpenses(expense_id,amount,description,expensecategory,date)
+        database.updateExpense(expense_id,amount,description,expensecategory,date)
     }
 
 
