@@ -255,21 +255,38 @@ class MyExpenseFragment : Fragment() {
         inflater.inflate(R.menu.main, menu)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+    override fun onOptionsItemSelected(item: MenuItem) =
         when (item.itemId) {
             R.id.action_setting->{
                 val action = MyExpenseFragmentDirections.actionMyExpenseFragmentToSettingsFragment()
                 findNavController().navigate(action)
+                true
             }
-            R.id.action_sign_out ->{
+            R.id.action_sign_out -> {
                 viewModel.clearPrefs()
                 signOut()
                 val navController = binding.root.findNavController()
                 navController.navigate(R.id.action_myExpenseFragment_to_loginUserFragment)
-                return true
+                true
             }
+            R.id.share_application -> {
+                shareApp()
+                true
+            }
+            else -> false
         }
-        return false
+
+    private fun shareApp() {
+        val sendIntent: Intent = Intent().apply {
+            action = Intent.ACTION_SEND
+            putExtra(
+                Intent.EXTRA_TEXT,
+                "https://play.google.com/store/apps/details?id=com.monitoryourexpenses.expenses"
+            )
+            type = "text/plain"
+        }
+        val shareIntent = Intent.createChooser(sendIntent, null)
+        startActivity(shareIntent)
     }
 
 
