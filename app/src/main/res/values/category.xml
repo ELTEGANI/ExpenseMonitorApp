@@ -113,5 +113,27 @@
          <item>@string/Vehiclepurchase</item>
          <item>@string/Water</item>
          <item>@string/Wedding</item>
+         <item>@string/food</item>
+         <item>@string/breakfast</item>
+         <item>@string/lunch</item>
+         <item>@string/fastfood</item>
+         <item>@string/tea</item>
+         <item>@string/cigarette</item>
+         <item>@string/soap</item>
+         <item>@string/showersoap</item>
+         <item>@string/boosh</item>
+         <item>@string/coffe</item>
+         <item>@string/teawithmilk</item>
+         <item>@string/meet</item>
+         <item>@string/beef</item>
+         <item>@string/showersoap</item>
+         <item>@string/rabbitmeat</item>
+         <item>@string/chickenmeat</item>
+         <item>@string/wildmeat</item>
+         <item>@string/meatofbirds</item>
+         <item>@string/meatofcamels</item>
+     <item>@string/milk</item>
+     <item>@string/drymilk</item>
+     <item>@string/credit</item>
     </array>
 </resources>
