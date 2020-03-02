@@ -59,7 +59,6 @@ class TodayExpenseFragment : Fragment() {
             it?.let {
                 if (it.isNotEmpty()){
                     adapter.submitList(it)
-                    binding.noExpensesTextView.visibility = View.GONE
                 }else{
                     binding.noExpensesTextView.visibility = View.VISIBLE
                 }

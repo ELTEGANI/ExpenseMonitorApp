@@ -62,7 +62,7 @@ class MonthExpenseFragment : Fragment() {
                 if (it.isNotEmpty()){
                     adapter.submitList(it)
                 }else{
-                    binding.noExpensesTextView.text = getString(R.string.no_monthly_expenses)
+                    binding.noExpensesTextView.visibility = View.VISIBLE
                 }            }
         })
 
