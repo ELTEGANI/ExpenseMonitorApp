@@ -6,7 +6,7 @@
         tools:context=".myexpenses.MyExpenseFragment">
 
     <item
-            android:id="@+id/share"
+            android:id="@+id/share_application"
             android:title="@string/share_application"
             app:showAsAction="never"/>
 

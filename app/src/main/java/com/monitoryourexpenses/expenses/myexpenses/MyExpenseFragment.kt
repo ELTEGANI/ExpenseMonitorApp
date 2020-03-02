@@ -269,7 +269,7 @@ class MyExpenseFragment : Fragment() {
                 navController.navigate(R.id.action_myExpenseFragment_to_loginUserFragment)
                 true
             }
-            R.id.share -> {
+            R.id.share_application -> {
                 shareApp()
                 true
             }
