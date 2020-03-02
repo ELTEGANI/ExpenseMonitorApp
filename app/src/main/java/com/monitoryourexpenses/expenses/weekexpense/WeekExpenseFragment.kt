@@ -1,5 +1,6 @@
 package com.monitoryourexpenses.expenses.weekexpense
 
+import android.opengl.Visibility
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -63,7 +64,7 @@ class WeekExpenseFragment : Fragment() {
                 if (it.isNotEmpty()){
                     adapter.submitList(it)
                 }else{
-                    binding.noExpensesTextView.text = getString(R.string.no_weekly_expenses)
+                    binding.noExpensesTextView.visibility = View.VISIBLE
                 }
             }
         })
