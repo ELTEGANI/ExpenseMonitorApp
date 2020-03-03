@@ -48,19 +48,6 @@ fun expenseAmountFormatter(amount: String?): String {
 
 }
 
-
-   fun sumationOfAmount(expensesResponseList: List<DurationExpenseResponse>?): BigDecimal {
-       val amountList = arrayListOf<BigDecimal>()
-       return if (expensesResponseList != null) {
-           expensesResponseList.forEach { amount ->
-               amount.amount?.toBigDecimal()?.let { amountList.add(it) }
-           }
-           amountList.sumByBigDecimal()
-       }else{
-           BigDecimal.ZERO
-       }
-   }
-
 fun saveCurrencyForSettings(selectedCurrency:String){
     val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
     val editor = sharedPreferences.edit()
@@ -69,9 +56,6 @@ fun saveCurrencyForSettings(selectedCurrency:String){
 }
 
 
-fun Iterable<BigDecimal>.sumByBigDecimal(): BigDecimal {
-    return this.fold(BigDecimal.ZERO) { acc, e -> acc + e }
-}
 
 fun isConnected(): Boolean {
     val connectivityManager =
@@ -100,10 +84,3 @@ fun isConnected(): Boolean {
     textView.highlightColor = Color.TRANSPARENT
 }
 
-object BigDecimalAdapter {
-    @FromJson
-    fun fromJson(string: String) = BigDecimal(string)
-
-    @ToJson
-    fun toJson(value: BigDecimal) = value.toString()
-}

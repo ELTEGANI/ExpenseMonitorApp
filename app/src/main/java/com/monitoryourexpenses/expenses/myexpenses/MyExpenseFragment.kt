@@ -70,8 +70,6 @@ class MyExpenseFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.my_expense_fragment,container,false)
 
 
-
-
         val application = requireNotNull(this.activity).application
         val dataBase = ExpenseMonitorDataBase.getInstance(application).expenseMonitorDao
         val viewModelFactory = MyExpenseFragmentViewModelFactory(dataBase,application)
@@ -83,7 +81,7 @@ class MyExpenseFragment : Fragment() {
         binding.lifecycleOwner = this
 
         
-        checkForAppUpdate()
+        if(isConnected()){checkForAppUpdate()}
 
         val gso =
             GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)

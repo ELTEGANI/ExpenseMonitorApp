@@ -44,6 +44,7 @@ class CreateNewExpenseFragment : Fragment() {
         binding.spinner.setPositiveButton(getString(R.string.close))
 
 
+
         binding.newDateButton.setOnClickListener {
             val c = Calendar.getInstance()
             val year = c.get(Calendar.YEAR)
