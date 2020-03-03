@@ -15,6 +15,7 @@ import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
@@ -75,7 +76,7 @@ class MyExpenseFragment : Fragment() {
         val dataBase = ExpenseMonitorDataBase.getInstance(application).expenseMonitorDao
         val viewModelFactory = MyExpenseFragmentViewModelFactory(dataBase,application)
 
-        viewModel = ViewModelProviders.of(this,viewModelFactory)
+        viewModel = ViewModelProvider(this,viewModelFactory)
             .get(MyExpenseFragmentViewModel::class.java)
 
         binding.viewModel = viewModel

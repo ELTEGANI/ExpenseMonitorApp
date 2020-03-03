@@ -15,6 +15,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -61,7 +62,7 @@ class LoginUserFragment : Fragment() {
 
 
         val viewModelFactory = LoginUserViewModelFactory(application)
-        val viewModel = ViewModelProviders.of(this,viewModelFactory)
+        val viewModel = ViewModelProvider(this,viewModelFactory)
             .get(LoginUserViewModel::class.java)
 
 
