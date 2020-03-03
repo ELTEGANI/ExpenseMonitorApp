@@ -47,6 +47,7 @@ class UpdateAndDeleteExpenseFragment : Fragment() {
             .get(UpdateAndDeleteFragmentViewModel::class.java)
 
 
+
         binding.viewModel = viewModel
         binding.lifecycleOwner =  this
 
