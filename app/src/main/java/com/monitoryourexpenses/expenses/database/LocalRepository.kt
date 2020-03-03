@@ -7,6 +7,7 @@ import com.monitoryourexpenses.expenses.network.Duration
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
+import retrofit2.HttpException
 
 
 class LocalRepository(private val database:ExpenseMonitorDao) {
@@ -61,8 +62,16 @@ class LocalRepository(private val database:ExpenseMonitorDao) {
         withContext(Dispatchers.IO){
             if(database.selectAllExpenses().size == 0) {
                 val duration = Duration(startMonth,endMonth)
-                val expensesList = ApiFactory.ALL_EXPENSES.allExpensesAsync(duration).await()
-                database.insertExpensesForCachingData(*expensesList.toTypedArray())
+                try {
+                    try {
+                        val expensesList = ApiFactory.ALL_EXPENSES.allExpensesAsync(duration).await()
+                        database.insertExpensesForCachingData(*expensesList.toTypedArray())
+                    }catch (http:HttpException){
+
+                    }
+                }catch (t:Throwable){
+
+                }
             }
         }
     }
