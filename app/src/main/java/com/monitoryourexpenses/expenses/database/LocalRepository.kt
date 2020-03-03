@@ -67,10 +67,10 @@ class LocalRepository(private val database:ExpenseMonitorDao) {
                         val expensesList = ApiFactory.ALL_EXPENSES.allExpensesAsync(duration).await()
                         database.insertExpensesForCachingData(*expensesList.toTypedArray())
                     }catch (http:HttpException){
-
+                      Log.d("http",http.toString())
                     }
                 }catch (t:Throwable){
-
+                    Log.d("t",t.toString())
                 }
             }
         }
