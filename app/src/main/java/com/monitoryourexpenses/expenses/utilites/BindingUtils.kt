@@ -32,11 +32,6 @@ fun bindingStatus(progressBar: ProgressBar,status: ProgressStatus?){
     }
 }
 
-//@BindingAdapter("listData")
-//fun bindRecyclerView(recyclerView: RecyclerView,data:List<Expenses>?){
-//    val adapter = recyclerView.adapter as DurationsExpenseAdapter
-//    adapter.submitList(data)
-//}
 
 @SuppressLint("SetTextI18n")
 @BindingAdapter("expenseAmount")

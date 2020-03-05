@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import com.monitoryourexpenses.expenses.R
@@ -33,14 +34,15 @@ class CreateNewExpenseFragment : Fragment() {
         val dataBase = ExpenseMonitorDataBase.getInstance(application).expenseMonitorDao
         val viewModelFactory = CreateNewExpenseFragmentViewModelFactory(dataBase,application)
 
-        val viewModel = ViewModelProviders.of(this,viewModelFactory)
+        val viewModel = ViewModelProvider(this,viewModelFactory)
             .get(CreateNewExpenseFragmentViewModel::class.java)
 
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
         binding.spinner.setTitle(getString(R.string.select_or_category))
-        binding.spinner.setPositiveButton(getString(R.string.close))
+
+
 
 
         binding.newDateButton.setOnClickListener {
@@ -77,9 +79,6 @@ class CreateNewExpenseFragment : Fragment() {
                 viewModel.onResponseMsgDisplayed()
             }
         })
-
-
-
         return binding.root
     }
 

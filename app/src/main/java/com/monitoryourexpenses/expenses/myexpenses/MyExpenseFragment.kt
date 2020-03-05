@@ -15,6 +15,7 @@ import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
@@ -69,20 +70,18 @@ class MyExpenseFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.my_expense_fragment,container,false)
 
 
-
-
         val application = requireNotNull(this.activity).application
         val dataBase = ExpenseMonitorDataBase.getInstance(application).expenseMonitorDao
         val viewModelFactory = MyExpenseFragmentViewModelFactory(dataBase,application)
 
-        viewModel = ViewModelProviders.of(this,viewModelFactory)
+        viewModel = ViewModelProvider(this,viewModelFactory)
             .get(MyExpenseFragmentViewModel::class.java)
 
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
         
-        checkForAppUpdate()
+        if(isConnected()){checkForAppUpdate()}
 
         val gso =
             GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)

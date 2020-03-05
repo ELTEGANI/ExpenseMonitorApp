@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import com.monitoryourexpenses.expenses.R
@@ -34,7 +35,7 @@ class RegisterationUserFragment : Fragment() {
         val dataBase = ExpenseMonitorDataBase.getInstance(application).expenseMonitorDao
         val viewModelFactory = RegisterationUserViewModelFactory(dataBase,application)
 
-        val viewModel = ViewModelProviders.of(this,viewModelFactory)
+        val viewModel = ViewModelProvider(this,viewModelFactory)
             .get(RegisterationUserViewModel::class.java)
 
 
@@ -50,6 +51,8 @@ class RegisterationUserFragment : Fragment() {
 
         binding.nameEditText.setText(PrefManager.getName(application))
         binding.emailEditText.setText(PrefManager.getEmail(application))
+
+
         binding.nextButton.setOnClickListener {
             viewModel.registerUser(binding.nameEditText.text.toString(),binding.emailEditText.text.toString())
         }

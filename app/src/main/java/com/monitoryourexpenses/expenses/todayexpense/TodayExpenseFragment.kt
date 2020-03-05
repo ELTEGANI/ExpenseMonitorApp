@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
@@ -32,7 +33,7 @@ class TodayExpenseFragment : Fragment() {
         val dataBase = ExpenseMonitorDataBase.getInstance(application).expenseMonitorDao
         val viewModelFactory = TodayExpenseFragmentViewModelFactory(dataBase,application)
 
-        val viewModel = ViewModelProviders.of(this,viewModelFactory)
+        val viewModel = ViewModelProvider(this,viewModelFactory)
             .get(TodayExpenseFragmentViewModel::class.java)
 
 
