@@ -2,6 +2,7 @@ package com.monitoryourexpenses.expenses.settings
 
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import androidx.navigation.fragment.findNavController
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
@@ -39,12 +40,9 @@ class SettingsFragment : PreferenceFragmentCompat() , SharedPreferences.OnShared
     }
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?,key:String?) {
-
-       if(sharedPreferences?.getString(key,null) != null){
-           sharedPreferences.getString(key, null)?.substring(range = 0..2)?.let {
-               PrefManager.saveCurrency(context,
-                   it
-               )
+       if(key != null && key != "exceed_expense"){
+           sharedPreferences?.getString(key, null)?.substring(range = 0..2)?.let {
+               PrefManager.saveCurrency(context,it)
            }
            //navigate back to main expenses
            val direction = SettingsFragmentDirections.actionSettingsFragmentToMyExpenseFragment()
