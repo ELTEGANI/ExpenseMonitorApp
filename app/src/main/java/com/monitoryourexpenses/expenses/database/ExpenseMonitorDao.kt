@@ -11,7 +11,6 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface ExpenseMonitorDao {
 
-
     @Query("SELECT * from expenses WHERE date=:todayDate and currency =:currency")
     fun retrieveTodayExpense(todayDate:String,currency: String): LiveData<List<Expenses>>
 
@@ -48,6 +47,9 @@ interface ExpenseMonitorDao {
 
     @Query("SELECT * from expenses")
     fun selectAllExpenses(): List<Expenses>
+
+    @Query("SELECT SUM(amount) from expenses WHERE currency =:currency")
+    suspend fun sumationOfSpecifiedExpenses(currency: String): String
 
 
 }

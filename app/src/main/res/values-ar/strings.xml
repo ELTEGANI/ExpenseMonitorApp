@@ -184,4 +184,11 @@
     <string name="boosh">بوش(فته)</string>
     <string name="beef">لحمة بقر</string>
     <string name="accessories">اكسسوارات سيارة</string>
+    <string name="enter_fixed_expense_here">Enter Fixed Expense Here</string>
+    <string name="rest_fixed_expense">Reset</string>
+    <string name="cancel_fixed_expense">Cancel</string>
+    <string name="save">Save</string>
+    <string name="message_body_fixed_expense">The Specified Expense Was Exceeded And Its Value Was</string>
+    <string name="message_body_fixed_expenses">Do You Want To Reset The Fixed Expense Or Canceled It.</string>
+    <string name="enter_fixed_expense">Please Enter Fixed Expense</string>
 </resources>

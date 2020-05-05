@@ -14,6 +14,14 @@
                 app:useSimpleSummaryProvider="true"
                 />
 
+        <EditTextPreference
+                android:key="exceed_expense"
+                android:title="@string/exceed_expenses"
+                android:icon="@drawable/ic_warning"
+                app:useSimpleSummaryProvider="true"
+                android:dialogTitle="@string/expense_value"
+                />
+
         <Preference
                 android:key="buildversion"
                 app:title="@string/build_version"

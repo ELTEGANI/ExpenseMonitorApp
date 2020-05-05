@@ -4,19 +4,22 @@ package com.monitoryourexpenses.expenses.createnewexpense
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
+import androidx.preference.PreferenceManager
 import com.monitoryourexpenses.expenses.R
 import com.monitoryourexpenses.expenses.database.ExpenseMonitorDataBase
 import com.monitoryourexpenses.expenses.databinding.CreateNewExpenseFragmentBinding
+import com.monitoryourexpenses.expenses.utilites.PrefManager
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -79,8 +82,55 @@ class CreateNewExpenseFragment : Fragment() {
                 viewModel.onResponseMsgDisplayed()
             }
         })
+
+        viewModel.exceedsMessage.observe(this, Observer {
+            if (it != null){
+                val builder = context?.let { it1 -> AlertDialog.Builder(it1) }
+                builder?.setTitle(getString(R.string.fixed_expense_title))
+                builder?.setMessage(getString(R.string.message_body_fixed_expense)+" "+it+" "+PrefManager.getCurrency(context)+" "+getString(
+                                    R.string.message_body_fixed_expenses))
+                builder?.setPositiveButton(getString(R.string.rest_fixed_expense)){ dialog, which ->
+                    val li = LayoutInflater.from(context)
+                    val promptsView: View = li.inflate(R.layout.alert_dialog, null)
+                    val alertDialogBuilder = context?.let { AlertDialog.Builder(it) }
+                    // set alert_dialog.xml to alertdialog builder
+                    alertDialogBuilder?.setView(promptsView)
+                    val userInput = promptsView.findViewById<View>(R.id.editText) as EditText
+                    // set dialog message
+                    alertDialogBuilder?.setCancelable(false)
+                        ?.setPositiveButton(getString(R.string.save)) { _, id -> // get user input and set it to result
+                            if(userInput.text.toString().isNotEmpty()){
+                                val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context).edit()
+                                sharedPreferences.putString("exceed_expense",userInput.text.toString())
+                                sharedPreferences.apply()
+                            }else{
+                                Toast.makeText(context,getString(R.string.enter_fixed_expense),Toast.LENGTH_LONG).show()
+                            }
+
+                        }
+                        ?.setNegativeButton(getString(R.string.close)) { _, id ->
+                            dialog.cancel()
+                        }
+                    // create alert dialog
+                    val alertDialog = alertDialogBuilder?.create()
+                    // show it
+                    alertDialog?.show()
+                }
+                builder?.setNegativeButton(getString(R.string.cancel_fixed_expense)){ dialog, which ->
+                    val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context).edit()
+                    sharedPreferences.putString("exceed_expense",null)
+                    sharedPreferences.apply()
+                  dialog.dismiss()
+                }
+
+                val dialog: AlertDialog? = builder?.create()
+                dialog?.show()
+            }
+        })
+
         return binding.root
     }
+
 
 
 }

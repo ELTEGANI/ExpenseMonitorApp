@@ -57,6 +57,10 @@ class LocalRepository(private val database:ExpenseMonitorDao) {
         database.insertExpenses(expenses)
     }
 
+    suspend fun sumationOfSpecifiedExpenses(currency: String):String{
+       return database.sumationOfSpecifiedExpenses(currency)
+    }
+
 
     suspend fun getAllExpensesFromServer(startMonth: String,endMonth: String){
         withContext(Dispatchers.IO){

@@ -9,6 +9,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import android.widget.AdapterView
 import androidx.lifecycle.viewModelScope
+import androidx.preference.PreferenceManager
 import com.monitoryourexpenses.expenses.R
 import com.monitoryourexpenses.expenses.database.ExpenseMonitorDao
 import com.monitoryourexpenses.expenses.database.Expenses
@@ -51,6 +52,10 @@ class CreateNewExpenseFragmentViewModel(val database: ExpenseMonitorDao,var appl
     val responseMsg: LiveData<String>
         get() = _responseMsg
 
+    private val _exceedsMessage = MutableLiveData<String>()
+    val exceedsMessage: LiveData<String>
+        get() = _exceedsMessage
+
 
 
     fun onSelectExpenseFormOrCategoryItem(parent: AdapterView<*>, view: View?, pos: Int, id: Long) {
@@ -67,9 +72,16 @@ class CreateNewExpenseFragmentViewModel(val database: ExpenseMonitorDao,var appl
         }else if(selectedCategoryItem == application.getString(R.string.SelectCategory)){
             _validationMsg.value = context?.getString(R.string.select_category)
         }else{
-            currentDate.value?.let {
-                createNewExpense(expenseAmount,expenseDescription,
-                    it,selectedCategoryItem)
+            viewModelScope.launch {
+                if (localRepository.sumationOfSpecifiedExpenses(PrefManager.getCurrency(application).toString())
+                    == PreferenceManager.getDefaultSharedPreferences(application).getString("exceed_expense",null).toString()){
+                    _exceedsMessage.value = PreferenceManager.getDefaultSharedPreferences(application).getString("exceed_expense",null)
+                }else{
+                    currentDate.value?.let {
+                        createNewExpense(expenseAmount,expenseDescription,
+                            it,selectedCategoryItem)
+                    }
+                }
             }
         }
     }
@@ -122,6 +134,10 @@ class CreateNewExpenseFragmentViewModel(val database: ExpenseMonitorDao,var appl
 
     fun onResponseMsgDisplayed(){
         _responseMsg.value = null
+    }
+
+    fun exceedMsgDisplayed(){
+        _exceedsMessage.value = null
     }
 
 }

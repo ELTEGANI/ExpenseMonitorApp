@@ -17,11 +17,9 @@ class PrefManager
             editor?.apply()
         }
 
-
         fun getAccessToken(context: Context): String? {
             return getSharedPreferences(context)?.getString("ACCESS_TOKEN", null)
         }
-
 
         fun saveName(context: Context,username:String){
             val editor = getSharedPreferences(context)?.edit()
@@ -94,7 +92,6 @@ class PrefManager
         fun getStartOfTheWeek(context: Context?): String? {
             return getSharedPreferences(context)?.getString("START_OF_THE_WEEK", null)
         }
-
 
         fun getEndOfTheMonth(context: Context?): String? {
             return getSharedPreferences(context)?.getString("END_OF_THE_MONTH", null)

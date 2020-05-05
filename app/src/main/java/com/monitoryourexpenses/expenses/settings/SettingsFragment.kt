@@ -2,7 +2,12 @@ package com.monitoryourexpenses.expenses.settings
 
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.text.InputFilter
+import android.text.InputFilter.LengthFilter
+import android.text.InputType
+import android.widget.EditText
 import androidx.navigation.fragment.findNavController
+import androidx.preference.EditTextPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import com.monitoryourexpenses.expenses.BuildConfig
@@ -26,6 +31,11 @@ class SettingsFragment : PreferenceFragmentCompat() , SharedPreferences.OnShared
         val buildVersion = findPreference<Preference>("buildversion")
         buildVersion?.summary = BuildConfig.VERSION_NAME
 
+        val preference: EditTextPreference? = findPreference("exceed_expense")
+        preference?.setOnBindEditTextListener { editText ->
+            editText.inputType = InputType.TYPE_CLASS_NUMBER // set only numbers allowed to input
+        }
+
     }
 
     override fun onResume() {
@@ -39,18 +49,16 @@ class SettingsFragment : PreferenceFragmentCompat() , SharedPreferences.OnShared
     }
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?,key:String?) {
-
-       if(sharedPreferences?.getString(key,null) != null){
-           sharedPreferences.getString(key, null)?.substring(range = 0..2)?.let {
-               PrefManager.saveCurrency(context,
-                   it
-               )
+       if(key != null && key != "exceed_expense"){
+           sharedPreferences?.getString(key, null)?.substring(range = 0..2)?.let {
+               PrefManager.saveCurrency(context,it)
            }
            //navigate back to main expenses
            val direction = SettingsFragmentDirections.actionSettingsFragmentToMyExpenseFragment()
            findNavController().navigate(direction)
-
        }
     }
+
+
 }
 
