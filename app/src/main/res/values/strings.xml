@@ -184,5 +184,14 @@
     <string name="select_or_category">Search or Select Category</string>
     <string name="close">Close</string>
     <string name="privacy_policy_words">Privacy Policy</string>
-    <string name="exceed_expenses">Do Not Exceed This Expense</string>
+    <string name="exceed_expenses">Notify Me When a Certain Expense Value Is Exceeded</string>
+    <string name="expense_value">Specified Expense</string>
+    <string name="enter_fixed_expense_here">Enter Fixed Expense Here</string>
+    <string name="fixed_expense_title">Fixed Expense</string>
+    <string name="rest_fixed_expense">Reset</string>
+    <string name="cancel_fixed_expense">Cancel</string>
+    <string name="save">Save</string>
+    <string name="message_body_fixed_expense">The Specified Expense Was Exceeded And Its Value Was</string>
+    <string name="message_body_fixed_expenses">Do You Want To Reset The Fixed Expense Or Canceled It.</string>
+    <string name="enter_fixed_expense">Please Enter Fixed Expense</string>
 </resources>

@@ -16,7 +16,6 @@ import com.monitoryourexpenses.expenses.R
 import com.monitoryourexpenses.expenses.database.ExpenseMonitorDataBase
 import com.monitoryourexpenses.expenses.databinding.RegisterationUserFragmentBinding
 import com.monitoryourexpenses.expenses.utilites.PrefManager
-import com.toptoche.searchablespinnerlibrary.SearchableSpinner
 
 
 class RegisterationUserFragment : Fragment() {

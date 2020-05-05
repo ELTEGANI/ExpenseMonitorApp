@@ -19,7 +19,7 @@
                 android:title="@string/exceed_expenses"
                 android:icon="@drawable/ic_warning"
                 app:useSimpleSummaryProvider="true"
-                android:dialogTitle="@string/exceed_expenses"
+                android:dialogTitle="@string/expense_value"
                 />
 
         <Preference
