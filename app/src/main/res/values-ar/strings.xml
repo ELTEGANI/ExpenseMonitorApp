@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Expense Monitor</string>
+    <string name="app_name">مراقب النفقات</string>
     <string name="week">اسبوع</string>
     <string name="weak_internet_connection">لا يوجد اتصال بالإنترنت</string>
     <string name="update_expense">تحديث الصرف</string>
@@ -184,11 +184,15 @@
     <string name="boosh">بوش(فته)</string>
     <string name="beef">لحمة بقر</string>
     <string name="accessories">اكسسوارات سيارة</string>
-    <string name="enter_fixed_expense_here">Enter Fixed Expense Here</string>
+    <string name="enter_fixed_expense_here">أدخل قيمة المصروف الثابت هنا</string>
     <string name="rest_fixed_expense">Reset</string>
     <string name="cancel_fixed_expense">Cancel</string>
     <string name="save">Save</string>
     <string name="message_body_fixed_expense">The Specified Expense Was Exceeded And Its Value Was</string>
     <string name="message_body_fixed_expenses">Do You Want To Reset The Fixed Expense Or Canceled It.</string>
-    <string name="enter_fixed_expense">Please Enter Fixed Expense</string>
+    <string name="enter_fixed_expense">الرجاء إدخال قيمة النفقات الثابتة</string>
+    <string name="fixed_expense_title">مصروف ثابت</string>
+    <string name="expense_value">مصروف محدد</string>
+    <string name="expense_monitor" translatable="false">مراقب النفقات</string>
+    <string name="exceed_expenses">أعلمني عند تجاوز قيمة معينة للمصروفات</string>
 </resources>
