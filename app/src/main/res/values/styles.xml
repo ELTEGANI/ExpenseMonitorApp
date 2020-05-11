@@ -16,14 +16,14 @@
     <style name="expenseAmountStyle">
         <item name="android:gravity">center</item>
         <item name="android:fontFamily">@font/eczar</item>
-        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textColor">?attr/colorOnSurface</item>
         <item name="android:textSize">30sp</item>
     </style>
 
     <style name="expenseDateStyle">
         <item name="android:gravity">center</item>
         <item name="android:fontFamily">@font/eczar</item>
-        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textColor">?attr/colorOnSurface</item>
         <item name="android:textSize">24sp</item>
     </style>
 
@@ -37,16 +37,19 @@
         <item name="android:fontFamily">@font/roboto</item>
         <item name="android:textStyle">normal</item>
         <item name="android:textSize">16sp</item>
-        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textColor">?attr/colorOnSurface</item>
     </style>
 
     <style name="noConnectionStyle">
         <item name="android:fontFamily">@font/roboto</item>
         <item name="android:textStyle">normal</item>
         <item name="android:textSize">18sp</item>
-        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textColor">?attr/colorOnSurface</item>
         <item name="android:gravity">center</item>
     </style>
 
+    <style name="actionOverflowButtonStyle" parent="@style/Widget.AppCompat.ActionButton.Overflow">
+        <item name="android:tint">?attr/colorOnSurface</item>
+    </style>
 
 </resources>

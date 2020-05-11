@@ -5,9 +5,6 @@ import android.content.Intent
 import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
-import android.text.SpannableString
-import android.text.Spanned
-import android.text.style.ClickableSpan
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -25,7 +22,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
 import com.monitoryourexpenses.expenses.R
-import com.monitoryourexpenses.expenses.database.ExpenseMonitorDataBase
 import com.monitoryourexpenses.expenses.databinding.LoginUserFragmentBinding
 import com.monitoryourexpenses.expenses.utilites.PrefManager
 import com.monitoryourexpenses.expenses.utilites.isConnected
@@ -80,6 +76,7 @@ class LoginUserFragment : Fragment() {
 
 
         makeTextLink(binding.privacyPolicyTextView,getString(R.string.privacy_policy_words), true,Color.BLACK, action = {
+            //TODO change color
             openPrivacyPolicyPage()
         })
 

@@ -24,17 +24,14 @@ import retrofit2.HttpException
 
 class RegisterationUserViewModel(val database: ExpenseMonitorDao, var application: Application) :ViewModel() {
 
-
     var radiochecked = MutableLiveData<Int>()
     private var geneder = ""
     var currency = ""
-
 
     init {
         //save dates for the first time so it can be updated later
         saveAllDates()
     }
-
 
     private val _status = MutableLiveData<ProgressStatus>()
     val status: LiveData<ProgressStatus>
@@ -58,8 +55,6 @@ class RegisterationUserViewModel(val database: ExpenseMonitorDao, var applicatio
     fun onSelectCurrencyItem(parent: AdapterView<*>, view: View?, pos: Int, id: Long) {
         currency = parent.selectedItem.toString()
     }
-
-
 
     fun registerUser(userName:String,emailAddress:String) {
         when(radiochecked.value){
@@ -102,7 +97,6 @@ class RegisterationUserViewModel(val database: ExpenseMonitorDao, var applicatio
         }
         }
 
-
     private fun saveAllDates(){
         viewModelScope.launch {
             PrefManager.saveCurrentDate(application,LocalDate.now().toString())
@@ -124,7 +118,4 @@ class RegisterationUserViewModel(val database: ExpenseMonitorDao, var applicatio
     fun onNavigationCompleted(){
         _navigateToNextScreen.value = false
     }
-
-
-
 }

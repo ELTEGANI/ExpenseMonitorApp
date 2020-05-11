@@ -13,13 +13,10 @@
   the License.
   -->
 <resources>
-
-    <!--Shape-->
-
-    <style name="ShapeAppearanceOverlay.ExpenesMonitor.MediumComponent.Marked" parent="">
-        <item name="cornerSizeTopLeft">@dimen/expensemonitor_small_component_corner_radius</item>
+    <style name="ShapeAppearanceOverlay.ExpenesMonitor.MediumComponent" parent="ShapeAppearance.MaterialComponents.MediumComponent">
+        <item name="cornerSizeTopLeft">@dimen/expensemonitor_small_left_component_corner_radius</item>
+        <item name="cornerSizeTopRight">@dimen/expensemonitor_small_right_component_corner_radius</item>
     </style>
-
-    <dimen name="expensemonitor_small_component_corner_radius">24dp</dimen>
-
+    <dimen name="expensemonitor_small_left_component_corner_radius">15dp</dimen>
+    <dimen name="expensemonitor_small_right_component_corner_radius">15dp</dimen>
 </resources>

@@ -10,7 +10,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import com.monitoryourexpenses.expenses.R
 import com.monitoryourexpenses.expenses.database.ExpenseMonitorDataBase
@@ -25,8 +24,6 @@ class RegisterationUserFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
 
-
-
         binding = DataBindingUtil.inflate(inflater,
             R.layout.registeration_user_fragment,container,false)
 
@@ -37,16 +34,11 @@ class RegisterationUserFragment : Fragment() {
         val viewModel = ViewModelProvider(this,viewModelFactory)
             .get(RegisterationUserViewModel::class.java)
 
-
-
-
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
-
         binding.spinner.setTitle(getString(R.string.search_select_currency))
         binding.spinner.setPositiveButton(getString(R.string.close))
-
 
         binding.nameEditText.setText(PrefManager.getName(application))
         binding.emailEditText.setText(PrefManager.getEmail(application))
@@ -64,25 +56,20 @@ class RegisterationUserFragment : Fragment() {
             }
         )
 
-        viewModel.errormsg.observe(this, Observer {
+        viewModel.errormsg.observe(viewLifecycleOwner, Observer {
                 if (it != null) {
                     Toast.makeText(context,it,Toast.LENGTH_LONG).show()
                     viewModel.onErrorMsgDisplayed()
                 }
             })
 
-
-        viewModel.navigateToNextScreen.observe(this, Observer{
+        viewModel.navigateToNextScreen.observe(viewLifecycleOwner, Observer{
              if(it){
                  val navController = binding.root.findNavController()
                  navController.navigate(R.id.action_registeration_to_myExpense)
                  viewModel.onNavigationCompleted()
              }
         })
-
-
         return  binding.root
     }
-
-
 }
