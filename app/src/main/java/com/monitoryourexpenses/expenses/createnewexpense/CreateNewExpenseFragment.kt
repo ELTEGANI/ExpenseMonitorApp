@@ -66,7 +66,7 @@ class CreateNewExpenseFragment : Fragment() {
             datePickerDialog?.show()
         }
 
-        viewModel.validationMsg.observe(this, Observer { validationMsg->
+        viewModel.validationMsg.observe(viewLifecycleOwner, Observer { validationMsg->
             if (validationMsg != null){
                 Toast.makeText(context,validationMsg,Toast.LENGTH_LONG).show()
                 viewModel.onNoEmptyFields()
@@ -74,7 +74,7 @@ class CreateNewExpenseFragment : Fragment() {
         })
 
 
-        viewModel.responseMsg.observe(this, Observer {
+        viewModel.responseMsg.observe(viewLifecycleOwner, Observer {
             if (it != null){
                 Toast.makeText(context,it,Toast.LENGTH_LONG).show()
                 val navController = binding.root.findNavController()
@@ -83,7 +83,7 @@ class CreateNewExpenseFragment : Fragment() {
             }
         })
 
-        viewModel.exceedsMessage.observe(this, Observer {
+        viewModel.exceedsMessage.observe(viewLifecycleOwner, Observer {
             if (it != null){
                 val builder = context?.let { it1 -> AlertDialog.Builder(it1) }
                 builder?.setTitle(getString(R.string.fixed_expense_title))

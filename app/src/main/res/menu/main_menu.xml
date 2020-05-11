@@ -20,4 +20,10 @@
             android:title="@string/signout"
             app:showAsAction="never"/>
 
+    <item
+            android:id="@+id/menu_dark_mode"
+            android:title="@string/dark_mode"
+            android:icon="@drawable/ic_moon"
+            app:showAsAction="ifRoom"/>
+
 </menu>

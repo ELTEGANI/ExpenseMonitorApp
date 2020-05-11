@@ -1,7 +1,5 @@
 package com.monitoryourexpenses.expenses.weekexpense
 
-import android.opengl.Visibility
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -48,7 +46,7 @@ class WeekExpenseFragment : Fragment() {
         })
 
 
-        viewModel.navigateToSelectedExpense.observe(this, Observer {
+        viewModel.navigateToSelectedExpense.observe(viewLifecycleOwner, Observer {
             if (it != null){
                 val direction = MyExpenseFragmentDirections.actionMyExpenseFragmentToUpdateAndDeleteExpenseFragment(it)
                 findNavController().navigate(direction)

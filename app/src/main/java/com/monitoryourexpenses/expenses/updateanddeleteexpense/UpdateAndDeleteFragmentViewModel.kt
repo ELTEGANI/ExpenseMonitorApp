@@ -6,6 +6,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import androidx.preference.PreferenceManager
 import com.monitoryourexpenses.expenses.R
 import com.monitoryourexpenses.expenses.database.ExpenseMonitorDao
 import com.monitoryourexpenses.expenses.database.Expenses
@@ -41,6 +42,10 @@ class UpdateAndDeleteFragmentViewModel(val expenses: Expenses, application: Appl
     private val _validationMsg = MutableLiveData<String>()
     val validationMsg: LiveData<String>
         get() = _validationMsg
+
+    private val _exceedsMessage = MutableLiveData<String>()
+    val exceedsMessage: LiveData<String>
+        get() = _exceedsMessage
 
     val currentDate = MutableLiveData<String>()
 
@@ -84,29 +89,53 @@ class UpdateAndDeleteFragmentViewModel(val expenses: Expenses, application: Appl
             _validationMsg.value = context?.getString(R.string.select_category)
         }else{
             viewModelScope.launch {
-                val expenseData = PrefManager.getCurrency(application)?.let {
-                    ExpenseData(newAmount,description,date,
-                        it,category)
-                }
-                val getUpdateExpenseResponse =
-                    expenseData?.let { ApiFactory.UPDATE_EXPENSE.updateExpenseAsync(expenseId, it) }
-                try {
-                    try {
-                        _status.value = ProgressStatus.LOADING
-                        val getResponse = getUpdateExpenseResponse?.await()
-                        if (getResponse != null) {
-                            if(getResponse.message.isNotEmpty()){
-                                _msgError.value = context?.getString(R.string.expense_update_successfuly)
-                                localRepository.updateExpenseUsingId(expenseId,newAmount,description,category,date)
-                            }
+                if (localRepository.sumationOfSpecifiedExpenses(
+                        PrefManager.getCurrency(application).toString())
+                    == PreferenceManager.getDefaultSharedPreferences(application)
+                        .getString("exceed_expense", null).toString()) {
+                    _exceedsMessage.value = PreferenceManager.getDefaultSharedPreferences(application).getString("exceed_expense",null)
+                } else {
+                    viewModelScope.launch {
+                        val expenseData = PrefManager.getCurrency(application)?.let {
+                            ExpenseData(
+                                newAmount, description, date,
+                                it, category
+                            )
                         }
-                        _status.value = ProgressStatus.DONE
-                    }catch (t:Throwable){
-                        _status.value = ProgressStatus.ERROR
-                        _validationMsg.value = context?.getString(R.string.weak_internet_connection)
+                        val getUpdateExpenseResponse =
+                            expenseData?.let {
+                                ApiFactory.UPDATE_EXPENSE.updateExpenseAsync(
+                                    expenseId,
+                                    it
+                                )
+                            }
+                        try {
+                            try {
+                                _status.value = ProgressStatus.LOADING
+                                val getResponse = getUpdateExpenseResponse?.await()
+                                if (getResponse != null) {
+                                    if (getResponse.message.isNotEmpty()) {
+                                        _msgError.value =
+                                            context?.getString(R.string.expense_update_successfuly)
+                                        localRepository.updateExpenseUsingId(
+                                            expenseId,
+                                            newAmount,
+                                            description,
+                                            category,
+                                            date
+                                        )
+                                    }
+                                }
+                                _status.value = ProgressStatus.DONE
+                            } catch (t: Throwable) {
+                                _status.value = ProgressStatus.ERROR
+                                _validationMsg.value =
+                                    context?.getString(R.string.weak_internet_connection)
+                            }
+                        } catch (httpException: HttpException) {
+                            Log.d("httpException", httpException.toString())
+                        }
                     }
-                }catch (httpException: HttpException){
-                    Log.d("httpException",httpException.toString())
                 }
             }
         }
