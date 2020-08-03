@@ -48,7 +48,7 @@ class RegisterationUserFragment : Fragment() {
             viewModel.registerUser(binding.nameEditText.text.toString(),binding.emailEditText.text.toString())
         }
 
-        viewModel.genderSelected.observe(this, Observer { isSelected ->
+        viewModel.genderSelected.observe(viewLifecycleOwner, Observer { isSelected ->
             if (!isSelected) {
                 Toast.makeText(context,getString(R.string.select_option),Toast.LENGTH_LONG).show()
                 viewModel.genderAlreadySelected()

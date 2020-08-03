@@ -1,7 +1,5 @@
 package com.monitoryourexpenses.expenses.myexpenses
 
-
-
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
@@ -66,10 +64,7 @@ class MyExpenseFragment : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,savedInstanceState: Bundle?): View? {
-
-
         binding = DataBindingUtil.inflate(inflater, R.layout.my_expense_fragment,container,false)
-
 
         val application = requireNotNull(this.activity).application
         val dataBase = ExpenseMonitorDataBase.getInstance(application).expenseMonitorDao
@@ -81,7 +76,9 @@ class MyExpenseFragment : Fragment() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
-        
+        (activity as AppCompatActivity).setSupportActionBar(binding.bottomAppBar)
+        setHasOptionsMenu(true)
+
         if(isConnected()){checkForAppUpdate()}
 
         val gso =
@@ -90,22 +87,14 @@ class MyExpenseFragment : Fragment() {
                 .build()
         mGoogleSignInClient = context?.let { GoogleSignIn.getClient(it, gso) }
 
-
-
-
         val tabLayout = binding.tabs
         val viewPager = binding.viewPager
 
-
         viewPager.adapter = PagerAdapter(this)
 
-
-        // Set the text for each tab
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
             tab.text = getTabTitle(position)
         }.attach()
-
-
 
 
         viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
@@ -114,19 +103,19 @@ class MyExpenseFragment : Fragment() {
                 super.onPageSelected(position)
                 when(position){
                     0->{
-                        viewModel.todayExpense.observe(this@MyExpenseFragment, Observer {
+                        viewModel.todayExpense.observe(viewLifecycleOwner, Observer {
                         binding.expenseTextView.text = PrefManager.getCurrency(context)+" "+ it
                         })
                         binding.dateTextView.text = LocalDate.now().toString()
                     }
                     1->{
-                        viewModel.weekExpense.observe(this@MyExpenseFragment, Observer {
+                        viewModel.weekExpense.observe(viewLifecycleOwner, Observer {
                         binding.expenseTextView.text = PrefManager.getCurrency(context)+" "+ it
                         })
                         binding.dateTextView.text = PrefManager.getStartOfTheWeek(context)+" "+"/"+" "+PrefManager.getEndOfTheWeek(context)
                     }
                     2->{
-                        viewModel.monthExpense.observe(this@MyExpenseFragment, Observer {
+                        viewModel.monthExpense.observe(viewLifecycleOwner, Observer {
                         binding.expenseTextView.text = PrefManager.getCurrency(context)+" "+ it
                         })
                         binding.dateTextView.text = PrefManager.getStartOfTheMonth(context)+" "+"/"+" "+ PrefManager.getEndOfTheMonth(context)
@@ -136,14 +125,7 @@ class MyExpenseFragment : Fragment() {
         })
 
 
-
-        (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
-        (activity as AppCompatActivity).supportActionBar?.setDisplayShowTitleEnabled(false)
-        setHasOptionsMenu(true)
-
-
-
-        viewModel.navigateToMyExpense.observe(this, Observer {
+        viewModel.navigateToMyExpense.observe(viewLifecycleOwner, Observer {
             shouldNavigate->if (shouldNavigate){
             val navController = binding.root.findNavController()
             navController.navigate(R.id.action_myExpenseFragment_to_createNewExpenseFragment)
@@ -151,17 +133,13 @@ class MyExpenseFragment : Fragment() {
         }
         })
 
-        setHasOptionsMenu(true)
         return binding.root
 
     }
 
      private fun checkForAppUpdate() {
-        // Returns an intent object that you use to check for an update.
         val appUpdateInfoTask = appUpdateManager.appUpdateInfo
-
-        // Checks that the platform will allow the specified type of update.
-        appUpdateInfoTask.addOnSuccessListener { appUpdateInfo ->
+         appUpdateInfoTask.addOnSuccessListener { appUpdateInfo ->
             if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE) {
                 // Request the update.
                 try {
@@ -215,15 +193,11 @@ class MyExpenseFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         appUpdateManager.appUpdateInfo.addOnSuccessListener { appUpdateInfo ->
-                // If the update is downloaded but not installed,
-                // notify the user to complete the update.
                 if (appUpdateInfo.installStatus() == InstallStatus.DOWNLOADED) {
                     popupSnackbarForCompleteUpdate()
                 }
-                //Check if Immediate update is required
                 try {
                     if (appUpdateInfo.updateAvailability() == UpdateAvailability.DEVELOPER_TRIGGERED_UPDATE_IN_PROGRESS) {
-                        // If an in-app update is already running, resume the update.
                         appUpdateManager.startUpdateFlowForResult(
                             appUpdateInfo,
                             AppUpdateType.IMMEDIATE,
@@ -257,16 +231,18 @@ class MyExpenseFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem) =
         when (item.itemId) {
-            R.id.menu_dark_mode -> {
-                // Get new mode.
+            R.id.menu_dark_mode->{
                 val mode = if ((resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) ==
                     Configuration.UI_MODE_NIGHT_NO) {
                     AppCompatDelegate.MODE_NIGHT_YES
                 } else {
                     AppCompatDelegate.MODE_NIGHT_AUTO_BATTERY
                 }
-                // Change UI Mode
                 AppCompatDelegate.setDefaultNightMode(mode)
+                true
+            }
+            R.id.share_application->{
+                shareApp()
                 true
             }
             R.id.action_setting->{
@@ -281,10 +257,7 @@ class MyExpenseFragment : Fragment() {
                 navController.navigate(R.id.action_myExpenseFragment_to_loginUserFragment)
                 true
             }
-            R.id.share_application -> {
-                shareApp()
-                true
-            }
+
             else -> false
         }
 
@@ -306,7 +279,5 @@ class MyExpenseFragment : Fragment() {
         mGoogleSignInClient?.signOut()?.addOnCompleteListener{
         }
     }
-
-
 
 }

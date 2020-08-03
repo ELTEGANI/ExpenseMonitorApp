@@ -49,8 +49,6 @@ class DurationsExpenseAdapter(private val expenseListener: ExpenseListener) : Li
 }
 
 
-
-
 class GetExpensesResponseDiffCallback:DiffUtil.ItemCallback<Expenses>(){
     override fun areItemsTheSame(oldItem: Expenses, newItem: Expenses): Boolean {
         return oldItem.id == newItem.id
@@ -59,9 +57,6 @@ class GetExpensesResponseDiffCallback:DiffUtil.ItemCallback<Expenses>(){
         return oldItem == newItem
     }
 }
-
-
-
 
 class ExpenseListener(val onClickListener:(expense:Expenses)->Unit){
     fun onClick(expense: Expenses) = onClickListener(expense)

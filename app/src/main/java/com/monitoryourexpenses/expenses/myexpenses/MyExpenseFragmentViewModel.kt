@@ -6,7 +6,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.monitoryourexpenses.expenses.database.ExpenseMonitorDao
+import com.monitoryourexpenses.expenses.database.Expenses
 import com.monitoryourexpenses.expenses.database.LocalRepository
+import com.monitoryourexpenses.expenses.network.Expense
 import com.monitoryourexpenses.expenses.utilites.*
 import com.monitoryourexpenses.expenses.utilites.MyApp.Companion.context
 import kotlinx.coroutines.*
@@ -20,7 +22,6 @@ import java.util.*
 class MyExpenseFragmentViewModel(val database:ExpenseMonitorDao,application: Application) : AndroidViewModel(application) {
 
     private val localRepository = LocalRepository(database)
-
 
     private val application = getApplication<Application>().applicationContext
     private val _navigateToMyExpense = MutableLiveData<Boolean>()
@@ -38,7 +39,7 @@ class MyExpenseFragmentViewModel(val database:ExpenseMonitorDao,application: App
     private val _monthExpense = MutableLiveData<String>()
     val monthExpense : LiveData<String>
         get() = _monthExpense
-    
+
 
     init {
         checkIfDurationFinished()
@@ -82,7 +83,6 @@ class MyExpenseFragmentViewModel(val database:ExpenseMonitorDao,application: App
             }
         }
     }
-
 
 
     fun onFabClicked(){
