@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import com.monitoryourexpenses.expenses.network.ApiFactory
 import com.monitoryourexpenses.expenses.network.Duration
+import com.monitoryourexpenses.expenses.network.Expense
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
@@ -60,7 +61,6 @@ class LocalRepository(private val database:ExpenseMonitorDao) {
     suspend fun sumationOfSpecifiedExpenses(currency: String):String{
        return database.sumationOfSpecifiedExpenses(currency)
     }
-
 
     suspend fun getAllExpensesFromServer(startMonth: String,endMonth: String){
         withContext(Dispatchers.IO){

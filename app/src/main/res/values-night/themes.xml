@@ -21,9 +21,5 @@
 
         <item name="scrimBackground">@color/expensemonitor_black_900_alpha_087</item>
         <item name="android:statusBarColor">@color/expensemonitor_black_900_alpha_060</item>
-        <!--System/Platform attributes-->
-        <item name="android:windowLightStatusBar" tools:ignore="NewApi">false</item>
-
-
     </style>
 </resources>

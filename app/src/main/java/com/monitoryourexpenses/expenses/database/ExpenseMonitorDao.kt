@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
+import androidx.room.RoomWarnings
 import com.monitoryourexpenses.expenses.network.AllExpense
 import kotlinx.coroutines.flow.Flow
 
@@ -50,6 +51,5 @@ interface ExpenseMonitorDao {
 
     @Query("SELECT SUM(amount) from expenses WHERE currency =:currency")
     suspend fun sumationOfSpecifiedExpenses(currency: String): String
-
 
 }

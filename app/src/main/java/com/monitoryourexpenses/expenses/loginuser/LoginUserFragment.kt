@@ -37,15 +37,12 @@ class LoginUserFragment : Fragment() {
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,savedInstanceState: Bundle?): View? {
-
         if(context?.let { PrefManager.isLoggedIn(it) }!! && context?.let { PrefManager.isRegistered(it) }!!){
             findNavController().navigate(R.id.action_loginUserFragment_to_myExpenseFragment)
         }
         if (context?.let { PrefManager.isLoggedIn(it) }!! && !context?.let { PrefManager.isRegistered(it) }!!){
             findNavController().navigate(R.id.action_loginUserFragment_to_registerationUserFragment)
         }
-
-
 
         binding = DataBindingUtil.inflate(inflater, R.layout.login_user_fragment,container,false)
         val application = requireNotNull(this.activity).application
@@ -76,7 +73,6 @@ class LoginUserFragment : Fragment() {
 
 
         makeTextLink(binding.privacyPolicyTextView,getString(R.string.privacy_policy_words), true,Color.BLACK, action = {
-            //TODO change color
             openPrivacyPolicyPage()
         })
 

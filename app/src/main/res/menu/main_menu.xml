@@ -4,11 +4,17 @@
         xmlns:tools="http://schemas.android.com/tools"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         tools:context=".myexpenses.MyExpenseFragment">
+    <item
+        android:id="@+id/share_application"
+        android:title="@string/share_application"
+        android:icon="@drawable/ic_share"
+        app:showAsAction="ifRoom"/>
 
     <item
-            android:id="@+id/share_application"
-            android:title="@string/share_application"
-            app:showAsAction="never"/>
+        android:id="@+id/menu_dark_mode"
+        android:title="@string/dark_mode"
+        android:icon="@drawable/ic_moon"
+        app:showAsAction="ifRoom"/>
 
     <item
             android:id="@+id/action_setting"
@@ -19,11 +25,5 @@
             android:id="@+id/action_sign_out"
             android:title="@string/signout"
             app:showAsAction="never"/>
-
-    <item
-            android:id="@+id/menu_dark_mode"
-            android:title="@string/dark_mode"
-            android:icon="@drawable/ic_moon"
-            app:showAsAction="ifRoom"/>
 
 </menu>

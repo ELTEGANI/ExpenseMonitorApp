@@ -1,25 +1,25 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
-    ext.kotlin_version = '1.3.71'
+    ext.kotlin_version = '1.3.72'
     ext {
-        version_core = "1.2.0"
+        version_core = '1.3.0'
         version_coroutine = "1.1.0"
         version_constraint_layout = "1.1.3"
         version_kotlin = "1.3.71"
         version_lifecycle_extensions = "2.2.0"
-        version_navigation = '2.3.0-alpha06'
-        version_retrofit = '2.7.1'
+        version_navigation = '2.3.0'
+        version_retrofit = '2.9.0'
         version_retrofit_coroutines_adapter = "0.9.2"
-        version_moshi = '1.9.2'
+        version_moshi = '1.9.3'
         version_viewPagerVersion = '1.0.0'
-        materialVersion = '1.2.0-alpha06'
-        buildGradle = '3.6.3'
+        materialVersion = '1.3.0-alpha01'
+        buildGradle = '4.0.0'
         gradlePlugin = '2.2.0-rc02'
         version_room = '2.2.5'
-        threetenabp = '1.2.1'
-        version_glide = '4.10.0'
-        version_glide_compiler = '4.10.0'
+        threetenabp = '1.2.4'
+        version_glide = '4.11.0'
+        version_glide_compiler = '4.11.0'
 
     }
     repositories {
@@ -36,9 +36,9 @@ buildscript {
 }
 
 
-plugins {
-    id "org.jlleitschuh.gradle.ktlint" version "7.1.0"
-}
+//plugins {
+//    id "org.jlleitschuh.gradle.ktlint" version "7.1.0"
+//}
 
 
 allprojects {
@@ -50,7 +50,7 @@ allprojects {
              url 'https://maven.google.com'
          }
     }
-    apply plugin : "org.jlleitschuh.gradle.ktlint"
+//    apply plugin : "org.jlleitschuh.gradle.ktlint"
 }
 
 task clean(type: Delete) {

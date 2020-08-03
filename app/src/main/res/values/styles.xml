@@ -49,7 +49,7 @@
     </style>
 
     <style name="actionOverflowButtonStyle" parent="@style/Widget.AppCompat.ActionButton.Overflow">
-        <item name="android:tint">?attr/colorOnSurface</item>
+        <item name="android:tint">?attr/colorSurface</item>
     </style>
 
 </resources>
