@@ -60,6 +60,8 @@ androidx.appcompat.graphics.drawable.AnimatedStateListDrawableCompat:
     void clearMutated()
 androidx.appcompat.app.TwilightManager:
     static void setInstance(androidx.appcompat.app.TwilightManager)
+androidx.dynamicanimation.animation.FlingAnimation:
+    float getAcceleration(float,float)
 androidx.recyclerview.widget.ChildHelper$Bucket:
     static final int BITS_PER_WORD
     static final long LAST_BIT
@@ -365,6 +367,9 @@ androidx.recyclerview.widget.AdapterHelper$UpdateOp:
 androidx.appcompat.widget.ListPopupWindow:
     void setListItemExpandMax(int)
     static final int EXPAND_LIST_TIMEOUT
+com.google.android.material.datepicker.TimeSource:
+    static com.google.android.material.datepicker.TimeSource fixed(long,java.util.TimeZone)
+    static com.google.android.material.datepicker.TimeSource fixed(long)
 com.bumptech.glide.load.engine.ResourceRecycler$ResourceRecyclerCallback:
     static final int RECYCLE_RESOURCE
 com.bumptech.glide.load.resource.gif.GifDrawable:
@@ -376,6 +381,7 @@ com.bumptech.glide.manager.RequestManagerRetriever:
 androidx.core.app.NotificationManagerCompat:
     static final int MAX_SIDE_CHANNEL_SDK_VERSION
 com.google.android.material.datepicker.UtcDates:
+    static void setTimeSource(com.google.android.material.datepicker.TimeSource)
     static java.text.SimpleDateFormat getSimpleFormat(java.lang.String)
     static java.text.DateFormat getMediumFormat()
     static java.text.DateFormat getMediumNoYear()
@@ -473,6 +479,8 @@ com.google.android.material.tabs.TabLayout:
     static final int FIXED_WRAP_GUTTER_MIN
 com.google.android.gms.common.api.internal.GoogleServices:
     static void clearInstanceForTest()
+com.google.android.material.transition.platform.FadeThroughProvider:
+    static final float PROGRESS_THRESHOLD
 com.bumptech.glide.load.resource.bitmap.DefaultImageHeaderParser:
     static final int EXIF_MAGIC_NUMBER
     static final int SEGMENT_START_ID
@@ -484,8 +492,9 @@ androidx.room.InvalidationTracker$ObservedTableTracker:
 androidx.recyclerview.widget.DiffUtil$DiffResult:
     java.util.List getSnakes()
 com.google.android.material.transition.TransitionUtils:
-    static void maybeAddTransition(android.transition.TransitionSet,android.transition.Transition)
-    static void maybeRemoveTransition(android.transition.TransitionSet,android.transition.Transition)
+    static android.graphics.Rect getRelativeBoundsRect(android.view.View)
+    static void maybeAddTransition(androidx.transition.TransitionSet,androidx.transition.Transition)
+    static void maybeRemoveTransition(androidx.transition.TransitionSet,androidx.transition.Transition)
 kotlinx.coroutines.flow.FlowKt__DistinctKt$distinctUntilChangedBy$$inlined$unsafeFlow$3$1:
     java.lang.Object L$0
     java.lang.Object L$1
@@ -509,6 +518,8 @@ androidx.appcompat.app.AppCompatDelegateImpl$PanelFeatureState:
     void applyFrozenState()
     boolean wasLastOpen
     android.os.Bundle frozenMenuState
+androidx.dynamicanimation.animation.SpringAnimation:
+    float getAcceleration(float,float)
 kotlinx.coroutines.flow.FlowKt__ZipKt$combine$$inlined$combine$1$1:
     java.lang.Object L$0
     java.lang.Object L$1
@@ -516,6 +527,8 @@ kotlin.text.StringsKt__StringsJVMKt:
     static synthetic char[] toCharArray$default(java.lang.String,char[],int,int,int,int,java.lang.Object)
     static synthetic byte[] toByteArray$default(java.lang.String,java.nio.charset.Charset,int,java.lang.Object)
     static synthetic java.util.regex.Pattern toPattern$default(java.lang.String,int,int,java.lang.Object)
+com.bumptech.glide.load.resource.bitmap.HardwareConfigState:
+    static final int MIN_HARDWARE_DIMENSION_O
 com.google.android.material.appbar.AppBarLayout:
     static final int PENDING_ACTION_NONE
     static final int PENDING_ACTION_EXPANDED
@@ -907,6 +920,8 @@ kotlinx.coroutines.flow.FlowKt__TransformKt$filterIsInstance$$inlined$filter$1$1
     java.lang.Object L$1
 androidx.recyclerview.widget.StaggeredGridLayoutManager$Span:
     static final int INVALID_LINE
+com.google.android.material.slider.BaseSlider:
+    void forceDrawCompatHalo(boolean)
 org.threeten.bp.chrono.MinguoChronology:
     static final int YEARS_DIFFERENCE
 androidx.appcompat.view.menu.MenuItemImpl:
@@ -919,6 +934,8 @@ androidx.versionedparcelable.VersionedParcel:
     protected static java.lang.Throwable getRootCause(java.lang.Throwable)
 com.google.android.gms.common.internal.GmsClientEventManager:
     protected final void onConnectionSuccess()
+androidx.appcompat.widget.AbsActionBarView:
+    void <init>(android.content.Context)
 androidx.appcompat.app.AppCompatDelegateImpl:
     android.view.ViewGroup getSubDecor()
     static final java.lang.String EXCEPTION_HANDLER_MESSAGE_SUFFIX
@@ -932,6 +949,8 @@ androidx.recyclerview.widget.AdapterHelper:
     static final int POSITION_TYPE_NEW_OR_LAID_OUT
 android.support.v4.media.session.MediaSessionCompat$MediaSessionImplApi28:
     void <init>(java.lang.Object)
+com.github.mikephil.charting.charts.Chart:
+    protected abstract void calcMinMax()
 com.google.android.material.bottomsheet.BottomSheetBehavior:
     int getPeekHeightMin()
 kotlinx.coroutines.JobSupport:
@@ -983,6 +1002,9 @@ androidx.appcompat.view.menu.CascadingMenuPopup:
     static final int HORIZ_POSITION_LEFT
     static final int HORIZ_POSITION_RIGHT
     static final int SUBMENU_TIMEOUT_MS
+com.google.android.material.transition.platform.TransitionUtils:
+    static void maybeAddTransition(android.transition.TransitionSet,android.transition.Transition)
+    static void maybeRemoveTransition(android.transition.TransitionSet,android.transition.Transition)
 androidx.databinding.ObservableDouble:
     static final long serialVersionUID
 androidx.constraintlayout.solver.widgets.ConstraintWidget:
@@ -1007,6 +1029,9 @@ androidx.constraintlayout.solver.widgets.ConstraintWidget:
     static final int DIMENSION_VERTICAL
 androidx.constraintlayout.solver.widgets.ConstraintWidgetContainer:
     static final boolean DEBUG_GRAPH
+androidx.dynamicanimation.animation.DynamicAnimation:
+    abstract float getAcceleration(float,float)
+    abstract boolean isAtEquilibrium(float,float)
 kotlinx.coroutines.flow.FlowKt__ZipKt$combine$$inlined$combine$3$1:
     java.lang.Object L$0
     java.lang.Object L$1
@@ -1121,6 +1146,16 @@ com.google.android.material.floatingactionbutton.FloatingActionButtonImpl:
     static final float SHADOW_MULTIPLIER
 android.support.v4.media.ParceledListSliceAdapterApi21:
     static java.lang.Object newInstance(java.util.List)
+androidx.exifinterface.media.ExifInterface:
+    static final short BYTE_ALIGN_II
+    static final short BYTE_ALIGN_MM
+    static final byte START_CODE
+    static final int IFD_TYPE_PRIMARY
+    static final int IFD_TYPE_THUMBNAIL
+    static final int IFD_TYPE_PREVIEW
+    static final byte MARKER
+    static final byte MARKER_APP1
+    static final byte MARKER_EOI
 kotlinx.coroutines.flow.FlowKt__MigrationKt$combine$$inlined$unsafeFlow$3$1:
     java.lang.Object L$0
     java.lang.Object L$1
@@ -1129,6 +1164,8 @@ androidx.core.content.pm.ShortcutManagerCompat:
     static final java.lang.String INSTALL_SHORTCUT_PERMISSION
 androidx.navigation.NavDestinationBuilder:
     protected final androidx.navigation.Navigator getNavigator()
+com.google.android.material.progressindicator.ProgressIndicator:
+    protected static final float ANIMATION_SPEED_FACTOR
 com.google.android.material.bottomsheet.BottomSheetDialog:
     protected void <init>(android.content.Context,boolean,android.content.DialogInterface$OnCancelListener)
 androidx.constraintlayout.widget.ConstraintLayout:
@@ -1143,6 +1180,14 @@ kotlin.io.ByteStreamsKt:
     static synthetic java.io.BufferedOutputStream buffered$default(java.io.OutputStream,int,int,java.lang.Object)
     static synthetic java.io.OutputStreamWriter writer$default(java.io.OutputStream,java.nio.charset.Charset,int,java.lang.Object)
     static synthetic java.io.BufferedWriter bufferedWriter$default(java.io.OutputStream,java.nio.charset.Charset,int,java.lang.Object)
+com.github.mikephil.charting.listener.ChartTouchListener:
+    protected static final int NONE
+    protected static final int DRAG
+    protected static final int X_ZOOM
+    protected static final int Y_ZOOM
+    protected static final int PINCH_ZOOM
+    protected static final int POST_ZOOM
+    protected static final int ROTATE
 androidx.transition.ViewOverlayApi14$OverlayViewGroup:
     protected android.view.ViewParent invalidateChildInParentFast(int,int,android.graphics.Rect)
 com.google.android.gms.common.api.GoogleApi:
@@ -1203,10 +1248,10 @@ androidx.fragment.app.ListFragment:
     static final int INTERNAL_EMPTY_ID
     static final int INTERNAL_PROGRESS_CONTAINER_ID
     static final int INTERNAL_LIST_CONTAINER_ID
-com.google.android.material.slider.Slider:
-    void forceDrawCompatHalo(boolean)
 androidx.loader.content.ModernAsyncTask:
     protected final varargs void publishProgress(java.lang.Object[])
+com.github.mikephil.charting.renderer.PieChartRenderer:
+    protected void drawRoundedSlices(android.graphics.Canvas)
 kotlinx.coroutines.flow.FlowKt__ZipKt$combine$$inlined$unsafeFlow$5$lambda$2:
     java.lang.Object L$2
 android.support.v4.media.session.MediaControllerCompat:
@@ -1234,6 +1279,8 @@ com.google.android.material.tabs.TabLayout$SlidingTabIndicator:
     float getIndicatorPosition()
 com.bumptech.glide.GlideBuilder:
     com.bumptech.glide.GlideBuilder setEngine(com.bumptech.glide.load.engine.Engine)
+com.bumptech.glide.load.resource.bitmap.VideoDecoder$ByteBufferInitializer$1:
+    public final synthetic com.bumptech.glide.load.resource.bitmap.VideoDecoder$ByteBufferInitializer this$0
 okhttp3.internal.http2.Http2Connection$$special$$inlined$schedule$1:
     public final synthetic java.lang.String $name
 org.threeten.bp.format.DateTimeFormatterBuilder$ZoneIdPrinterParser$SubstringTree:
@@ -1243,8 +1290,6 @@ com.google.android.gms.common.api.internal.RegistrationMethods$Builder:
     public static synthetic com.google.android.gms.common.api.internal.RemoteCall zaa(com.google.android.gms.common.api.internal.RegistrationMethods$Builder)
     public static synthetic com.google.android.gms.common.api.internal.RemoteCall zab(com.google.android.gms.common.api.internal.RegistrationMethods$Builder)
     public final synthetic void zaa(com.google.android.gms.common.api.Api$AnyClient,com.google.android.gms.tasks.TaskCompletionSource)
-com.google.android.material.slider.Slider$SliderState:
-    public synthetic void <init>(android.os.Parcel,com.google.android.material.slider.Slider$1)
 com.google.android.material.bottomappbar.BottomAppBar$Behavior:
     public static synthetic java.lang.ref.WeakReference access$2100(com.google.android.material.bottomappbar.BottomAppBar$Behavior)
     public static synthetic android.graphics.Rect access$2200(com.google.android.material.bottomappbar.BottomAppBar$Behavior)
@@ -1291,8 +1336,6 @@ org.threeten.bp.format.DateTimeParseContext$Parsed:
     public org.threeten.bp.format.DateTimeParseContext$Parsed copy()
 com.google.android.play.core.appupdate.testing.FakeAppUpdateManager:
     public static void <clinit>()
-com.google.android.play.core.splitcompat.e:
-    public final void f(java.lang.String)
 kotlin.io.FileTreeWalk$FileTreeWalkIterator$SingleFileState:
     public final synthetic kotlin.io.FileTreeWalk$FileTreeWalkIterator this$0
 com.google.android.material.shape.MaterialShapeUtils:
@@ -1328,6 +1371,11 @@ com.google.android.gms.common.internal.zzh:
     public final java.lang.String getPackageName()
     public final int zzq()
     public final boolean getUseDynamicLookup()
+com.google.android.material.transition.platform.MaterialContainerTransformSharedElementCallback:
+    public static synthetic void access$000(android.view.Window)
+    public static synthetic void access$100(android.view.Window)
+    public static synthetic java.lang.ref.WeakReference access$200()
+    public static synthetic java.lang.ref.WeakReference access$202(java.lang.ref.WeakReference)
 com.google.android.play.core.splitinstall.y:
     public static com.google.android.play.core.splitinstall.x a()
 kotlin.reflect.jvm.internal.impl.metadata.ProtoBuf$VersionRequirementTable$Builder:
@@ -1345,6 +1393,10 @@ com.google.android.gms.common.api.internal.ListenerHolder:
 kotlin.reflect.jvm.internal.impl.load.java.lazy.descriptors.LazyJavaStaticClassScope:
     public kotlin.reflect.jvm.internal.impl.load.java.lazy.descriptors.ClassDeclaredMemberIndex computeMemberIndex()
     public kotlin.reflect.jvm.internal.impl.load.java.lazy.descriptors.LazyJavaClassDescriptor getOwnerDescriptor()
+com.github.mikephil.charting.data.RadarDataSet:
+    public void copy(com.github.mikephil.charting.data.RadarDataSet)
+androidx.dynamicanimation.animation.AnimationHandler$FrameCallbackProvider14$1:
+    public void <init>(androidx.dynamicanimation.animation.AnimationHandler$FrameCallbackProvider14)
 com.google.android.material.bottomappbar.BottomAppBar:
     public static synthetic int access$000(com.google.android.material.bottomappbar.BottomAppBar)
     public static synthetic boolean access$100(com.google.android.material.bottomappbar.BottomAppBar)
@@ -1359,7 +1411,6 @@ com.google.android.material.bottomappbar.BottomAppBar:
     public static synthetic int access$1002(com.google.android.material.bottomappbar.BottomAppBar,int)
     public static synthetic android.animation.Animator access$1702(com.google.android.material.bottomappbar.BottomAppBar,android.animation.Animator)
     public static synthetic int access$2700(com.google.android.material.bottomappbar.BottomAppBar)
-    public void createFabDefaultXAnimation(int)
 com.google.android.play.core.splitinstall.testing.FakeSplitInstallManagerFactory:
     public static void <clinit>()
 androidx.transition.ViewGroupUtilsApi14:
@@ -1385,11 +1436,13 @@ kotlin.reflect.jvm.internal.impl.metadata.ProtoBuf$Property:
     public static synthetic kotlin.reflect.jvm.internal.impl.protobuf.ByteString access$16500(kotlin.reflect.jvm.internal.impl.metadata.ProtoBuf$Property)
 com.google.android.gms.common.images.zab:
     public final void zaa(android.content.Context,android.graphics.Bitmap,boolean)
-    public final void zaa()
     public final boolean zaa(boolean,boolean)
 com.google.android.material.internal.TextDrawableHelper:
     public static synthetic boolean access$002(com.google.android.material.internal.TextDrawableHelper,boolean)
     public static synthetic java.lang.ref.WeakReference access$100(com.google.android.material.internal.TextDrawableHelper)
+com.github.mikephil.charting.data.PieDataSet:
+    public void copy(com.github.mikephil.charting.data.PieDataSet)
+    public void calcMinMax(com.github.mikephil.charting.data.PieEntry)
 androidx.fragment.app.FragmentTransitionCompat21$5:
     public final synthetic androidx.fragment.app.FragmentTransitionCompat21 this$0
 com.google.android.material.appbar.HeaderBehavior:
@@ -1409,6 +1462,11 @@ com.google.android.material.shape.MaterialShapeDrawable$2:
     public final synthetic com.google.android.material.shape.MaterialShapeDrawable this$0
 androidx.core.app.NotificationCompat:
     public static android.app.Notification[] getNotificationArrayFromBundle(android.os.Bundle,java.lang.String)
+com.google.android.play.core.assetpacks.bc:
+    public final java.io.File b(java.lang.String,int,long)
+    public final java.io.File d(java.lang.String,int,long,java.lang.String)
+    public final com.google.android.play.core.assetpacks.AssetLocation a(java.lang.String,java.lang.String)
+    public final com.google.android.play.core.assetpacks.AssetLocation a(java.lang.String,java.lang.String,com.google.android.play.core.assetpacks.AssetPackLocation)
 androidx.preference.PreferenceGroupAdapter$2:
     public final synthetic androidx.preference.PreferenceGroupAdapter this$0
 com.bumptech.glide.load.engine.cache.MemorySizeCalculator:
@@ -1426,6 +1484,7 @@ androidx.core.app.NotificationCompatBuilder:
 com.google.android.material.snackbar.SnackbarContentLayout:
     public void updateActionTextColorAlphaIfNeeded(float)
 org.threeten.bp.ZonedDateTime:
+    public static org.threeten.bp.ZonedDateTime readExternal(java.io.DataInput)
     public void writeExternal(java.io.DataOutput)
 com.google.android.gms.common.api.internal.DataHolderResult:
     public final com.google.android.gms.common.api.Status mStatus
@@ -1436,10 +1495,13 @@ com.google.android.gms.common.api.internal.BasePendingResult:
     public static synthetic com.google.android.gms.common.api.ResultCallback zab(com.google.android.gms.common.api.ResultCallback)
     public static synthetic com.google.android.gms.common.api.Result zaa(com.google.android.gms.common.api.internal.BasePendingResult)
 androidx.navigation.NavBackStackEntry:
+    public void replaceArguments(android.os.Bundle)
+    public void setMaxLifecycle(androidx.lifecycle.Lifecycle$State)
     public androidx.lifecycle.Lifecycle$State getMaxLifecycle()
+    public void handleLifecycleEvent(androidx.lifecycle.Lifecycle$Event)
     public void saveState(android.os.Bundle)
 com.google.android.play.core.assetpacks.di:
-    public static java.lang.Runnable a(com.google.android.play.core.assetpacks.bb)
+    public static java.lang.Runnable a(com.google.android.play.core.assetpacks.bc)
 kotlinx.coroutines.internal.ExceptionsConstuctorKt:
     public static synthetic int fieldsCount$default(java.lang.Class,int,int)
 kotlin.reflect.jvm.internal.impl.resolve.MemberComparator$NameAndTypeMemberComparator:
@@ -1473,8 +1535,6 @@ org.threeten.bp.format.DateTimeParseContext:
     public void setCaseSensitive(boolean)
     public boolean isStrict()
     public void setStrict(boolean)
-com.google.android.play.core.assetpacks.u:
-    public static synthetic com.google.android.play.core.assetpacks.v a()
 com.google.android.gms.tasks.zzg:
     public static synthetic java.lang.Object zza(com.google.android.gms.tasks.zzg)
     public static synthetic com.google.android.gms.tasks.OnCanceledListener zzb(com.google.android.gms.tasks.zzg)
@@ -1527,11 +1587,6 @@ androidx.appcompat.widget.LinearLayoutCompat:
     public android.view.View getVirtualChildAt(int)
     public void measureVertical(int,int)
     public void measureHorizontal(int,int)
-    public int getChildrenSkipCount()
-    public int measureNullChild()
-    public void measureChildBeforeLayout(android.view.View,int,int,int,int)
-    public int getLocationOffset()
-    public int getNextLocationOffset()
     public void layoutVertical(int,int,int,int)
     public void layoutHorizontal(int,int,int,int)
 android.support.v4.media.session.MediaControllerCompat$MediaControllerExtraData:
@@ -1542,6 +1597,8 @@ androidx.appcompat.graphics.drawable.AnimatedStateListDrawableCompat:
     public androidx.appcompat.graphics.drawable.AnimatedStateListDrawableCompat$AnimatedStateListState cloneConstantState()
 kotlin.reflect.jvm.internal.impl.resolve.scopes.TypeIntersectionScope:
     public kotlin.reflect.jvm.internal.impl.resolve.scopes.ChainedMemberScope getWorkerScope()
+com.google.android.play.core.splitcompat.d:
+    public final void f(java.lang.String)
 androidx.coordinatorlayout.widget.CoordinatorLayout$LayoutParams:
     public void setLastChildRect(android.graphics.Rect)
     public android.graphics.Rect getLastChildRect()
@@ -1559,11 +1616,11 @@ androidx.transition.ViewGroupOverlayApi14:
     public static androidx.transition.ViewGroupOverlayApi14 createFrom(android.view.ViewGroup)
 android.support.v4.media.MediaBrowserCompat$MediaBrowserImplBase$6:
     public final synthetic android.support.v4.media.MediaBrowserCompat$MediaBrowserImplBase this$0
-com.google.android.gms.common.api.internal.zacc:
-    public final com.google.android.gms.common.api.Status getStatus()
 androidx.media.MediaBrowserServiceCompat$3:
     public void onResultSent(java.util.List)
     public final synthetic androidx.media.MediaBrowserServiceCompat this$0
+com.google.android.gms.common.api.internal.zacc:
+    public final com.google.android.gms.common.api.Status getStatus()
 kotlin.reflect.jvm.internal.impl.load.java.typeEnhancement.PredefinedEnhancementInfoKt$$special$$inlined$enhancement$lambda$17:
     public final synthetic kotlin.reflect.jvm.internal.impl.load.kotlin.SignatureBuildingComponents $this_signatures$inlined
     public final synthetic java.lang.String $JFConsumer$inlined
@@ -1573,8 +1630,13 @@ kotlin.reflect.jvm.internal.impl.load.java.typeEnhancement.PredefinedEnhancement
     public final synthetic java.lang.String $JFBiConsumer$inlined
     public final synthetic java.lang.String $JFBiFunction$inlined
     public final synthetic java.lang.String $JFFunction$inlined
+androidx.core.provider.SelfDestructiveThread:
+    public void onInvokeRunnable(java.lang.Runnable)
+    public void onDestruction()
 androidx.appcompat.app.TwilightManager:
     public static androidx.appcompat.app.TwilightManager getInstance(android.content.Context)
+androidx.dynamicanimation.animation.FlingAnimation:
+    public boolean isAtEquilibrium(float,float)
 kotlin.reflect.jvm.internal.impl.serialization.deserialization.descriptors.DeserializedTypeParameterDescriptor:
     public java.lang.Void reportSupertypeLoopError(kotlin.reflect.jvm.internal.impl.types.KotlinType)
 retrofit2.HttpServiceMethod:
@@ -1582,6 +1644,8 @@ retrofit2.HttpServiceMethod:
     public final java.lang.Object invoke(java.lang.Object[])
 kotlin.jvm.internal.IntSpreadBuilder:
     public int getSize(int[])
+androidx.dynamicanimation.animation.FloatPropertyCompat:
+    public final java.lang.String mPropertyName
 kotlin.reflect.jvm.internal.impl.metadata.ProtoBuf$TypeParameter$Builder:
     public static synthetic kotlin.reflect.jvm.internal.impl.metadata.ProtoBuf$TypeParameter$Builder access$7600()
 kotlin.reflect.jvm.internal.impl.protobuf.SmallSortedMap$EmptySet:
@@ -1635,6 +1699,9 @@ kotlin.reflect.jvm.internal.impl.descriptors.impl.PropertyDescriptorImpl:
     public kotlin.reflect.jvm.internal.impl.descriptors.PropertyDescriptor doSubstitute(kotlin.reflect.jvm.internal.impl.descriptors.impl.PropertyDescriptorImpl$CopyConfiguration)
 kotlin.reflect.jvm.internal.impl.descriptors.impl.LazySubstitutingClassDescriptor$1:
     public final synthetic kotlin.reflect.jvm.internal.impl.descriptors.impl.LazySubstitutingClassDescriptor this$0
+com.github.mikephil.charting.buffer.AbstractBuffer:
+    public int mFrom
+    public int mTo
 androidx.databinding.adapters.DatePickerBindingAdapter$DateChangedListener:
     public synthetic void <init>(androidx.databinding.adapters.DatePickerBindingAdapter$1)
 androidx.core.view.GestureDetectorCompat$GestureDetectorCompatImplBase$GestureHandler:
@@ -1644,9 +1711,12 @@ android.support.v4.media.session.MediaSessionCompat$MediaSessionImplBase$MediaSe
     public void postToHandler(int,java.lang.Object,int)
 androidx.navigation.NavType:
     public static androidx.navigation.NavType inferFromValue(java.lang.String)
+    public static androidx.navigation.NavType inferFromValueType(java.lang.Object)
     public java.lang.Object parseAndPut(android.os.Bundle,java.lang.String,java.lang.String)
 com.google.android.material.internal.NavigationMenuPresenter:
     public static synthetic int access$000(com.google.android.material.internal.NavigationMenuPresenter)
+androidx.core.content.res.ResourcesCompat$ThemeCompat$ImplApi23:
+    public static void rebase(android.content.res.Resources$Theme)
 androidx.loader.app.LoaderManagerImpl$LoaderViewModel:
     public static androidx.loader.app.LoaderManagerImpl$LoaderViewModel getInstance(androidx.lifecycle.ViewModelStore)
     public void startCreatingLoader()
@@ -1661,6 +1731,7 @@ kotlin.reflect.jvm.internal.impl.descriptors.impl.VariableDescriptorImpl:
     public static void <clinit>()
     public static final synthetic boolean $assertionsDisabled
 androidx.preference.PreferenceManager:
+    public long getNextId()
     public boolean shouldCommit()
 com.bumptech.glide.disklrucache.DiskLruCache$Value:
     public synthetic void <init>(com.bumptech.glide.disklrucache.DiskLruCache,java.lang.String,long,java.io.File[],long[],com.bumptech.glide.disklrucache.DiskLruCache$1)
@@ -1753,6 +1824,8 @@ com.monitoryourexpenses.expenses.myexpenses.MyExpenseFragmentViewModel$checkIfDu
 androidx.loader.app.LoaderManagerImpl$LoaderObserver:
     public boolean hasDeliveredData()
     public void reset()
+com.google.android.play.core.assetpacks.v:
+    public static synthetic com.google.android.play.core.assetpacks.w a()
 com.google.android.gms.common.api.Batch:
     public synthetic void <init>(java.util.List,com.google.android.gms.common.api.GoogleApiClient,com.google.android.gms.common.api.zaa)
     public static synthetic java.lang.Object zaa(com.google.android.gms.common.api.Batch)
@@ -1774,24 +1847,14 @@ okhttp3.internal.http2.Http2Connection$pushHeadersLater$$inlined$execute$1:
     public final synthetic boolean $cancelable
 androidx.lifecycle.LifecycleCoroutineScopeImpl$register$1:
     public int label
-com.google.android.play.core.assetpacks.e:
-    public static com.google.android.play.core.tasks.OnSuccessListener a(com.google.android.play.core.assetpacks.bb)
 androidx.room.SharedSQLiteStatement:
     public void assertNotMainThread()
 androidx.appcompat.widget.AppCompatSpinner$DropdownPopup$1:
     public final synthetic androidx.appcompat.widget.AppCompatSpinner val$this$0
+androidx.dynamicanimation.animation.AnimationHandler$FrameCallbackProvider14:
+    public void <init>(androidx.dynamicanimation.animation.AnimationHandler$AnimationCallbackDispatcher)
 android.support.v4.media.MediaBrowserCompat$MediaBrowserImplBase$5:
     public final synthetic android.support.v4.media.MediaBrowserCompat$MediaBrowserImplBase this$0
-com.google.android.play.core.assetpacks.ar:
-    public static synthetic java.lang.String a(com.google.android.play.core.assetpacks.ar)
-    public static synthetic com.google.android.play.core.assetpacks.cb b(com.google.android.play.core.assetpacks.ar)
-    public static synthetic com.google.android.play.core.internal.ak c(com.google.android.play.core.assetpacks.ar)
-    public static synthetic com.google.android.play.core.internal.aa d()
-    public static synthetic android.os.Bundle c(int,java.lang.String,java.lang.String,int)
-    public static synthetic android.os.Bundle b(int,java.lang.String)
-    public static synthetic android.os.Bundle b(int)
-    public static synthetic com.google.android.play.core.internal.ak d(com.google.android.play.core.assetpacks.ar)
-    public static synthetic java.util.concurrent.atomic.AtomicBoolean e(com.google.android.play.core.assetpacks.ar)
 androidx.core.view.ViewCompat$5:
     public java.lang.Boolean frameworkGet(android.view.View)
     public void frameworkSet(android.view.View,java.lang.Boolean)
@@ -1824,7 +1887,8 @@ kotlin.jvm.internal.PrimitiveSpreadBuilder:
     public final void setPosition(int)
 com.google.android.material.textfield.ClearTextEndIconDelegate:
     public static synthetic boolean access$000(android.text.Editable)
-    public static synthetic android.text.TextWatcher access$200(com.google.android.material.textfield.ClearTextEndIconDelegate)
+    public static synthetic android.view.View$OnFocusChangeListener access$200(com.google.android.material.textfield.ClearTextEndIconDelegate)
+    public static synthetic android.text.TextWatcher access$300(com.google.android.material.textfield.ClearTextEndIconDelegate)
 com.google.android.material.internal.TextScale$1:
     public final synthetic com.google.android.material.internal.TextScale this$0
 org.threeten.bp.Ser:
@@ -1838,6 +1902,8 @@ com.bumptech.glide.request.BaseRequestOptions:
 okhttp3.internal.http2.Http2Connection$ReaderRunnable$ping$$inlined$execute$1:
     public final synthetic java.lang.String $name
     public final synthetic boolean $cancelable
+androidx.navigation.NavDeepLinkBuilder:
+    public void <init>(androidx.navigation.NavController)
 androidx.constraintlayout.solver.SolverVariable:
     public static void increaseErrorId()
     public static void <clinit>()
@@ -1854,7 +1920,7 @@ com.google.android.material.transition.FadeModeResult:
 com.google.android.material.floatingactionbutton.BorderDrawable:
     public void setGradientColors(int,int,int,int)
 com.google.android.material.transition.MaterialContainerTransform$TransitionDrawable:
-    public synthetic void <init>(android.transition.PathMotion,android.view.View,android.graphics.RectF,com.google.android.material.shape.ShapeAppearanceModel,android.view.View,android.graphics.RectF,com.google.android.material.shape.ShapeAppearanceModel,int,int,boolean,com.google.android.material.transition.FadeModeEvaluator,com.google.android.material.transition.FitModeEvaluator,com.google.android.material.transition.MaterialContainerTransform$ProgressThresholdsGroup,boolean,com.google.android.material.transition.MaterialContainerTransform$1)
+    public synthetic void <init>(androidx.transition.PathMotion,android.view.View,android.graphics.RectF,com.google.android.material.shape.ShapeAppearanceModel,float,android.view.View,android.graphics.RectF,com.google.android.material.shape.ShapeAppearanceModel,float,int,int,int,int,boolean,boolean,com.google.android.material.transition.FadeModeEvaluator,com.google.android.material.transition.FitModeEvaluator,com.google.android.material.transition.MaterialContainerTransform$ProgressThresholdsGroup,boolean,com.google.android.material.transition.MaterialContainerTransform$1)
     public static synthetic android.view.View access$800(com.google.android.material.transition.MaterialContainerTransform$TransitionDrawable)
     public static synthetic android.view.View access$900(com.google.android.material.transition.MaterialContainerTransform$TransitionDrawable)
 kotlin.reflect.jvm.internal.impl.metadata.jvm.JvmProtoBuf$StringTableTypes$Builder:
@@ -1939,6 +2005,13 @@ com.bumptech.glide.util.pool.StateVerifier:
     public synthetic void <init>(com.bumptech.glide.util.pool.StateVerifier$1)
 com.google.android.material.datepicker.DateValidatorPointBackward:
     public synthetic void <init>(long,com.google.android.material.datepicker.DateValidatorPointBackward$1)
+com.github.mikephil.charting.renderer.LineChartRenderer:
+    public void drawDataSet(android.graphics.Canvas,com.github.mikephil.charting.interfaces.datasets.ILineDataSet)
+    public void drawHorizontalBezier(com.github.mikephil.charting.interfaces.datasets.ILineDataSet)
+    public void drawCubicBezier(com.github.mikephil.charting.interfaces.datasets.ILineDataSet)
+    public void drawLinear(android.graphics.Canvas,com.github.mikephil.charting.interfaces.datasets.ILineDataSet)
+    public void drawLinearFill(android.graphics.Canvas,com.github.mikephil.charting.interfaces.datasets.ILineDataSet,com.github.mikephil.charting.utils.Transformer,com.github.mikephil.charting.renderer.BarLineScatterCandleBubbleRenderer$XBounds)
+    public void drawCircles(android.graphics.Canvas)
 androidx.core.view.ViewPropertyAnimatorCompat$1:
     public final synthetic androidx.core.view.ViewPropertyAnimatorCompat this$0
 com.google.android.material.textfield.PasswordToggleEndIconDelegate:
@@ -1955,6 +2028,8 @@ com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton:
     public static synthetic int access$602(com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton,int)
 kotlin.sequences.IndexingSequence$iterator$1:
     public final synthetic kotlin.sequences.IndexingSequence this$0
+com.github.mikephil.charting.data.BaseDataSet:
+    public void copy(com.github.mikephil.charting.data.BaseDataSet)
 androidx.appcompat.widget.ResourceManagerInternal:
     public boolean tintDrawableUsingColorFilter(android.content.Context,int,android.graphics.drawable.Drawable)
     public android.graphics.PorterDuff$Mode getTintMode(int)
@@ -1999,6 +2074,7 @@ androidx.transition.ChangeBounds$9:
     public final synthetic androidx.transition.ChangeBounds this$0
 kotlin.reflect.jvm.internal.impl.load.java.JavaVisibilities:
     public static synthetic boolean access$000(kotlin.reflect.jvm.internal.impl.descriptors.DeclarationDescriptor,kotlin.reflect.jvm.internal.impl.descriptors.DeclarationDescriptor)
+    public static synthetic boolean access$100(kotlin.reflect.jvm.internal.impl.resolve.scopes.receivers.ReceiverValue,kotlin.reflect.jvm.internal.impl.descriptors.DeclarationDescriptorWithVisibility,kotlin.reflect.jvm.internal.impl.descriptors.DeclarationDescriptor)
 androidx.media.MediaBrowserServiceCompat$MediaBrowserServiceImplBase:
     public void <init>(androidx.media.MediaBrowserServiceCompat)
 com.google.android.gms.auth.api.accounttransfer.AccountTransferClient:
@@ -2027,11 +2103,8 @@ com.google.android.gms.common.internal.BaseGmsClient:
     public static synthetic com.google.android.gms.common.internal.BaseGmsClient$BaseOnConnectionFailedListener zzg(com.google.android.gms.common.internal.BaseGmsClient)
     public java.lang.String getStartServicePackage()
     public java.lang.String getLocalStartServiceAction()
-    public void onConnectedLocked(android.os.IInterface)
-    public void onConnectionSuspended(int)
     public void triggerNotAvailable(com.google.android.gms.common.internal.BaseGmsClient$ConnectionProgressReportCallbacks,int,android.app.PendingIntent)
     public void onPostInitHandler(int,android.os.IBinder,android.os.Bundle,int)
-    public final void zza(int,int)
     public final void checkConnected()
     public boolean enableLocalFallback()
     public java.util.Set getScopes()
@@ -2059,9 +2132,6 @@ com.google.android.gms.internal.base.zai:
     public synthetic void <init>(com.google.android.gms.internal.base.zag)
 kotlin.reflect.jvm.internal.impl.protobuf.BoundedByteString$BoundedByteIterator:
     public synthetic void <init>(kotlin.reflect.jvm.internal.impl.protobuf.BoundedByteString,kotlin.reflect.jvm.internal.impl.protobuf.BoundedByteString$1)
-com.google.android.material.theme.MaterialComponentsViewInflater:
-    public static void <clinit>()
-    public boolean shouldInflateAppCompatButton(android.content.Context,android.util.AttributeSet)
 com.monitoryourexpenses.expenses.createnewexpense.CreateNewExpenseFragment$onCreateView$1$$special$$inlined$let$lambda$1:
     public final synthetic int $year$inlined
     public final synthetic int $month$inlined
@@ -2079,16 +2149,32 @@ kotlin.reflect.jvm.internal.impl.load.java.typeEnhancement.PredefinedEnhancement
     public final synthetic java.lang.String $JFBiFunction$inlined
     public final synthetic java.lang.String $JFFunction$inlined
     public final synthetic java.lang.String $JUOptional$inlined
+com.google.android.material.transition.platform.MaskEvaluator:
+    public void evaluate(float,com.google.android.material.shape.ShapeAppearanceModel,com.google.android.material.shape.ShapeAppearanceModel,android.graphics.RectF,android.graphics.RectF,android.graphics.RectF,com.google.android.material.transition.platform.MaterialContainerTransform$ProgressThresholds)
+    public void clip(android.graphics.Canvas)
+    public android.graphics.Path getPath()
+    public com.google.android.material.shape.ShapeAppearanceModel getCurrentShapeAppearanceModel()
+com.google.android.play.core.assetpacks.as:
+    public static synthetic java.lang.String a(com.google.android.play.core.assetpacks.as)
+    public static synthetic com.google.android.play.core.assetpacks.cb b(com.google.android.play.core.assetpacks.as)
+    public static synthetic com.google.android.play.core.internal.ak c(com.google.android.play.core.assetpacks.as)
+    public static synthetic com.google.android.play.core.internal.aa b()
+    public static synthetic android.os.Bundle c()
+    public static synthetic android.os.Bundle c(int,java.lang.String,java.lang.String,int)
+    public static synthetic android.os.Bundle b(int,java.lang.String)
+    public static synthetic android.os.Bundle b(int)
+    public static synthetic com.google.android.play.core.internal.ak d(com.google.android.play.core.assetpacks.as)
+    public static synthetic java.util.concurrent.atomic.AtomicBoolean e(com.google.android.play.core.assetpacks.as)
 com.bumptech.glide.load.data.StreamAssetPathFetcher:
     public java.io.InputStream loadResource(android.content.res.AssetManager,java.lang.String)
     public void close(java.io.InputStream)
 com.google.android.gms.tasks.zze:
     public static synthetic com.google.android.gms.tasks.Continuation zza(com.google.android.gms.tasks.zze)
     public static synthetic com.google.android.gms.tasks.zzu zzb(com.google.android.gms.tasks.zze)
-com.google.android.gms.common.api.internal.zaca:
-    public final void registerListener(com.google.android.gms.common.api.Api$AnyClient,com.google.android.gms.tasks.TaskCompletionSource)
 androidx.appcompat.widget.TintInfo:
     public void clear()
+com.google.android.gms.common.api.internal.zaca:
+    public final void registerListener(com.google.android.gms.common.api.Api$AnyClient,com.google.android.gms.tasks.TaskCompletionSource)
 kotlin.reflect.jvm.internal.impl.load.java.typeEnhancement.PredefinedEnhancementInfoKt$$special$$inlined$enhancement$lambda$15:
     public final synthetic kotlin.reflect.jvm.internal.impl.load.kotlin.SignatureBuildingComponents $this_signatures$inlined
     public final synthetic java.lang.String $JFConsumer$inlined
@@ -2155,6 +2241,8 @@ androidx.core.content.pm.ShortcutInfoCompat:
     public static androidx.core.app.Person[] getPersonsFromExtra(android.os.PersistableBundle)
 com.google.android.gms.common.api.internal.zacr:
     public synthetic void <init>(com.google.android.gms.common.api.internal.BasePendingResult,android.os.IBinder)
+com.google.android.play.core.assetpacks.g:
+    public static com.google.android.play.core.tasks.OnSuccessListener a(com.google.android.play.core.assetpacks.bc)
 androidx.recyclerview.widget.StaggeredGridLayoutManager$LazySpanLookup:
     public int getSpan(int)
     public void setSpan(int,androidx.recyclerview.widget.StaggeredGridLayoutManager$Span)
@@ -2174,6 +2262,8 @@ androidx.core.view.ViewPropertyAnimatorCompat$2:
     public final synthetic androidx.core.view.ViewPropertyAnimatorCompat this$0
 kotlin.collections.AbstractIterator:
     public final void done()
+com.bumptech.glide.load.engine.Engine$LazyDiskCacheProvider:
+    public synchronized void clearDiskCacheIfCreated()
 com.bumptech.glide.request.target.BitmapThumbnailImageViewTarget:
     public android.graphics.drawable.Drawable getDrawable(android.graphics.Bitmap)
 com.google.android.gms.internal.auth.zzh:
@@ -2198,7 +2288,7 @@ com.google.android.gms.auth.api.credentials.HintRequest$Builder:
     public static synthetic java.lang.String zzh(com.google.android.gms.auth.api.credentials.HintRequest$Builder)
     public static synthetic java.lang.String zzi(com.google.android.gms.auth.api.credentials.HintRequest$Builder)
 com.google.android.play.core.internal.ak:
-    public static synthetic void a(com.google.android.play.core.internal.ak,com.google.android.play.core.internal.ab)
+    public static void a(com.google.android.play.core.internal.ak,com.google.android.play.core.internal.ab)
     public static synthetic android.os.IInterface a(com.google.android.play.core.internal.ak)
     public static synthetic com.google.android.play.core.internal.aa b(com.google.android.play.core.internal.ak)
     public static synthetic android.content.ServiceConnection c(com.google.android.play.core.internal.ak)
@@ -2228,6 +2318,12 @@ com.google.android.material.shape.MaterialShapeDrawable:
     public static synthetic boolean access$402(com.google.android.material.shape.MaterialShapeDrawable,boolean)
 androidx.room.RoomDatabase$JournalMode:
     public androidx.room.RoomDatabase$JournalMode resolve(android.content.Context)
+com.google.android.material.progressindicator.CircularIndeterminateDrawable:
+    public static synthetic android.animation.ObjectAnimator access$000(com.google.android.material.progressindicator.CircularIndeterminateDrawable)
+    public void setIndicatorStartOffset(float)
+    public void setIndicatorInCycleOffset(float)
+    public void setIndicatorHeadChangeFraction(float)
+    public void setIndicatorTailChangeFraction(float)
 com.google.android.material.button.MaterialButtonToggleGroup:
     public static synthetic boolean access$300(com.google.android.material.button.MaterialButtonToggleGroup)
     public static synthetic boolean access$400(com.google.android.material.button.MaterialButtonToggleGroup)
@@ -2235,12 +2331,16 @@ com.google.android.material.button.MaterialButtonToggleGroup:
 okhttp3.internal.ws.RealWebSocket$writeOneFrame$$inlined$synchronized$lambda$1:
     public final synthetic java.lang.String $name
     public final synthetic boolean $cancelable
-    public final synthetic okhttp3.internal.ws.WebSocketWriter $writer$inlined
     public final synthetic okio.ByteString $pong$inlined
     public final synthetic kotlin.jvm.internal.Ref$ObjectRef $messageOrClose$inlined
     public final synthetic kotlin.jvm.internal.Ref$IntRef $receivedCloseCode$inlined
     public final synthetic kotlin.jvm.internal.Ref$ObjectRef $receivedCloseReason$inlined
     public final synthetic kotlin.jvm.internal.Ref$ObjectRef $streamsToClose$inlined
+    public final synthetic kotlin.jvm.internal.Ref$ObjectRef $readerToClose$inlined
+    public final synthetic kotlin.jvm.internal.Ref$ObjectRef $writerToClose$inlined
+com.google.android.material.transition.MaterialContainerTransform$ProgressThresholds:
+    public static synthetic float access$1000(com.google.android.material.transition.MaterialContainerTransform$ProgressThresholds)
+    public static synthetic float access$1100(com.google.android.material.transition.MaterialContainerTransform$ProgressThresholds)
 androidx.recyclerview.widget.FastScroller:
     public void requestRedraw()
     public void hide(int)
@@ -2248,7 +2348,7 @@ androidx.recyclerview.widget.FastScroller:
 kotlinx.coroutines.internal.LockFreeLinkedListNode$makeCondAddOp$1:
     public final synthetic kotlinx.coroutines.internal.LockFreeLinkedListNode $node
 com.google.android.play.core.splitcompat.SplitCompat:
-    public static synthetic com.google.android.play.core.splitcompat.e b(com.google.android.play.core.splitcompat.SplitCompat)
+    public static synthetic com.google.android.play.core.splitcompat.d b(com.google.android.play.core.splitcompat.SplitCompat)
 androidx.loader.app.LoaderManagerImpl$LoaderInfo:
     public androidx.loader.content.Loader getLoader()
     public boolean isCallbackWaitingForData()
@@ -2261,15 +2361,14 @@ kotlin.reflect.jvm.internal.impl.descriptors.impl.PropertySetterDescriptorImpl:
 androidx.appcompat.view.menu.MenuItemWrapperICS$ActionProviderWrapperJB:
     public final synthetic androidx.appcompat.view.menu.MenuItemWrapperICS this$0
 com.bumptech.glide.RequestBuilder:
+    public void <init>(java.lang.Class,com.bumptech.glide.RequestBuilder)
     public com.bumptech.glide.request.target.Target into(com.bumptech.glide.request.target.Target,com.bumptech.glide.request.RequestListener,java.util.concurrent.Executor)
-    public com.bumptech.glide.RequestBuilder getDownloadOnlyRequest()
 androidx.room.RoomSQLiteQuery:
     public void init(java.lang.String,int)
 com.bumptech.glide.request.transition.BitmapContainerTransitionFactory:
     public abstract android.graphics.Bitmap getBitmap(java.lang.Object)
 androidx.room.RoomOpenHelper$Delegate:
     public abstract void onCreate(androidx.sqlite.db.SupportSQLiteDatabase)
-    public void validateMigration()
 com.google.android.gms.common.images.ImageManager$ImageReceiver:
     public static synthetic java.util.ArrayList zaa(com.google.android.gms.common.images.ImageManager$ImageReceiver)
 com.bumptech.glide.load.data.BufferedOutputStream:
@@ -2290,7 +2389,6 @@ org.threeten.bp.chrono.JapaneseEra:
     public org.threeten.bp.LocalDate startDate()
     public void writeExternal(java.io.DataOutput)
 com.bumptech.glide.load.model.ModelCache$1:
-    public void onItemEvicted(com.bumptech.glide.load.model.ModelCache$ModelKey)
     public final synthetic com.bumptech.glide.load.model.ModelCache this$0
 androidx.customview.view.AbsSavedState:
     public synthetic void <init>(androidx.customview.view.AbsSavedState$1)
@@ -2334,6 +2432,9 @@ com.google.android.material.internal.ViewGroupOverlayApi14:
 com.google.android.material.bottomsheet.BottomSheetBehavior$SettleRunnable:
     public static synthetic boolean access$100(com.google.android.material.bottomsheet.BottomSheetBehavior$SettleRunnable)
     public static synthetic boolean access$102(com.google.android.material.bottomsheet.BottomSheetBehavior$SettleRunnable,boolean)
+com.github.mikephil.charting.data.BarDataSet:
+    public void copy(com.github.mikephil.charting.data.BarDataSet)
+    public void calcMinMax(com.github.mikephil.charting.data.BarEntry)
 retrofit2.ParameterHandler$PartMap:
     public void apply(retrofit2.RequestBuilder,java.util.Map)
 com.google.android.material.shape.ShapePath:
@@ -2355,6 +2456,7 @@ kotlin.reflect.jvm.internal.impl.storage.LockBasedStorageManager$3:
 okhttp3.internal.ws.RealWebSocket$initReaderAndWriter$$inlined$synchronized$lambda$1:
     public final synthetic java.lang.String $name
     public final synthetic java.lang.String $name$inlined
+    public final synthetic okhttp3.internal.ws.WebSocketExtensions $extensions$inlined
 com.google.android.material.snackbar.BaseTransientBottomBar:
     public static synthetic android.content.Context access$000(com.google.android.material.snackbar.BaseTransientBottomBar)
     public static synthetic int access$300(com.google.android.material.snackbar.BaseTransientBottomBar)
@@ -2369,6 +2471,8 @@ com.google.android.material.snackbar.BaseTransientBottomBar:
     public boolean hasSnackbarStyleAttr()
     public com.google.android.material.behavior.SwipeDismissBehavior getNewBehavior()
     public void animateViewIn()
+com.google.android.material.progressindicator.DeterminateDrawable:
+    public void setLevelByFraction(float)
 androidx.transition.PathProperty:
     public void <init>(android.util.Property,android.graphics.Path)
 com.google.android.gms.tasks.zzc:
@@ -2382,6 +2486,8 @@ retrofit2.Utils:
     public static java.lang.reflect.Type getParameterLowerBound(int,java.lang.reflect.ParameterizedType)
 com.google.android.material.datepicker.SingleDateSelector:
     public static synthetic java.lang.Long access$102(com.google.android.material.datepicker.SingleDateSelector,java.lang.Long)
+com.google.android.material.slider.BaseSlider$SliderState:
+    public synthetic void <init>(android.os.Parcel,com.google.android.material.slider.BaseSlider$1)
 com.google.android.gms.common.GoogleApiAvailability:
     public final void zaa(android.content.Context)
 androidx.core.graphics.TypefaceCompatBaseImpl$2:
@@ -2406,6 +2512,8 @@ kotlin.reflect.jvm.internal.impl.descriptors.impl.FunctionDescriptorImpl$CopyCon
     public static synthetic java.util.Map access$600(kotlin.reflect.jvm.internal.impl.descriptors.impl.FunctionDescriptorImpl$CopyConfiguration)
 com.google.android.gms.common.api.internal.zas:
     public synthetic void <init>(com.google.android.gms.common.api.internal.zaq,com.google.android.gms.common.api.internal.zat)
+com.google.android.material.transition.platform.MaterialContainerTransformSharedElementCallback$1:
+    public final synthetic com.google.android.material.transition.platform.MaterialContainerTransformSharedElementCallback this$0
 kotlin.reflect.jvm.internal.impl.renderer.DescriptorRendererImpl:
     public static synthetic void renderTypeConstructorAndArguments$default(kotlin.reflect.jvm.internal.impl.renderer.DescriptorRendererImpl,java.lang.StringBuilder,kotlin.reflect.jvm.internal.impl.types.KotlinType,kotlin.reflect.jvm.internal.impl.types.TypeConstructor,int)
 com.google.android.gms.tasks.Tasks$zza:
@@ -2481,6 +2589,9 @@ androidx.core.widget.NestedScrollView:
     public void smoothScrollTo(int,int,boolean)
 com.bumptech.glide.load.engine.ActiveResources:
     public void <init>(boolean,java.util.concurrent.Executor)
+    public void setListener(com.bumptech.glide.load.engine.EngineResource$ResourceListener)
+    public synchronized void deactivate(com.bumptech.glide.load.Key)
+    public synchronized com.bumptech.glide.load.engine.EngineResource get(com.bumptech.glide.load.Key)
     public void cleanReferenceQueue()
     public void shutdown()
 kotlin.reflect.jvm.internal.impl.descriptors.impl.AbstractTypeAliasDescriptor:
@@ -2505,10 +2616,14 @@ com.bumptech.glide.load.engine.EngineJob$ResourceCallbacksAndExecutors:
     public com.bumptech.glide.load.engine.EngineJob$ResourceCallbacksAndExecutors copy()
 com.bumptech.glide.load.engine.bitmap_recycle.LruArrayPool$KeyPool:
     public com.bumptech.glide.load.engine.bitmap_recycle.LruArrayPool$Key create()
+com.github.mikephil.charting.data.filter.Approximator:
+    public varargs float[] concat(float[][])
 org.threeten.bp.zone.Ser:
     public static java.lang.Object read(java.io.DataInput)
-com.google.android.material.transition.MaterialContainerTransformSharedElementCallback$3:
-    public final synthetic com.google.android.material.transition.MaterialContainerTransformSharedElementCallback this$0
+com.bumptech.glide.load.engine.DecodeJob$ReleaseManager:
+    public synchronized void reset()
+com.google.android.play.core.assetpacks.cb:
+    public final synchronized double a(java.lang.String,com.google.android.play.core.assetpacks.ct)
 kotlin.reflect.jvm.internal.impl.load.java.components.JavaAnnotationDescriptor:
     public final kotlin.reflect.jvm.internal.impl.load.java.structure.JavaAnnotationArgument getFirstArgument()
 androidx.fragment.app.FragmentTransitionImpl$1:
@@ -2524,6 +2639,8 @@ kotlin.reflect.jvm.internal.impl.descriptors.impl.MutableClassDescriptor:
     public static final synthetic boolean $assertionsDisabled
 kotlin.reflect.jvm.internal.impl.descriptors.impl.FunctionDescriptorImpl:
     public static synthetic kotlin.reflect.jvm.internal.impl.descriptors.ReceiverParameterDescriptor access$000(kotlin.reflect.jvm.internal.impl.descriptors.impl.FunctionDescriptorImpl)
+androidx.lifecycle.ViewModel:
+    public final void clear()
 kotlin.reflect.jvm.internal.impl.descriptors.impl.TypeAliasConstructorDescriptorImpl:
     public kotlin.reflect.jvm.internal.impl.descriptors.impl.TypeAliasConstructorDescriptorImpl createSubstitutedCopy(kotlin.reflect.jvm.internal.impl.descriptors.DeclarationDescriptor,kotlin.reflect.jvm.internal.impl.descriptors.CallableMemberDescriptor$Kind,kotlin.reflect.jvm.internal.impl.name.Name,kotlin.reflect.jvm.internal.impl.descriptors.annotations.Annotations,kotlin.reflect.jvm.internal.impl.descriptors.SourceElement)
     public static final synthetic kotlin.reflect.KProperty[] $$delegatedProperties
@@ -2538,6 +2655,8 @@ retrofit2.Retrofit$Builder:
     public void <init>(retrofit2.Platform)
 androidx.lifecycle.AbstractSavedStateViewModelFactory:
     public abstract androidx.lifecycle.ViewModel create(java.lang.String,java.lang.Class,androidx.lifecycle.SavedStateHandle)
+androidx.vectordrawable.graphics.drawable.Animatable2Compat$AnimationCallback:
+    public android.graphics.drawable.Animatable2$AnimationCallback getPlatformCallback()
 androidx.constraintlayout.solver.widgets.ConstraintTableLayout$HorizontalSlice:
     public final synthetic androidx.constraintlayout.solver.widgets.ConstraintTableLayout this$0
 androidx.lifecycle.Lifecycling$1:
@@ -2549,7 +2668,13 @@ androidx.fragment.app.FragmentViewLifecycleOwner:
 com.bumptech.glide.request.target.PreloadTarget:
     public void clear()
 com.squareup.moshi.CollectionJsonAdapter:
+    public static com.squareup.moshi.JsonAdapter newArrayListAdapter(java.lang.reflect.Type,com.squareup.moshi.Moshi)
+    public static com.squareup.moshi.JsonAdapter newLinkedHashSetAdapter(java.lang.reflect.Type,com.squareup.moshi.Moshi)
     public synthetic void <init>(com.squareup.moshi.JsonAdapter,com.squareup.moshi.CollectionJsonAdapter$1)
+com.google.android.material.progressindicator.DrawableWithAnimatedVisibilityChange:
+    public void disableAnimatorsForTesting()
+    public android.animation.ValueAnimator getHideAnimator()
+    public float getGrowFraction()
 com.google.android.gms.common.AccountPicker$AccountChooserOptions:
     public static synthetic boolean zza(com.google.android.gms.common.AccountPicker$AccountChooserOptions)
     public static synthetic java.lang.String zzb(com.google.android.gms.common.AccountPicker$AccountChooserOptions)
@@ -2594,6 +2719,8 @@ org.threeten.bp.chrono.Chronology:
     public void writeExternal(java.io.DataOutput)
 com.google.android.material.floatingactionbutton.FloatingActionButtonImpl$ShadowAnimatorImpl:
     public synthetic void <init>(com.google.android.material.floatingactionbutton.FloatingActionButtonImpl,com.google.android.material.floatingactionbutton.FloatingActionButtonImpl$1)
+com.github.mikephil.charting.listener.PieRadarChartTouchListener$AngularVelocitySample:
+    public final synthetic com.github.mikephil.charting.listener.PieRadarChartTouchListener this$0
 okhttp3.internal.concurrent.TaskQueue$schedule$2:
     public final synthetic java.lang.String $name
 androidx.recyclerview.widget.DefaultItemAnimator:
@@ -2623,7 +2750,7 @@ androidx.recyclerview.widget.RecyclerView$RecycledViewPool:
     public void detach()
     public void onAdapterChanged(androidx.recyclerview.widget.RecyclerView$Adapter,androidx.recyclerview.widget.RecyclerView$Adapter,boolean)
 com.google.android.gms.internal.auth-api.zzq:
-    public final com.google.android.gms.auth.api.Auth$AuthCredentialsOptions zze()
+    public final com.google.android.gms.auth.api.Auth$AuthCredentialsOptions zzf()
 androidx.databinding.ViewStubProxy:
     public static synthetic android.view.View access$002(androidx.databinding.ViewStubProxy,android.view.View)
     public static synthetic androidx.databinding.ViewDataBinding access$102(androidx.databinding.ViewStubProxy,androidx.databinding.ViewDataBinding)
@@ -2661,6 +2788,10 @@ kotlin.reflect.jvm.internal.impl.metadata.jvm.JvmProtoBuf$StringTableTypes$Recor
     public static synthetic java.util.List access$800(kotlin.reflect.jvm.internal.impl.metadata.jvm.JvmProtoBuf$StringTableTypes$Record)
     public static synthetic java.util.List access$900(kotlin.reflect.jvm.internal.impl.metadata.jvm.JvmProtoBuf$StringTableTypes$Record)
     public static synthetic kotlin.reflect.jvm.internal.impl.protobuf.ByteString access$1100(kotlin.reflect.jvm.internal.impl.metadata.jvm.JvmProtoBuf$StringTableTypes$Record)
+com.google.android.material.datepicker.TimeSource:
+    public static com.google.android.material.datepicker.TimeSource system()
+    public java.util.Calendar now()
+    public java.util.Calendar now(java.util.TimeZone)
 org.threeten.bp.format.DateTimeFormatterBuilder$2:
     public final synthetic org.threeten.bp.format.DateTimeFormatterBuilder this$0
 kotlin.reflect.jvm.internal.impl.protobuf.RopeByteString:
@@ -2671,6 +2802,10 @@ kotlin.reflect.jvm.internal.impl.protobuf.RopeByteString:
 androidx.fragment.app.DialogFragment:
     public static synthetic android.app.Dialog access$000(androidx.fragment.app.DialogFragment)
     public static synthetic android.content.DialogInterface$OnDismissListener access$100(androidx.fragment.app.DialogFragment)
+com.google.android.material.transition.platform.MaterialContainerTransformSharedElementCallback$2:
+    public final synthetic com.google.android.material.transition.platform.MaterialContainerTransformSharedElementCallback this$0
+com.google.android.material.transition.FitModeEvaluators:
+    public static com.google.android.material.transition.FitModeEvaluator get(int,boolean,android.graphics.RectF,android.graphics.RectF)
 com.google.android.gms.common.server.response.FastJsonResponse$Field:
     public static synthetic com.google.android.gms.common.server.response.FastJsonResponse$FieldConverter zaa(com.google.android.gms.common.server.response.FastJsonResponse$Field)
 androidx.core.view.DisplayCutoutCompat:
@@ -2684,6 +2819,10 @@ androidx.navigation.ui.NavigationUI:
     public static androidx.navigation.NavDestination findStartDestination(androidx.navigation.NavGraph)
 org.threeten.bp.format.DateTimeFormatStyleProvider:
     public static org.threeten.bp.format.DateTimeFormatStyleProvider getInstance()
+androidx.exifinterface.media.ExifInterface$ExifTag:
+    public boolean isFormatCompatible(int)
+androidx.dynamicanimation.animation.AnimationHandler:
+    public androidx.dynamicanimation.animation.AnimationHandler$AnimationFrameCallbackProvider getProvider()
 com.google.android.play.core.assetpacks.cc:
     public static synthetic com.google.android.play.core.assetpacks.cd a()
 androidx.preference.PreferenceFragmentCompat:
@@ -2699,6 +2838,7 @@ androidx.core.app.NotificationManagerCompat$CancelTask:
 com.squareup.moshi.JsonAdapter$3:
     public final synthetic com.squareup.moshi.JsonAdapter this$0
 com.google.android.material.datepicker.UtcDates:
+    public static com.google.android.material.datepicker.TimeSource getTimeSource()
     public static android.icu.text.DateFormat getYearAbbrMonthDayFormat(java.util.Locale)
     public static android.icu.text.DateFormat getAbbrMonthDayFormat(java.util.Locale)
     public static android.icu.text.DateFormat getAbbrMonthWeekdayDayFormat(java.util.Locale)
@@ -2719,20 +2859,21 @@ com.google.android.play.core.assetpacks.bq:
     public final android.app.PendingIntent a()
 kotlin.reflect.jvm.internal.impl.metadata.ProtoBuf$Annotation$Argument$Builder:
     public static synthetic kotlin.reflect.jvm.internal.impl.metadata.ProtoBuf$Annotation$Argument$Builder access$3600()
+com.github.mikephil.charting.data.ScatterDataSet:
+    public void copy(com.github.mikephil.charting.data.ScatterDataSet)
 org.threeten.bp.format.DateTimePrintContext:
     public org.threeten.bp.temporal.TemporalAccessor getTemporal()
     public java.util.Locale getLocale()
     public org.threeten.bp.format.DecimalStyle getSymbols()
     public void startOptional()
 org.threeten.bp.chrono.ThaiBuddhistDate:
+    public static org.threeten.bp.chrono.ChronoLocalDate readExternal(java.io.DataInput)
     public org.threeten.bp.chrono.ThaiBuddhistDate plusYears(long)
     public void writeExternal(java.io.DataOutput)
 androidx.appcompat.view.menu.MenuItemWrapperICS$CollapsibleActionViewWrapper:
     public android.view.View getWrappedView()
 androidx.transition.FragmentTransitionSupport$4:
     public final synthetic androidx.transition.FragmentTransitionSupport this$0
-com.google.android.material.transition.MaterialFade:
-    public com.google.android.material.transition.FadeProvider getDefaultPrimaryAnimatorProvider()
 com.google.android.material.appbar.ViewUtilsLollipop:
     public static void setBoundsViewOutlineProvider(android.view.View)
     public static void setStateListAnimatorFromAttrs(android.view.View,android.util.AttributeSet,int,int)
@@ -2750,8 +2891,6 @@ kotlin.reflect.jvm.internal.impl.storage.LockBasedStorageManager:
     public static synthetic kotlin.reflect.jvm.internal.impl.storage.LockBasedStorageManager$ExceptionHandlingStrategy access$100(kotlin.reflect.jvm.internal.impl.storage.LockBasedStorageManager)
     public static synthetic java.lang.Throwable access$200(java.lang.Throwable)
     public static final synthetic boolean $assertionsDisabled
-com.google.android.material.transition.MaterialContainerTransformSharedElementCallback$2:
-    public final synthetic com.google.android.material.transition.MaterialContainerTransformSharedElementCallback this$0
 androidx.activity.OnBackPressedDispatcher:
     public androidx.activity.Cancellable addCancellableCallback(androidx.activity.OnBackPressedCallback)
 com.google.android.gms.internal.common.zza:
@@ -2762,6 +2901,10 @@ androidx.fragment.app.FragmentManager$StartEnterTransitionListener:
     public void cancelTransaction()
 androidx.fragment.app.FragmentTransitionImpl$2:
     public final synthetic androidx.fragment.app.FragmentTransitionImpl this$0
+com.google.android.material.transition.platform.FadeModeResult:
+    public static com.google.android.material.transition.platform.FadeModeResult endOnTop(int,int)
+com.github.mikephil.charting.renderer.XAxisRenderer:
+    public void setupGridPaint()
 kotlin.reflect.jvm.internal.impl.load.kotlin.AbstractBinaryClassAnnotationAndConstantLoader:
     public byte[] getCachedFileContent(kotlin.reflect.jvm.internal.impl.load.kotlin.KotlinJvmBinaryClass)
 com.monitoryourexpenses.expenses.databinding.ExpenseViewItemBindingImpl:
@@ -2783,6 +2926,8 @@ kotlin.reflect.jvm.internal.impl.load.java.typeEnhancement.PredefinedEnhancement
     public final synthetic java.lang.String $JUOptional$inlined
 org.threeten.bp.format.DateTimeFormatterBuilder$ReducedPrinterParser:
     public org.threeten.bp.format.DateTimeFormatterBuilder$ReducedPrinterParser withSubsequentWidth(int)
+androidx.dynamicanimation.animation.DynamicAnimation$15:
+    public final synthetic androidx.dynamicanimation.animation.DynamicAnimation this$0
 com.bumptech.glide.request.target.ViewTarget$SizeDeterminer:
     public void removeCallback(com.bumptech.glide.request.target.SizeReadyCallback)
 com.google.android.gms.common.util.ProcessUtils:
@@ -2832,9 +2977,6 @@ com.google.android.material.shape.ShapeAppearanceModel:
     public synthetic void <init>(com.google.android.material.shape.ShapeAppearanceModel$Builder,com.google.android.material.shape.ShapeAppearanceModel$1)
 com.squareup.moshi.LinkedHashTreeMap$AvlIterator:
     public void reset(com.squareup.moshi.LinkedHashTreeMap$Node)
-com.google.android.material.slider.Slider$AccessibilityEventSender:
-    public synthetic void <init>(com.google.android.material.slider.Slider,com.google.android.material.slider.Slider$1)
-    public void setVirtualViewId(int)
 com.bumptech.glide.request.target.ViewTarget:
     public void resumeMyRequest()
     public void pauseMyRequest()
@@ -2870,6 +3012,8 @@ kotlin.reflect.jvm.internal.impl.metadata.jvm.JvmProtoBuf$JvmMethodSignature:
     public static synthetic int access$2102(kotlin.reflect.jvm.internal.impl.metadata.jvm.JvmProtoBuf$JvmMethodSignature,int)
     public static synthetic int access$2202(kotlin.reflect.jvm.internal.impl.metadata.jvm.JvmProtoBuf$JvmMethodSignature,int)
     public static synthetic kotlin.reflect.jvm.internal.impl.protobuf.ByteString access$2300(kotlin.reflect.jvm.internal.impl.metadata.jvm.JvmProtoBuf$JvmMethodSignature)
+androidx.dynamicanimation.animation.DynamicAnimation$ViewProperty:
+    public synthetic void <init>(java.lang.String,androidx.dynamicanimation.animation.DynamicAnimation$1)
 com.google.android.gms.auth.api.signin.internal.zzo:
     public static void <clinit>()
 kotlinx.coroutines.flow.internal.ChannelFlow:
@@ -2886,6 +3030,8 @@ kotlin.reflect.jvm.internal.impl.metadata.ProtoBuf$VersionRequirementTable:
     public static synthetic java.util.List access$21102(kotlin.reflect.jvm.internal.impl.metadata.ProtoBuf$VersionRequirementTable,java.util.List)
     public static synthetic java.util.List access$21100(kotlin.reflect.jvm.internal.impl.metadata.ProtoBuf$VersionRequirementTable)
     public static synthetic kotlin.reflect.jvm.internal.impl.protobuf.ByteString access$21200(kotlin.reflect.jvm.internal.impl.metadata.ProtoBuf$VersionRequirementTable)
+com.google.android.material.transition.platform.MaterialContainerTransformSharedElementCallback$3:
+    public final synthetic com.google.android.material.transition.platform.MaterialContainerTransformSharedElementCallback this$0
 kotlinx.coroutines.channels.AbstractChannel:
     public final boolean getHasReceiveOrClosed()
     public final kotlinx.coroutines.channels.AbstractChannel$TryPollDesc describeTryPoll()
@@ -2893,6 +3039,11 @@ kotlinx.coroutines.channels.AbstractChannel:
     public void onReceiveDequeued()
 com.squareup.moshi.JsonAdapter$1:
     public final synthetic com.squareup.moshi.JsonAdapter this$0
+com.github.mikephil.charting.data.filter.Approximator$Line:
+    public final synthetic com.github.mikephil.charting.data.filter.Approximator this$0
+com.bumptech.glide.load.resource.gif.ByteBufferGifDecoder$GifHeaderParserPool:
+    public synchronized com.bumptech.glide.gifdecoder.GifHeaderParser obtain(java.nio.ByteBuffer)
+    public synchronized void release(com.bumptech.glide.gifdecoder.GifHeaderParser)
 com.google.android.play.core.assetpacks.br:
     public static synthetic com.google.android.play.core.assetpacks.bs a()
 android.support.v4.media.session.MediaSessionCompat$2:
@@ -2910,6 +3061,13 @@ retrofit2.ParameterHandler$HeaderMap:
 com.bumptech.glide.load.data.FileDescriptorLocalUriFetcher:
     public android.os.ParcelFileDescriptor loadResource(android.net.Uri,android.content.ContentResolver)
     public void close(android.os.ParcelFileDescriptor)
+com.google.android.material.progressindicator.LinearIndeterminateDrawable:
+    public void setLine1HeadFraction(float)
+    public void setLine1TailFraction(float)
+    public void setLine2HeadFraction(float)
+    public void setLine2TailFraction(float)
+    public void setLineConnectPoint1Fraction(float)
+    public void setLineConnectPoint2Fraction(float)
 com.google.android.material.tabs.TabLayout:
     public static synthetic android.graphics.RectF access$1100(com.google.android.material.tabs.TabLayout)
     public com.google.android.material.tabs.TabLayout$Tab createTabFromPool()
@@ -2945,6 +3103,7 @@ com.google.android.gms.common.api.internal.GoogleApiManager:
     public static synthetic com.google.android.gms.common.GoogleApiAvailability zah(com.google.android.gms.common.api.internal.GoogleApiManager)
     public static synthetic long zai(com.google.android.gms.common.api.internal.GoogleApiManager)
     public static synthetic java.util.Map zaj(com.google.android.gms.common.api.internal.GoogleApiManager)
+    public final void zab(com.google.android.gms.common.api.internal.zaad)
     public final void maybeSignOut()
     public final android.app.PendingIntent zaa(com.google.android.gms.common.api.internal.ApiKey,int)
     public final boolean zac(com.google.android.gms.common.ConnectionResult,int)
@@ -2952,6 +3111,12 @@ kotlinx.coroutines.channels.ProducerCoroutine:
     public void onCompleted(kotlin.Unit)
 com.google.android.material.shape.ShapePath$1:
     public final synthetic com.google.android.material.shape.ShapePath this$0
+com.google.android.gms.auth.api.identity.BeginSignInRequest:
+    public static synthetic java.util.List zzd(java.util.List)
+androidx.room.InvalidationTracker$ObservedTableTracker:
+    public varargs boolean onAdded(int[])
+    public varargs boolean onRemoved(int[])
+    public void onSyncCompleted()
 kotlin.reflect.jvm.internal.impl.protobuf.AbstractMessageLite:
     public kotlin.reflect.jvm.internal.impl.protobuf.UninitializedMessageException newUninitializedMessageException()
     public int memoizedHashCode
@@ -2968,8 +3133,6 @@ androidx.core.view.ViewCompat$Api21Impl:
     public static androidx.core.view.WindowInsetsCompat computeSystemWindowInsets(android.view.View,androidx.core.view.WindowInsetsCompat,android.graphics.Rect)
 com.bumptech.glide.load.engine.EngineKeyFactory:
     public com.bumptech.glide.load.engine.EngineKey buildKey(java.lang.Object,com.bumptech.glide.load.Key,int,int,java.util.Map,java.lang.Class,java.lang.Class,com.bumptech.glide.load.Options)
-com.google.android.material.transition.MaterialContainerTransformSharedElementCallback$1:
-    public final synthetic com.google.android.material.transition.MaterialContainerTransformSharedElementCallback this$0
 com.google.android.gms.auth.api.signin.internal.SignInHubActivity$zzc:
     public synthetic void <init>(com.google.android.gms.auth.api.signin.internal.SignInHubActivity,com.google.android.gms.auth.api.signin.internal.zzy)
 com.google.android.gms.auth.api.credentials.CredentialRequest$Builder:
@@ -3002,6 +3165,8 @@ okhttp3.internal.http2.Http2Connection$ReaderRunnable$headers$$inlined$synchroni
 androidx.appcompat.app.AppCompatDelegateImpl$PanelFeatureState:
     public void setStyle(android.content.Context)
     public androidx.appcompat.view.menu.MenuView getListMenuView(androidx.appcompat.view.menu.MenuPresenter$Callback)
+androidx.dynamicanimation.animation.SpringAnimation:
+    public boolean isAtEquilibrium(float,float)
 androidx.appcompat.widget.Toolbar:
     public void removeChildrenForExpandedActionView()
     public void addChildrenForExpandedActionView()
@@ -3036,6 +3201,8 @@ kotlin.reflect.jvm.internal.impl.descriptors.impl.PropertyDescriptorImpl$CopyCon
     public kotlin.reflect.jvm.internal.impl.descriptors.PropertySetterDescriptor getOriginalSetter()
 okhttp3.Cache$CacheResponseBody$1:
     public final synthetic okio.Source $source
+com.github.mikephil.charting.jobs.AnimatedViewPortJob:
+    public void resetAnimator()
 retrofit2.Platform:
     public static retrofit2.Platform get()
     public java.util.List defaultCallAdapterFactories(java.util.concurrent.Executor)
@@ -3043,7 +3210,6 @@ retrofit2.Platform:
     public java.util.List defaultConverterFactories()
     public int defaultConverterFactoriesSize()
     public boolean isDefaultMethod(java.lang.reflect.Method)
-    public varargs java.lang.Object invokeDefaultMethod(java.lang.reflect.Method,java.lang.Class,java.lang.Object,java.lang.Object[])
 com.google.android.material.datepicker.DateStrings:
     public static java.lang.String getYearMonthDay(long)
     public static java.lang.String getMonthDay(long)
@@ -3090,12 +3256,10 @@ kotlin.reflect.jvm.internal.impl.metadata.ProtoBuf$VersionRequirement:
     public static synthetic kotlin.reflect.jvm.internal.impl.protobuf.ByteString access$20700(kotlin.reflect.jvm.internal.impl.metadata.ProtoBuf$VersionRequirement)
 kotlin.reflect.jvm.internal.impl.types.ErrorUtils$ThrowingScope:
     public synthetic void <init>(java.lang.String,kotlin.reflect.jvm.internal.impl.types.ErrorUtils$1)
-com.google.android.gms.common.api.internal.BaseImplementation$ApiMethodImpl:
-    public void onSetFailedResult()
-com.google.android.gms.common.api.internal.zac:
-    public static synthetic com.google.android.gms.common.api.Status zab(android.os.RemoteException)
 android.support.v4.media.MediaBrowserCompat$ConnectionCallback:
     public void setInternalConnectionCallback(android.support.v4.media.MediaBrowserCompat$ConnectionCallback$ConnectionCallbackInternal)
+com.google.android.gms.common.api.internal.zac:
+    public static synthetic com.google.android.gms.common.api.Status zab(android.os.RemoteException)
 kotlin.reflect.jvm.internal.impl.resolve.OverridingUtil:
     public static synthetic kotlin.reflect.jvm.internal.impl.types.checker.KotlinTypeChecker$TypeConstructorEquality access$000(kotlin.reflect.jvm.internal.impl.resolve.OverridingUtil)
     public static final synthetic boolean $assertionsDisabled
@@ -3157,6 +3321,8 @@ androidx.core.view.accessibility.AccessibilityNodeInfoCompat:
     public static void <clinit>()
 com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton$3:
     public final synthetic com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton this$0
+com.google.android.material.transition.FadeModeEvaluators:
+    public static com.google.android.material.transition.FadeModeEvaluator get(int,boolean)
 androidx.appcompat.widget.TooltipPopup:
     public boolean isShowing()
 androidx.fragment.app.FragmentStore:
@@ -3165,6 +3331,7 @@ androidx.fragment.app.FragmentStore:
     public void makeActive(androidx.fragment.app.FragmentStateManager)
     public void makeInactive(androidx.fragment.app.FragmentStateManager)
     public java.util.ArrayList saveActiveFragments()
+    public java.util.ArrayList saveAddedFragments()
     public int getActiveFragmentCount()
     public androidx.fragment.app.Fragment findFragmentById(int)
     public androidx.fragment.app.Fragment findFragmentByTag(java.lang.String)
@@ -3172,15 +3339,10 @@ androidx.fragment.app.FragmentStore:
     public androidx.fragment.app.Fragment findFragmentByWho(java.lang.String)
     public androidx.fragment.app.Fragment findFragmentUnder(androidx.fragment.app.Fragment)
     public void dump(java.lang.String,java.io.FileDescriptor,java.io.PrintWriter,java.lang.String[])
-androidx.transition.ChangeClipBounds$1:
-    public final synthetic androidx.transition.ChangeClipBounds this$0
 androidx.recyclerview.widget.ViewInfoStore$InfoRecord:
     public static void drainCache()
-com.google.android.play.core.assetpacks.bb:
-    public final java.io.File b(java.lang.String,int,long)
-    public final java.io.File d(java.lang.String,int,long,java.lang.String)
-    public final com.google.android.play.core.assetpacks.AssetLocation a(java.lang.String,java.lang.String)
-    public final com.google.android.play.core.assetpacks.AssetLocation a(java.lang.String,java.lang.String,com.google.android.play.core.assetpacks.AssetPackLocation)
+androidx.transition.ChangeClipBounds$1:
+    public final synthetic androidx.transition.ChangeClipBounds this$0
 kotlin.reflect.jvm.internal.impl.load.java.typeEnhancement.PredefinedEnhancementInfoKt$$special$$inlined$enhancement$lambda$3:
     public final synthetic kotlin.reflect.jvm.internal.impl.load.kotlin.SignatureBuildingComponents $this_signatures$inlined
     public final synthetic java.lang.String $JFConsumer$inlined
@@ -3196,11 +3358,17 @@ androidx.loader.content.AsyncTaskLoader:
     public java.lang.Object onLoadInBackground()
 com.bumptech.glide.load.model.LazyHeaders$Builder:
     public static java.lang.String getSanitizedUserAgent()
+com.github.mikephil.charting.data.LineDataSet:
+    public void copy(com.github.mikephil.charting.data.LineDataSet)
 androidx.appcompat.view.ViewPropertyAnimatorCompatSet$1:
     public void onEnd()
 com.toptoche.searchablespinnerlibrary.SearchableListDialog:
     public static synthetic android.widget.ArrayAdapter access$000(com.toptoche.searchablespinnerlibrary.SearchableListDialog)
     public static synthetic com.toptoche.searchablespinnerlibrary.SearchableListDialog$SearchableItem access$100(com.toptoche.searchablespinnerlibrary.SearchableListDialog)
+androidx.dynamicanimation.animation.FlingAnimation$DragForce:
+    public void setFrictionScalar(float)
+    public float getFrictionScalar()
+    public androidx.dynamicanimation.animation.DynamicAnimation$MassState updateValueAndVelocity(float,float,long)
 kotlin.reflect.jvm.internal.impl.load.java.lazy.descriptors.LazyJavaPackageScope:
     public kotlin.reflect.jvm.internal.impl.load.java.lazy.descriptors.LazyJavaPackageFragment getOwnerDescriptor()
 android.support.v4.media.session.MediaSessionCompat$3:
@@ -3219,6 +3387,7 @@ androidx.navigation.NavGraph:
     public java.lang.String getStartDestDisplayName()
 androidx.appcompat.widget.AppCompatDrawableManager:
     public static synthetic android.graphics.PorterDuff$Mode access$000()
+    public synchronized android.graphics.drawable.Drawable getDrawable(android.content.Context,int,boolean)
 kotlin.reflect.jvm.internal.impl.builtins.KotlinBuiltIns:
     public static synthetic kotlin.reflect.jvm.internal.impl.descriptors.impl.ModuleDescriptorImpl access$000(kotlin.reflect.jvm.internal.impl.builtins.KotlinBuiltIns)
     public static synthetic kotlin.reflect.jvm.internal.impl.name.FqName access$100()
@@ -3234,10 +3403,15 @@ kotlin.reflect.jvm.internal.impl.metadata.jvm.JvmProtoBuf$JvmMethodSignature$Bui
 androidx.navigation.NavArgument:
     public void putDefaultValue(java.lang.String,android.os.Bundle)
     public boolean verify(java.lang.String,android.os.Bundle)
+kotlin.reflect.jvm.internal.KFunctionImpl:
+    public synthetic void <init>(kotlin.reflect.jvm.internal.KDeclarationContainerImpl,java.lang.String,java.lang.String,kotlin.reflect.jvm.internal.impl.descriptors.FunctionDescriptor,java.lang.Object,int)
 androidx.appcompat.widget.AppCompatSpinner$DropdownPopup:
     public boolean isVisibleToUser(android.view.View)
 androidx.lifecycle.ClassesInfoCache$MethodReference:
     public void invokeCallback(androidx.lifecycle.LifecycleOwner,androidx.lifecycle.Lifecycle$Event,java.lang.Object)
+androidx.core.view.ViewCompat$UnhandledKeyEventManager:
+    public static void registerListeningView(android.view.View)
+    public static void unregisterListeningView(android.view.View)
 com.google.android.gms.security.ProviderInstaller:
     public static synthetic com.google.android.gms.common.GoogleApiAvailabilityLight zzam()
 androidx.viewpager2.widget.ViewPager2$BasicAccessibilityProvider:
@@ -3276,11 +3450,16 @@ com.google.android.gms.internal.auth.zzaq:
 com.bumptech.glide.Glide:
     public com.bumptech.glide.manager.ConnectivityMonitorFactory getConnectivityMonitorFactory()
     public com.bumptech.glide.GlideContext getGlideContext()
+    public boolean removeFromManagers(com.bumptech.glide.request.target.Target)
+    public void registerRequestManager(com.bumptech.glide.RequestManager)
+    public void unregisterRequestManager(com.bumptech.glide.RequestManager)
 androidx.core.view.WindowInsetsCompat$BuilderImpl:
     public void <init>(androidx.core.view.WindowInsetsCompat)
 com.google.android.gms.common.zzl:
     public static com.google.android.gms.common.zzl zze()
+    public static com.google.android.gms.common.zzl zza(java.util.concurrent.Callable)
     public static com.google.android.gms.common.zzl zza(java.lang.String,java.lang.Throwable)
+    public static java.lang.String zzc(java.lang.String,com.google.android.gms.common.zzd,boolean,boolean)
 okhttp3.internal.cache.DiskLruCache$Editor$newSink$$inlined$synchronized$lambda$1:
     public final synthetic int $index$inlined
 com.google.android.material.bottomsheet.BottomSheetDialogFragment$BottomSheetDismissCallback:
@@ -3384,12 +3563,16 @@ com.google.android.play.core.assetpacks.dq:
     public abstract long c()
     public abstract long d()
     public abstract int e()
+com.bumptech.glide.load.engine.cache.DiskCacheWriteLocker:
+    public void acquire(java.lang.String)
 android.support.v4.media.session.MediaSessionCompat$MediaSessionImplApi19:
     public void <init>(android.content.Context,java.lang.String,android.content.ComponentName,android.app.PendingIntent)
 com.bumptech.glide.load.engine.prefill.BitmapPreFiller:
     public varargs com.bumptech.glide.load.engine.prefill.PreFillQueue generateAllocationOrder(com.bumptech.glide.load.engine.prefill.PreFillType[])
 com.google.android.gms.internal.base.zab:
     public final void zac(android.os.Parcel)
+com.google.android.material.transition.platform.MaterialContainerTransform:
+    public static synthetic boolean access$300(com.google.android.material.transition.platform.MaterialContainerTransform)
 kotlin.reflect.jvm.internal.impl.protobuf.CodedInputStream:
     public static kotlin.reflect.jvm.internal.impl.protobuf.CodedInputStream newInstance(kotlin.reflect.jvm.internal.impl.protobuf.LiteralByteString)
 kotlin.reflect.jvm.internal.impl.load.java.typeEnhancement.PredefinedEnhancementInfoKt$$special$$inlined$enhancement$lambda$23:
@@ -3419,7 +3602,9 @@ com.google.android.material.badge.BadgeDrawable$SavedState:
     public static synthetic int access$702(com.google.android.material.badge.BadgeDrawable$SavedState,int)
     public static synthetic java.lang.CharSequence access$802(com.google.android.material.badge.BadgeDrawable$SavedState,java.lang.CharSequence)
     public static synthetic int access$902(com.google.android.material.badge.BadgeDrawable$SavedState,int)
+    public static synthetic int access$1002(com.google.android.material.badge.BadgeDrawable$SavedState,int)
     public static synthetic int access$900(com.google.android.material.badge.BadgeDrawable$SavedState)
+    public static synthetic int access$1000(com.google.android.material.badge.BadgeDrawable$SavedState)
     public static synthetic java.lang.CharSequence access$800(com.google.android.material.badge.BadgeDrawable$SavedState)
     public static synthetic int access$502(com.google.android.material.badge.BadgeDrawable$SavedState,int)
     public static synthetic int access$602(com.google.android.material.badge.BadgeDrawable$SavedState,int)
@@ -3433,10 +3618,6 @@ kotlin.reflect.jvm.internal.impl.load.java.typeEnhancement.PredefinedEnhancement
     public final synthetic java.lang.String $JFBiFunction$inlined
     public final synthetic java.lang.String $JFFunction$inlined
     public final synthetic java.lang.String $JUOptional$inlined
-retrofit2.CompletableFutureCallAdapterFactory$ResponseCallAdapter$2:
-    public final synthetic retrofit2.CompletableFutureCallAdapterFactory$ResponseCallAdapter this$0
-com.google.android.material.transition.MaterialFadeThrough:
-    public com.google.android.material.transition.FadeThroughProvider getDefaultPrimaryAnimatorProvider()
 com.bumptech.glide.load.resource.gif.GifFrameLoader$DelayTarget:
     public android.graphics.Bitmap getResource()
 com.google.android.gms.auth.api.accounttransfer.AccountTransferClient$zzc:
@@ -3459,8 +3640,6 @@ com.bumptech.glide.request.transition.ViewAnimationFactory:
     public void <init>(com.bumptech.glide.request.transition.ViewTransition$ViewTransitionAnimationFactory)
 com.google.android.material.appbar.ViewOffsetHelper:
     public void onViewLayout()
-retrofit2.CompletableFutureCallAdapterFactory$BodyCallAdapter$1:
-    public final synthetic retrofit2.CompletableFutureCallAdapterFactory$BodyCallAdapter this$0
 org.threeten.bp.MonthDay:
     public void writeExternal(java.io.DataOutput)
 com.google.android.material.behavior.HideBottomViewOnScrollBehavior:
@@ -3495,8 +3674,6 @@ com.google.android.material.button.MaterialButtonHelper:
     public void setCheckable(boolean)
     public boolean isCheckable()
     public com.google.android.material.shape.ShapeAppearanceModel getShapeAppearanceModel()
-androidx.appcompat.view.ContextThemeWrapper:
-    public void onApplyThemeResource(android.content.res.Resources$Theme,int)
 kotlin.coroutines.experimental.jvm.internal.CoroutineImpl:
     public int label
 androidx.lifecycle.SavedStateHandle:
@@ -3517,11 +3694,6 @@ kotlin.reflect.jvm.internal.impl.metadata.ProtoBuf$Expression:
     public static synthetic kotlin.reflect.jvm.internal.impl.protobuf.ByteString access$24700(kotlin.reflect.jvm.internal.impl.metadata.ProtoBuf$Expression)
 com.google.android.material.transformation.FabTransformationBehavior:
     public abstract com.google.android.material.transformation.FabTransformationBehavior$FabTransformationSpec onCreateMotionSpec(android.content.Context,boolean)
-com.google.android.material.transition.MaterialContainerTransformSharedElementCallback:
-    public static synthetic void access$000(android.view.Window)
-    public static synthetic void access$100(android.view.Window)
-    public static synthetic java.lang.ref.WeakReference access$200()
-    public static synthetic java.lang.ref.WeakReference access$202(java.lang.ref.WeakReference)
 androidx.cardview.widget.RoundRectDrawable:
     public float getPadding()
 com.google.android.gms.common.api.internal.zaaf:
@@ -3537,6 +3709,10 @@ kotlin.reflect.jvm.internal.impl.metadata.ProtoBuf$StringTable$Builder:
     public static synthetic kotlin.reflect.jvm.internal.impl.metadata.ProtoBuf$StringTable$Builder access$100()
 kotlin.reflect.jvm.internal.impl.descriptors.impl.EnumEntrySyntheticClassDescriptor$EnumEntryScope$2:
     public final synthetic kotlin.reflect.jvm.internal.impl.descriptors.impl.EnumEntrySyntheticClassDescriptor val$this$0
+com.bumptech.glide.load.engine.SourceGenerator:
+    public boolean isCurrentRequest(com.bumptech.glide.load.model.ModelLoader$LoadData)
+    public void onDataReadyInternal(com.bumptech.glide.load.model.ModelLoader$LoadData,java.lang.Object)
+    public void onLoadFailedInternal(com.bumptech.glide.load.model.ModelLoader$LoadData,java.lang.Exception)
 com.squareup.moshi.JsonWriter:
     public final void replaceTop(int)
     public final void promoteValueToName()
@@ -3555,8 +3731,6 @@ kotlin.jvm.internal.FloatSpreadBuilder:
     public int getSize(float[])
 kotlin.reflect.jvm.internal.impl.protobuf.RopeByteString$PieceIterator:
     public synthetic void <init>(kotlin.reflect.jvm.internal.impl.protobuf.ByteString,kotlin.reflect.jvm.internal.impl.protobuf.RopeByteString$1)
-com.google.android.play.core.splitcompat.m:
-    public final java.util.Set a(com.google.android.play.core.splitcompat.r)
 kotlin.reflect.jvm.internal.impl.load.java.descriptors.JavaClassConstructorDescriptor:
     public static void <clinit>()
     public kotlin.reflect.jvm.internal.impl.load.java.descriptors.JavaClassConstructorDescriptor createDescriptor(kotlin.reflect.jvm.internal.impl.descriptors.ClassDescriptor,kotlin.reflect.jvm.internal.impl.load.java.descriptors.JavaClassConstructorDescriptor,kotlin.reflect.jvm.internal.impl.descriptors.CallableMemberDescriptor$Kind,kotlin.reflect.jvm.internal.impl.descriptors.SourceElement,kotlin.reflect.jvm.internal.impl.descriptors.annotations.Annotations)
@@ -3572,11 +3746,12 @@ androidx.transition.Scene:
     public static void setCurrentScene(android.view.ViewGroup,androidx.transition.Scene)
     public boolean isCreatedFromLayoutResource()
 com.bumptech.glide.request.target.CustomViewTarget:
-    public void onResourceLoading()
     public final void resumeMyRequest()
     public final void pauseMyRequest()
 com.bumptech.glide.TransitionOptions:
     public final com.bumptech.glide.request.transition.TransitionFactory getTransitionFactory()
+com.github.mikephil.charting.renderer.CandleStickChartRenderer:
+    public void drawDataSet(android.graphics.Canvas,com.github.mikephil.charting.interfaces.datasets.ICandleDataSet)
 androidx.appcompat.app.TwilightCalculator:
     public static androidx.appcompat.app.TwilightCalculator getInstance()
 androidx.transition.ViewUtilsApi22:
@@ -3584,16 +3759,16 @@ androidx.transition.ViewUtilsApi22:
 com.bumptech.glide.disklrucache.StrictLineReader:
     public static synthetic java.nio.charset.Charset access$000(com.bumptech.glide.disklrucache.StrictLineReader)
 androidx.print.PrintHelper$PrintUriAdapter$1:
-    public varargs android.graphics.Bitmap doInBackground()
-    public void onCancelled1()
+    public void onPostExecute(android.graphics.Bitmap)
 androidx.media.session.MediaButtonReceiver$MediaButtonConnectionCallback:
     public void setMediaBrowser(android.support.v4.media.MediaBrowserCompat)
+com.github.mikephil.charting.highlight.RadarHighlighter:
+    public java.util.List getHighlightsAtIndex(int)
 kotlin.jvm.internal.CharSpreadBuilder:
     public int getSize(char[])
 androidx.appcompat.widget.AppCompatTextHelper:
     public void setAllCaps(boolean)
     public void onSetCompoundDrawables()
-    public void onLayout()
     public void autoSizeText()
     public void setAutoSizeTextTypeWithDefaults(int)
     public void setAutoSizeTextTypeUniformWithConfiguration(int,int,int,int)
@@ -3669,8 +3844,6 @@ kotlinx.coroutines.channels.ChannelCoroutine:
     public static synthetic java.lang.Object receiveOrNull$suspendImpl(kotlinx.coroutines.channels.ChannelCoroutine,kotlin.coroutines.Continuation)
     public static synthetic java.lang.Object send$suspendImpl(kotlinx.coroutines.channels.ChannelCoroutine,java.lang.Object,kotlin.coroutines.Continuation)
     public final kotlinx.coroutines.channels.Channel get_channel()
-retrofit2.CompletableFutureCallAdapterFactory$ResponseCallAdapter$1:
-    public final synthetic retrofit2.CompletableFutureCallAdapterFactory$ResponseCallAdapter this$0
 org.threeten.bp.temporal.IsoFields$Field:
     public synthetic void <init>(java.lang.String,int,org.threeten.bp.temporal.IsoFields$1)
     public static synthetic boolean access$100(org.threeten.bp.temporal.TemporalAccessor)
@@ -3683,6 +3856,7 @@ kotlin.reflect.jvm.internal.impl.types.checker.TypeCheckingProcedure:
     public static void <clinit>()
     public static final synthetic boolean $assertionsDisabled
 androidx.room.InvalidationTracker:
+    public void internalInit(androidx.sqlite.db.SupportSQLiteDatabase)
     public void startMultiInstanceInvalidation(android.content.Context,java.lang.String)
     public void stopMultiInstanceInvalidation()
 kotlin.reflect.jvm.internal.impl.metadata.ProtoBuf$PackageFragment:
@@ -3741,10 +3915,12 @@ kotlin.reflect.jvm.internal.impl.load.java.typeEnhancement.PredefinedEnhancement
     public final synthetic java.lang.String $JFBiFunction$inlined
     public final synthetic java.lang.String $JFFunction$inlined
     public final synthetic java.lang.String $JUOptional$inlined
-retrofit2.CompletableFutureCallAdapterFactory$BodyCallAdapter$2:
-    public final synthetic retrofit2.CompletableFutureCallAdapterFactory$BodyCallAdapter this$0
-com.google.android.play.core.assetpacks.m:
-    public final android.content.Context a()
+com.google.android.material.transition.platform.MaterialContainerTransform$ProgressThresholdsGroup:
+    public synthetic void <init>(com.google.android.material.transition.platform.MaterialContainerTransform$ProgressThresholds,com.google.android.material.transition.platform.MaterialContainerTransform$ProgressThresholds,com.google.android.material.transition.platform.MaterialContainerTransform$ProgressThresholds,com.google.android.material.transition.platform.MaterialContainerTransform$ProgressThresholds,com.google.android.material.transition.platform.MaterialContainerTransform$1)
+    public static synthetic com.google.android.material.transition.platform.MaterialContainerTransform$ProgressThresholds access$400(com.google.android.material.transition.platform.MaterialContainerTransform$ProgressThresholdsGroup)
+    public static synthetic com.google.android.material.transition.platform.MaterialContainerTransform$ProgressThresholds access$500(com.google.android.material.transition.platform.MaterialContainerTransform$ProgressThresholdsGroup)
+    public static synthetic com.google.android.material.transition.platform.MaterialContainerTransform$ProgressThresholds access$600(com.google.android.material.transition.platform.MaterialContainerTransform$ProgressThresholdsGroup)
+    public static synthetic com.google.android.material.transition.platform.MaterialContainerTransform$ProgressThresholds access$700(com.google.android.material.transition.platform.MaterialContainerTransform$ProgressThresholdsGroup)
 com.google.android.play.core.assetpacks.bl:
     public final java.lang.String a()
     public final long b()
@@ -3789,14 +3965,21 @@ com.google.android.material.datepicker.MaterialCalendarGridView$1:
     public final synthetic com.google.android.material.datepicker.MaterialCalendarGridView this$0
 com.google.android.play.core.appupdate.l:
     public final long a()
+com.google.android.material.transition.platform.MaterialContainerTransform$ProgressThresholds:
+    public static synthetic float access$1000(com.google.android.material.transition.platform.MaterialContainerTransform$ProgressThresholds)
+    public static synthetic float access$1100(com.google.android.material.transition.platform.MaterialContainerTransform$ProgressThresholds)
+com.google.android.play.core.splitcompat.l:
+    public final java.util.Set a(com.google.android.play.core.splitcompat.r)
+com.google.android.play.core.tasks.b:
+    public static synthetic java.lang.Object a(com.google.android.play.core.tasks.b)
+    public static synthetic com.google.android.play.core.tasks.OnCompleteListener b(com.google.android.play.core.tasks.b)
+com.google.android.play.core.appupdate.m:
+    public final long a()
     public final long b()
     public final android.app.PendingIntent c()
     public final android.app.PendingIntent d()
     public final android.app.PendingIntent e()
     public final android.app.PendingIntent f()
-com.google.android.play.core.tasks.b:
-    public static synthetic java.lang.Object a(com.google.android.play.core.tasks.b)
-    public static synthetic com.google.android.play.core.tasks.OnCompleteListener b(com.google.android.play.core.tasks.b)
 kotlin.reflect.jvm.internal.impl.metadata.ProtoBuf$Annotation:
     public synthetic void <init>(kotlin.reflect.jvm.internal.impl.protobuf.CodedInputStream,kotlin.reflect.jvm.internal.impl.protobuf.ExtensionRegistryLite,kotlin.reflect.jvm.internal.impl.metadata.ProtoBuf$1)
     public synthetic void <init>(kotlin.reflect.jvm.internal.impl.protobuf.GeneratedMessageLite$Builder,kotlin.reflect.jvm.internal.impl.metadata.ProtoBuf$1)
@@ -3826,10 +4009,13 @@ com.google.android.material.chip.ChipGroup:
     public int getIndexOfChip(android.view.View)
 com.bumptech.glide.load.engine.EngineJob:
     public void <init>(com.bumptech.glide.load.engine.executor.GlideExecutor,com.bumptech.glide.load.engine.executor.GlideExecutor,com.bumptech.glide.load.engine.executor.GlideExecutor,com.bumptech.glide.load.engine.executor.GlideExecutor,com.bumptech.glide.load.engine.EngineJobListener,com.bumptech.glide.load.engine.EngineResource$ResourceListener,androidx.core.util.Pools$Pool,com.bumptech.glide.load.engine.EngineJob$EngineResourceFactory)
+    public synchronized com.bumptech.glide.load.engine.EngineJob init(com.bumptech.glide.load.Key,boolean,boolean,boolean,boolean)
     public void callCallbackOnResourceReady(com.bumptech.glide.request.ResourceCallback)
     public void callCallbackOnLoadFailed(com.bumptech.glide.request.ResourceCallback)
     public boolean onlyRetrieveFromCache()
     public void cancel()
+    public void notifyCallbacksOfResult()
+    public void notifyCallbacksOfException()
 kotlin.reflect.jvm.internal.impl.load.java.typeEnhancement.PredefinedEnhancementInfoKt$$special$$inlined$enhancement$lambda$1:
     public final synthetic kotlin.reflect.jvm.internal.impl.load.kotlin.SignatureBuildingComponents $this_signatures$inlined
     public final synthetic java.lang.String $JFPredicate$inlined
@@ -3858,6 +4044,8 @@ com.google.android.gms.common.api.internal.zack:
     public static synthetic java.lang.Object zaf(com.google.android.gms.common.api.internal.zack)
     public static synthetic com.google.android.gms.common.api.internal.zack zag(com.google.android.gms.common.api.internal.zack)
     public final void zabt()
+com.github.mikephil.charting.renderer.BubbleChartRenderer:
+    public void drawDataSet(android.graphics.Canvas,com.github.mikephil.charting.interfaces.datasets.IBubbleDataSet)
 com.google.android.material.floatingactionbutton.BorderDrawable$BorderState:
     public synthetic void <init>(com.google.android.material.floatingactionbutton.BorderDrawable,com.google.android.material.floatingactionbutton.BorderDrawable$1)
 android.support.v4.media.session.MediaSessionCompat$1:
@@ -3897,7 +4085,6 @@ androidx.appcompat.app.AppCompatViewInflater:
     public androidx.appcompat.widget.AppCompatRatingBar createRatingBar(android.content.Context,android.util.AttributeSet)
     public androidx.appcompat.widget.AppCompatSeekBar createSeekBar(android.content.Context,android.util.AttributeSet)
     public androidx.appcompat.widget.AppCompatToggleButton createToggleButton(android.content.Context,android.util.AttributeSet)
-    public android.view.View createView()
 androidx.recyclerview.widget.RecyclerView$ViewHolder:
     public void flagRemovedAndOffsetPosition(int,int,boolean)
     public void saveOldPosition()
@@ -4005,6 +4192,8 @@ androidx.room.RoomDatabase:
     public abstract androidx.sqlite.db.SupportSQLiteOpenHelper createOpenHelper(androidx.room.DatabaseConfiguration)
     public abstract androidx.room.InvalidationTracker createInvalidationTracker()
     public void internalInitInvalidationTracker(androidx.sqlite.db.SupportSQLiteDatabase)
+retrofit2.CompletableFutureCallAdapterFactory$ResponseCallAdapter$ResponseCallback:
+    public final synthetic retrofit2.CompletableFutureCallAdapterFactory$ResponseCallAdapter this$0
 com.bumptech.glide.disklrucache.DiskLruCache$Editor:
     public synthetic void <init>(com.bumptech.glide.disklrucache.DiskLruCache,com.bumptech.glide.disklrucache.DiskLruCache$Entry,com.bumptech.glide.disklrucache.DiskLruCache$1)
     public static synthetic com.bumptech.glide.disklrucache.DiskLruCache$Entry access$1500(com.bumptech.glide.disklrucache.DiskLruCache$Editor)
@@ -4030,11 +4219,12 @@ androidx.preference.Preference:
     public final boolean wasDetached()
     public final void clearWasDetached()
     public androidx.preference.Preference findPreferenceInHierarchy(java.lang.String)
-    public void onSetInitialValue1(java.lang.Object)
     public java.lang.StringBuilder getFilterableStringBuilder()
 com.google.android.material.transition.MaskEvaluator:
     public void evaluate(float,com.google.android.material.shape.ShapeAppearanceModel,com.google.android.material.shape.ShapeAppearanceModel,android.graphics.RectF,android.graphics.RectF,android.graphics.RectF,com.google.android.material.transition.MaterialContainerTransform$ProgressThresholds)
     public void clip(android.graphics.Canvas)
+    public android.graphics.Path getPath()
+    public com.google.android.material.shape.ShapeAppearanceModel getCurrentShapeAppearanceModel()
 com.google.android.material.bottomnavigation.BottomNavigationView$2:
     public final synthetic com.google.android.material.bottomnavigation.BottomNavigationView this$0
 android.support.v4.media.MediaBrowserCompat$MediaBrowserImplApi21$5:
@@ -4045,7 +4235,6 @@ com.google.android.material.bottomnavigation.BottomNavigationMenuView:
     public void tryRestoreSelectedItemId(int)
     public com.google.android.material.badge.BadgeDrawable getBadge(int)
 com.bumptech.glide.load.engine.cache.LruResourceCache:
-    public void onItemEvicted(com.bumptech.glide.load.engine.Resource)
     public int getSize(com.bumptech.glide.load.engine.Resource)
 com.google.android.material.appbar.CollapsingToolbarLayout:
     public androidx.core.view.WindowInsetsCompat onWindowInsetChanged(androidx.core.view.WindowInsetsCompat)
@@ -4087,10 +4276,12 @@ kotlinx.coroutines.sync.MutexImpl$lockSuspend$$inlined$suspendAtomicCancellableC
     public final synthetic kotlinx.coroutines.internal.LockFreeLinkedListNode $node
     public final synthetic kotlinx.coroutines.CancellableContinuation $cont$inlined
     public final synthetic kotlinx.coroutines.sync.MutexImpl$LockCont $waiter$inlined
+retrofit2.CompletableFutureCallAdapterFactory$BodyCallAdapter$BodyCallback:
+    public final synthetic retrofit2.CompletableFutureCallAdapterFactory$BodyCallAdapter this$0
 androidx.core.view.ViewPropertyAnimatorCompat$ViewPropertyAnimatorListenerApi14:
     public void <init>(androidx.core.view.ViewPropertyAnimatorCompat)
 com.google.android.play.core.assetpacks.n:
-    public static synthetic com.google.android.play.core.assetpacks.o a()
+    public final android.content.Context a()
 com.google.android.material.appbar.AppBarLayout$BaseBehavior:
     public static synthetic int access$000(com.google.android.material.appbar.AppBarLayout$BaseBehavior)
     public boolean canDragView(com.google.android.material.appbar.AppBarLayout)
@@ -4111,7 +4302,7 @@ com.google.android.play.core.appupdate.k:
     public static synthetic java.lang.String a(com.google.android.play.core.appupdate.k)
     public static synthetic com.google.android.play.core.internal.aa a()
     public static synthetic android.os.Bundle b()
-    public static synthetic com.google.android.play.core.appupdate.AppUpdateInfo a(com.google.android.play.core.appupdate.k,android.os.Bundle,java.lang.String)
+    public static com.google.android.play.core.appupdate.AppUpdateInfo a(com.google.android.play.core.appupdate.k,android.os.Bundle,java.lang.String)
 com.google.android.material.appbar.HeaderScrollingViewBehavior:
     public boolean shouldHeaderOverlapScrollingChild()
     public float getOverlapRatioForOffset(android.view.View)
@@ -4130,13 +4321,18 @@ com.google.android.material.textfield.DropdownMenuEndIconDelegate:
     public static synthetic android.view.accessibility.AccessibilityManager access$300(com.google.android.material.textfield.DropdownMenuEndIconDelegate)
     public static synthetic android.text.TextWatcher access$800(com.google.android.material.textfield.DropdownMenuEndIconDelegate)
     public static synthetic com.google.android.material.textfield.TextInputLayout$AccessibilityDelegate access$900(com.google.android.material.textfield.DropdownMenuEndIconDelegate)
-    public static synthetic long access$1102(com.google.android.material.textfield.DropdownMenuEndIconDelegate,long)
-    public static synthetic boolean access$1200(com.google.android.material.textfield.DropdownMenuEndIconDelegate)
-    public static synthetic android.animation.ValueAnimator access$1300(com.google.android.material.textfield.DropdownMenuEndIconDelegate)
+    public static synthetic android.view.View$OnFocusChangeListener access$1000(com.google.android.material.textfield.DropdownMenuEndIconDelegate)
+    public static synthetic boolean access$1100()
+    public static synthetic long access$1302(com.google.android.material.textfield.DropdownMenuEndIconDelegate,long)
+    public static synthetic boolean access$1400(com.google.android.material.textfield.DropdownMenuEndIconDelegate)
+    public static synthetic android.animation.ValueAnimator access$1500(com.google.android.material.textfield.DropdownMenuEndIconDelegate)
     public static void <clinit>()
 androidx.appcompat.widget.ResourceManagerInternal$ColorFilterLruCache:
     public android.graphics.PorterDuffColorFilter get(int,android.graphics.PorterDuff$Mode)
     public android.graphics.PorterDuffColorFilter put(int,android.graphics.PorterDuff$Mode,android.graphics.PorterDuffColorFilter)
+com.bumptech.glide.load.engine.cache.DiskCacheWriteLocker$WriteLockPool:
+    public com.bumptech.glide.load.engine.cache.DiskCacheWriteLocker$WriteLock obtain()
+    public void offer(com.bumptech.glide.load.engine.cache.DiskCacheWriteLocker$WriteLock)
 com.bumptech.glide.load.resource.ImageDecoderResourceDecoder$1$1:
     public final synthetic com.bumptech.glide.load.resource.ImageDecoderResourceDecoder$1 this$1
 androidx.viewpager2.widget.FakeDrag:
@@ -4159,6 +4355,9 @@ androidx.vectordrawable.graphics.drawable.VectorDrawableCompat$VObject:
     public synthetic void <init>(androidx.vectordrawable.graphics.drawable.VectorDrawableCompat$1)
 com.bumptech.glide.disklrucache.DiskLruCache$DiskLruCacheThreadFactory:
     public synthetic void <init>(com.bumptech.glide.disklrucache.DiskLruCache$1)
+com.github.mikephil.charting.data.BubbleDataSet:
+    public void calcMinMax(com.github.mikephil.charting.data.BubbleEntry)
+    public void copy(com.github.mikephil.charting.data.BubbleDataSet)
 kotlin.reflect.jvm.internal.impl.types.AbstractTypeConstructor:
     public void reportScopesLoopError(kotlin.reflect.jvm.internal.impl.types.KotlinType)
 androidx.core.provider.SelfDestructiveThread$3:
@@ -4185,6 +4384,8 @@ androidx.appcompat.widget.ActionMenuPresenter$OverflowMenuButton$1:
     public final synthetic androidx.appcompat.widget.ActionMenuPresenter val$this$0
 kotlin.reflect.jvm.internal.impl.protobuf.SmallSortedMap$EntrySet:
     public synthetic void <init>(kotlin.reflect.jvm.internal.impl.protobuf.SmallSortedMap,kotlin.reflect.jvm.internal.impl.protobuf.SmallSortedMap$1)
+com.github.mikephil.charting.utils.ObjectPool$Poolable:
+    public static void <clinit>()
 kotlin.reflect.jvm.internal.impl.load.java.typeEnhancement.PredefinedEnhancementInfoKt$$special$$inlined$enhancement$lambda$20:
     public final synthetic kotlin.reflect.jvm.internal.impl.load.kotlin.SignatureBuildingComponents $this_signatures$inlined
     public final synthetic java.lang.String $JFPredicate$inlined
@@ -4200,6 +4401,8 @@ kotlinx.coroutines.flow.FlowKt__DelayKt$sample$2$invokeSuspend$$inlined$select$l
 com.google.android.material.chip.ChipGroup$PassThroughHierarchyChangeListener:
     public synthetic void <init>(com.google.android.material.chip.ChipGroup,com.google.android.material.chip.ChipGroup$1)
     public static synthetic android.view.ViewGroup$OnHierarchyChangeListener access$202(com.google.android.material.chip.ChipGroup$PassThroughHierarchyChangeListener,android.view.ViewGroup$OnHierarchyChangeListener)
+com.google.android.play.core.assetpacks.o:
+    public static synthetic com.google.android.play.core.assetpacks.p a()
 kotlin.reflect.jvm.internal.impl.protobuf.UnmodifiableLazyStringList:
     public static synthetic kotlin.reflect.jvm.internal.impl.protobuf.LazyStringList access$000(kotlin.reflect.jvm.internal.impl.protobuf.UnmodifiableLazyStringList)
 okhttp3.internal.http1.Http1ExchangeCodec$UnknownLengthSource:
@@ -4207,7 +4410,6 @@ okhttp3.internal.http1.Http1ExchangeCodec$UnknownLengthSource:
 kotlin.reflect.jvm.internal.impl.metadata.ProtoBuf$TypeTable$Builder:
     public static synthetic kotlin.reflect.jvm.internal.impl.metadata.ProtoBuf$TypeTable$Builder access$11800()
 androidx.appcompat.widget.SearchView:
-    public boolean onSuggestionsKey(int,android.view.KeyEvent)
     public void adjustDropDownSizeAndPosition()
 com.google.android.play.core.splitinstall.SplitInstallSessionState:
     public abstract java.util.List a()
@@ -4217,11 +4419,16 @@ com.google.android.play.core.splitinstall.a:
     public final java.util.List a()
     public final java.util.List b()
     public final java.util.List c()
-androidx.appcompat.widget.AppCompatTextHelper$ApplyTextViewCallback$TypefaceApplyCallback:
-    public final synthetic androidx.appcompat.widget.AppCompatTextHelper$ApplyTextViewCallback this$0
 androidx.recyclerview.widget.LayoutState:
     public boolean hasMore(androidx.recyclerview.widget.RecyclerView$State)
     public android.view.View next(androidx.recyclerview.widget.RecyclerView$Recycler)
+androidx.appcompat.widget.AppCompatTextHelper$ApplyTextViewCallback$TypefaceApplyCallback:
+    public final synthetic androidx.appcompat.widget.AppCompatTextHelper$ApplyTextViewCallback this$0
+com.github.mikephil.charting.renderer.LineChartRenderer$DataSetImageCache:
+    public synthetic void <init>(com.github.mikephil.charting.renderer.LineChartRenderer,com.github.mikephil.charting.renderer.LineChartRenderer$1)
+    public boolean init(com.github.mikephil.charting.interfaces.datasets.ILineDataSet)
+    public void fill(com.github.mikephil.charting.interfaces.datasets.ILineDataSet,boolean,boolean)
+    public android.graphics.Bitmap getBitmap(int)
 androidx.room.InvalidationTracker$ObserverWrapper:
     public void notifyByTableInvalidStatus(java.util.Set)
 com.google.android.gms.common.api.internal.zaad:
@@ -4259,9 +4466,6 @@ com.google.android.material.datepicker.MaterialCalendar:
     public void toggleVisibleSelector()
 com.google.android.gms.auth.api.credentials.CredentialPickerConfig:
     public synthetic void <init>(com.google.android.gms.auth.api.credentials.CredentialPickerConfig$Builder,com.google.android.gms.auth.api.credentials.zzd)
-androidx.customview.widget.ExploreByTouchHelper:
-    public void onPopulateEventForVirtualView()
-    public void onPopulateEventForHost()
 com.google.android.material.datepicker.CompositeDateValidator:
     public synthetic void <init>(java.util.List,com.google.android.material.datepicker.CompositeDateValidator$1)
 androidx.appcompat.widget.AppCompatCompoundButtonHelper:
@@ -4394,6 +4598,10 @@ kotlinx.coroutines.sync.MutexImpl:
 androidx.recyclerview.widget.LinearLayoutManager:
     public int getExtraLayoutSpace(androidx.recyclerview.widget.RecyclerView$State)
     public androidx.recyclerview.widget.LinearLayoutManager$LayoutState createLayoutState()
+com.google.android.material.transition.platform.MaterialContainerTransform$TransitionDrawable:
+    public synthetic void <init>(android.transition.PathMotion,android.view.View,android.graphics.RectF,com.google.android.material.shape.ShapeAppearanceModel,float,android.view.View,android.graphics.RectF,com.google.android.material.shape.ShapeAppearanceModel,float,int,int,int,int,boolean,boolean,com.google.android.material.transition.platform.FadeModeEvaluator,com.google.android.material.transition.platform.FitModeEvaluator,com.google.android.material.transition.platform.MaterialContainerTransform$ProgressThresholdsGroup,boolean,com.google.android.material.transition.platform.MaterialContainerTransform$1)
+    public static synthetic android.view.View access$800(com.google.android.material.transition.platform.MaterialContainerTransform$TransitionDrawable)
+    public static synthetic android.view.View access$900(com.google.android.material.transition.platform.MaterialContainerTransform$TransitionDrawable)
 androidx.vectordrawable.graphics.drawable.VectorDrawableCompat:
     public java.lang.Object getTargetByName(java.lang.String)
     public void setAllowCaching(boolean)
@@ -4423,7 +4631,6 @@ com.google.android.material.datepicker.YearGridAdapter:
     public static synthetic com.google.android.material.datepicker.MaterialCalendar access$000(com.google.android.material.datepicker.YearGridAdapter)
     public int getYearForPosition(int)
 androidx.print.PrintHelper$1:
-    public varargs java.lang.Throwable doInBackground()
     public void onPostExecute(java.lang.Throwable)
 com.google.android.material.bottomnavigation.BottomNavigationItemView:
     public static synthetic android.widget.ImageView access$000(com.google.android.material.bottomnavigation.BottomNavigationItemView)
@@ -4462,6 +4669,8 @@ androidx.core.graphics.TypefaceCompatApi26Impl:
     public java.lang.reflect.Constructor obtainFontFamilyCtor(java.lang.Class)
     public java.lang.reflect.Method obtainFreezeMethod(java.lang.Class)
     public java.lang.reflect.Method obtainAbortCreationMethod(java.lang.Class)
+com.github.mikephil.charting.highlight.BarHighlighter:
+    public int getClosestStackIndex(com.github.mikephil.charting.highlight.Range[],float)
 kotlin.reflect.jvm.internal.impl.protobuf.CodedOutputStream:
     public static int computePreferredBufferSize(int)
 kotlin.sequences.TakeSequence$iterator$1:
@@ -4478,12 +4687,20 @@ kotlin.reflect.jvm.internal.impl.load.kotlin.BinaryClassAnnotationAndConstantLoa
     public kotlin.reflect.jvm.internal.impl.descriptors.annotations.AnnotationDescriptor loadTypeAnnotation(kotlin.reflect.jvm.internal.impl.metadata.ProtoBuf$Annotation,kotlin.reflect.jvm.internal.impl.metadata.deserialization.NameResolver)
     public kotlin.reflect.jvm.internal.impl.resolve.constants.ConstantValue loadConstant(java.lang.String,java.lang.Object)
     public kotlin.reflect.jvm.internal.impl.resolve.constants.ConstantValue transformToUnsignedConstant(kotlin.reflect.jvm.internal.impl.resolve.constants.ConstantValue)
+com.google.android.material.slider.BaseSlider:
+    public static synthetic int access$000()
+    public static synthetic com.google.android.material.tooltip.TooltipDrawable access$100(android.content.Context,android.content.res.TypedArray)
+    public static synthetic com.google.android.material.slider.BaseSlider$AccessibilityHelper access$300(com.google.android.material.slider.BaseSlider)
+com.google.android.material.transition.platform.FadeModeEvaluators:
+    public static com.google.android.material.transition.platform.FadeModeEvaluator get(int,boolean)
 androidx.appcompat.view.menu.MenuItemImpl:
     public java.lang.String getShortcutLabel()
     public java.lang.CharSequence getTitleForItemView(androidx.appcompat.view.menu.MenuView$ItemView)
     public void setMenuInfo(android.view.ContextMenu$ContextMenuInfo)
 androidx.transition.GhostViewHolder:
     public void popToOverlayTop()
+kotlin.reflect.jvm.internal.impl.protobuf.LazyFieldLite:
+    public void ensureInitialized(kotlin.reflect.jvm.internal.impl.protobuf.MessageLite)
 com.google.android.gms.common.api.internal.zaa$zaa:
     public static synthetic com.google.android.gms.common.api.internal.zaa$zaa zab(android.app.Activity)
 androidx.versionedparcelable.VersionedParcel:
@@ -4508,12 +4725,19 @@ androidx.transition.FragmentTransitionSupport$6:
     public final synthetic androidx.transition.FragmentTransitionSupport this$0
 androidx.preference.PreferenceInflater:
     public androidx.preference.Preference onCreateItem(java.lang.String,android.util.AttributeSet)
+com.google.android.material.slider.BaseSlider$AccessibilityEventSender:
+    public synthetic void <init>(com.google.android.material.slider.BaseSlider,com.google.android.material.slider.BaseSlider$1)
+    public void setVirtualViewId(int)
+com.google.android.material.transition.platform.MaterialContainerTransform$1:
+    public final synthetic com.google.android.material.transition.platform.MaterialContainerTransform this$0
 com.google.android.gms.common.internal.BaseGmsClient$zzb:
     public abstract void zzk()
 kotlin.reflect.jvm.internal.impl.metadata.ProtoBuf$QualifiedNameTable$Builder:
     public static synthetic kotlin.reflect.jvm.internal.impl.metadata.ProtoBuf$QualifiedNameTable$Builder access$1400()
 androidx.databinding.DataBindingUtil:
     public static androidx.databinding.ViewDataBinding bind(androidx.databinding.DataBindingComponent,android.view.View[],int)
+com.google.android.material.snackbar.BaseTransientBottomBar$SnackbarBaseLayout:
+    public void <init>(android.content.Context)
 androidx.media.MediaBrowserServiceCompatApi26$ResultWrapper:
     public java.util.List parcelListToItemList(java.util.List)
 kotlin.reflect.jvm.internal.impl.metadata.ProtoBuf$Annotation$Argument$Value$Builder:
@@ -4524,13 +4748,14 @@ kotlinx.coroutines.JobSupport$addLastAtomic$$inlined$addLastIf$1:
     public final synthetic kotlinx.coroutines.internal.LockFreeLinkedListNode $node
 com.google.android.gms.common.api.internal.zax:
     public synthetic void <init>(com.google.android.gms.common.api.internal.zav,com.google.android.gms.common.api.internal.zay)
+okhttp3.internal.cache.DiskLruCache$Entry$newSource$1:
+    public final synthetic okio.Source $fileSource
 androidx.appcompat.app.AppCompatDelegateImpl:
     public void <init>(android.app.Activity,androidx.appcompat.app.AppCompatCallback)
     public void <init>(android.app.Dialog,androidx.appcompat.app.AppCompatCallback)
     public void <init>(android.content.Context,android.view.Window,androidx.appcompat.app.AppCompatCallback)
     public void <init>(android.content.Context,android.app.Activity,androidx.appcompat.app.AppCompatCallback)
     public final androidx.appcompat.app.ActionBar peekSupportActionBar()
-    public void onSubDecorInstalled()
     public final java.lang.CharSequence getTitle()
     public void onPanelClosed(int)
     public void onMenuOpened(int)
@@ -4577,6 +4802,8 @@ androidx.viewpager2.widget.CompositeOnPageChangeCallback:
 androidx.recyclerview.widget.RecyclerViewAccessibilityDelegate$ItemDelegate:
     public void saveOriginalDelegate(android.view.View)
     public androidx.core.view.AccessibilityDelegateCompat getAndRemoveOriginalDelegateForItem(android.view.View)
+com.github.mikephil.charting.renderer.DataRenderer:
+    public android.graphics.Paint mDrawPaint
 androidx.appcompat.app.ResourcesFlusher:
     public static void flush(android.content.res.Resources)
 androidx.transition.ImageViewUtils:
@@ -4594,6 +4821,8 @@ androidx.room.RoomTrackingLiveData:
     public java.util.concurrent.Executor getQueryExecutor()
 androidx.core.content.res.ResourcesCompat$ThemeCompat$ImplApi29:
     public static void rebase(android.content.res.Resources$Theme)
+androidx.recyclerview.widget.MessageThreadUtil$MessageQueue:
+    public synchronized void sendMessageAtFrontOfQueue(androidx.recyclerview.widget.MessageThreadUtil$SyncQueueItem)
 com.bumptech.glide.load.engine.DecodeHelper:
     public void init(com.bumptech.glide.GlideContext,java.lang.Object,com.bumptech.glide.load.Key,int,int,com.bumptech.glide.load.engine.DiskCacheStrategy,java.lang.Class,java.lang.Class,com.bumptech.glide.Priority,com.bumptech.glide.load.Options,java.util.Map,boolean,boolean,com.bumptech.glide.load.engine.DecodeJob$DiskCacheProvider)
     public void clear()
@@ -4616,6 +4845,7 @@ com.bumptech.glide.load.engine.DecodeHelper:
     public com.bumptech.glide.load.Encoder getSourceEncoder(java.lang.Object)
 org.threeten.bp.chrono.ChronoLocalDateTimeImpl:
     public static org.threeten.bp.chrono.ChronoLocalDateTimeImpl of(org.threeten.bp.chrono.ChronoLocalDate,org.threeten.bp.LocalTime)
+    public static org.threeten.bp.chrono.ChronoLocalDateTime readExternal(java.io.ObjectInput)
     public void writeExternal(java.io.ObjectOutput)
 androidx.recyclerview.widget.AdapterHelper:
     public void <init>(androidx.recyclerview.widget.AdapterHelper$Callback,boolean)
@@ -4673,6 +4903,8 @@ androidx.media.MediaBrowserServiceCompat$MediaBrowserServiceImplApi26$1:
     public final synthetic androidx.media.MediaBrowserServiceCompat$MediaBrowserServiceImplApi26 this$1
 kotlin.reflect.jvm.internal.impl.renderer.AnnotationArgumentsRenderingPolicy:
     public synthetic void <init>(java.lang.String,int,boolean,boolean,int)
+com.github.mikephil.charting.charts.Chart:
+    public void setupDefaultFormatter(float,float)
 com.google.android.material.bottomsheet.BottomSheetBehavior:
     public static synthetic com.google.android.material.shape.MaterialShapeDrawable access$000(com.google.android.material.bottomsheet.BottomSheetBehavior)
     public static synthetic boolean access$200(com.google.android.material.bottomsheet.BottomSheetBehavior)
@@ -4697,6 +4929,8 @@ com.bumptech.glide.request.target.DrawableImageViewTarget:
     public void setResource(android.graphics.drawable.Drawable)
 kotlinx.coroutines.AwaitAll$DisposeHandlersOnCancel:
     public final synthetic kotlinx.coroutines.AwaitAll this$0
+com.google.android.play.core.splitcompat.a:
+    public final synchronized boolean a(android.content.Context,java.util.Set)
 org.threeten.bp.chrono.JapaneseDate:
     public org.threeten.bp.chrono.JapaneseDate plusYears(long)
     public void writeExternal(java.io.DataOutput)
@@ -4704,6 +4938,8 @@ com.google.android.play.core.assetpacks.AssetLocation:
     public static com.google.android.play.core.assetpacks.AssetLocation a(java.lang.String,long,long)
 androidx.arch.core.executor.DefaultTaskExecutor$1:
     public final synthetic androidx.arch.core.executor.DefaultTaskExecutor this$0
+com.github.mikephil.charting.renderer.LegendRenderer:
+    public void drawLabel(android.graphics.Canvas,float,float,java.lang.String)
 androidx.fragment.app.FragmentManager$5:
     public final synthetic androidx.fragment.app.FragmentManager this$0
 com.google.android.material.datepicker.PickerFragment:
@@ -4720,7 +4956,6 @@ org.threeten.bp.chrono.MinguoEra:
 androidx.fragment.app.Fragment:
     public final void restoreViewState(android.os.Bundle)
     public void restoreChildFragmentState(android.os.Bundle)
-    public androidx.fragment.app.Fragment findFragmentByWho(java.lang.String)
     public void performAttach()
     public void performCreate(android.os.Bundle)
     public void performActivityCreated(android.os.Bundle)
@@ -4731,12 +4966,6 @@ androidx.fragment.app.Fragment:
     public void performMultiWindowModeChanged(boolean)
     public void performPictureInPictureModeChanged(boolean)
     public void performConfigurationChanged(android.content.res.Configuration)
-    public void performLowMemory()
-    public boolean performCreateOptionsMenu(android.view.Menu,android.view.MenuInflater)
-    public boolean performPrepareOptionsMenu(android.view.Menu)
-    public boolean performOptionsItemSelected(android.view.MenuItem)
-    public boolean performContextItemSelected(android.view.MenuItem)
-    public void performOptionsMenuClosed(android.view.Menu)
     public void performSaveInstanceState(android.os.Bundle)
     public void performPause()
     public void performStop()
@@ -4773,11 +5002,16 @@ androidx.appcompat.widget.ActionBarContextView$1:
     public final synthetic androidx.appcompat.widget.ActionBarContextView this$0
 com.squareup.moshi.LinkedHashTreeMap$KeySet$1:
     public final synthetic com.squareup.moshi.LinkedHashTreeMap$KeySet this$1
+com.github.mikephil.charting.highlight.ChartHighlighter:
+    public com.github.mikephil.charting.utils.MPPointD getValsForTouch(float,float)
+    public float getHighlightPos(com.github.mikephil.charting.highlight.Highlight)
 com.bumptech.glide.load.resource.bitmap.TransformationUtils:
     public static void initializeMatrixForRotation(int,android.graphics.Matrix)
 kotlin.reflect.jvm.internal.impl.descriptors.impl.ClassDescriptorImpl:
     public static void <clinit>()
     public static final synthetic boolean $assertionsDisabled
+com.github.mikephil.charting.renderer.ScatterChartRenderer:
+    public void drawDataSet(android.graphics.Canvas,com.github.mikephil.charting.interfaces.datasets.IScatterDataSet)
 kotlin.reflect.jvm.internal.impl.storage.LockBasedStorageManager$RecursionDetectedResult:
     public static void <clinit>()
     public static final synthetic boolean $assertionsDisabled
@@ -4808,6 +5042,8 @@ kotlin.reflect.jvm.internal.impl.metadata.ProtoBuf$ValueParameter:
     public static synthetic int access$17402(kotlin.reflect.jvm.internal.impl.metadata.ProtoBuf$ValueParameter,int)
     public static synthetic int access$17502(kotlin.reflect.jvm.internal.impl.metadata.ProtoBuf$ValueParameter,int)
     public static synthetic kotlin.reflect.jvm.internal.impl.protobuf.ByteString access$17600(kotlin.reflect.jvm.internal.impl.metadata.ProtoBuf$ValueParameter)
+com.google.android.material.transition.platform.TransitionUtils:
+    public static com.google.android.material.shape.ShapeAppearanceModel transformCornerSizes(com.google.android.material.shape.ShapeAppearanceModel,com.google.android.material.shape.ShapeAppearanceModel,android.graphics.RectF,com.google.android.material.transition.platform.TransitionUtils$CornerSizeBinaryOperator)
 retrofit2.RequestBuilder:
     public void setRelativeUrl(java.lang.Object)
     public void addHeaders(okhttp3.Headers)
@@ -4871,8 +5107,6 @@ kotlin.reflect.jvm.internal.impl.metadata.ProtoBuf$Function:
     public static synthetic kotlin.reflect.jvm.internal.impl.protobuf.ByteString access$14800(kotlin.reflect.jvm.internal.impl.metadata.ProtoBuf$Function)
 androidx.cursoradapter.widget.CursorAdapter:
     public void onContentChanged()
-androidx.preference.PreferenceDialogFragmentCompat:
-    public android.view.View onCreateDialogView()
 kotlin.coroutines.intrinsics.IntrinsicsKt__IntrinsicsJvmKt$createCoroutineUnintercepted$$inlined$createCoroutineFromSuspendFunction$IntrinsicsKt__IntrinsicsJvmKt$1:
     public final synthetic kotlin.coroutines.Continuation $completion
 kotlin.collections.ArraysUtilJVM:
@@ -4914,12 +5148,6 @@ android.support.v4.media.MediaBrowserCompat$MediaBrowserImplApi21$6:
 org.threeten.bp.zone.StandardZoneRules:
     public static org.threeten.bp.zone.StandardZoneRules readExternal(java.io.DataInput)
     public void writeExternal(java.io.DataOutput)
-com.google.android.play.core.assetpacks.i:
-    public static final synthetic void a(java.lang.Exception)
-    public static synthetic com.google.android.play.core.assetpacks.bq a(com.google.android.play.core.assetpacks.i)
-    public final int a(int,java.lang.String)
-    public final synthetic void a()
-    public final synthetic void a(java.lang.String,com.google.android.play.core.tasks.i)
 androidx.lifecycle.ProcessLifecycleOwner:
     public static void init(android.content.Context)
     public void activityPaused()
@@ -4955,6 +5183,8 @@ com.google.android.gms.auth.zzd:
     public static synthetic com.google.android.gms.common.logging.Logger zza()
 org.threeten.bp.temporal.TemporalAdjusters$RelativeDayOfWeek:
     public synthetic void <init>(int,org.threeten.bp.DayOfWeek,org.threeten.bp.temporal.TemporalAdjusters$1)
+com.bumptech.glide.load.data.ParcelFileDescriptorRewinder$InternalRewinder:
+    public android.os.ParcelFileDescriptor rewind()
 kotlin.reflect.jvm.internal.impl.metadata.ProtoBuf$Type$Argument:
     public synthetic void <init>(kotlin.reflect.jvm.internal.impl.protobuf.CodedInputStream,kotlin.reflect.jvm.internal.impl.protobuf.ExtensionRegistryLite,kotlin.reflect.jvm.internal.impl.metadata.ProtoBuf$1)
     public synthetic void <init>(kotlin.reflect.jvm.internal.impl.protobuf.GeneratedMessageLite$Builder,kotlin.reflect.jvm.internal.impl.metadata.ProtoBuf$1)
@@ -5006,7 +5236,6 @@ androidx.room.RoomDatabaseKt:
 androidx.appcompat.view.menu.MenuBuilder:
     public void setExclusiveItemChecked(android.view.MenuItem)
     public android.content.res.Resources getResources()
-    public void onItemVisibleChanged()
     public boolean getOptionalIconsVisible()
 androidx.appcompat.widget.ThemeUtils:
     public static int getThemeAttrColor(android.content.Context,int,float)
@@ -5015,6 +5244,8 @@ androidx.appcompat.widget.ThemeUtils:
     public static final int[] NOT_PRESSED_OR_FOCUSED_STATE_SET
 com.google.android.gms.internal.base.zaf:
     public static synthetic com.google.android.gms.internal.base.zaf zace()
+com.github.mikephil.charting.renderer.XAxisRendererHorizontalBarChart:
+    public com.github.mikephil.charting.charts.BarChart mChart
 kotlinx.coroutines.internal.SegmentQueue:
     public final kotlinx.coroutines.internal.Segment getHead()
     public final kotlinx.coroutines.internal.Segment getTail()
@@ -5050,9 +5281,12 @@ com.google.android.material.floatingactionbutton.FloatingActionButtonImpl:
     public void onPreDraw()
 com.bumptech.glide.RequestManager:
     public void <init>(com.bumptech.glide.Glide,com.bumptech.glide.manager.Lifecycle,com.bumptech.glide.manager.RequestManagerTreeNode,com.bumptech.glide.manager.RequestTracker,com.bumptech.glide.manager.ConnectivityMonitorFactory,android.content.Context)
+    public synchronized void track(com.bumptech.glide.request.target.Target,com.bumptech.glide.request.Request)
     public java.util.List getDefaultRequestListeners()
+    public synchronized com.bumptech.glide.request.RequestOptions getDefaultRequestOptions()
     public com.bumptech.glide.TransitionOptions getDefaultTransitionOptions(java.lang.Class)
 org.threeten.bp.chrono.MinguoDate:
+    public static org.threeten.bp.chrono.ChronoLocalDate readExternal(java.io.DataInput)
     public org.threeten.bp.chrono.MinguoDate plusYears(long)
     public void writeExternal(java.io.DataOutput)
 kotlin.reflect.jvm.internal.impl.utils.SmartList:
@@ -5069,6 +5303,12 @@ kotlin.reflect.jvm.internal.impl.metadata.jvm.JvmProtoBuf$JvmPropertySignature$B
     public static synthetic kotlin.reflect.jvm.internal.impl.metadata.jvm.JvmProtoBuf$JvmPropertySignature$Builder access$3200()
 androidx.media.app.NotificationCompat$MediaStyle:
     public android.app.Notification$MediaStyle fillInMediaStyle(android.app.Notification$MediaStyle)
+com.github.mikephil.charting.utils.ObjectPool:
+    public static void <clinit>()
+com.github.mikephil.charting.data.CandleDataSet:
+    public void copy(com.github.mikephil.charting.data.CandleDataSet)
+    public void calcMinMax(com.github.mikephil.charting.data.CandleEntry)
+    public void calcMinMaxY(com.github.mikephil.charting.data.CandleEntry)
 androidx.fragment.app.FragmentTransitionCompat21$1:
     public final synthetic androidx.fragment.app.FragmentTransitionCompat21 this$0
 com.google.android.play.core.assetpacks.AssetPackLocation:
@@ -5082,6 +5322,8 @@ kotlin.reflect.jvm.internal.impl.serialization.deserialization.AbstractDeseriali
     public final kotlin.reflect.jvm.internal.impl.descriptors.ModuleDescriptor getModuleDescriptor()
 androidx.preference.DropDownPreference:
     public android.widget.ArrayAdapter createAdapter()
+androidx.dynamicanimation.animation.SpringForce:
+    public void setValueThreshold(double)
 androidx.lifecycle.ViewModelStore:
     public final void put(java.lang.String,androidx.lifecycle.ViewModel)
     public final androidx.lifecycle.ViewModel get(java.lang.String)
@@ -5118,6 +5360,10 @@ kotlin.reflect.jvm.internal.impl.protobuf.GeneratedMessageLite:
     public static synthetic boolean access$100(kotlin.reflect.jvm.internal.impl.protobuf.FieldSet,kotlin.reflect.jvm.internal.impl.protobuf.MessageLite,kotlin.reflect.jvm.internal.impl.protobuf.CodedInputStream,kotlin.reflect.jvm.internal.impl.protobuf.CodedOutputStream,kotlin.reflect.jvm.internal.impl.protobuf.ExtensionRegistryLite,int)
     public boolean parseUnknownField(kotlin.reflect.jvm.internal.impl.protobuf.CodedInputStream,kotlin.reflect.jvm.internal.impl.protobuf.CodedOutputStream,kotlin.reflect.jvm.internal.impl.protobuf.ExtensionRegistryLite,int)
     public void makeExtensionsImmutable()
+com.google.android.material.progressindicator.ProgressIndicator:
+    public static synthetic int access$000(com.google.android.material.progressindicator.ProgressIndicator)
+    public static synthetic boolean access$100(com.google.android.material.progressindicator.ProgressIndicator)
+    public boolean isEffectivelyVisible()
 com.squareup.moshi.LinkedHashTreeMap:
     public void <init>(java.util.Comparator)
     public static com.squareup.moshi.LinkedHashTreeMap$Node[] doubleCapacity(com.squareup.moshi.LinkedHashTreeMap$Node[])
@@ -5133,6 +5379,8 @@ androidx.viewpager2.widget.ViewPager2:
     public static void <clinit>()
     public void snapToPage()
     public static boolean sFeatureEnhancedA11yEnabled
+kotlin.io.FileTreeWalk:
+    public synthetic void <init>(java.io.File,kotlin.io.FileWalkDirection,kotlin.jvm.functions.Function1,kotlin.jvm.functions.Function1,kotlin.jvm.functions.Function2,int,int)
 com.bumptech.glide.load.model.MultiModelLoaderFactory:
     public void <init>(androidx.core.util.Pools$Pool,com.bumptech.glide.load.model.MultiModelLoaderFactory$Factory)
 kotlin.reflect.jvm.internal.impl.serialization.deserialization.descriptors.DeserializedClassDescriptor$EnumEntryClassDescriptors$enumEntryByName$1$$special$$inlined$let$lambda$1:
@@ -5150,6 +5398,13 @@ androidx.print.PrintHelper:
     public static android.graphics.Matrix getMatrix(int,int,android.graphics.RectF,int)
 androidx.vectordrawable.graphics.drawable.AnimatedVectorDrawableCompat:
     public androidx.vectordrawable.graphics.drawable.AnimatedVectorDrawableCompat$AnimatedVectorDrawableDelegateState mCachedConstantStateDelegate
+com.google.android.play.core.assetpacks.j:
+    public static final synthetic void a(java.lang.Exception)
+    public static synthetic com.google.android.play.core.assetpacks.bq a(com.google.android.play.core.assetpacks.j)
+    public final int a(int,java.lang.String)
+    public final synthetic void a()
+    public final void b()
+    public final synthetic void a(java.lang.String,com.google.android.play.core.tasks.i)
 kotlin.reflect.jvm.internal.impl.load.java.lazy.types.JavaTypeResolver$computeArguments$$inlined$map$lambda$1:
     public final synthetic kotlin.reflect.jvm.internal.impl.load.java.lazy.types.JavaTypeResolver this$0
     public final synthetic boolean $isRaw$inlined
@@ -5161,10 +5416,8 @@ kotlin.coroutines.intrinsics.IntrinsicsKt__IntrinsicsJvmKt$createCoroutineUninte
     public final synthetic kotlin.coroutines.CoroutineContext $context
 com.bumptech.glide.gifdecoder.StandardGifDecoder:
     public static void <clinit>()
-com.google.android.play.core.assetpacks.aw:
-    public final void a(com.google.android.play.core.assetpacks.AssetPackState)
-    public final synthetic void a(android.os.Bundle)
-    public final synthetic void a(android.os.Bundle,com.google.android.play.core.assetpacks.AssetPackState)
+com.github.mikephil.charting.listener.ChartTouchListener:
+    public static float distance(float,float,float,float)
 com.google.android.gms.internal.auth.zzaz:
     public static void <clinit>()
 androidx.transition.ViewOverlayApi14$OverlayViewGroup:
@@ -5321,6 +5574,9 @@ com.google.android.play.core.appupdate.AppUpdateInfo:
 com.google.android.gms.common.api.internal.zzd:
     public static synthetic int zza(com.google.android.gms.common.api.internal.zzd)
     public static synthetic android.os.Bundle zzb(com.google.android.gms.common.api.internal.zzd)
+androidx.appcompat.app.AppCompatDelegate:
+    public static void markStarted(androidx.appcompat.app.AppCompatDelegate)
+    public static void markStopped(androidx.appcompat.app.AppCompatDelegate)
 androidx.core.view.inputmethod.EditorInfoCompat:
     public static int getProtocol(android.view.inputmethod.EditorInfo)
 com.bumptech.glide.load.engine.bitmap_recycle.AttributeStrategy$KeyPool:
@@ -5330,6 +5586,8 @@ kotlin.jvm.internal.CallableReference$NoReceiver:
     public static synthetic kotlin.jvm.internal.CallableReference$NoReceiver access$000()
 com.google.android.material.circularreveal.CircularRevealWidget$RevealInfo:
     public synthetic void <init>(com.google.android.material.circularreveal.CircularRevealWidget$1)
+retrofit2.SkipCallbackExecutorImpl:
+    public static java.lang.annotation.Annotation[] ensurePresent(java.lang.annotation.Annotation[])
 com.bumptech.glide.request.RequestFutureTarget:
     public void <init>(int,int,boolean,com.bumptech.glide.request.RequestFutureTarget$Waiter)
 com.monitoryourexpenses.expenses.registeruser.RegisterationUserViewModel$saveAllDates$1:
@@ -5368,6 +5626,7 @@ androidx.transition.Fade$1:
 androidx.media.AudioAttributesImplApi21:
     public static java.lang.reflect.Method getAudioAttributesToLegacyStreamTypeMethod()
 org.threeten.bp.chrono.ChronoZonedDateTimeImpl:
+    public static org.threeten.bp.chrono.ChronoZonedDateTime readExternal(java.io.ObjectInput)
     public void writeExternal(java.io.ObjectOutput)
 com.google.android.gms.tasks.zzi:
     public static synthetic java.lang.Object zza(com.google.android.gms.tasks.zzi)
@@ -5396,12 +5655,16 @@ kotlin.reflect.jvm.internal.impl.types.ErrorUtils:
     public static synthetic java.util.Set access$000()
     public static synthetic kotlin.reflect.jvm.internal.impl.descriptors.SimpleFunctionDescriptor access$100(kotlin.reflect.jvm.internal.impl.types.ErrorUtils$ErrorScope)
     public static synthetic kotlin.reflect.jvm.internal.impl.types.TypeConstructor access$200(java.lang.String,kotlin.reflect.jvm.internal.impl.types.ErrorUtils$ErrorClassDescriptor)
+androidx.recyclerview.widget.DefaultItemAnimator$ChangeInfo:
+    public void <init>(androidx.recyclerview.widget.RecyclerView$ViewHolder,androidx.recyclerview.widget.RecyclerView$ViewHolder,int,int,int,int)
 androidx.navigation.ui.AppBarConfiguration:
     public synthetic void <init>(java.util.Set,androidx.customview.widget.Openable,androidx.navigation.ui.AppBarConfiguration$OnNavigateUpListener,androidx.navigation.ui.AppBarConfiguration$1)
 androidx.appcompat.view.ViewPropertyAnimatorCompatSet:
     public void onAnimationsEnded()
 android.support.v4.media.MediaBrowserCompat$MediaBrowserImplBase$4:
     public final synthetic android.support.v4.media.MediaBrowserCompat$MediaBrowserImplBase this$0
+com.google.android.material.transition.platform.FitModeEvaluators:
+    public static com.google.android.material.transition.platform.FitModeEvaluator get(int,boolean,android.graphics.RectF,android.graphics.RectF)
 com.google.android.play.core.splitinstall.az:
     public static synthetic java.lang.String a(com.google.android.play.core.splitinstall.az)
     public static synthetic com.google.android.play.core.internal.aa c()
@@ -5468,22 +5731,17 @@ kotlin.coroutines.intrinsics.IntrinsicsKt__IntrinsicsJvmKt$createCoroutineUninte
     public final synthetic kotlin.coroutines.Continuation $completion
 androidx.preference.PreferenceGroup:
     public boolean onPrepareAddPreference(androidx.preference.Preference)
+    public void sortPreferences()
 com.google.android.material.badge.BadgeUtils:
     public static void <clinit>()
 com.google.android.gms.auth.api.credentials.CredentialsOptions:
     public synthetic void <init>(com.google.android.gms.auth.api.credentials.CredentialsOptions$Builder,com.google.android.gms.auth.api.credentials.zzh)
+com.google.android.play.core.assetpacks.ax:
+    public final void a(com.google.android.play.core.assetpacks.AssetPackState)
+    public final synthetic void a(android.os.Bundle)
+    public final void a(android.os.Bundle,com.google.android.play.core.assetpacks.AssetPackState)
 androidx.recyclerview.widget.ItemTouchHelper$ItemTouchHelperGestureListener:
     public void doNotReactToLongPress()
-com.google.android.material.slider.Slider:
-    public static synthetic int access$000()
-    public static synthetic com.google.android.material.tooltip.TooltipDrawable access$100(android.content.Context,android.content.res.TypedArray)
-    public static synthetic com.google.android.material.slider.Slider$AccessibilityHelper access$300(com.google.android.material.slider.Slider)
-    public static synthetic float access$500(com.google.android.material.slider.Slider)
-    public static synthetic float access$600(com.google.android.material.slider.Slider)
-    public static synthetic java.util.ArrayList access$700(com.google.android.material.slider.Slider)
-    public static synthetic int access$900(com.google.android.material.slider.Slider)
-    public static synthetic int access$1100(com.google.android.material.slider.Slider)
-    public static synthetic int access$1300(com.google.android.material.slider.Slider)
 kotlin.reflect.jvm.internal.impl.load.java.typeEnhancement.PredefinedEnhancementInfoKt$$special$$inlined$enhancement$lambda$11:
     public final synthetic kotlin.reflect.jvm.internal.impl.load.kotlin.SignatureBuildingComponents $this_signatures$inlined
     public final synthetic java.lang.String $JFConsumer$inlined
@@ -5505,7 +5763,6 @@ androidx.loader.content.ModernAsyncTask:
     public varargs abstract java.lang.Object doInBackground(java.lang.Object[])
     public void onPreExecute()
     public void onPostExecute(java.lang.Object)
-    public varargs void onProgressUpdate()
     public void onCancelled(java.lang.Object)
     public void onCancelled()
     public void finish(java.lang.Object)
@@ -5520,6 +5777,9 @@ androidx.navigation.NavBackStackEntryState:
     public android.os.Bundle getSavedState()
 androidx.appcompat.view.menu.MenuPopup:
     public static androidx.appcompat.view.menu.MenuAdapter toMenuAdapter(android.widget.ListAdapter)
+com.github.mikephil.charting.renderer.PieChartRenderer:
+    public void drawEntryLabel(android.graphics.Canvas,java.lang.String,float,float)
+    public void drawCenterText(android.graphics.Canvas)
 com.google.android.material.transformation.ExpandableTransformationBehavior:
     public static synthetic android.animation.AnimatorSet access$002(com.google.android.material.transformation.ExpandableTransformationBehavior,android.animation.AnimatorSet)
 com.bumptech.glide.load.engine.ActiveResources$1$1:
@@ -5556,8 +5816,6 @@ kotlin.reflect.jvm.internal.impl.load.java.typeEnhancement.PredefinedEnhancement
     public final synthetic java.lang.String $JUOptional$inlined
 androidx.viewpager2.adapter.FragmentStateAdapter$5:
     public final synthetic androidx.viewpager2.adapter.FragmentStateAdapter this$0
-androidx.appcompat.app.AppCompatActivity:
-    public void onNightModeChanged()
 com.squareup.moshi.CollectionJsonAdapter$3:
     public java.util.Set newCollection()
 kotlin.reflect.jvm.internal.impl.descriptors.impl.EnumEntrySyntheticClassDescriptor$EnumEntryScope$1:
@@ -5566,8 +5824,6 @@ androidx.viewpager2.widget.AnimateLayoutChangeDetector$1:
     public final synthetic androidx.viewpager2.widget.AnimateLayoutChangeDetector this$0
 androidx.constraintlayout.widget.ConstraintSet$Constraint:
     public synthetic void <init>(androidx.constraintlayout.widget.ConstraintSet$1)
-com.google.android.material.textfield.PasswordToggleEndIconDelegate$3:
-    public final synthetic com.google.android.material.textfield.PasswordToggleEndIconDelegate this$0
 androidx.recyclerview.widget.ItemTouchHelper:
     public void postDispatchSwipe(androidx.recyclerview.widget.ItemTouchHelper$RecoverAnimation,int)
     public boolean hasRunningRecoverAnim()
@@ -5580,6 +5836,9 @@ okio.Throttler$sink$1:
 okhttp3.internal.http2.Http2Connection$writeWindowUpdateLater$$inlined$execute$1:
     public final synthetic java.lang.String $name
     public final synthetic boolean $cancelable
+com.github.mikephil.charting.buffer.BarBuffer:
+    public int mDataSetIndex
+    public int mDataSetCount
 androidx.navigation.NavDeepLinkRequest:
     public void <init>(android.content.Intent)
 androidx.recyclerview.widget.RecyclerView$SmoothScroller:
@@ -5596,6 +5855,8 @@ com.google.android.gms.dynamic.DeferredLifecycleHelper:
     public static synthetic java.util.LinkedList zaa(com.google.android.gms.dynamic.DeferredLifecycleHelper)
     public static synthetic com.google.android.gms.dynamic.LifecycleDelegate zab(com.google.android.gms.dynamic.DeferredLifecycleHelper)
     public static synthetic android.os.Bundle zaa(com.google.android.gms.dynamic.DeferredLifecycleHelper)
+kotlin.text.RegexOption:
+    public synthetic void <init>(java.lang.String,int,int,int,int)
 com.google.android.gms.common.api.internal.BasePendingResult$zaa:
     public synthetic void <init>(com.google.android.gms.common.api.internal.BasePendingResult,com.google.android.gms.common.api.internal.zao)
 kotlin.reflect.jvm.internal.impl.builtins.jvm.JvmBuiltIns:
@@ -5613,17 +5874,20 @@ com.google.android.gms.common.api.internal.zace:
     public static synthetic com.google.android.gms.common.api.internal.zacf zaa(com.google.android.gms.common.api.internal.zace)
 android.support.v4.media.MediaBrowserCompat$MediaBrowserImplBase$3:
     public final synthetic android.support.v4.media.MediaBrowserCompat$MediaBrowserImplBase this$0
+com.github.mikephil.charting.renderer.RadarChartRenderer:
+    public void drawDataSet(android.graphics.Canvas,com.github.mikephil.charting.interfaces.datasets.IRadarDataSet,int)
+    public void drawWeb(android.graphics.Canvas)
 kotlin.reflect.jvm.internal.impl.metadata.ProtoBuf$Expression$Builder:
     public static synthetic kotlin.reflect.jvm.internal.impl.metadata.ProtoBuf$Expression$Builder access$23700()
+androidx.media.MediaBrowserServiceCompat$MediaBrowserServiceImplApi21:
+    public void notifyChildrenChangedForCompat(java.lang.String,android.os.Bundle)
+    public void notifyChildrenChangedForCompat(androidx.media.MediaSessionManager$RemoteUserInfo,java.lang.String,android.os.Bundle)
 androidx.fragment.app.FragmentTransitionImpl:
     public static java.lang.String findKeyForValue(java.util.Map,java.lang.String)
     public java.util.ArrayList prepareSetNameOverridesReordered(java.util.ArrayList)
     public void setNameOverridesReordered(android.view.View,java.util.ArrayList,java.util.ArrayList,java.util.ArrayList,java.util.Map)
     public void setNameOverridesOrdered(android.view.View,java.util.ArrayList,java.util.Map)
     public void scheduleNameReset(android.view.ViewGroup,java.util.ArrayList,java.util.Map)
-androidx.media.MediaBrowserServiceCompat$MediaBrowserServiceImplApi21:
-    public void notifyChildrenChangedForCompat(java.lang.String,android.os.Bundle)
-    public void notifyChildrenChangedForCompat(androidx.media.MediaSessionManager$RemoteUserInfo,java.lang.String,android.os.Bundle)
 androidx.core.view.ViewCompat$3:
     public java.lang.Boolean frameworkGet(android.view.View)
     public void frameworkSet(android.view.View,java.lang.Boolean)
@@ -5635,7 +5899,7 @@ com.monitoryourexpenses.expenses.database.ExpenseMonitorDataBase_Impl:
     public static synthetic java.util.List access$200(com.monitoryourexpenses.expenses.database.ExpenseMonitorDataBase_Impl)
     public static synthetic java.util.List access$400(com.monitoryourexpenses.expenses.database.ExpenseMonitorDataBase_Impl)
     public static synthetic java.util.List access$500(com.monitoryourexpenses.expenses.database.ExpenseMonitorDataBase_Impl)
-    public static synthetic void access$700(com.monitoryourexpenses.expenses.database.ExpenseMonitorDataBase_Impl,androidx.sqlite.db.SupportSQLiteDatabase)
+    public static void access$700(com.monitoryourexpenses.expenses.database.ExpenseMonitorDataBase_Impl,androidx.sqlite.db.SupportSQLiteDatabase)
     public static synthetic java.util.List access$800(com.monitoryourexpenses.expenses.database.ExpenseMonitorDataBase_Impl)
     public static synthetic java.util.List access$900(com.monitoryourexpenses.expenses.database.ExpenseMonitorDataBase_Impl)
     public static synthetic java.util.List access$1000(com.monitoryourexpenses.expenses.database.ExpenseMonitorDataBase_Impl)
@@ -5645,6 +5909,13 @@ androidx.constraintlayout.widget.Constraints:
     public androidx.constraintlayout.widget.Constraints$LayoutParams generateDefaultLayoutParams()
 org.threeten.bp.Duration:
     public void writeExternal(java.io.DataOutput)
+com.github.mikephil.charting.data.ChartData:
+    public int getDataSetIndexByLabel(java.util.List,java.lang.String,boolean)
+    public void calcMinMax(com.github.mikephil.charting.data.Entry,com.github.mikephil.charting.components.YAxis$AxisDependency)
+    public com.github.mikephil.charting.interfaces.datasets.IDataSet getFirstLeft(java.util.List)
+com.github.mikephil.charting.charts.BarLineChartBase:
+    public void autoScale()
+    public void drawGridBackground(android.graphics.Canvas)
 com.google.android.material.tabs.TabLayout$TabView:
     public static synthetic com.google.android.material.badge.BadgeDrawable access$500(com.google.android.material.tabs.TabLayout$TabView)
     public void reset()

@@ -4,12 +4,12 @@ package com.monitoryourexpenses.expenses.createnewexpense
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.os.Bundle
+import android.view.*
 import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -128,9 +128,41 @@ class CreateNewExpenseFragment : Fragment() {
             }
         })
 
+        (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
+        (activity as AppCompatActivity).supportActionBar?.setDisplayShowTitleEnabled(false)
+        setHasOptionsMenu(true)
+
         return binding.root
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.new_expense_menu, menu)
+    }
 
+    override fun onOptionsItemSelected(item: MenuItem) =
+        when (item.itemId) {
+            R.id.add_new_category -> {
+                addNewCategory()
+                true
+            }
+            else -> false
+        }
+
+
+    private fun addNewCategory(){
+        val builder = context?.let { AlertDialog.Builder(it) }
+        builder?.setTitle("Add New Category")
+        val customLayout: View = layoutInflater.inflate(R.layout.add_new_category_dialog, null)
+        builder?.setView(customLayout)
+        builder?.setPositiveButton("OK") { dialogInterface, which ->
+            val editText: EditText = customLayout.findViewById(R.id.editTextTextNewCategory)
+            Toast.makeText(context,editText.text.toString(),Toast.LENGTH_LONG).show()
+        }
+        builder?.setNegativeButton("Close"){dialogInterface, i ->
+           dialogInterface.dismiss()
+        }
+        val dialog = builder?.create()
+        dialog?.show()
+    }
 
 }
