@@ -196,4 +196,7 @@
     <string name="enter_fixed_expense">Please Enter The Fixed Expense Value</string>
     <string name="dark_mode">Dark Mode</string>
     <string name="daily_report">The Daily Report</string>
+    <string name="add_new_category">Add New Category</string>
+    <string name="ok">OK</string>
+    <string name="close_categories">Close</string>
 </resources>

@@ -11,6 +11,7 @@ import android.widget.AdapterView
 import androidx.lifecycle.viewModelScope
 import androidx.preference.PreferenceManager
 import com.monitoryourexpenses.expenses.R
+import com.monitoryourexpenses.expenses.database.Categories
 import com.monitoryourexpenses.expenses.database.ExpenseMonitorDao
 import com.monitoryourexpenses.expenses.database.Expenses
 import com.monitoryourexpenses.expenses.database.LocalRepository
@@ -32,8 +33,6 @@ class CreateNewExpenseFragmentViewModel(val database: ExpenseMonitorDao,var appl
     val description = MutableLiveData<String>()
     val currentDate = MutableLiveData<String>()
     private var selectedCategoryItem = ""
-
-
 
     init {
         currentDate.value = LocalDate.now().toString()
@@ -93,9 +92,7 @@ class CreateNewExpenseFragmentViewModel(val database: ExpenseMonitorDao,var appl
                     it,category)
             }
             val getResponse = expenseData?.let {
-                ApiFactory.CREATE_EXPENSE_SERVICE.createNewExpenseAsync(
-                    it
-                )
+                ApiFactory.CREATE_EXPENSE_SERVICE.createNewExpenseAsync(it)
             }
             try {
                 try{
@@ -126,7 +123,11 @@ class CreateNewExpenseFragmentViewModel(val database: ExpenseMonitorDao,var appl
     }
 
 
-
+    fun addNewCategory(category:Categories){
+        viewModelScope.launch {
+            localRepository.insertNewCategory(category)
+        }
+    }
 
     fun onNoEmptyFields(){
         _validationMsg.value = null

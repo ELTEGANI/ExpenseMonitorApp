@@ -48,7 +48,7 @@ class MyExpenseFragment : Fragment() {
     lateinit var viewModel: MyExpenseFragmentViewModel
     private var mGoogleSignInClient: GoogleSignInClient? = null
 
-    private val appUpdateManager: AppUpdateManager by lazy { AppUpdateManagerFactory.create(context) }
+    private val appUpdateManager: AppUpdateManager by lazy { AppUpdateManagerFactory.create(this.requireContext()) }
     private val appUpdatedListener: InstallStateUpdatedListener by lazy {
         object : InstallStateUpdatedListener {
             override fun onStateUpdate(installState: InstallState) {
@@ -153,7 +153,7 @@ class MyExpenseFragment : Fragment() {
                         appUpdateManager.startUpdateFlowForResult(
                             appUpdateInfo,
                             it,
-                            context as Activity?,
+                            (context as Activity?)!!,
                             APP_UPDATE_REQUEST_CODE)
                     }
                 } catch (e: IntentSender.SendIntentException) {
@@ -201,7 +201,7 @@ class MyExpenseFragment : Fragment() {
                         appUpdateManager.startUpdateFlowForResult(
                             appUpdateInfo,
                             AppUpdateType.IMMEDIATE,
-                            context as Activity?,
+                            (context as Activity?)!!,
                             APP_UPDATE_REQUEST_CODE)
                     }
                 } catch (e: IntentSender.SendIntentException) {

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="add_new_category">Add New Category</string>
+    <string name="ok">OK</string>
+    <string name="close_categories">Close</string>
+</resources>
