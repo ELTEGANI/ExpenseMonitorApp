@@ -196,4 +196,7 @@
     <string name="expense_monitor">مراقب المصروف</string>
     <string name="exceed_expenses">أعلمني عند تجاوز قيمة معينة للمصروفات</string>
     <string name="dark_mode">الوضع الليلي</string>
+    <string name="add_new_category">Add New Category</string>
+    <string name="ok">OK</string>
+    <string name="close_categories">Close</string>
 </resources>

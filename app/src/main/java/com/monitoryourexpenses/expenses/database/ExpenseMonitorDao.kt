@@ -4,8 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
-import androidx.room.RoomWarnings
-import com.monitoryourexpenses.expenses.network.AllExpense
 import kotlinx.coroutines.flow.Flow
 
 
@@ -42,6 +40,9 @@ interface ExpenseMonitorDao {
 
     @Insert
     suspend fun insertExpenses(expenses: Expenses)
+
+    @Insert
+    suspend fun insertNewCategory(categories:Categories)
 
     @Insert
     fun insertExpensesForCachingData(vararg expenses: Expenses)

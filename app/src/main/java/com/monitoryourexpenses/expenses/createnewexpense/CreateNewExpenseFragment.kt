@@ -17,6 +17,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.preference.PreferenceManager
 import com.monitoryourexpenses.expenses.R
+import com.monitoryourexpenses.expenses.database.Categories
 import com.monitoryourexpenses.expenses.database.ExpenseMonitorDataBase
 import com.monitoryourexpenses.expenses.databinding.CreateNewExpenseFragmentBinding
 import com.monitoryourexpenses.expenses.utilites.PrefManager
@@ -27,7 +28,7 @@ import java.util.*
 class CreateNewExpenseFragment : Fragment() {
 
     private lateinit var binding: CreateNewExpenseFragmentBinding
-
+    lateinit var viewModel: CreateNewExpenseFragmentViewModel
     @SuppressLint("SimpleDateFormat")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
@@ -37,7 +38,7 @@ class CreateNewExpenseFragment : Fragment() {
         val dataBase = ExpenseMonitorDataBase.getInstance(application).expenseMonitorDao
         val viewModelFactory = CreateNewExpenseFragmentViewModelFactory(dataBase,application)
 
-        val viewModel = ViewModelProvider(this,viewModelFactory)
+        viewModel = ViewModelProvider(this,viewModelFactory)
             .get(CreateNewExpenseFragmentViewModel::class.java)
 
         binding.viewModel = viewModel
@@ -151,14 +152,14 @@ class CreateNewExpenseFragment : Fragment() {
 
     private fun addNewCategory(){
         val builder = context?.let { AlertDialog.Builder(it) }
-        builder?.setTitle("Add New Category")
+        builder?.setTitle(getString(R.string.add_new_category))
         val customLayout: View = layoutInflater.inflate(R.layout.add_new_category_dialog, null)
         builder?.setView(customLayout)
-        builder?.setPositiveButton("OK") { dialogInterface, which ->
+        builder?.setPositiveButton(getString(R.string.ok)) { _, _ ->
             val editText: EditText = customLayout.findViewById(R.id.editTextTextNewCategory)
-            Toast.makeText(context,editText.text.toString(),Toast.LENGTH_LONG).show()
+            viewModel.addNewCategory(Categories(id = null,CategoryName =  editText.text.toString()))
         }
-        builder?.setNegativeButton("Close"){dialogInterface, i ->
+        builder?.setNegativeButton(getString(R.string.close_categories)){ dialogInterface, i ->
            dialogInterface.dismiss()
         }
         val dialog = builder?.create()
