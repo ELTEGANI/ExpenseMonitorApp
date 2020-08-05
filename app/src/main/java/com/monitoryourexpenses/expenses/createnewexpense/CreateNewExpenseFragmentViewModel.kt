@@ -20,15 +20,18 @@ import com.monitoryourexpenses.expenses.network.ExpenseData
 import com.monitoryourexpenses.expenses.utilites.*
 import com.monitoryourexpenses.expenses.utilites.MyApp.Companion.context
 import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.onCompletion
+import kotlinx.coroutines.flow.onStart
+import okio.IOException
 import org.threeten.bp.LocalDate
 import retrofit2.HttpException
 
 
 class CreateNewExpenseFragmentViewModel(val database: ExpenseMonitorDao,var application: Application) : ViewModel() {
-
-
     private val localRepository = LocalRepository(database)
-
+    private val createNewExpenseRepository = CreateNewExpenseRepository()
     val amount = MutableLiveData<String>()
     val description = MutableLiveData<String>()
     val currentDate = MutableLiveData<String>()
@@ -56,12 +59,11 @@ class CreateNewExpenseFragmentViewModel(val database: ExpenseMonitorDao,var appl
         get() = _exceedsMessage
 
 
-
     fun onSelectExpenseFormOrCategoryItem(parent: AdapterView<*>, view: View?, pos: Int, id: Long) {
         selectedCategoryItem = parent.selectedItem.toString()
     }
 
-
+    @ExperimentalCoroutinesApi
     fun createExpenseClick(){
         val expenseAmount = amount.value
         val expenseDescription = description.value
@@ -85,20 +87,30 @@ class CreateNewExpenseFragmentViewModel(val database: ExpenseMonitorDao,var appl
         }
     }
 
-    private fun createNewExpense(amount:String,description:String,date:String,category:String){
+
+    @ExperimentalCoroutinesApi
+    fun createNewExpense(amount:String, description:String, date:String, category:String){
         viewModelScope.launch {
             val expenseData = PrefManager.getCurrency(application)?.let {
-                ExpenseData(amount,description,date,
-                    it,category)
+                ExpenseData(amount, description, date, it, category)
             }
-            val getResponse = expenseData?.let {
-                ApiFactory.CREATE_EXPENSE_SERVICE.createNewExpenseAsync(it)
-            }
-            try {
-                try{
-                    _status.value = ProgressStatus.LOADING
-                    val expenseResponse = getResponse?.await()
-                    if (expenseResponse?.message != null){
+            expenseData?.let {
+                createNewExpenseRepository.createNewExpense(it)
+                    .onStart { _status.value = ProgressStatus.LOADING}
+                    .onCompletion {  _status.value = ProgressStatus.DONE }
+                    .catch {
+                        if (it is IOException){
+                            _validationMsg.value =context?.getString(R.string.weak_internet_connection)
+                        }else if (it is HttpException){
+                            when(it.code()){
+                                500->{
+                            _validationMsg.value = context?.getString(R.string.try_later)
+                                }
+                            }
+                        }
+                    }
+            }?.collect { expenseResponse ->
+                    if (expenseResponse.message != null){
                         expenseResponse.expense?.amount?.let {
                             Expenses(
                                 id = expenseResponse.expense?.id.toString(),
@@ -108,20 +120,14 @@ class CreateNewExpenseFragmentViewModel(val database: ExpenseMonitorDao,var appl
                                 currency = expenseResponse.expense?.currency.toString(),
                                 date = expenseResponse.expense?.date.toString()
                             )
-                        }?.let { localRepository.insertExpense(it) }
+                        }?.let {
+                            localRepository.insertExpense(it)
+                        }
                         _responseMsg.value = context?.getString(R.string.expense_created_successfuly)
-                        _status.value = ProgressStatus.DONE
                     }
-                }catch (t:Throwable){
-                    _status.value = ProgressStatus.ERROR
-                    _validationMsg.value =context?.getString(R.string.weak_internet_connection)
                 }
-                }catch (httpException: HttpException){
-                   Log.d("httpException",httpException.toString())
-                }
-           }
+        }
     }
-
 
     fun addNewCategory(category:Categories){
         viewModelScope.launch {
@@ -136,9 +142,4 @@ class CreateNewExpenseFragmentViewModel(val database: ExpenseMonitorDao,var appl
     fun onResponseMsgDisplayed(){
         _responseMsg.value = null
     }
-
-    fun exceedMsgDisplayed(){
-        _exceedsMessage.value = null
-    }
-
 }

@@ -29,7 +29,6 @@ class RegisterationUserViewModel(val database: ExpenseMonitorDao, var applicatio
     var currency = ""
 
     init {
-        //save dates for the first time so it can be updated later
         saveAllDates()
     }
 
