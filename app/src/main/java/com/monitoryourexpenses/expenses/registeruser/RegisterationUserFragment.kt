@@ -22,8 +22,6 @@ class RegisterationUserFragment : Fragment() {
     private lateinit var binding: RegisterationUserFragmentBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
-
         binding = DataBindingUtil.inflate(inflater,
             R.layout.registeration_user_fragment,container,false)
 
@@ -53,8 +51,7 @@ class RegisterationUserFragment : Fragment() {
                 Toast.makeText(context,getString(R.string.select_option),Toast.LENGTH_LONG).show()
                 viewModel.genderAlreadySelected()
               }
-            }
-        )
+        })
 
         viewModel.errormsg.observe(viewLifecycleOwner, Observer {
                 if (it != null) {

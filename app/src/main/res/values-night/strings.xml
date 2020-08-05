@@ -3,4 +3,5 @@
     <string name="add_new_category">Add New Category</string>
     <string name="ok">OK</string>
     <string name="close_categories">Close</string>
+    <string name="try_later">OOPs Failed Please Try Later</string>
 </resources>

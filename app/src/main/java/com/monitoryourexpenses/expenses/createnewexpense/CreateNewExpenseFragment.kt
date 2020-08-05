@@ -47,8 +47,6 @@ class CreateNewExpenseFragment : Fragment() {
         binding.spinner.setTitle(getString(R.string.select_or_category))
 
 
-
-
         binding.newDateButton.setOnClickListener {
             val c = Calendar.getInstance()
             val year = c.get(Calendar.YEAR)
@@ -94,12 +92,10 @@ class CreateNewExpenseFragment : Fragment() {
                     val li = LayoutInflater.from(context)
                     val promptsView: View = li.inflate(R.layout.alert_dialog, null)
                     val alertDialogBuilder = context?.let { AlertDialog.Builder(it) }
-                    // set alert_dialog.xml to alertdialog builder
                     alertDialogBuilder?.setView(promptsView)
                     val userInput = promptsView.findViewById<View>(R.id.editText) as EditText
-                    // set dialog message
                     alertDialogBuilder?.setCancelable(false)
-                        ?.setPositiveButton(getString(R.string.save)) { _, id -> // get user input and set it to result
+                        ?.setPositiveButton(getString(R.string.save)) { _, _ -> // get user input and set it to result
                             if(userInput.text.toString().isNotEmpty()){
                                 val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context).edit()
                                 sharedPreferences.putString("exceed_expense",userInput.text.toString())
@@ -107,14 +103,11 @@ class CreateNewExpenseFragment : Fragment() {
                             }else{
                                 Toast.makeText(context,getString(R.string.enter_fixed_expense),Toast.LENGTH_LONG).show()
                             }
-
                         }
                         ?.setNegativeButton(getString(R.string.close)) { _, id ->
                             dialog.cancel()
                         }
-                    // create alert dialog
                     val alertDialog = alertDialogBuilder?.create()
-                    // show it
                     alertDialog?.show()
                 }
                 builder?.setNegativeButton(getString(R.string.cancel_fixed_expense)){ dialog, which ->
@@ -159,7 +152,7 @@ class CreateNewExpenseFragment : Fragment() {
             val editText: EditText = customLayout.findViewById(R.id.editTextTextNewCategory)
             viewModel.addNewCategory(Categories(id = null,CategoryName =  editText.text.toString()))
         }
-        builder?.setNegativeButton(getString(R.string.close_categories)){ dialogInterface, i ->
+        builder?.setNegativeButton(getString(R.string.close_categories)){ dialogInterface, _ ->
            dialogInterface.dismiss()
         }
         val dialog = builder?.create()

@@ -5,12 +5,6 @@ import com.monitoryourexpenses.expenses.utilites.AppConstants
 import kotlinx.coroutines.Deferred
 import retrofit2.http.*
 
-interface CreateExpenseService {
-    @POST(AppConstants.CREATE_NEW_EXPENSE)
-    fun createNewExpenseAsync(@Body expenseData: ExpenseData) : Deferred<ExpenseResponseMsg>
-
-}
-
 
 interface RegisterationService {
     @POST(AppConstants.USER_REGISTERATION)
