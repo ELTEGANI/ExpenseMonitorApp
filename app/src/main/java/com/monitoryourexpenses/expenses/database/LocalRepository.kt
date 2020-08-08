@@ -65,23 +65,5 @@ class LocalRepository(private val database:ExpenseMonitorDao) {
        return database.sumationOfSpecifiedExpenses(currency)
     }
 
-    suspend fun getAllExpensesFromServer(startMonth: String,endMonth: String){
-        withContext(Dispatchers.IO){
-            if(database.selectAllExpenses().size == 0) {
-                val duration = Duration(startMonth,endMonth)
-                try {
-                    try {
-                        val expensesList = ApiFactory.ALL_EXPENSES.allExpensesAsync(duration).await()
-                        database.insertExpensesForCachingData(*expensesList.toTypedArray())
-                    }catch (http:HttpException){
-                      Log.d("httpException",http.toString())
-                    }
-                }catch (t:Throwable){
-                    Log.d("Throwable",t.toString())
-                }
-            }
-        }
-    }
-
 
 }

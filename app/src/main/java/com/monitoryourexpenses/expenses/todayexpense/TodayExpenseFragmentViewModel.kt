@@ -20,6 +20,7 @@ class TodayExpenseFragmentViewModel(val database: ExpenseMonitorDao,val applicat
 
     val todayExpenses = localRepository.getTodayExpenses(PrefManager.getCurrentDate(application).toString(),PrefManager.getCurrency(application).toString())
 
+    
     fun displaySelectedExpense(expense: Expenses){
         _navigateToSelectedExpense.value = expense
     }
@@ -27,7 +28,5 @@ class TodayExpenseFragmentViewModel(val database: ExpenseMonitorDao,val applicat
     fun displaySelectedExpenseCompleted(){
         _navigateToSelectedExpense.value = null
     }
-
-
-
+    
 }

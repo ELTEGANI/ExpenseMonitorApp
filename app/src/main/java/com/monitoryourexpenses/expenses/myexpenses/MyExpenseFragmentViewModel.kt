@@ -1,22 +1,31 @@
 package com.monitoryourexpenses.expenses.myexpenses
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.monitoryourexpenses.expenses.api.Duration
+import com.monitoryourexpenses.expenses.data.ExpensesRepository
 import com.monitoryourexpenses.expenses.database.ExpenseMonitorDao
 import com.monitoryourexpenses.expenses.database.LocalRepository
 import com.monitoryourexpenses.expenses.utilites.*
 import com.monitoryourexpenses.expenses.utilites.MyApp.Companion.context
 import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.onCompletion
+import kotlinx.coroutines.flow.onStart
+import okio.IOException
 import org.threeten.bp.LocalDate
+import retrofit2.HttpException
 import java.text.SimpleDateFormat
 import java.util.*
 
 
-class MyExpenseFragmentViewModel(val database:ExpenseMonitorDao,application: Application) : AndroidViewModel(application) {
+@ExperimentalCoroutinesApi
+class MyExpenseFragmentViewModel(val database:ExpenseMonitorDao, val expensesRepository: ExpensesRepository, application: Application) : AndroidViewModel(application) {
 
     private val localRepository = LocalRepository(database)
 
@@ -39,21 +48,14 @@ class MyExpenseFragmentViewModel(val database:ExpenseMonitorDao,application: App
 
 
     init {
-        checkIfDurationFinished()
-        getTodayExpenses()
-        getWeekExpenses()
-        getMonthExpenses()
-        getAllExpensesForCache()
-    }
-
-
-    private fun getAllExpensesForCache(){
         viewModelScope.launch {
-            localRepository.getAllExpensesFromServer(
-                PrefManager.getStartOfTheMonth(application).toString(),
-                PrefManager.getEndOfTheMonth(application).toString())
+            checkIfDurationFinished()
+            getTodayExpenses()
+            getWeekExpenses()
+            getMonthExpenses()
         }
     }
+
 
     private fun getTodayExpenses(){
         viewModelScope.launch {
