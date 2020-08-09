@@ -39,12 +39,15 @@ import com.google.android.play.core.install.InstallStateUpdatedListener
 import com.google.android.play.core.install.model.AppUpdateType
 import com.google.android.play.core.install.model.InstallStatus
 import com.google.android.play.core.install.model.UpdateAvailability
+import com.monitoryourexpenses.expenses.data.ExpensesRepository
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.threeten.bp.LocalDate
 
 
 class MyExpenseFragment : Fragment() {
 
     private lateinit var binding: MyExpenseFragmentBinding
+    @ExperimentalCoroutinesApi
     lateinit var viewModel: MyExpenseFragmentViewModel
     private var mGoogleSignInClient: GoogleSignInClient? = null
 
@@ -63,18 +66,20 @@ class MyExpenseFragment : Fragment() {
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,savedInstanceState: Bundle?): View? {
+    @ExperimentalCoroutinesApi
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.my_expense_fragment,container,false)
 
         val application = requireNotNull(this.activity).application
         val dataBase = ExpenseMonitorDataBase.getInstance(application).expenseMonitorDao
-        val viewModelFactory = MyExpenseFragmentViewModelFactory(dataBase,application)
+        val viewModelFactory = MyExpenseFragmentViewModelFactory(dataBase,ExpensesRepository(),application)
 
         viewModel = ViewModelProvider(this,viewModelFactory)
             .get(MyExpenseFragmentViewModel::class.java)
 
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
+
 
         (activity as AppCompatActivity).setSupportActionBar(binding.bottomAppBar)
         setHasOptionsMenu(true)

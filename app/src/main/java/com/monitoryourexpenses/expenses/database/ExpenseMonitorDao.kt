@@ -47,9 +47,6 @@ interface ExpenseMonitorDao {
     @Insert
     fun insertExpensesForCachingData(vararg expenses: Expenses)
 
-    @Query("SELECT * from expenses")
-    fun selectAllExpenses(): List<Expenses>
-
     @Query("SELECT SUM(amount) from expenses WHERE currency =:currency")
     suspend fun sumationOfSpecifiedExpenses(currency: String): String
 

@@ -1,12 +1,10 @@
 package com.monitoryourexpenses.expenses.data
 
-import com.monitoryourexpenses.expenses.api.ExpenseData
-import com.monitoryourexpenses.expenses.api.ExpenseResponseMsg
-import com.monitoryourexpenses.expenses.api.RegisterationResponse
-import com.monitoryourexpenses.expenses.api.UserData
+import com.monitoryourexpenses.expenses.api.*
+import com.monitoryourexpenses.expenses.database.Expenses
 import com.monitoryourexpenses.expenses.utilites.AppConstants
-import retrofit2.http.Body
-import retrofit2.http.POST
+import kotlinx.coroutines.Deferred
+import retrofit2.http.*
 
 
 interface ExpenseService {
@@ -16,5 +14,15 @@ interface ExpenseService {
 
     @POST(AppConstants.USER_REGISTERATION)
     suspend fun createNewUser(@Body userData: UserData) : RegisterationResponse
+
+
+    @PUT(AppConstants.UPDATE_EXPENSE)
+    suspend fun updateExpense(@Path("expenseid")expenseid:String, @Body expenseData: ExpenseData) : DeleteAndUpdateResponse
+
+    @DELETE(AppConstants.DELETE_EXPENSE)
+    suspend fun deleteExpense(@Path("expenseid")expenseid:String) : DeleteAndUpdateResponse
+
+    @GET(AppConstants.ALL_EXPENSES)
+    suspend fun getAllExpenses(@Body duration: Duration):List<Expenses>
 
 }

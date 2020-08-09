@@ -17,6 +17,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import androidx.preference.PreferenceManager
 import com.monitoryourexpenses.expenses.R
+import com.monitoryourexpenses.expenses.data.ExpensesRepository
 import com.monitoryourexpenses.expenses.database.ExpenseMonitorDataBase
 import com.monitoryourexpenses.expenses.databinding.UpdateAndDeleteExpenseFragmentBinding
 import com.monitoryourexpenses.expenses.utilites.PrefManager
@@ -43,7 +44,7 @@ class UpdateAndDeleteExpenseFragment : Fragment() {
 
 
         val viewModelFactory = expenseResponse?.let {
-            UpdateAndDeleteFragmentViewModelFactory(it,application,dataBase)
+            UpdateAndDeleteFragmentViewModelFactory(it,ExpensesRepository(),application,dataBase)
         }
 
 
