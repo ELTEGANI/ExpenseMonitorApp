@@ -12,6 +12,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.monitoryourexpenses.expenses.R
+import com.monitoryourexpenses.expenses.data.UserRepository
 import com.monitoryourexpenses.expenses.database.ExpenseMonitorDataBase
 import com.monitoryourexpenses.expenses.databinding.RegisterationUserFragmentBinding
 import com.monitoryourexpenses.expenses.utilites.PrefManager
@@ -26,8 +27,7 @@ class RegisterationUserFragment : Fragment() {
             R.layout.registeration_user_fragment,container,false)
 
         val application = requireNotNull(this.activity).application
-        val dataBase = ExpenseMonitorDataBase.getInstance(application).expenseMonitorDao
-        val viewModelFactory = RegisterationUserViewModelFactory(dataBase,application)
+        val viewModelFactory = RegisterationUserViewModelFactory(UserRepository(),application)
 
         val viewModel = ViewModelProvider(this,viewModelFactory)
             .get(RegisterationUserViewModel::class.java)

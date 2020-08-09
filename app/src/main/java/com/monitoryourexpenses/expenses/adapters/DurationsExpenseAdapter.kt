@@ -7,8 +7,6 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.monitoryourexpenses.expenses.database.Expenses
 import com.monitoryourexpenses.expenses.databinding.ExpenseViewItemBinding
-import com.monitoryourexpenses.expenses.network.DurationExpenseResponse
-import com.monitoryourexpenses.expenses.network.Expense
 
 class DurationsExpenseAdapter(private val expenseListener: ExpenseListener) : ListAdapter<Expenses, DurationsExpenseAdapter.ViewHolder>(
     GetExpensesResponseDiffCallback()

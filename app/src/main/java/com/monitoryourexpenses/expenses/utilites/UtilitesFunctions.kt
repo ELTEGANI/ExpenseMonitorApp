@@ -11,7 +11,6 @@ import android.text.style.ClickableSpan
 import android.view.View
 import android.widget.TextView
 import androidx.preference.PreferenceManager
-import com.monitoryourexpenses.expenses.network.DurationExpenseResponse
 import com.monitoryourexpenses.expenses.utilites.MyApp.Companion.context
 import com.squareup.moshi.FromJson
 import com.squareup.moshi.ToJson

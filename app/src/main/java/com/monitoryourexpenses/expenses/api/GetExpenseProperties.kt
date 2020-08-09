@@ -1,4 +1,4 @@
-package com.monitoryourexpenses.expenses.network
+package com.monitoryourexpenses.expenses.api
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize

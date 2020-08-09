@@ -2,7 +2,6 @@ package com.monitoryourexpenses.expenses.createnewexpense
 
 
 import android.app.Application
-import android.util.Log
 import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -15,8 +14,8 @@ import com.monitoryourexpenses.expenses.database.Categories
 import com.monitoryourexpenses.expenses.database.ExpenseMonitorDao
 import com.monitoryourexpenses.expenses.database.Expenses
 import com.monitoryourexpenses.expenses.database.LocalRepository
-import com.monitoryourexpenses.expenses.network.ApiFactory
-import com.monitoryourexpenses.expenses.network.ExpenseData
+import com.monitoryourexpenses.expenses.api.ExpenseData
+import com.monitoryourexpenses.expenses.data.ExpensesRepository
 import com.monitoryourexpenses.expenses.utilites.*
 import com.monitoryourexpenses.expenses.utilites.MyApp.Companion.context
 import kotlinx.coroutines.*
@@ -31,7 +30,8 @@ import retrofit2.HttpException
 
 class CreateNewExpenseFragmentViewModel(val database: ExpenseMonitorDao,var application: Application) : ViewModel() {
     private val localRepository = LocalRepository(database)
-    private val createNewExpenseRepository = CreateNewExpenseRepository()
+    private val createNewExpenseRepository =
+        ExpensesRepository()
     val amount = MutableLiveData<String>()
     val description = MutableLiveData<String>()
     val currentDate = MutableLiveData<String>()
