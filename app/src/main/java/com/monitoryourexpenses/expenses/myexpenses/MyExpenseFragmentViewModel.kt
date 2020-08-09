@@ -6,15 +6,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.monitoryourexpenses.expenses.database.ExpenseMonitorDao
-import com.monitoryourexpenses.expenses.database.Expenses
 import com.monitoryourexpenses.expenses.database.LocalRepository
-import com.monitoryourexpenses.expenses.network.Expense
 import com.monitoryourexpenses.expenses.utilites.*
 import com.monitoryourexpenses.expenses.utilites.MyApp.Companion.context
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.collect
 import org.threeten.bp.LocalDate
-import java.math.BigDecimal
 import java.text.SimpleDateFormat
 import java.util.*
 

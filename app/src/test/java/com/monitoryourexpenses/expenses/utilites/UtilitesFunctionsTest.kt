@@ -1,6 +1,6 @@
 package com.monitoryourexpenses.expenses.utilites
 
-import com.monitoryourexpenses.expenses.network.DurationExpenseResponse
+import com.monitoryourexpenses.expenses.api.DurationExpenseResponse
 import org.hamcrest.core.Is.`is`
 import org.junit.Assert.*
 import org.junit.Test

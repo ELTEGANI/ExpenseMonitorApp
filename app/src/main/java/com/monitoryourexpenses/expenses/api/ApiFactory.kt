@@ -1,16 +1,12 @@
-package com.monitoryourexpenses.expenses.network
+package com.monitoryourexpenses.expenses.api
 
+import com.monitoryourexpenses.expenses.data.ExpenseService
 import com.monitoryourexpenses.expenses.utilites.AppConstants
-import retrofit2.http.Body
-import retrofit2.http.POST
 
 object ApiFactory {
 
-    val expensesService:ExpenseService = RetrofitFactory.retrofit(AppConstants.BASEURL)
+    val expensesService: ExpenseService = RetrofitFactory.retrofit(AppConstants.BASEURL)
         .create(ExpenseService::class.java)
-
-    val REGISTERATION_SERVICE:RegisterationService = RetrofitFactory.retrofit((AppConstants.BASEURL))
-        .create(RegisterationService::class.java)
 
     val ALL_EXPENSES:AllExpensesService = RetrofitFactory.retrofit((AppConstants.BASEURL))
         .create(AllExpensesService::class.java)

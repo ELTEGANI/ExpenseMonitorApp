@@ -11,18 +11,25 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.monitoryourexpenses.expenses.R
 import com.monitoryourexpenses.expenses.database.ExpenseMonitorDao
-import com.monitoryourexpenses.expenses.network.ApiFactory
-import com.monitoryourexpenses.expenses.network.UserData
+import com.monitoryourexpenses.expenses.api.ApiFactory
+import com.monitoryourexpenses.expenses.api.UserData
+import com.monitoryourexpenses.expenses.data.UserRepository
 import com.monitoryourexpenses.expenses.utilites.MyApp.Companion.context
 import com.monitoryourexpenses.expenses.utilites.PrefManager
 import com.monitoryourexpenses.expenses.utilites.ProgressStatus
 import com.monitoryourexpenses.expenses.utilites.saveCurrencyForSettings
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.onCompletion
+import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
+import okio.IOException
 import org.threeten.bp.LocalDate
 import retrofit2.HttpException
 
 
-class RegisterationUserViewModel(val database: ExpenseMonitorDao, var application: Application) :ViewModel() {
+class RegisterationUserViewModel(val userRepository: UserRepository, var application: Application) :ViewModel() {
 
     var radiochecked = MutableLiveData<Int>()
     private var geneder = ""
@@ -55,7 +62,8 @@ class RegisterationUserViewModel(val database: ExpenseMonitorDao, var applicatio
         currency = parent.selectedItem.toString()
     }
 
-    fun registerUser(userName:String,emailAddress:String) {
+    @ExperimentalCoroutinesApi
+    fun registerUser(userName:String, emailAddress:String) {
         when(radiochecked.value){
             R.id.male_radio_button->{
                 geneder = "male"
@@ -73,25 +81,27 @@ class RegisterationUserViewModel(val database: ExpenseMonitorDao, var applicatio
         }else{
             val userData = UserData(userName,emailAddress,geneder,currency)
             viewModelScope.launch {
-                val getUserResponse =  ApiFactory.REGISTERATION_SERVICE.registerationUserAsync(userData)
-                try {
-                    try {
-                        _status.value = ProgressStatus.LOADING
-                        val userResponse = getUserResponse.await()
+                userRepository.registerNewUser(userData)
+                    .onStart { _status.value = ProgressStatus.LOADING }
+                    .onCompletion {  _status.value = ProgressStatus.DONE }
+                    .catch {
+                        if (it is IOException){
+                            _errormsg.value =context?.getString(R.string.weak_internet_connection)
+                        }else if (it is HttpException){
+                            when(it.code()){
+                                500->{
+                            _errormsg.value = context?.getString(R.string.try_later)
+                                }
+                            }
+                        }
+                    }
+                    .collect {
                         PrefManager.saveCurrency(application,currency.substring(range = 0..2))
                         saveCurrencyForSettings(currency)
                         PrefManager.setUserRegistered(application,true)
-                        PrefManager.saveAccessToken(application,userResponse.accessToken)
+                        PrefManager.saveAccessToken(application,it.accessToken)
                         _navigateToNextScreen.value = true
-                        _status.value = ProgressStatus.DONE
-                    }catch (t:Throwable){
-                        Log.d("throwable",t.toString())
-                        _status.value = ProgressStatus.ERROR
-                        _errormsg.value = context?.getString(R.string.weak_internet_connection)
                     }
-                }catch (httpException:HttpException){
-                    Log.d("httpException",httpException.message())
-                }
             }
         }
         }

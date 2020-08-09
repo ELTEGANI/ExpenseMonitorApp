@@ -1,6 +1,5 @@
-package com.monitoryourexpenses.expenses.network
+package com.monitoryourexpenses.expenses.api
 
-import com.monitoryourexpenses.expenses.database.Expenses
 import com.squareup.moshi.Json
 import java.math.BigDecimal
 

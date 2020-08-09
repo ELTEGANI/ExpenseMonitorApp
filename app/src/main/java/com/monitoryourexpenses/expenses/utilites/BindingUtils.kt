@@ -10,9 +10,6 @@ import android.widget.Spinner
 import android.widget.TextView
 import androidx.core.view.updateLayoutParams
 import androidx.databinding.BindingAdapter
-import androidx.recyclerview.widget.RecyclerView
-import com.monitoryourexpenses.expenses.adapters.DurationsExpenseAdapter
-import com.monitoryourexpenses.expenses.network.DurationExpenseResponse
 import com.google.android.material.elevation.ElevationOverlayProvider
 import com.monitoryourexpenses.expenses.database.Expenses
 
