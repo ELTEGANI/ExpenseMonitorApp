@@ -27,7 +27,8 @@ class RegisterationUserFragment : Fragment() {
             R.layout.registeration_user_fragment,container,false)
 
         val application = requireNotNull(this.activity).application
-        val viewModelFactory = RegisterationUserViewModelFactory(UserRepository(),application)
+        val dataBase = ExpenseMonitorDataBase.getInstance(application).expenseMonitorDao
+        val viewModelFactory = RegisterationUserViewModelFactory(UserRepository(),dataBase,application)
 
         val viewModel = ViewModelProvider(this,viewModelFactory)
             .get(RegisterationUserViewModel::class.java)

@@ -1,13 +1,7 @@
 package com.monitoryourexpenses.expenses.database
 
-import android.util.Log
 import androidx.lifecycle.LiveData
-import com.monitoryourexpenses.expenses.api.ApiFactory
-import com.monitoryourexpenses.expenses.api.Duration
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.withContext
-import retrofit2.HttpException
 
 
 class LocalRepository(private val database:ExpenseMonitorDao) {
@@ -57,7 +51,7 @@ class LocalRepository(private val database:ExpenseMonitorDao) {
         database.insertExpenses(expenses)
     }
 
-    suspend fun insertNewCategory(categories:Categories){
+    suspend fun insertNewCategory(categories: List<Categories>){
         database.insertNewCategory(categories)
     }
 
