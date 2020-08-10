@@ -2,7 +2,6 @@ package com.monitoryourexpenses.expenses.registeruser
 
 
 import android.app.Application
-import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import androidx.lifecycle.LiveData
@@ -11,9 +10,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.monitoryourexpenses.expenses.R
 import com.monitoryourexpenses.expenses.database.ExpenseMonitorDao
-import com.monitoryourexpenses.expenses.api.ApiFactory
 import com.monitoryourexpenses.expenses.api.UserData
 import com.monitoryourexpenses.expenses.data.UserRepository
+import com.monitoryourexpenses.expenses.database.Categories
+import com.monitoryourexpenses.expenses.database.LocalRepository
 import com.monitoryourexpenses.expenses.utilites.MyApp.Companion.context
 import com.monitoryourexpenses.expenses.utilites.PrefManager
 import com.monitoryourexpenses.expenses.utilites.ProgressStatus
@@ -29,14 +29,17 @@ import org.threeten.bp.LocalDate
 import retrofit2.HttpException
 
 
-class RegisterationUserViewModel(val userRepository: UserRepository, var application: Application) :ViewModel() {
+class RegisterationUserViewModel(val userRepository: UserRepository,var database: ExpenseMonitorDao,var application: Application) :ViewModel() {
 
+    var localRepository = LocalRepository(database)
     var radiochecked = MutableLiveData<Int>()
     private var geneder = ""
     var currency = ""
 
     init {
-        saveAllDates()
+        viewModelScope.launch {
+            saveAllDates()
+        }
     }
 
     private val _status = MutableLiveData<ProgressStatus>()
@@ -100,6 +103,7 @@ class RegisterationUserViewModel(val userRepository: UserRepository, var applica
                         saveCurrencyForSettings(currency)
                         PrefManager.setUserRegistered(application,true)
                         PrefManager.saveAccessToken(application,it.accessToken)
+                        insertAllCategories()
                         _navigateToNextScreen.value = true
                     }
             }
@@ -126,5 +130,33 @@ class RegisterationUserViewModel(val userRepository: UserRepository, var applica
 
     fun onNavigationCompleted(){
         _navigateToNextScreen.value = false
+    }
+    
+    suspend fun insertAllCategories(){
+        val listOfCategories = listOf(
+            Categories(null,context?.getString(R.string.Anniversary)),
+            Categories(null,context?.getString(R.string.Adultsclothing)),
+            Categories(null,context?.getString(R.string.Administrativeviolations)),
+            Categories(null,context?.getString(R.string.Adultsshoes)),
+            Categories(null,context?.getString(R.string.Autoinsurance)),
+            Categories(null,context?.getString(R.string.AlcoholBars)),
+            Categories(null,context?.getString(R.string.Alimonyandchildsupport)),
+            Categories(null,context?.getString(R.string.Babysitter)),
+            Categories(null,context?.getString(R.string.beef)),
+            Categories(null,context?.getString(R.string.Books)),
+            Categories(null,context?.getString(R.string.Bigpurchases)),
+            Categories(null,context?.getString(R.string.Birthday)),
+            Categories(null,context?.getString(R.string.boosh)),
+            Categories(null,context?.getString(R.string.breakfast)),
+            Categories(null,context?.getString(R.string.Cable)),
+            Categories(null,context?.getString(R.string.Cafes)),
+            Categories(null,context?.getString(R.string.CarLeasing)),
+            Categories(null,context?.getString(R.string.Carpayment)),
+            Categories(null,context?.getString(R.string.Carpayment)),
+            Categories(null,context?.getString(R.string.Dentalcare)),
+            Categories(null,context?.getString(R.string.Disabilityinsurance)),
+            Categories(null,context?.getString(R.string.Electricity)))
+
+        localRepository.insertNewCategory(listOfCategories)
     }
 }

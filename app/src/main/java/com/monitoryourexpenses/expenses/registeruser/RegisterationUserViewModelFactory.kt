@@ -7,11 +7,11 @@ import com.monitoryourexpenses.expenses.data.UserRepository
 import com.monitoryourexpenses.expenses.database.ExpenseMonitorDao
 import java.lang.IllegalArgumentException
 
-class RegisterationUserViewModelFactory (private val userRepository: UserRepository, private val application: Application): ViewModelProvider.Factory {
+class RegisterationUserViewModelFactory (private val userRepository: UserRepository,var database:ExpenseMonitorDao,private val application: Application): ViewModelProvider.Factory {
     @Suppress("unchecked_cast")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(RegisterationUserViewModel::class.java)) {
-            return RegisterationUserViewModel(userRepository,application) as T
+            return RegisterationUserViewModel(userRepository,database,application) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

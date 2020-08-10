@@ -131,7 +131,7 @@ class CreateNewExpenseFragmentViewModel(val database: ExpenseMonitorDao,var appl
 
     fun addNewCategory(category:Categories){
         viewModelScope.launch {
-            localRepository.insertNewCategory(category)
+            localRepository.insertNewCategory(listOf(category))
         }
     }
 

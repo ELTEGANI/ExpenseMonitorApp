@@ -42,7 +42,7 @@ interface ExpenseMonitorDao {
     suspend fun insertExpenses(expenses: Expenses)
 
     @Insert
-    suspend fun insertNewCategory(categories:Categories)
+    suspend fun insertNewCategory(categories:List<Categories>)
 
     @Insert
     fun insertExpensesForCachingData(vararg expenses: Expenses)
