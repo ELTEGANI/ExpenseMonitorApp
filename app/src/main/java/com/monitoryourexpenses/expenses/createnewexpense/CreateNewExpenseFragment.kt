@@ -4,23 +4,30 @@ package com.monitoryourexpenses.expenses.createnewexpense
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.view.LayoutInflater
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.preference.PreferenceManager
+import androidx.recyclerview.selection.SelectionPredicates
+import androidx.recyclerview.selection.SelectionTracker
+import androidx.recyclerview.selection.StorageStrategy
 import com.monitoryourexpenses.expenses.R
+import com.monitoryourexpenses.expenses.adapters.*
 import com.monitoryourexpenses.expenses.database.Categories
 import com.monitoryourexpenses.expenses.database.ExpenseMonitorDataBase
 import com.monitoryourexpenses.expenses.databinding.CreateNewExpenseFragmentBinding
 import com.monitoryourexpenses.expenses.utilites.PrefManager
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -29,6 +36,10 @@ class CreateNewExpenseFragment : Fragment() {
 
     private lateinit var binding: CreateNewExpenseFragmentBinding
     lateinit var viewModel: CreateNewExpenseFragmentViewModel
+    private var tracker: SelectionTracker<Long>? = null
+    var category:String? = null
+
+    @ExperimentalCoroutinesApi
     @SuppressLint("SimpleDateFormat")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
@@ -44,10 +55,9 @@ class CreateNewExpenseFragment : Fragment() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
-        binding.spinner.setTitle(getString(R.string.select_or_category))
 
 
-        binding.newDateButton.setOnClickListener {
+        binding.dateButton.setOnClickListener {
             val c = Calendar.getInstance()
             val year = c.get(Calendar.YEAR)
             val month = c.get(Calendar.MONTH)
@@ -55,11 +65,11 @@ class CreateNewExpenseFragment : Fragment() {
             val datePickerDialog = context?.let { it1 -> DatePickerDialog(
                 it1,
                 DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
-                    val c = Calendar.getInstance()
-                    c.set(year, monthOfYear, dayOfMonth)
+                    val calendar = Calendar.getInstance()
+                    calendar.set(year, monthOfYear, dayOfMonth)
                     val format = SimpleDateFormat("yyyy-MM-dd")
-                    val datestring = format.format(c.time)
-                    viewModel.currentDate.value = datestring
+                    val dateString = format.format(calendar.time)
+                    viewModel.currentDate.value = dateString
                 },year,month,day)
             }
             datePickerDialog?.show()
@@ -126,6 +136,48 @@ class CreateNewExpenseFragment : Fragment() {
         (activity as AppCompatActivity).supportActionBar?.setDisplayShowTitleEnabled(false)
         setHasOptionsMenu(true)
 
+        val manager = NoPredictiveAnimationsGridLayoutManager(context,spanCount = 3)
+        binding.categoryList.layoutManager = manager
+
+
+        val adapter = ExpenseCategoryAdapter(CategoryListener{
+            category = it.CategoryName.toString()
+        })
+
+        binding.categoryList.adapter = adapter
+        viewModel.categories.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                adapter.addList(it)
+            }
+        })
+
+        tracker = SelectionTracker.Builder<Long>(
+            "mySelection",binding.categoryList,
+            MyItemKeyProvider(binding.categoryList),
+            MyItemDetailsLookup(binding.categoryList),
+            StorageStrategy.createLongStorage()).withSelectionPredicate(SelectionPredicates.createSelectSingleAnything()).build()
+
+        adapter.tracker = tracker
+
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
+            android.widget.SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String): Boolean {
+                return false
+            }
+            override fun onQueryTextChange(newText: String): Boolean {
+                 (binding.categoryList.adapter as ExpenseCategoryAdapter).filter(newText)
+                return true
+            }
+        })
+
+        binding.createNewExpenseButton.setOnClickListener {
+            category?.let { it1 ->
+                viewModel.createNewExpense(binding.expenseAmountTextView.text.toString(),binding.expenseDescriptionTextView.text.toString(),
+                    binding.expenseDateTextView.text.toString(), it1
+                )
+            }
+        }
+
         return binding.root
     }
 
@@ -158,5 +210,6 @@ class CreateNewExpenseFragment : Fragment() {
         val dialog = builder?.create()
         dialog?.show()
     }
+
 
 }

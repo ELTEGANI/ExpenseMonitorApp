@@ -16,13 +16,15 @@ import com.monitoryourexpenses.expenses.data.UserRepository
 import com.monitoryourexpenses.expenses.database.ExpenseMonitorDataBase
 import com.monitoryourexpenses.expenses.databinding.RegisterationUserFragmentBinding
 import com.monitoryourexpenses.expenses.utilites.PrefManager
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 
 class RegisterationUserFragment : Fragment() {
 
     private lateinit var binding: RegisterationUserFragmentBinding
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,savedInstanceState: Bundle?): View? {
+    @ExperimentalCoroutinesApi
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater,
             R.layout.registeration_user_fragment,container,false)
 

@@ -15,7 +15,7 @@ import com.monitoryourexpenses.expenses.database.ExpenseMonitorDataBase
 import com.monitoryourexpenses.expenses.databinding.WeekExpenseFragmentBinding
 import com.monitoryourexpenses.expenses.myexpenses.MyExpenseFragmentDirections
 import com.monitoryourexpenses.expenses.adapters.DurationsExpenseAdapter
-import com.monitoryourexpenses.expenses.adapters.ExpenseListener
+import com.monitoryourexpenses.expenses.adapters.ExpenseCategoryListener
 
 class WeekExpenseFragment : Fragment() {
 
@@ -41,7 +41,7 @@ class WeekExpenseFragment : Fragment() {
 
 
 
-        val adapter = DurationsExpenseAdapter(ExpenseListener {
+        val adapter = DurationsExpenseAdapter(ExpenseCategoryListener {
             viewModel.displaySelectedExpense(it)
         })
 

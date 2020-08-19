@@ -50,4 +50,7 @@ interface ExpenseMonitorDao {
     @Query("SELECT SUM(amount) from expenses WHERE currency =:currency")
     suspend fun sumationOfSpecifiedExpenses(currency: String): String
 
+    @Query("SELECT * from categories")
+    fun selectAllCategories(): LiveData<List<Categories>>
+
 }

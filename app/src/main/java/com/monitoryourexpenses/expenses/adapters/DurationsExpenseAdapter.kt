@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.monitoryourexpenses.expenses.database.Expenses
 import com.monitoryourexpenses.expenses.databinding.ExpenseViewItemBinding
 
-class DurationsExpenseAdapter(private val expenseListener: ExpenseListener) : ListAdapter<Expenses, DurationsExpenseAdapter.ViewHolder>(
+class DurationsExpenseAdapter(private val expenseCategoryListener: ExpenseCategoryListener) : ListAdapter<Expenses, DurationsExpenseAdapter.ViewHolder>(
     GetExpensesResponseDiffCallback()
 ){
 
@@ -19,17 +19,14 @@ class DurationsExpenseAdapter(private val expenseListener: ExpenseListener) : Li
 
 
     override fun onBindViewHolder(holder: ViewHolder, position:Int){
-       holder.bind(getItem(position)!!,expenseListener)
+       holder.bind(getItem(position)!!,expenseCategoryListener)
     }
 
 
     class ViewHolder private constructor(val binding: ExpenseViewItemBinding):RecyclerView.ViewHolder(binding.root) {
-        fun bind(
-            expense: Expenses,
-            expenseListener: ExpenseListener
-        ) {
+        fun bind(expense: Expenses,expenseCategoryListener: ExpenseCategoryListener) {
           binding.expensesProperties = expense
-          binding.clickListener = expenseListener
+          binding.clickListener = expenseCategoryListener
           binding.executePendingBindings()
         }
 
@@ -56,6 +53,6 @@ class GetExpensesResponseDiffCallback:DiffUtil.ItemCallback<Expenses>(){
     }
 }
 
-class ExpenseListener(val onClickListener:(expense:Expenses)->Unit){
+class ExpenseCategoryListener(val onClickListener:(expense:Expenses)->Unit){
     fun onClick(expense: Expenses) = onClickListener(expense)
 }

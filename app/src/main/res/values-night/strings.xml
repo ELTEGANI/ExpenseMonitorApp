@@ -4,4 +4,6 @@
     <string name="ok">OK</string>
     <string name="close_categories">Close</string>
     <string name="try_later">OOPs Failed Please Try Later</string>
+    <string name="search_for_category">Search For Category</string>
+    <string name="categoires_expense_content_descriptions">categoires_expense_content_descriptions</string>
 </resources>

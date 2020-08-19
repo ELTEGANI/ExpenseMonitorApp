@@ -5,12 +5,15 @@ import android.graphics.drawable.ColorDrawable
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowInsets
+import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.Spinner
 import android.widget.TextView
 import androidx.core.view.updateLayoutParams
 import androidx.databinding.BindingAdapter
 import com.google.android.material.elevation.ElevationOverlayProvider
+import com.monitoryourexpenses.expenses.R
+import com.monitoryourexpenses.expenses.database.Categories
 import com.monitoryourexpenses.expenses.database.Expenses
 
 
@@ -214,3 +217,37 @@ fun Spinner.bindPopupElevationOverlay(popupElevationOverlay: Float) {
         )
     )
 }
+
+@BindingAdapter("expenseCategoryImage")
+fun ImageView.setCategoryImage(category: Categories?) {
+    category?.let {
+        setImageResource(when (category.CategoryName) {
+            context.getString(R.string.Anniversary) -> R.drawable.ic_anniversary
+            context.getString(R.string.Adultsclothing) -> R.drawable.ic_receipt
+            context.getString(R.string.Alimonyandchildsupport) -> R.drawable.ic_human_female_boy
+            context.getString(R.string.Babysitter) -> R.drawable.ic_baby_face_outline
+            context.getString(R.string.beef)-> R.drawable.ic_food_drumstick
+            context.getString(R.string.Books) -> R.drawable.ic_book_shelf
+            context.getString(R.string.Bigpurchases) -> R.drawable.ic_basket_plus
+            context.getString(R.string.Birthday) -> R.drawable.ic_cake_layered
+            context.getString(R.string.boosh) -> R.drawable.ic_food_variant
+            context.getString(R.string.fastfood) -> R.drawable.ic_food
+            context.getString(R.string.breakfast) -> R.drawable.ic_food_fork_drink
+            context.getString(R.string.Cable) -> R.drawable.ic_cake_layered
+            context.getString(R.string.Cafes) -> R.drawable.ic_coffee
+            context.getString(R.string.CarLeasing) -> R.drawable.ic_car_hatchback
+            context.getString(R.string.Carpayment) -> R.drawable.ic_car_outline
+            context.getString(R.string.Electricity) -> R.drawable.ic_flash
+            context.getString(R.string.Invoices) -> R.drawable.ic_receipt
+            else -> R.drawable.ic_launcher
+        })
+    }
+}
+
+@BindingAdapter("CategoryNameString")
+fun TextView.setCategoryNameString(category: Categories?) {
+    category?.let {
+        text = category.CategoryName
+    }
+}
+
