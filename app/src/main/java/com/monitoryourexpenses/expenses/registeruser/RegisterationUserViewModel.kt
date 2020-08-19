@@ -77,35 +77,39 @@ class RegisterationUserViewModel(val userRepository: UserRepository,var database
             }
         }
 
-        if (geneder.isEmpty()){
-            _genderSelected.value = false
-        }else if(currency == context?.getString(R.string.select_currency)){
-            _genderSelected.value = false
-        }else{
-            val userData = UserData(userName,emailAddress,geneder,currency)
-            viewModelScope.launch {
-                userRepository.registerNewUser(userData)
-                    .onStart { _status.value = ProgressStatus.LOADING }
-                    .onCompletion {  _status.value = ProgressStatus.DONE }
-                    .catch {
-                        if (it is IOException){
-                            _errormsg.value =context?.getString(R.string.weak_internet_connection)
-                        }else if (it is HttpException){
-                            when(it.code()){
-                                500->{
-                            _errormsg.value = context?.getString(R.string.try_later)
+        when {
+            geneder.isEmpty() -> {
+                _genderSelected.value = false
+            }
+            currency == context?.getString(R.string.select_currency) -> {
+                _genderSelected.value = false
+            }
+            else -> {
+                val userData = UserData(userName,emailAddress,geneder,currency)
+                viewModelScope.launch {
+                    userRepository.registerNewUser(userData)
+                        .onStart { _status.value = ProgressStatus.LOADING }
+                        .onCompletion {  _status.value = ProgressStatus.DONE }
+                        .catch {
+                            if (it is IOException){
+                                _errormsg.value =context?.getString(R.string.weak_internet_connection)
+                            }else if (it is HttpException){
+                                when(it.code()){
+                                    500->{
+                                        _errormsg.value = context?.getString(R.string.try_later)
+                                    }
                                 }
                             }
                         }
-                    }
-                    .collect {
-                        PrefManager.saveCurrency(application,currency.substring(range = 0..2))
-                        saveCurrencyForSettings(currency)
-                        PrefManager.setUserRegistered(application,true)
-                        PrefManager.saveAccessToken(application,it.accessToken)
-                        insertAllCategories()
-                        _navigateToNextScreen.value = true
-                    }
+                        .collect {
+                            PrefManager.saveCurrency(application,currency.substring(range = 0..2))
+                            saveCurrencyForSettings(currency)
+                            PrefManager.setUserRegistered(application,true)
+                            PrefManager.saveAccessToken(application,it.accessToken)
+                            insertAllCategories()
+                            _navigateToNextScreen.value = true
+                        }
+                }
             }
         }
         }
@@ -132,14 +136,10 @@ class RegisterationUserViewModel(val userRepository: UserRepository,var database
         _navigateToNextScreen.value = false
     }
     
-    suspend fun insertAllCategories(){
+    private suspend fun insertAllCategories(){
         val listOfCategories = listOf(
             Categories(null,context?.getString(R.string.Anniversary)),
             Categories(null,context?.getString(R.string.Adultsclothing)),
-            Categories(null,context?.getString(R.string.Administrativeviolations)),
-            Categories(null,context?.getString(R.string.Adultsshoes)),
-            Categories(null,context?.getString(R.string.Autoinsurance)),
-            Categories(null,context?.getString(R.string.AlcoholBars)),
             Categories(null,context?.getString(R.string.Alimonyandchildsupport)),
             Categories(null,context?.getString(R.string.Babysitter)),
             Categories(null,context?.getString(R.string.beef)),
@@ -147,15 +147,14 @@ class RegisterationUserViewModel(val userRepository: UserRepository,var database
             Categories(null,context?.getString(R.string.Bigpurchases)),
             Categories(null,context?.getString(R.string.Birthday)),
             Categories(null,context?.getString(R.string.boosh)),
+            Categories(null,context?.getString(R.string.juice)),
             Categories(null,context?.getString(R.string.breakfast)),
             Categories(null,context?.getString(R.string.Cable)),
             Categories(null,context?.getString(R.string.Cafes)),
             Categories(null,context?.getString(R.string.CarLeasing)),
             Categories(null,context?.getString(R.string.Carpayment)),
-            Categories(null,context?.getString(R.string.Carpayment)),
-            Categories(null,context?.getString(R.string.Dentalcare)),
-            Categories(null,context?.getString(R.string.Disabilityinsurance)),
-            Categories(null,context?.getString(R.string.Electricity)))
+            Categories(null,context?.getString(R.string.Electricity)),
+            Categories(null,context?.getString(R.string.Invoices)))
 
         localRepository.insertNewCategory(listOfCategories)
     }

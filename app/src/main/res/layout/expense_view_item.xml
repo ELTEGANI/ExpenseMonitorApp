@@ -8,7 +8,7 @@
                      type="com.monitoryourexpenses.expenses.database.Expenses" />
             <variable
                     name="clickListener"
-                    type="com.monitoryourexpenses.expenses.adapters.ExpenseListener" />
+                    type="com.monitoryourexpenses.expenses.adapters.ExpenseCategoryListener" />
         </data>
 
     <FrameLayout

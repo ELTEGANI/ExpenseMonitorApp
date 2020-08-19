@@ -59,5 +59,7 @@ class LocalRepository(private val database:ExpenseMonitorDao) {
        return database.sumationOfSpecifiedExpenses(currency)
     }
 
-
+    fun getAllCategories(): LiveData<List<Categories>> {
+        return database.selectAllCategories()
+    }
 }

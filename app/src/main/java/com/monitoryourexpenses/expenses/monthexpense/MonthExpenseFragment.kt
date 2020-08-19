@@ -1,6 +1,5 @@
 package com.monitoryourexpenses.expenses.monthexpense
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -16,7 +15,7 @@ import com.monitoryourexpenses.expenses.database.ExpenseMonitorDataBase
 import com.monitoryourexpenses.expenses.databinding.MonthExpenseFragmentBinding
 import com.monitoryourexpenses.expenses.myexpenses.MyExpenseFragmentDirections
 import com.monitoryourexpenses.expenses.adapters.DurationsExpenseAdapter
-import com.monitoryourexpenses.expenses.adapters.ExpenseListener
+import com.monitoryourexpenses.expenses.adapters.ExpenseCategoryListener
 
 class MonthExpenseFragment : Fragment() {
 
@@ -40,7 +39,7 @@ class MonthExpenseFragment : Fragment() {
         binding.viewModel = viewModel
 
 
-        val adapter = DurationsExpenseAdapter(ExpenseListener {
+        val adapter = DurationsExpenseAdapter(ExpenseCategoryListener {
             viewModel.displaySelectedExpense(it)
         })
 
