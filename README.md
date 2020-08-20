@@ -29,7 +29,7 @@ Application is available here:
       </tr>
 </table> 
 
-### Libraries used and their documentation
+### Libraries & documentation
 
 - Retrofit [Docs](https://square.github.io/retrofit/)
 - Glide [Docs](https://bumptech.github.io/glide/)
@@ -46,4 +46,5 @@ Application is available here:
 - Kotlin Flow [DOCS](https://kotlinlang.org/docs/reference/coroutines/flow.html)
 
 ## Developed by
-*EL TEGANI MOHAMED HAMMAD GABIR - <tiganimoh@gmail.com>
+
+#EL TEGANI MOHAMED HAMMAD GABIR - <tiganimoh@gmail.com>
