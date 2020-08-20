@@ -25,10 +25,12 @@ import kotlinx.coroutines.flow.onStart
 import okio.IOException
 import retrofit2.HttpException
 
-class UpdateAndDeleteFragmentViewModel(val expenses: Expenses,val expensesRepository: ExpensesRepository,application: Application,dataBase: ExpenseMonitorDao) : AndroidViewModel(application) {
+class UpdateAndDeleteFragmentViewModel(val expenses: Expenses,
+                                       private val expensesRepository: ExpensesRepository, application: Application, dataBase: ExpenseMonitorDao) : AndroidViewModel(application) {
 
     private val application = getApplication<Application>().applicationContext
     private val localRepository = LocalRepository(dataBase)
+    val categories = localRepository.getAllCategories()
 
     private val _selectedExpense = MutableLiveData<Expenses>()
     val selectedExpenseMsg :LiveData<Expenses>
@@ -60,8 +62,6 @@ class UpdateAndDeleteFragmentViewModel(val expenses: Expenses,val expensesReposi
         _selectedExpense.value = expenses
         currentDate.value = expenses.date
     }
-
-
 
     @ExperimentalCoroutinesApi
     fun deleteExpense(expenseId:String){
