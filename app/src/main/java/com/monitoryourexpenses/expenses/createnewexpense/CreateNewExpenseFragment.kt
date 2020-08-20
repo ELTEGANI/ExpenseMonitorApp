@@ -4,7 +4,6 @@ package com.monitoryourexpenses.expenses.createnewexpense
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import android.view.LayoutInflater
 import android.widget.EditText
@@ -49,8 +48,7 @@ class CreateNewExpenseFragment : Fragment() {
         val dataBase = ExpenseMonitorDataBase.getInstance(application).expenseMonitorDao
         val viewModelFactory = CreateNewExpenseFragmentViewModelFactory(dataBase,application)
 
-        viewModel = ViewModelProvider(this,viewModelFactory)
-            .get(CreateNewExpenseFragmentViewModel::class.java)
+        viewModel = ViewModelProvider(this,viewModelFactory).get(CreateNewExpenseFragmentViewModel::class.java)
 
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
@@ -171,11 +169,9 @@ class CreateNewExpenseFragment : Fragment() {
         })
 
         binding.createNewExpenseButton.setOnClickListener {
-            category?.let { it1 ->
                 viewModel.createNewExpense(binding.expenseAmountTextView.text.toString(),binding.expenseDescriptionTextView.text.toString(),
-                    binding.expenseDateTextView.text.toString(), it1
-                )
-            }
+                    binding.expenseDateTextView.text.toString(),category.toString())
+
         }
 
         return binding.root

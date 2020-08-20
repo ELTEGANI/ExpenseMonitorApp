@@ -3,24 +3,31 @@ package com.monitoryourexpenses.expenses.updateanddeleteexpense
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.widget.SearchView
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import androidx.preference.PreferenceManager
+import androidx.recyclerview.selection.SelectionPredicates
+import androidx.recyclerview.selection.SelectionTracker
+import androidx.recyclerview.selection.StorageStrategy
 import com.monitoryourexpenses.expenses.R
+import com.monitoryourexpenses.expenses.adapters.*
 import com.monitoryourexpenses.expenses.data.ExpensesRepository
+import com.monitoryourexpenses.expenses.database.Categories
 import com.monitoryourexpenses.expenses.database.ExpenseMonitorDataBase
 import com.monitoryourexpenses.expenses.databinding.UpdateAndDeleteExpenseFragmentBinding
 import com.monitoryourexpenses.expenses.utilites.PrefManager
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -28,8 +35,11 @@ class UpdateAndDeleteExpenseFragment : Fragment() {
 
 
     private lateinit var binding: UpdateAndDeleteExpenseFragmentBinding
+    private var tracker: SelectionTracker<Long>? = null
+    var category:String? = null
 
 
+    @ExperimentalCoroutinesApi
     @SuppressLint("SetTextI18n", "SimpleDateFormat")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
@@ -57,12 +67,6 @@ class UpdateAndDeleteExpenseFragment : Fragment() {
         binding.lifecycleOwner =  this
 
 
-        binding.spinner.setTitle(getString(R.string.select_or_category))
-        binding.spinner.setPositiveButton(getString(R.string.close))
-
-        binding.spinner.setSelection((binding.spinner.adapter as ArrayAdapter<String>).getPosition(expenseResponse?.expenseCategory))
-
-
         binding.dateButton.setOnClickListener {
             val c = Calendar.getInstance()
             val year = c.get(Calendar.YEAR)
@@ -84,7 +88,7 @@ class UpdateAndDeleteExpenseFragment : Fragment() {
 
         binding.updateExpenseButton.setOnClickListener {
            viewModel.updateExpense(binding.uuidEditText.text.toString(),binding.amountEditText.text.toString(),
-               binding.descriptionEditText.text.toString(),binding.dateEditText.text.toString(),binding.spinner.selectedItem.toString())
+               binding.descriptionEditText.text.toString(),binding.dateEditText.text.toString(),category.toString())
         }
 
 
@@ -150,6 +154,40 @@ class UpdateAndDeleteExpenseFragment : Fragment() {
 
                 val dialog: AlertDialog? = builder?.create()
                 dialog?.show()
+            }
+        })
+
+        val manager = NoPredictiveAnimationsGridLayoutManager(context,spanCount = 3)
+        binding.categoryList.layoutManager = manager
+
+
+        val adapter = ExpenseCategoryAdapter(CategoryListener{
+            category = it.CategoryName.toString()
+        })
+
+        binding.categoryList.adapter = adapter
+        viewModel.categories.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                adapter.addList(it)
+            }
+        })
+
+        tracker = SelectionTracker.Builder<Long>(
+            "mySelection",binding.categoryList,
+            MyItemKeyProvider(binding.categoryList),
+            MyItemDetailsLookup(binding.categoryList),
+            StorageStrategy.createLongStorage()).withSelectionPredicate(SelectionPredicates.createSelectSingleAnything()).build()
+
+        adapter.tracker = tracker
+
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
+            android.widget.SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String): Boolean {
+                return false
+            }
+            override fun onQueryTextChange(newText: String): Boolean {
+                (binding.categoryList.adapter as ExpenseCategoryAdapter).filter(newText)
+                return true
             }
         })
 

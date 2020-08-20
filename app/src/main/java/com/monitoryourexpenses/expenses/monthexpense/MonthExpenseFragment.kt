@@ -44,7 +44,7 @@ class MonthExpenseFragment : Fragment() {
         })
 
 
-        viewModel.navigateToSelectedExpense.observe(this, Observer {
+        viewModel.navigateToSelectedExpense.observe(viewLifecycleOwner, Observer {
             if (it != null){
                 val direction = MyExpenseFragmentDirections.actionMyExpenseFragmentToUpdateAndDeleteExpenseFragment(it)
                 findNavController().navigate(direction)
@@ -60,7 +60,7 @@ class MonthExpenseFragment : Fragment() {
         viewModel.monthExpenses.observe(viewLifecycleOwner, Observer {
             it?.let {
                 if (it.isNotEmpty()){
-                    adapter.submitList(it)
+                    adapter.submitList(it.reversed())
                 }else{
                     binding.noExpensesTextView.visibility = View.VISIBLE
                 }            }

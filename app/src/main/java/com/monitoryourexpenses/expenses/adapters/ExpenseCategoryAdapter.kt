@@ -49,11 +49,12 @@ class ExpenseCategoryAdapter(private val categoryListener: CategoryListener): Li
         tracker?.let {
             holder.bind(getItem(position),it.isSelected(position.toLong()),categoryListener)
         }
-            if(tracker?.isSelected(position.toLong())!!){
+
+        if(tracker?.isSelected(position.toLong())!!){
                 holder.itemView.cardView.setBackgroundResource(R.drawable.item_category_background)
             }else{
                 holder.itemView.cardView.setBackgroundResource(0)
-            }
+        }
     }
 
 
@@ -69,8 +70,6 @@ class ExpenseCategoryAdapter(private val categoryListener: CategoryListener): Li
             categoriesItemExpenseBinding.clickListener = expenseCategoryListener
             categoriesItemExpenseBinding.executePendingBindings()
         }
-
-
         companion object {
             fun from(parent: ViewGroup): ViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
@@ -78,7 +77,6 @@ class ExpenseCategoryAdapter(private val categoryListener: CategoryListener): Li
                 return ViewHolder(categoriesItemExpenseBinding)
             }
         }
-
 
         fun getItemDetails(): ItemDetailsLookup.ItemDetails<Long> =
             object : ItemDetailsLookup.ItemDetails<Long>() {

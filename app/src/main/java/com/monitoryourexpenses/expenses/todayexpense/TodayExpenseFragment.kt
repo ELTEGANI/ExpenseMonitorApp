@@ -57,7 +57,7 @@ class TodayExpenseFragment : Fragment() {
         viewModel.todayExpenses.observe(viewLifecycleOwner, Observer {
             it?.let {
                 if (it.isNotEmpty()){
-                    adapter.submitList(it)
+                    adapter.submitList(it.reversed())
                 }else{
                     binding.noExpensesTextView.visibility = View.VISIBLE
                 }
