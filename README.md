@@ -30,7 +30,7 @@ Application is available here:
 </table> 
 
 ### Libraries & documentation
-- MVVM Architecture[DOCS](https://developer.android.com/jetpack/guide)
+- MVVM Architecture [DOCS](https://developer.android.com/jetpack/guide)
 - Retrofit [Docs](https://square.github.io/retrofit/)
 - Glide [Docs](https://bumptech.github.io/glide/)
 - Moshi [Docs](https://github.com/square/moshi)
@@ -47,4 +47,4 @@ Application is available here:
 
 ## Developed by
 
-#EL TEGANI MOHAMED HAMMAD GABIR - <tiganimoh@gmail.com>
+# EL TEGANI MOHAMED HAMMAD GABIR - <tiganimoh@gmail.com>
