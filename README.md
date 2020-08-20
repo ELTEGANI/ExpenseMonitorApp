@@ -1,11 +1,14 @@
 <div align="center">
-# ![alt text]()
+        
 # Expense Monitor App
-Expense Monitor, monitors all your daily, weekly and monthly expenses and classifies them in categories using one currency or multiple currencies. So you can stay aware of all your expenses and where they went.
-Application is available here:
-<a href='https://play.google.com/store/apps/details?id=com.codingblocks.cbonlineapp'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png' height="80"/></a>
+        
+Expense Monitor, monitors all your daily, weekly and monthly expenses and classifies them in categories using one currency or multiple currencies. 
+So you can stay aware of all your expenses and where they went.
 
-[![Downloads Badge](https://img.shields.io/endpoint?logo=google-play&url=https://api-playstore.rajkumaar.co.in/downloads?id=com.codingblocks.cbonlineapp&color=success)](https://play.google.com/store/apps/details?id=com.monitoryourexpenses.expenses)️
+Application is available here:
+
+<a href='https://play.google.com/store/apps/details?id=com.monitoryourexpenses.expenses'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png' height="80"/></a>
+
 </div>
 
 ## Screenshots
@@ -14,13 +17,11 @@ Application is available here:
           <td><img src = "app/screenshots/1.jpg" ></td>
           <td><img src = "app/screenshots/2.jpg" ></td>
           <td><img src = "app/screenshots/3.jpg" ></td>
-          <td><img src = "app/screenshots/4.jpg" ></td>
         </tr>
       <tr>
         <td><img src = "app/screenshots/5.jpg" ></td>
         <td><img src = "app/screenshots/6.jpg" ></td>
         <td><img src = "app/screenshots/7.jpg" ></td>
-        <td><img src = "app/screenshots/8.jpg" ></td>
       </tr>
 </table> 
 
@@ -30,7 +31,6 @@ Application is available here:
 - Glide [Docs](https://bumptech.github.io/glide/)
 - Moshi [Docs](https://github.com/square/moshi)
 - Room [Docs](https://developer.android.com/jetpack/androidx/releases/room)
-- MPAndroidChart [Docs](https://github.com/PhilJay/MPAndroidChart)
 - PlayCore [DOCS](https://developer.android.com/guide/playcore)
 - Preference [DOCS](https://developer.android.com/reference/android/preference/Preference)
 - ViewPager2 [DOCS](https://developer.android.com/jetpack/androidx/releases/viewpager2)
