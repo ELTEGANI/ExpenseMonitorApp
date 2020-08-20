@@ -176,7 +176,8 @@ class UpdateAndDeleteExpenseFragment : Fragment() {
             "mySelection",binding.categoryList,
             MyItemKeyProvider(binding.categoryList),
             MyItemDetailsLookup(binding.categoryList),
-            StorageStrategy.createLongStorage()).withSelectionPredicate(SelectionPredicates.createSelectSingleAnything()).build()
+            StorageStrategy.createLongStorage()
+        ).withSelectionPredicate(SelectionPredicates.createSelectSingleAnything()).build()
 
         adapter.tracker = tracker
 
