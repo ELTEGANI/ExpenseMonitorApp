@@ -1,5 +1,7 @@
 <div align="center">
-        
+
+# ![alt text](https://github.com/ELTEGANI/ExpenseMonitorApp/blob/master/app/screenshots/logo.png)   
+     
 # Expense Monitor App
         
 Expense Monitor, monitors all your daily, weekly and monthly expenses and classifies them in categories using one currency or multiple currencies. 
@@ -17,11 +19,13 @@ Application is available here:
           <td><img src = "app/screenshots/1.jpg" ></td>
           <td><img src = "app/screenshots/2.jpg" ></td>
           <td><img src = "app/screenshots/3.jpg" ></td>
+          <td><img src = "app/screenshots/4.jpg" ></td>
         </tr>
       <tr>
         <td><img src = "app/screenshots/5.jpg" ></td>
         <td><img src = "app/screenshots/6.jpg" ></td>
         <td><img src = "app/screenshots/7.jpg" ></td>
+        <td><img src = "app/screenshots/8.jpg" ></td>
       </tr>
 </table> 
 
