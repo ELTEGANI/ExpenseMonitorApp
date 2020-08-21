@@ -39,7 +39,6 @@ import com.google.android.play.core.install.InstallStateUpdatedListener
 import com.google.android.play.core.install.model.AppUpdateType
 import com.google.android.play.core.install.model.InstallStatus
 import com.google.android.play.core.install.model.UpdateAvailability
-import com.monitoryourexpenses.expenses.data.ExpensesRepository
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.threeten.bp.LocalDate
 
@@ -72,7 +71,7 @@ class MyExpenseFragment : Fragment() {
 
         val application = requireNotNull(this.activity).application
         val dataBase = ExpenseMonitorDataBase.getInstance(application).expenseMonitorDao
-        val viewModelFactory = MyExpenseFragmentViewModelFactory(dataBase,ExpensesRepository(),application)
+        val viewModelFactory = MyExpenseFragmentViewModelFactory(dataBase,application)
 
         viewModel = ViewModelProvider(this,viewModelFactory)
             .get(MyExpenseFragmentViewModel::class.java)
@@ -255,13 +254,6 @@ class MyExpenseFragment : Fragment() {
                 findNavController().navigate(action)
                 true
             }
-            R.id.action_sign_out -> {
-                viewModel.clearPrefs()
-                signOut()
-                val navController = binding.root.findNavController()
-                navController.navigate(R.id.action_myExpenseFragment_to_loginUserFragment)
-                true
-            }
 
             else -> false
         }
@@ -279,10 +271,5 @@ class MyExpenseFragment : Fragment() {
         startActivity(shareIntent)
     }
 
-
-    private fun signOut() {
-        mGoogleSignInClient?.signOut()?.addOnCompleteListener{
-        }
-    }
 
 }

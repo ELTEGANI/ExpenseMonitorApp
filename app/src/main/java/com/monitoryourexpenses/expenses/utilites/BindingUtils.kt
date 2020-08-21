@@ -17,21 +17,6 @@ import com.monitoryourexpenses.expenses.database.Categories
 import com.monitoryourexpenses.expenses.database.Expenses
 
 
-@BindingAdapter("progressStatus")
-fun bindingStatus(progressBar: ProgressBar,status: ProgressStatus?){
-    when(status){
-        ProgressStatus.LOADING->{
-           progressBar.visibility = View.VISIBLE
-        }
-        ProgressStatus.DONE->{
-            progressBar.visibility = View.GONE
-        }
-        ProgressStatus.ERROR->{
-            progressBar.visibility = View.GONE
-        }
-    }
-}
-
 
 @SuppressLint("SetTextI18n")
 @BindingAdapter("expenseAmount")

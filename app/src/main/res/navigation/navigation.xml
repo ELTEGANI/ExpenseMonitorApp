@@ -5,7 +5,7 @@
         app:startDestination="@id/loginUserFragment">
     <fragment
             android:id="@+id/registerationUserFragment"
-            android:name="com.monitoryourexpenses.expenses.registeruser.RegisterationUserFragment"
+            android:name="com.monitoryourexpenses.expenses.usercurrency.GetUserCurrencyFragment"
             android:label="RegisterationUserFragment" >
         <action
                 android:id="@+id/action_registeration_to_myExpense"
@@ -49,7 +49,7 @@
     </fragment>
     <fragment
             android:id="@+id/createNewExpenseFragment"
-            android:name="com.monitoryourexpenses.expenses.createnewexpense.CreateNewExpenseFragment"
+            android:name="com.monitoryourexpenses.expenses.createexpense.CreateNewExpenseFragment"
             android:label="CreateNewExpenseFragment" >
         <action
                 android:id="@+id/action_createNewExpenseFragment_to_myExpenseFragment"
@@ -63,7 +63,7 @@
     </fragment>
     <fragment
             android:id="@+id/loginUserFragment"
-            android:name="com.monitoryourexpenses.expenses.loginuser.LoginUserFragment"
+            android:name="com.monitoryourexpenses.expenses.splashscreen.SplashScreenFragment"
             android:label="LoginUserFragment" >
         <action
                 android:id="@+id/action_loginUserFragment_to_registerationUserFragment"

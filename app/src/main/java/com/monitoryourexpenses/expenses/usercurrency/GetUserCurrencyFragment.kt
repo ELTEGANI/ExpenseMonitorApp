@@ -1,4 +1,4 @@
-package com.monitoryourexpenses.expenses.registeruser
+package com.monitoryourexpenses.expenses.usercurrency
 
 
 import android.os.Bundle
@@ -12,28 +12,24 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.monitoryourexpenses.expenses.R
-import com.monitoryourexpenses.expenses.data.UserRepository
 import com.monitoryourexpenses.expenses.database.ExpenseMonitorDataBase
-import com.monitoryourexpenses.expenses.databinding.RegisterationUserFragmentBinding
-import com.monitoryourexpenses.expenses.utilites.PrefManager
-import kotlinx.coroutines.ExperimentalCoroutinesApi
+import com.monitoryourexpenses.expenses.databinding.GetUserCurrencyFragmentBinding
 
 
-class RegisterationUserFragment : Fragment() {
+class GetUserCurrencyFragment : Fragment() {
 
-    private lateinit var binding: RegisterationUserFragmentBinding
+    private lateinit var binding: GetUserCurrencyFragmentBinding
 
-    @ExperimentalCoroutinesApi
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater,
-            R.layout.registeration_user_fragment,container,false)
+            R.layout.get_user_currency_fragment,container,false)
 
         val application = requireNotNull(this.activity).application
         val dataBase = ExpenseMonitorDataBase.getInstance(application).expenseMonitorDao
-        val viewModelFactory = RegisterationUserViewModelFactory(UserRepository(),dataBase,application)
+        val viewModelFactory = GetUserCurrencyViewModelFactory(dataBase,application)
 
         val viewModel = ViewModelProvider(this,viewModelFactory)
-            .get(RegisterationUserViewModel::class.java)
+            .get(GetUserCurrencyUserViewModel::class.java)
 
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
@@ -41,27 +37,17 @@ class RegisterationUserFragment : Fragment() {
         binding.spinner.setTitle(getString(R.string.search_select_currency))
         binding.spinner.setPositiveButton(getString(R.string.close))
 
-        binding.nameEditText.setText(PrefManager.getName(application))
-        binding.emailEditText.setText(PrefManager.getEmail(application))
-
 
         binding.nextButton.setOnClickListener {
-            viewModel.registerUser(binding.nameEditText.text.toString(),binding.emailEditText.text.toString())
+            viewModel.saveUserCurrency()
+            viewModel.genderSelected()
         }
 
         viewModel.genderSelected.observe(viewLifecycleOwner, Observer { isSelected ->
             if (!isSelected) {
-                Toast.makeText(context,getString(R.string.select_option),Toast.LENGTH_LONG).show()
-                viewModel.genderAlreadySelected()
+                Toast.makeText(context,getString(R.string.select_currency),Toast.LENGTH_LONG).show()
               }
         })
-
-        viewModel.errormsg.observe(viewLifecycleOwner, Observer {
-                if (it != null) {
-                    Toast.makeText(context,it,Toast.LENGTH_LONG).show()
-                    viewModel.onErrorMsgDisplayed()
-                }
-            })
 
         viewModel.navigateToNextScreen.observe(viewLifecycleOwner, Observer{
              if(it){
@@ -70,6 +56,7 @@ class RegisterationUserFragment : Fragment() {
                  viewModel.onNavigationCompleted()
              }
         })
+
         return  binding.root
     }
 }

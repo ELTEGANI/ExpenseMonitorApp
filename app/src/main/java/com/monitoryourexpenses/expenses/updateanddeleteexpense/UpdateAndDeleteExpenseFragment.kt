@@ -3,7 +3,6 @@ package com.monitoryourexpenses.expenses.updateanddeleteexpense
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +12,8 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.SearchView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
@@ -22,8 +23,6 @@ import androidx.recyclerview.selection.SelectionTracker
 import androidx.recyclerview.selection.StorageStrategy
 import com.monitoryourexpenses.expenses.R
 import com.monitoryourexpenses.expenses.adapters.*
-import com.monitoryourexpenses.expenses.data.ExpensesRepository
-import com.monitoryourexpenses.expenses.database.Categories
 import com.monitoryourexpenses.expenses.database.ExpenseMonitorDataBase
 import com.monitoryourexpenses.expenses.databinding.UpdateAndDeleteExpenseFragmentBinding
 import com.monitoryourexpenses.expenses.utilites.PrefManager
@@ -38,6 +37,9 @@ class UpdateAndDeleteExpenseFragment : Fragment() {
     private var tracker: SelectionTracker<Long>? = null
     var category:String? = null
 
+    private val _validationMsg = MutableLiveData<String>()
+    val validationMsg: LiveData<String>
+        get() = _validationMsg
 
     @ExperimentalCoroutinesApi
     @SuppressLint("SetTextI18n", "SimpleDateFormat")
@@ -54,7 +56,7 @@ class UpdateAndDeleteExpenseFragment : Fragment() {
 
 
         val viewModelFactory = expenseResponse?.let {
-            UpdateAndDeleteFragmentViewModelFactory(it,ExpensesRepository(),application,dataBase)
+            UpdateAndDeleteFragmentViewModelFactory(it,application,dataBase)
         }
 
 
@@ -87,30 +89,25 @@ class UpdateAndDeleteExpenseFragment : Fragment() {
 
 
         binding.updateExpenseButton.setOnClickListener {
-           viewModel.updateExpense(binding.uuidEditText.text.toString(),binding.amountEditText.text.toString(),
+           viewModel.updateExpense(expenseResponse?.expense_id.toString(),binding.amountEditText.text.toString(),
                binding.descriptionEditText.text.toString(),binding.dateEditText.text.toString(),category.toString())
         }
 
 
         binding.deleteExpenseButton.setOnClickListener {
-            viewModel.deleteExpense(binding.uuidEditText.text.toString())
+            viewModel.deleteExpense(expenseResponse?.expense_id.toString())
         }
 
         viewModel.validationMsg.observe(viewLifecycleOwner, Observer {
             if (it != null){
-                Toast.makeText(context,it,Toast.LENGTH_LONG).show()
+                Toast.makeText(context,it, Toast.LENGTH_LONG).show()
+                val navController = binding.root.findNavController()
+                navController.navigate(R.id.action_updateAndDeleteExpenseFragment_to_myExpenseFragment)
                 viewModel.onValidationErrorDisplayed()
             }
         })
 
-        viewModel.msgError.observe(viewLifecycleOwner, Observer {
-            if (it != null){
-                Toast.makeText(context,it, Toast.LENGTH_LONG).show()
-                val navController = binding.root.findNavController()
-                navController.navigate(R.id.action_updateAndDeleteExpenseFragment_to_myExpenseFragment)
-                viewModel.onMsgErrorDisplayed()
-            }
-        })
+
 
         viewModel.exceedsMessage.observe(viewLifecycleOwner, Observer {
             if (it != null){

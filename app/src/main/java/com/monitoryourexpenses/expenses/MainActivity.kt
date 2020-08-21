@@ -15,5 +15,7 @@ class MainActivity : AppCompatActivity() {
         AndroidThreeTen.init(this)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
+
     }
+
 }

@@ -14,9 +14,6 @@ data class Expenses(
     @PrimaryKey(autoGenerate = true)
     var expense_id: Int = 0,
 
-    @ColumnInfo(name = "id")
-    val id: String?,
-
     @ColumnInfo(name = "amount")
     val amount: BigDecimal?,
 
