@@ -28,11 +28,11 @@ interface ExpenseMonitorDao {
     @Query("SELECT SUM(amount) from expenses WHERE date between :startMonth and :endMonth and currency =:currency")
     fun retrieveSumationOfMonthExpense(startMonth:String,endMonth:String,currency:String): Flow<String>
 
-    @Query("DELETE FROM expenses WHERE id=:id")
+    @Query("DELETE FROM expenses WHERE expense_id=:id")
     suspend fun deleteExpenses(id:String)
 
     //update expense
-    @Query("UPDATE expenses SET amount=:amount,description=:description,expense_category=:expensecategory,date=:date WHERE id=:id")
+    @Query("UPDATE expenses SET amount=:amount,description=:description,expense_category=:expensecategory,date=:date WHERE expense_id=:id")
     suspend fun updateExpenses(id: String,amount:String,description:String,expensecategory:String,date:String)
 
     @Query("DELETE  FROM expenses WHERE date between :startMonth and :endMonth")

@@ -112,25 +112,14 @@ class PrefManager
         }
 
 
-        fun setLoggedIn(context: Context, isAuthenticated:Boolean){
+        fun setUserCurrency(context: Context?, hasCurrency:Boolean){
             val editor = getSharedPreferences(context)?.edit()
-            editor?.putBoolean("IS_USER_AUTHENTICATED",isAuthenticated)
+                editor?.putBoolean("IS_USER_CURRENCY",hasCurrency)
             editor?.apply()
         }
 
-        fun isLoggedIn(context: Context): Boolean? {
-            return getSharedPreferences(context)?.getBoolean("IS_USER_AUTHENTICATED",false)
-        }
-
-
-        fun setUserRegistered(context: Context?, isAuthenticated:Boolean){
-            val editor = getSharedPreferences(context)?.edit()
-                editor?.putBoolean("IS_USER_REGISTERED",isAuthenticated)
-            editor?.apply()
-        }
-
-        fun isRegistered(context: Context): Boolean? {
-            return getSharedPreferences(context)?.getBoolean("IS_USER_REGISTERED",false)
+        fun hasCurrency(context: Context): Boolean? {
+            return getSharedPreferences(context)?.getBoolean("IS_USER_CURRENCY",false)
         }
 
         fun clear(context: Context?){

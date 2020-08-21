@@ -46,7 +46,7 @@ class DurationsExpenseAdapter(private val expenseCategoryListener: ExpenseCatego
 
 class GetExpensesResponseDiffCallback:DiffUtil.ItemCallback<Expenses>(){
     override fun areItemsTheSame(oldItem: Expenses, newItem: Expenses): Boolean {
-        return oldItem.id == newItem.id
+        return oldItem.expense_id == newItem.expense_id
     }
     override fun areContentsTheSame(oldItem: Expenses, newItem: Expenses): Boolean {
         return oldItem == newItem

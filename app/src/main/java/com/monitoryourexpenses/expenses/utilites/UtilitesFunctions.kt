@@ -63,30 +63,3 @@ fun isConnected(): Boolean {
     return activeNetworkInfo != null && activeNetworkInfo.isConnectedOrConnecting
 }
 
- fun makeTextLink(textView: TextView, str: String, underlined: Boolean, color: Int?, action: (() -> Unit)? = null) {
-    val spannableString = SpannableString(textView.text)
-    val textColor = color ?: textView.currentTextColor
-    val clickableSpan = object : ClickableSpan() {
-        override fun onClick(textView: View) {
-            action?.invoke()
-        }
-        override fun updateDrawState(drawState: TextPaint) {
-            super.updateDrawState(drawState)
-            drawState.isUnderlineText = underlined
-            drawState.color = textColor
-        }
-    }
-    val index = spannableString.indexOf(str)
-    spannableString.setSpan(clickableSpan, index, index + str.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
-    textView.text = spannableString
-    textView.movementMethod = LinkMovementMethod.getInstance()
-    textView.highlightColor = Color.TRANSPARENT
-}
-
-object BigDecimalAdapter {
-    @FromJson
-    fun fromJson(string: String) = BigDecimal(string)
-
-    @ToJson
-    fun toJson(value: BigDecimal) = value.toString()
-}

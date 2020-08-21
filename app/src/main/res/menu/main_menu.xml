@@ -20,10 +20,5 @@
             android:id="@+id/action_setting"
             android:title="@string/setting"
             app:showAsAction="never"/>
-
-    <item
-            android:id="@+id/action_sign_out"
-            android:title="@string/signout"
-            app:showAsAction="never"/>
-
+    
 </menu>

@@ -1,4 +1,4 @@
-package com.monitoryourexpenses.expenses.createnewexpense
+package com.monitoryourexpenses.expenses.createexpense
 
 import android.app.Application
 import androidx.lifecycle.ViewModel

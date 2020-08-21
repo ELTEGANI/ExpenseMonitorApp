@@ -1,4 +1,4 @@
-package com.monitoryourexpenses.expenses.createnewexpense
+package com.monitoryourexpenses.expenses.createexpense
 
 
 import android.annotation.SuppressLint
@@ -76,19 +76,13 @@ class CreateNewExpenseFragment : Fragment() {
         viewModel.validationMsg.observe(viewLifecycleOwner, Observer { validationMsg->
             if (validationMsg != null){
                 Toast.makeText(context,validationMsg,Toast.LENGTH_LONG).show()
-                viewModel.onNoEmptyFields()
-            }
-        })
-
-
-        viewModel.responseMsg.observe(viewLifecycleOwner, Observer {
-            if (it != null){
-                Toast.makeText(context,it,Toast.LENGTH_LONG).show()
                 val navController = binding.root.findNavController()
                 navController.navigate(R.id.action_createNewExpenseFragment_to_myExpenseFragment)
-                viewModel.onResponseMsgDisplayed()
             }
         })
+
+
+
 
         viewModel.exceedsMessage.observe(viewLifecycleOwner, Observer {
             if (it != null){

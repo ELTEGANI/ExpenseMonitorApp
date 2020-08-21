@@ -202,4 +202,7 @@
     <string name="try_later">OOPs Failed Please Try Later</string>
     <string name="search_for_category">Search For Category</string>
     <string name="categoires_expense_content_descriptions">categoires_expense_content_descriptions</string>
+    <string name="logo_image_content_description">logo_image_content_description</string>
+    <string name="getting_started">Getting Started</string>
+    <string name="choose_your_currency">Choose Your Currency</string>
 </resources>
