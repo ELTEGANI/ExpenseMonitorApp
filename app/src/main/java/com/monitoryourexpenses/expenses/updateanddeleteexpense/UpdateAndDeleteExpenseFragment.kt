@@ -50,6 +50,9 @@ class UpdateAndDeleteExpenseFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater,R.layout.update_and_delete_expense_fragment,container,false)
 
 
+        //TODO validation for empty categories
+        //TODO prevent navigation from go back when empty
+
         val expenseResponse = arguments?.let {
             UpdateAndDeleteExpenseFragmentArgs.fromBundle(it).selectedExpense
         }
