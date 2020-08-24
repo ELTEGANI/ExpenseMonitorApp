@@ -5,6 +5,7 @@ import android.app.Activity
 import android.content.Intent
 import android.content.IntentSender
 import android.content.res.Configuration
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -13,23 +14,22 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
-import com.monitoryourexpenses.expenses.R
-import com.monitoryourexpenses.expenses.adapters.MONTH_EXPENSE_INDEX
-import com.monitoryourexpenses.expenses.adapters.PagerAdapter
-import com.monitoryourexpenses.expenses.adapters.TODAY_EXPENSE_INDEX
-import com.monitoryourexpenses.expenses.adapters.WEEK_EXPENSE_INDEX
-import com.monitoryourexpenses.expenses.database.ExpenseMonitorDataBase
-import com.monitoryourexpenses.expenses.databinding.MyExpenseFragmentBinding
-import com.monitoryourexpenses.expenses.utilites.*
+import com.github.mikephil.charting.components.Legend
+import com.github.mikephil.charting.data.PieData
+import com.github.mikephil.charting.data.PieDataSet
+import com.github.mikephil.charting.data.PieEntry
+import com.github.mikephil.charting.utils.EntryXComparator
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayoutMediator
 import com.google.android.play.core.appupdate.AppUpdateManager
@@ -39,8 +39,21 @@ import com.google.android.play.core.install.InstallStateUpdatedListener
 import com.google.android.play.core.install.model.AppUpdateType
 import com.google.android.play.core.install.model.InstallStatus
 import com.google.android.play.core.install.model.UpdateAvailability
+import com.monitoryourexpenses.expenses.R
+import com.monitoryourexpenses.expenses.adapters.MONTH_EXPENSE_INDEX
+import com.monitoryourexpenses.expenses.adapters.PagerAdapter
+import com.monitoryourexpenses.expenses.adapters.TODAY_EXPENSE_INDEX
+import com.monitoryourexpenses.expenses.adapters.WEEK_EXPENSE_INDEX
+import com.monitoryourexpenses.expenses.database.ExpenseMonitorDataBase
+import com.monitoryourexpenses.expenses.databinding.MyExpenseFragmentBinding
+import com.monitoryourexpenses.expenses.utilites.PrefManager
+import com.monitoryourexpenses.expenses.utilites.isConnected
+import kotlinx.android.synthetic.main.chart_bottom_sheets.*
+import kotlinx.android.synthetic.main.chart_bottom_sheets.view.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.threeten.bp.LocalDate
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class MyExpenseFragment : Fragment() {
@@ -136,6 +149,7 @@ class MyExpenseFragment : Fragment() {
             viewModel.onNavigatedToMyExpense()
         }
         })
+
 
         return binding.root
 
@@ -233,9 +247,11 @@ class MyExpenseFragment : Fragment() {
         inflater.inflate(R.menu.main_menu, menu)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem) =
-        when (item.itemId) {
-            R.id.menu_dark_mode->{
+
+   @ExperimentalCoroutinesApi
+   override fun onOptionsItemSelected(item: MenuItem): Boolean {
+    when (item.itemId) {
+         R.id.menu_dark_mode->{
                 val mode = if ((resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) ==
                     Configuration.UI_MODE_NIGHT_NO) {
                     AppCompatDelegate.MODE_NIGHT_YES
@@ -243,20 +259,20 @@ class MyExpenseFragment : Fragment() {
                     AppCompatDelegate.MODE_NIGHT_AUTO_BATTERY
                 }
                 AppCompatDelegate.setDefaultNightMode(mode)
-                true
             }
-            R.id.share_application->{
+         R.id.share_application->{
                 shareApp()
-                true
             }
-            R.id.action_setting->{
+         R.id.action_setting->{
                 val action = MyExpenseFragmentDirections.actionMyExpenseFragmentToSettingsFragment()
                 findNavController().navigate(action)
-                true
-            }
-
-            else -> false
+         }
+        R.id.report_currency->{
+            currenciesReportsDialog()
         }
+    }
+    return true
+  }
 
     private fun shareApp() {
         val sendIntent: Intent = Intent().apply {
@@ -271,5 +287,54 @@ class MyExpenseFragment : Fragment() {
         startActivity(shareIntent)
     }
 
+
+    @ExperimentalCoroutinesApi
+    private fun currenciesReportsDialog() {
+        val dialogBinding = DataBindingUtil
+            .inflate<ViewDataBinding>(LayoutInflater.from(context), R.layout.chart_bottom_sheets, null, false)
+        val dialog = context?.let { BottomSheetDialog(it) }
+        dialog?.setContentView(dialogBinding.root.rootView)
+        viewModel.sumationOfCurrencies.observe(viewLifecycleOwner, Observer {
+
+            val entries: MutableList<PieEntry> = ArrayList()
+            Collections.sort(entries, EntryXComparator())
+            it?.forEach { i ->
+                entries.add(PieEntry(i.amount.toFloat(),i.currency))
+            }
+            val pieDataSet = PieDataSet(entries, null)
+            pieDataSet.setColors(
+                intArrayOf(
+                    R.color.pruple,
+                    R.color.teal,
+                    R.color.cyan,
+                    R.color.green,
+                    R.color.gray,
+                    R.color.brown,
+                    R.color.lime,
+                    R.color.orange
+                ), context
+            )
+            val pieData = PieData(pieDataSet)
+            pieData.setValueTextSize(16f)
+            pieData.setValueTextColor(Color.BLACK)
+            dialogBinding.root.rootView.chart.isDrawHoleEnabled = true
+            dialogBinding.root.rootView.chart.transparentCircleRadius = 30f
+            dialogBinding.root.rootView.chart.holeRadius = 30f
+            dialogBinding.root.rootView.chart.setDrawCenterText(true)
+            dialogBinding.root.rootView.chart.description.isEnabled = false
+            dialogBinding.root.rootView.chart.legend.formSize = 16f
+            dialogBinding.root.rootView.chart.legend.textColor = Color.BLACK
+            dialogBinding.root.rootView.chart.legend.textSize = 16f
+            dialogBinding.root.rootView.chart.legend.form = Legend.LegendForm.CIRCLE
+            dialogBinding.root.rootView.chart.legend.xEntrySpace = 5f
+            dialogBinding.root.rootView.chart.legend.yEntrySpace = 5f
+            dialogBinding.root.rootView.chart.legend.isWordWrapEnabled = true
+            dialogBinding.root.rootView.chart.legend.horizontalAlignment = Legend.LegendHorizontalAlignment.CENTER
+            dialogBinding.root.rootView.chart.data = pieData
+            dialogBinding.root.rootView.chart.invalidate()
+
+        })
+        dialog?.show()
+    }
 
 }

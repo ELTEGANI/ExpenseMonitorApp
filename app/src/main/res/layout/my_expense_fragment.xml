@@ -99,7 +99,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:backgroundTint="?attr/colorPrimary"
-            app:navigationIcon="@drawable/ic_menu"
             style="@style/Widget.MaterialComponents.BottomAppBar.Colored"
             app:menu="@menu/main_menu"
          />

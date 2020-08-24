@@ -53,4 +53,7 @@ interface ExpenseMonitorDao {
     @Query("SELECT * from categories")
     fun selectAllCategories(): LiveData<List<Categories>>
 
+    @Query("select currency,SUM(amount) as amount from expenses GROUP BY currency")
+    fun selectSumationOfCurrencies(): LiveData<List<amountOfAllCurrencies>>
+
 }

@@ -20,5 +20,10 @@
             android:id="@+id/action_setting"
             android:title="@string/setting"
             app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/report_currency"
+        android:title="@string/report_currency"
+        app:showAsAction="never"/>
     
 </menu>
