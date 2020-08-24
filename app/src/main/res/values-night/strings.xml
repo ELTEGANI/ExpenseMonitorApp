@@ -11,4 +11,5 @@
     <string name="choose_your_currency">Choose Your Currency</string>
     <string name="report_about_currencies">Report About Currencies</string>
     <string name="report_currency">Report About Currencies</string>
+    <string name="no_expenses_found">There Are No Added Expenses Currently</string>
 </resources>

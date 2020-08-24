@@ -42,6 +42,8 @@ class CreateNewExpenseFragmentViewModel(val database: ExpenseMonitorDao,var appl
 
 
     fun createNewExpense(amount:String, description:String, date:String, category:String) {
+        //TODO validation for empty categories
+        //TODO prevent navigation from go back when empty
         if (amount.isEmpty() || description.isEmpty() || category.isEmpty()) {
             _validationMsg.value = context?.getString(R.string.fill_empty)
         } else {

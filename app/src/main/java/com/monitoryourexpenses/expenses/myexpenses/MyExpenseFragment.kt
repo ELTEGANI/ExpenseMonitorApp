@@ -295,45 +295,48 @@ class MyExpenseFragment : Fragment() {
         val dialog = context?.let { BottomSheetDialog(it) }
         dialog?.setContentView(dialogBinding.root.rootView)
         viewModel.sumationOfCurrencies.observe(viewLifecycleOwner, Observer {
-
-            val entries: MutableList<PieEntry> = ArrayList()
-            Collections.sort(entries, EntryXComparator())
-            it?.forEach { i ->
-                entries.add(PieEntry(i.amount.toFloat(),i.currency))
-            }
-            val pieDataSet = PieDataSet(entries, null)
-            pieDataSet.setColors(
-                intArrayOf(
-                    R.color.pruple,
-                    R.color.teal,
-                    R.color.cyan,
-                    R.color.green,
-                    R.color.gray,
-                    R.color.brown,
-                    R.color.lime,
-                    R.color.orange
-                ), context
-            )
-            val pieData = PieData(pieDataSet)
-            pieData.setValueTextSize(16f)
-            pieData.setValueTextColor(Color.BLACK)
-            dialogBinding.root.rootView.chart.isDrawHoleEnabled = true
-            dialogBinding.root.rootView.chart.transparentCircleRadius = 30f
-            dialogBinding.root.rootView.chart.holeRadius = 30f
-            dialogBinding.root.rootView.chart.setDrawCenterText(true)
-            dialogBinding.root.rootView.chart.description.isEnabled = false
-            dialogBinding.root.rootView.chart.legend.formSize = 16f
-            dialogBinding.root.rootView.chart.legend.textColor = Color.BLACK
-            dialogBinding.root.rootView.chart.legend.textSize = 16f
-            dialogBinding.root.rootView.chart.legend.form = Legend.LegendForm.CIRCLE
-            dialogBinding.root.rootView.chart.legend.xEntrySpace = 5f
-            dialogBinding.root.rootView.chart.legend.yEntrySpace = 5f
-            dialogBinding.root.rootView.chart.legend.isWordWrapEnabled = true
-            dialogBinding.root.rootView.chart.legend.horizontalAlignment = Legend.LegendHorizontalAlignment.CENTER
-            dialogBinding.root.rootView.chart.data = pieData
-            dialogBinding.root.rootView.chart.invalidate()
-
+         if(it != null){
+             val entries: MutableList<PieEntry> = ArrayList()
+             Collections.sort(entries, EntryXComparator())
+             it.forEach { i ->
+                 entries.add(PieEntry(i.amount.toFloat(),i.currency))
+             }
+             val pieDataSet = PieDataSet(entries, null)
+             pieDataSet.setColors(
+                 intArrayOf(
+                     R.color.pruple,
+                     R.color.teal,
+                     R.color.cyan,
+                     R.color.green,
+                     R.color.gray,
+                     R.color.brown,
+                     R.color.lime,
+                     R.color.orange
+                 ), context
+             )
+             val pieData = PieData(pieDataSet)
+             pieData.setValueTextSize(16f)
+             pieData.setValueTextColor(Color.BLACK)
+             dialogBinding.root.rootView.chart.isDrawHoleEnabled = true
+             dialogBinding.root.rootView.chart.transparentCircleRadius = 30f
+             dialogBinding.root.rootView.chart.holeRadius = 30f
+             dialogBinding.root.rootView.chart.setDrawCenterText(true)
+             dialogBinding.root.rootView.chart.description.isEnabled = false
+             dialogBinding.root.rootView.chart.legend.formSize = 16f
+             dialogBinding.root.rootView.chart.legend.textColor = Color.BLACK
+             dialogBinding.root.rootView.chart.legend.textSize = 16f
+             dialogBinding.root.rootView.chart.legend.form = Legend.LegendForm.CIRCLE
+             dialogBinding.root.rootView.chart.legend.xEntrySpace = 5f
+             dialogBinding.root.rootView.chart.legend.yEntrySpace = 5f
+             dialogBinding.root.rootView.chart.legend.isWordWrapEnabled = true
+             dialogBinding.root.rootView.chart.legend.horizontalAlignment = Legend.LegendHorizontalAlignment.CENTER
+             dialogBinding.root.rootView.chart.data = pieData
+             dialogBinding.root.rootView.chart.invalidate()
+         }else{
+          Toast.makeText(context,getString(R.string.no_expenses_found),Toast.LENGTH_LONG).show()
+         }
         })
+        //TODO validation when empty
         dialog?.show()
     }
 
