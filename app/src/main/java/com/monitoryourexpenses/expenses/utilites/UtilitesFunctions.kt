@@ -1,5 +1,6 @@
 package com.monitoryourexpenses.expenses.utilites
 
+import android.content.Context
 import android.content.Context.CONNECTIVITY_SERVICE
 import android.graphics.Color
 import android.net.ConnectivityManager
@@ -8,8 +9,10 @@ import android.text.Spanned
 import android.text.TextPaint
 import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
+import android.view.Gravity
 import android.view.View
 import android.widget.TextView
+import android.widget.Toast
 import androidx.preference.PreferenceManager
 import com.monitoryourexpenses.expenses.utilites.MyApp.Companion.context
 import com.squareup.moshi.FromJson
@@ -63,3 +66,8 @@ fun isConnected(): Boolean {
     return activeNetworkInfo != null && activeNetworkInfo.isConnectedOrConnecting
 }
 
+fun Context.toast(message: CharSequence) {
+    val toast = Toast.makeText(this, message, Toast.LENGTH_SHORT)
+    toast.setGravity(Gravity.BOTTOM, 0, 600)
+    toast.show()
+}

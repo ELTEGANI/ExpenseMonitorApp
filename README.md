@@ -31,9 +31,7 @@ Application is available here:
 
 ### Libraries & documentation
 - MVVM Architecture [DOCS](https://developer.android.com/jetpack/guide)
-- Retrofit [Docs](https://square.github.io/retrofit/)
 - Glide [Docs](https://bumptech.github.io/glide/)
-- Moshi [Docs](https://github.com/square/moshi)
 - Room [Docs](https://developer.android.com/jetpack/androidx/releases/room)
 - PlayCore [DOCS](https://developer.android.com/guide/playcore)
 - Preference [DOCS](https://developer.android.com/reference/android/preference/Preference)

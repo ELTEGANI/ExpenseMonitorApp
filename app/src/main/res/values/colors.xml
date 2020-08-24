@@ -21,4 +21,13 @@
     <color name="expensemonitor_black_900_alpha_087">#de000000</color>
     <color name="expensemonitor_black_900_alpha_060">#99000000</color>
 
+    <color name="pruple">#320b86</color>
+    <color name="teal">#52c7b8</color>
+    <color name="cyan">#008ba3</color>
+    <color name="green">#087f23</color>
+    <color name="brown">#4b2c20</color>
+    <color name="orange">#c41c00</color>
+    <color name="gray">#8d8d8d</color>
+    <color name="lime">#99aa00</color>
+
 </resources>

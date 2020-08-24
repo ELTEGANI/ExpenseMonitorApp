@@ -9,4 +9,6 @@
     <string name="logo_image_content_description">logo_image_content_description</string>
     <string name="getting_started">Getting Started</string>
     <string name="choose_your_currency">Choose Your Currency</string>
+    <string name="report_about_currencies">Report About Currencies</string>
+    <string name="report_currency">Report About Currencies</string>
 </resources>
