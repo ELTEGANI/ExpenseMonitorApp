@@ -63,7 +63,11 @@ class LocalRepository(private val database:ExpenseMonitorDao) {
         return database.selectAllCategories()
     }
 
-    fun selectSumationOfCurrencies(): LiveData<List<amountOfAllCurrencies>> {
+    fun selectSumationOfCurrencies(): LiveData<List<AllCurrencies>> {
         return database.selectSumationOfCurrencies()
+    }
+
+    fun selectSumationOfCatogries(startMonth: String,endMonth: String,currency:String): LiveData<List<AllCategories>> {
+        return database.selectSumationOfCategories(startMonth,endMonth,currency)
     }
 }

@@ -22,9 +22,12 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.github.mikephil.charting.components.Legend
-import com.github.mikephil.charting.data.PieData
-import com.github.mikephil.charting.data.PieDataSet
-import com.github.mikephil.charting.data.PieEntry
+import com.github.mikephil.charting.components.XAxis
+import com.github.mikephil.charting.data.*
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
+import com.github.mikephil.charting.formatter.PercentFormatter
+import com.github.mikephil.charting.interfaces.datasets.IBarDataSet
+import com.github.mikephil.charting.utils.ColorTemplate
 import com.github.mikephil.charting.utils.EntryXComparator
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -48,8 +51,8 @@ import com.monitoryourexpenses.expenses.database.ExpenseMonitorDataBase
 import com.monitoryourexpenses.expenses.databinding.MyExpenseFragmentBinding
 import com.monitoryourexpenses.expenses.utilites.PrefManager
 import com.monitoryourexpenses.expenses.utilites.isConnected
-import kotlinx.android.synthetic.main.chart_bottom_sheets.*
-import kotlinx.android.synthetic.main.chart_bottom_sheets.view.*
+import kotlinx.android.synthetic.main.barchart_bottom_sheets.view.*
+import kotlinx.android.synthetic.main.piechart_bottom_sheets.view.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.threeten.bp.LocalDate
 import java.util.*
@@ -268,7 +271,10 @@ class MyExpenseFragment : Fragment() {
                 findNavController().navigate(action)
          }
         R.id.report_currency->{
-            currenciesReportsDialog()
+           currenciesReportsDialog()
+        }
+        R.id.report_category->{
+            categoriesReportsDialog()
         }
     }
     return true
@@ -289,55 +295,97 @@ class MyExpenseFragment : Fragment() {
 
 
     @ExperimentalCoroutinesApi
-    private fun currenciesReportsDialog() {
+    private fun categoriesReportsDialog() {
         val dialogBinding = DataBindingUtil
-            .inflate<ViewDataBinding>(LayoutInflater.from(context), R.layout.chart_bottom_sheets, null, false)
+            .inflate<ViewDataBinding>(LayoutInflater.from(context), R.layout.piechart_bottom_sheets, null, false)
         val dialog = context?.let { BottomSheetDialog(it) }
         dialog?.setContentView(dialogBinding.root.rootView)
-        viewModel.sumationOfCurrencies.observe(viewLifecycleOwner, Observer {
-         if(it != null){
+        viewModel.sumationOfCategories?.observe(viewLifecycleOwner, Observer {
              val entries: MutableList<PieEntry> = ArrayList()
              Collections.sort(entries, EntryXComparator())
              it.forEach { i ->
-                 entries.add(PieEntry(i.amount.toFloat(),i.currency))
+                 entries.add(PieEntry(i.amount.toFloat(),i.expense_category))
              }
-             val pieDataSet = PieDataSet(entries, null)
-             pieDataSet.setColors(
-                 intArrayOf(
-                     R.color.pruple,
-                     R.color.teal,
-                     R.color.cyan,
-                     R.color.green,
-                     R.color.gray,
-                     R.color.brown,
-                     R.color.lime,
-                     R.color.orange
-                 ), context
-             )
+            val pieDataSet = PieDataSet(entries, null)
+            pieDataSet.setColors(*ColorTemplate.COLORFUL_COLORS)
+            pieDataSet.yValuePosition = PieDataSet.ValuePosition.OUTSIDE_SLICE
+            pieDataSet.valueLinePart1OffsetPercentage = 15f
+            pieDataSet.valueLinePart1Length = 0.1f
+            pieDataSet.valueLinePart2Length = 0.1f
+            pieDataSet.valueTextColor = Color.BLACK
+            pieDataSet.xValuePosition = PieDataSet.ValuePosition.OUTSIDE_SLICE
              val pieData = PieData(pieDataSet)
-             pieData.setValueTextSize(16f)
+             pieData.setValueTextSize(14f)
              pieData.setValueTextColor(Color.BLACK)
-             dialogBinding.root.rootView.chart.isDrawHoleEnabled = true
-             dialogBinding.root.rootView.chart.transparentCircleRadius = 30f
-             dialogBinding.root.rootView.chart.holeRadius = 30f
-             dialogBinding.root.rootView.chart.setDrawCenterText(true)
-             dialogBinding.root.rootView.chart.description.isEnabled = false
-             dialogBinding.root.rootView.chart.legend.formSize = 16f
-             dialogBinding.root.rootView.chart.legend.textColor = Color.BLACK
-             dialogBinding.root.rootView.chart.legend.textSize = 16f
-             dialogBinding.root.rootView.chart.legend.form = Legend.LegendForm.CIRCLE
-             dialogBinding.root.rootView.chart.legend.xEntrySpace = 5f
-             dialogBinding.root.rootView.chart.legend.yEntrySpace = 5f
-             dialogBinding.root.rootView.chart.legend.isWordWrapEnabled = true
-             dialogBinding.root.rootView.chart.legend.horizontalAlignment = Legend.LegendHorizontalAlignment.CENTER
-             dialogBinding.root.rootView.chart.data = pieData
-             dialogBinding.root.rootView.chart.invalidate()
-         }else{
-          Toast.makeText(context,getString(R.string.no_expenses_found),Toast.LENGTH_LONG).show()
-         }
+             dialogBinding.root.rootView.pie_chart.setEntryLabelColor(Color.BLACK)
+             dialogBinding.root.rootView.pie_chart.isDrawHoleEnabled = false
+             dialogBinding.root.rootView.pie_chart.transparentCircleRadius = 5f
+             dialogBinding.root.rootView.pie_chart.holeRadius = 5f
+             dialogBinding.root.rootView.pie_chart.setCenterTextSize(5f)
+             dialogBinding.root.rootView.pie_chart.setDrawCenterText(true)
+             dialogBinding.root.rootView.pie_chart.description.isEnabled = false
+             dialogBinding.root.rootView.pie_chart.legend.formSize = 16f
+             dialogBinding.root.rootView.pie_chart.legend.textColor = Color.BLACK
+             dialogBinding.root.rootView.pie_chart.legend.textSize = 16f
+             dialogBinding.root.rootView.pie_chart.legend.form = Legend.LegendForm.CIRCLE
+             dialogBinding.root.rootView.pie_chart.legend.xEntrySpace = 3f
+             dialogBinding.root.rootView.pie_chart.legend.yEntrySpace = 3f
+             dialogBinding.root.rootView.pie_chart.legend.isWordWrapEnabled = true
+             dialogBinding.root.rootView.pie_chart.data = pieData
+             dialogBinding.root.rootView.pie_chart.invalidate()
         })
-        //TODO validation when empty
         dialog?.show()
     }
+
+
+    @ExperimentalCoroutinesApi
+    private fun currenciesReportsDialog() {
+        val dialogBinding = DataBindingUtil
+            .inflate<ViewDataBinding>(LayoutInflater.from(context), R.layout.barchart_bottom_sheets, null, false)
+        val dialog = context?.let { BottomSheetDialog(it) }
+        dialog?.setContentView(dialogBinding.root.rootView)
+        viewModel.sumationOfCurrencies.observe(viewLifecycleOwner,Observer{currenciesAndAmount->
+            val barEntries: MutableList<BarEntry> = ArrayList()
+            val currenciesList: ArrayList<String> = ArrayList()
+            for (i in currenciesAndAmount.indices) {
+                barEntries.add(BarEntry(i.toFloat(),currenciesAndAmount[i].amount.toFloat()))
+                currenciesList.add(currenciesAndAmount[i].currency)
+            }
+            val barDataSet = BarDataSet(barEntries, "Currencies")
+            barDataSet.setColors(*ColorTemplate.COLORFUL_COLORS)
+            barDataSet.setDrawValues(true)
+            val dataSets: ArrayList<IBarDataSet> = ArrayList()
+            dataSets.add(barDataSet)
+                val barData = BarData(dataSets)
+                dialogBinding.root.rootView.bar_chart.data = barData
+                dialogBinding.root.rootView.bar_chart.xAxis.granularity = 1f
+                dialogBinding.root.rootView.bar_chart.xAxis.isGranularityEnabled = true
+                dialogBinding.root.rootView.bar_chart.xAxis.valueFormatter =
+                    IndexAxisValueFormatter(currenciesList)
+            dialogBinding.root.rootView.bar_chart.description.isEnabled = false
+            dialogBinding.root.rootView.bar_chart.xAxis.setDrawGridLines(true)
+            dialogBinding.root.rootView.bar_chart.setPinchZoom(false)
+            dialogBinding.root.rootView.bar_chart.setDrawBarShadow(false)
+            dialogBinding.root.rootView.bar_chart.setDrawGridBackground(false)
+            dialogBinding.root.rootView.bar_chart.xAxis.setDrawGridLines(false)
+            dialogBinding.root.rootView.bar_chart.axisLeft.setDrawGridLines(false)
+            dialogBinding.root.rootView.bar_chart.axisRight.setDrawGridLines(false)
+            dialogBinding.root.rootView.bar_chart.axisRight.isEnabled = false
+            dialogBinding.root.rootView.bar_chart.axisLeft.isEnabled = true
+            dialogBinding.root.rootView.bar_chart.legend.isEnabled = true
+            dialogBinding.root.rootView.bar_chart.legend.form = Legend.LegendForm.SQUARE
+            dialogBinding.root.rootView.bar_chart.axisRight.setDrawLabels(true)
+            dialogBinding.root.rootView.bar_chart.axisLeft.setDrawLabels(true)
+            dialogBinding.root.rootView.bar_chart.setTouchEnabled(false)
+            dialogBinding.root.rootView.bar_chart.isDoubleTapToZoomEnabled = false
+            dialogBinding.root.rootView.bar_chart.xAxis.isEnabled = true
+            dialogBinding.root.rootView.bar_chart.xAxis.position = XAxis.XAxisPosition.BOTH_SIDED
+            dialogBinding.root.rootView.bar_chart.invalidate()
+
+
+        })
+        dialog?.show()
+    }
+
 
 }

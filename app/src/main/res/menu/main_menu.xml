@@ -9,21 +9,21 @@
         android:title="@string/share_application"
         android:icon="@drawable/ic_share"
         app:showAsAction="ifRoom"/>
-
     <item
         android:id="@+id/menu_dark_mode"
         android:title="@string/dark_mode"
         android:icon="@drawable/ic_moon"
         app:showAsAction="ifRoom"/>
-
     <item
-            android:id="@+id/action_setting"
-            android:title="@string/setting"
-            app:showAsAction="never"/>
-
+        android:id="@+id/report_category"
+        android:title="@string/report_about_categories"
+        app:showAsAction="never"/>
     <item
         android:id="@+id/report_currency"
         android:title="@string/report_currency"
         app:showAsAction="never"/>
-    
+    <item
+            android:id="@+id/action_setting"
+            android:title="@string/setting"
+            app:showAsAction="never"/>
 </menu>

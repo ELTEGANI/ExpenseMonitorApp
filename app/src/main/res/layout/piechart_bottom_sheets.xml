@@ -7,10 +7,9 @@
             android:id="@+id/bottom_sheet_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?attr/colorSurface"
             android:padding="12dp"
             app:behavior_hideable="false"
-            app:behavior_peekHeight="100dp"
+            app:behavior_peekHeight="500dp"
             app:layout_behavior="android.support.design.widget.BottomSheetBehavior">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -22,7 +21,7 @@
                 app:layout_constraintTop_toTopOf="parent">
 
             <com.github.mikephil.charting.charts.PieChart
-                    android:id="@+id/chart"
+                    android:id="@+id/pie_chart"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
 
