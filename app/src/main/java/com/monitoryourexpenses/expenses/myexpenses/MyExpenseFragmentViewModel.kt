@@ -1,14 +1,14 @@
 package com.monitoryourexpenses.expenses.myexpenses
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.monitoryourexpenses.expenses.database.AllCategories
 import com.monitoryourexpenses.expenses.database.ExpenseMonitorDao
 import com.monitoryourexpenses.expenses.database.LocalRepository
-import com.monitoryourexpenses.expenses.database.amountOfAllCurrencies
+import com.monitoryourexpenses.expenses.database.AllCurrencies
 import com.monitoryourexpenses.expenses.utilites.*
 import com.monitoryourexpenses.expenses.utilites.MyApp.Companion.context
 import kotlinx.coroutines.*
@@ -39,8 +39,21 @@ class MyExpenseFragmentViewModel(val database:ExpenseMonitorDao, application: Ap
     val monthExpense : LiveData<String>
         get() = _monthExpense
 
-    val sumationOfCurrencies: LiveData<List<amountOfAllCurrencies>> =
+    val sumationOfCurrencies: LiveData<List<AllCurrencies>> =
         localRepository.selectSumationOfCurrencies()
+
+    val sumationOfCategories: LiveData<List<AllCategories>>? =
+        PrefManager.getEndOfTheMonth(application)?.let {startEndTheMonth->
+            PrefManager.getStartOfTheMonth(application)?.let { startOfTheMonth ->
+              PrefManager.getCurrency(application)?.let {currency->
+                  localRepository.selectSumationOfCatogries(
+                      startOfTheMonth,
+                      startEndTheMonth,
+                      currency
+                      )
+              }
+            }
+        }
 
     init {
         viewModelScope.launch {

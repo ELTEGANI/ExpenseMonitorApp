@@ -12,4 +12,5 @@
     <string name="report_about_currencies">Report About Currencies</string>
     <string name="report_currency">Report About Currencies</string>
     <string name="no_expenses_found">There Are No Added Expenses Currently</string>
+    <string name="report_about_categories">Report About Categories</string>
 </resources>

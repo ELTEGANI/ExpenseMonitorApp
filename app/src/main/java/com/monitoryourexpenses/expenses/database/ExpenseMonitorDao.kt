@@ -54,6 +54,9 @@ interface ExpenseMonitorDao {
     fun selectAllCategories(): LiveData<List<Categories>>
 
     @Query("select currency,SUM(amount) as amount from expenses GROUP BY currency")
-    fun selectSumationOfCurrencies(): LiveData<List<amountOfAllCurrencies>>
+    fun selectSumationOfCurrencies(): LiveData<List<AllCurrencies>>
+
+    @Query("select expense_category,SUM(amount) as amount from expenses WHERE date BETWEEN :startMonth AND :endMonth AND currency =:currency GROUP BY expense_category")
+    fun selectSumationOfCategories(startMonth: String,endMonth: String,currency:String): LiveData<List<AllCategories>>
 
 }
