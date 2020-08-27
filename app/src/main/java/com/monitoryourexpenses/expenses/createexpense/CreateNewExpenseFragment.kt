@@ -84,14 +84,11 @@ class CreateNewExpenseFragment : Fragment() {
         })
 
 
-        viewModel.makeSelection.observe(viewLifecycleOwner, Observer { shouldNavigate->
-            if (!shouldNavigate){
+        viewModel.makeSelection.observe(viewLifecycleOwner, Observer { isSelected->
+            if (!isSelected){
                 context?.toast(getString(R.string.select_category))
                 }
         })
-
-
-
 
         viewModel.exceedsMessage.observe(viewLifecycleOwner, Observer {
             if (it != null){

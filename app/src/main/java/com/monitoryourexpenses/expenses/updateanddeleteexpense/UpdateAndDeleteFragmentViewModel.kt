@@ -10,7 +10,6 @@ import com.monitoryourexpenses.expenses.R
 import com.monitoryourexpenses.expenses.database.ExpenseMonitorDao
 import com.monitoryourexpenses.expenses.database.Expenses
 import com.monitoryourexpenses.expenses.database.LocalRepository
-import com.monitoryourexpenses.expenses.utilites.MyApp.Companion.context
 import com.monitoryourexpenses.expenses.utilites.PrefManager
 import kotlinx.coroutines.*
 
@@ -24,17 +23,19 @@ class UpdateAndDeleteFragmentViewModel(val expenses: Expenses, application: Appl
     val selectedExpenseMsg :LiveData<Expenses>
         get() = _selectedExpense
 
-
-    private val _validationMsg = MutableLiveData<String>()
-    val validationMsg: LiveData<String>
+    private val _validationMsg = MutableLiveData<Boolean>()
+    val validationMsg: LiveData<Boolean>
         get() = _validationMsg
+
+    private val _isExpenseDeleted = MutableLiveData<Boolean>()
+    val isExpenseDeleted: LiveData<Boolean>
+        get() = _isExpenseDeleted
 
     private val _exceedsMessage = MutableLiveData<String>()
     val exceedsMessage: LiveData<String>
         get() = _exceedsMessage
 
     val currentDate = MutableLiveData<String>()
-
 
     init {
         _selectedExpense.value = expenses
@@ -45,17 +46,15 @@ class UpdateAndDeleteFragmentViewModel(val expenses: Expenses, application: Appl
     fun deleteExpense(expenseId:String){
         viewModelScope.launch {
             localRepository.deleteExpneseUsingId(expenseId)
-            _validationMsg.value = context?.getString(R.string.expense_deleted_successfuly)
+            _isExpenseDeleted.value = true
         }
     }
 
 
 
-    fun updateExpense(expenseId:String, newAmount:String, description:String, date:String, category:String){
-        if(description.isEmpty() || date.isEmpty() || category.isEmpty()){
-            _validationMsg.value =  context?.getString(R.string.fill_empty)
-        }else if(category == application.getString(R.string.SelectCategory)){
-            _validationMsg.value = context?.getString(R.string.select_category)
+    fun updateExpense(expenseId:String,amount:String, description:String, date:String, category:String){
+        if(description.isEmpty() || date.isEmpty() || amount.isEmpty()){
+            _validationMsg.value =  false
         }else{
             viewModelScope.launch {
                 if (localRepository.sumationOfSpecifiedExpenses(
@@ -67,20 +66,17 @@ class UpdateAndDeleteFragmentViewModel(val expenses: Expenses, application: Appl
                     viewModelScope.launch {
                         localRepository.updateExpenseUsingId(
                             expenseId,
-                            newAmount,
+                            amount,
                             description,
                             category,
                             date
                         )
-                        _validationMsg.value =  context?.getString(R.string.update_expense)
+                        _validationMsg.value =  true
                     }
                 }
             }
         }
     }
 
-    fun onValidationErrorDisplayed(){
-        _validationMsg.value = null
-    }
 
 }

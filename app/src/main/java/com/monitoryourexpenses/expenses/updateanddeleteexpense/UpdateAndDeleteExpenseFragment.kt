@@ -26,6 +26,7 @@ import com.monitoryourexpenses.expenses.adapters.*
 import com.monitoryourexpenses.expenses.database.ExpenseMonitorDataBase
 import com.monitoryourexpenses.expenses.databinding.UpdateAndDeleteExpenseFragmentBinding
 import com.monitoryourexpenses.expenses.utilites.PrefManager
+import com.monitoryourexpenses.expenses.utilites.toast
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import java.text.SimpleDateFormat
 import java.util.*
@@ -35,11 +36,6 @@ class UpdateAndDeleteExpenseFragment : Fragment() {
 
     private lateinit var binding: UpdateAndDeleteExpenseFragmentBinding
     private var tracker: SelectionTracker<Long>? = null
-    var category:String? = null
-
-    private val _validationMsg = MutableLiveData<String>()
-    val validationMsg: LiveData<String>
-        get() = _validationMsg
 
     @ExperimentalCoroutinesApi
     @SuppressLint("SetTextI18n", "SimpleDateFormat")
@@ -49,28 +45,21 @@ class UpdateAndDeleteExpenseFragment : Fragment() {
         val dataBase = ExpenseMonitorDataBase.getInstance(application).expenseMonitorDao
         binding = DataBindingUtil.inflate(inflater,R.layout.update_and_delete_expense_fragment,container,false)
 
-
-        //TODO validation for empty categories
-        //TODO prevent navigation from go back when empty
-
         val expenseResponse = arguments?.let {
             UpdateAndDeleteExpenseFragmentArgs.fromBundle(it).selectedExpense
         }
-
 
         val viewModelFactory = expenseResponse?.let {
             UpdateAndDeleteFragmentViewModelFactory(it,application,dataBase)
         }
 
-
         val viewModel = ViewModelProviders.of(this,viewModelFactory)
             .get(UpdateAndDeleteFragmentViewModel::class.java)
-
-
 
         binding.viewModel = viewModel
         binding.lifecycleOwner =  this
 
+        var category = expenseResponse?.expenseCategory.toString()
 
         binding.dateButton.setOnClickListener {
             val c = Calendar.getInstance()
@@ -93,7 +82,7 @@ class UpdateAndDeleteExpenseFragment : Fragment() {
 
         binding.updateExpenseButton.setOnClickListener {
            viewModel.updateExpense(expenseResponse?.expense_id.toString(),binding.amountEditText.text.toString(),
-               binding.descriptionEditText.text.toString(),binding.dateEditText.text.toString(),category.toString())
+               binding.descriptionEditText.text.toString(),binding.dateEditText.text.toString(),category)
         }
 
 
@@ -101,16 +90,24 @@ class UpdateAndDeleteExpenseFragment : Fragment() {
             viewModel.deleteExpense(expenseResponse?.expense_id.toString())
         }
 
-        viewModel.validationMsg.observe(viewLifecycleOwner, Observer {
-            if (it != null){
-                Toast.makeText(context,it, Toast.LENGTH_LONG).show()
+        viewModel.validationMsg.observe(viewLifecycleOwner, Observer {shouldNavigation->
+            if (shouldNavigation){
+                context?.toast(getString(R.string.update_expense))
                 val navController = binding.root.findNavController()
                 navController.navigate(R.id.action_updateAndDeleteExpenseFragment_to_myExpenseFragment)
-                viewModel.onValidationErrorDisplayed()
+            }else{
+                context?.toast(getString(R.string.fill_empty))
             }
         })
 
 
+        viewModel.isExpenseDeleted.observe(viewLifecycleOwner, Observer { isDeleted->
+            if (isDeleted){
+                context?.toast(getString(R.string.expense_deleted_successfuly))
+                val navController = binding.root.findNavController()
+                navController.navigate(R.id.action_updateAndDeleteExpenseFragment_to_myExpenseFragment)
+            }
+        })
 
         viewModel.exceedsMessage.observe(viewLifecycleOwner, Observer {
             if (it != null){
@@ -133,16 +130,14 @@ class UpdateAndDeleteExpenseFragment : Fragment() {
                                 sharedPreferences.putString("exceed_expense",userInput.text.toString())
                                 sharedPreferences.apply()
                             }else{
-                                Toast.makeText(context,getString(R.string.enter_fixed_expense),Toast.LENGTH_LONG).show()
+                                context?.toast(getString(R.string.enter_fixed_expense))
                             }
 
                         }
                         ?.setNegativeButton(getString(R.string.close)) { _, id ->
                             dialog.cancel()
                         }
-                    // create alert dialog
                     val alertDialog = alertDialogBuilder?.create()
-                    // show it
                     alertDialog?.show()
                 }
                 builder?.setNegativeButton(getString(R.string.cancel_fixed_expense)){ dialog, which ->

@@ -85,4 +85,5 @@ class CreateNewExpenseFragmentViewModel(val database: ExpenseMonitorDao,var appl
             localRepository.insertNewCategory(listOf(category))
         }
     }
+
 }
