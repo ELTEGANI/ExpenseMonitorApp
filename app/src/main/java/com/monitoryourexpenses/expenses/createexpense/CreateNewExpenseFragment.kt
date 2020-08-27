@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.view.*
 import android.view.LayoutInflater
 import android.widget.EditText
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
@@ -26,6 +25,7 @@ import com.monitoryourexpenses.expenses.database.Categories
 import com.monitoryourexpenses.expenses.database.ExpenseMonitorDataBase
 import com.monitoryourexpenses.expenses.databinding.CreateNewExpenseFragmentBinding
 import com.monitoryourexpenses.expenses.utilites.PrefManager
+import com.monitoryourexpenses.expenses.utilites.toast
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import java.text.SimpleDateFormat
 import java.util.*
@@ -36,7 +36,7 @@ class CreateNewExpenseFragment : Fragment() {
     private lateinit var binding: CreateNewExpenseFragmentBinding
     lateinit var viewModel: CreateNewExpenseFragmentViewModel
     private var tracker: SelectionTracker<Long>? = null
-    var category:String? = null
+    var category = ""
 
     @ExperimentalCoroutinesApi
     @SuppressLint("SimpleDateFormat")
@@ -73,12 +73,21 @@ class CreateNewExpenseFragment : Fragment() {
             datePickerDialog?.show()
         }
 
-        viewModel.validationMsg.observe(viewLifecycleOwner, Observer { validationMsg->
-            if (validationMsg != null){
-                Toast.makeText(context,validationMsg,Toast.LENGTH_LONG).show()
+        viewModel.validationMsg.observe(viewLifecycleOwner, Observer { shouldNavigate->
+            if (shouldNavigate){
+                context?.toast(getString(R.string.expense_created_successfuly))
                 val navController = binding.root.findNavController()
                 navController.navigate(R.id.action_createNewExpenseFragment_to_myExpenseFragment)
+            }else{
+                context?.toast(getString(R.string.fill_empty))
             }
+        })
+
+
+        viewModel.makeSelection.observe(viewLifecycleOwner, Observer { shouldNavigate->
+            if (!shouldNavigate){
+                context?.toast(getString(R.string.select_category))
+                }
         })
 
 
@@ -103,7 +112,7 @@ class CreateNewExpenseFragment : Fragment() {
                                 sharedPreferences.putString("exceed_expense",userInput.text.toString())
                                 sharedPreferences.apply()
                             }else{
-                                Toast.makeText(context,getString(R.string.enter_fixed_expense),Toast.LENGTH_LONG).show()
+                                context?.toast(getString(R.string.enter_fixed_expense))
                             }
                         }
                         ?.setNegativeButton(getString(R.string.close)) { _, id ->
@@ -164,7 +173,7 @@ class CreateNewExpenseFragment : Fragment() {
 
         binding.createNewExpenseButton.setOnClickListener {
                 viewModel.createNewExpense(binding.expenseAmountTextView.text.toString(),binding.expenseDescriptionTextView.text.toString(),
-                    binding.expenseDateTextView.text.toString(),category.toString())
+                    binding.expenseDateTextView.text.toString(),category)
 
         }
 

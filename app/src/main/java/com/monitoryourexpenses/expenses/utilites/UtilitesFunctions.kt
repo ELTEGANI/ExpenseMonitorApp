@@ -67,7 +67,7 @@ fun isConnected(): Boolean {
 }
 
 fun Context.toast(message: CharSequence) {
-    val toast = Toast.makeText(this, message, Toast.LENGTH_SHORT)
+    val toast = Toast.makeText(this, message, Toast.LENGTH_LONG)
     toast.setGravity(Gravity.BOTTOM, 0, 600)
     toast.show()
 }
