@@ -145,7 +145,7 @@ class CreateNewExpenseFragment : Fragment() {
         binding.categoryList.adapter = adapter
         viewModel.categories.observe(viewLifecycleOwner, Observer {
             it?.let {
-                adapter.addList(it)
+                adapter.addList(it.reversed())
             }
         })
 
@@ -198,7 +198,11 @@ class CreateNewExpenseFragment : Fragment() {
         builder?.setView(customLayout)
         builder?.setPositiveButton(getString(R.string.ok)) { _, _ ->
             val editText: EditText = customLayout.findViewById(R.id.editTextTextNewCategory)
-            viewModel.addNewCategory(Categories(id = null,CategoryName =  editText.text.toString()))
+            if (editText.text.toString().isNotEmpty()){
+                viewModel.addNewCategory(Categories(id = null,CategoryName =  editText.text.toString()))
+            }else{
+                context?.toast(getString(R.string.select_category))
+            }
         }
         builder?.setNegativeButton(getString(R.string.close_categories)){ dialogInterface, _ ->
            dialogInterface.dismiss()

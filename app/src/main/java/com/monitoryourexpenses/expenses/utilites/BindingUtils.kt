@@ -224,7 +224,7 @@ fun ImageView.setCategoryImage(category: Categories?) {
             context.getString(R.string.Carpayment) -> R.drawable.ic_car_outline
             context.getString(R.string.Electricity) -> R.drawable.ic_flash
             context.getString(R.string.Invoices) -> R.drawable.ic_receipt
-            else -> R.drawable.ic_launcher
+            else -> R.drawable.new_category
         })
     }
 }
