@@ -91,7 +91,6 @@ class GetUserCurrencyUserViewModel(var database: ExpenseMonitorDao, var applicat
             Categories(null,context?.getString(R.string.Carpayment)),
             Categories(null,context?.getString(R.string.Electricity)),
             Categories(null,context?.getString(R.string.Invoices)))
-
         localRepository.insertNewCategory(listOfCategories)
     }
 

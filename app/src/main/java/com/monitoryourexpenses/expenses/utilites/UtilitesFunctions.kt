@@ -47,7 +47,6 @@ fun expenseAmountFormatter(amount: String?): String {
     }else{
         return "0"
     }
-
 }
 
 fun saveCurrencyForSettings(selectedCurrency:String){
@@ -56,8 +55,6 @@ fun saveCurrencyForSettings(selectedCurrency:String){
     editor.putString("userCurrency",selectedCurrency)
     editor.apply()
 }
-
-
 
 fun isConnected(): Boolean {
     val connectivityManager =

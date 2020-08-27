@@ -163,7 +163,7 @@ class UpdateAndDeleteExpenseFragment : Fragment() {
         binding.categoryList.adapter = adapter
         viewModel.categories.observe(viewLifecycleOwner, Observer {
             it?.let {
-                adapter.addList(it)
+                adapter.addList(it.reversed())
             }
         })
 
