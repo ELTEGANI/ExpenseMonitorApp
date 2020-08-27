@@ -32,9 +32,13 @@ class CreateNewExpenseFragmentViewModel(val database: ExpenseMonitorDao,var appl
     }
 
 
-    private val _validationMsg = MutableLiveData<String>()
-    val validationMsg: LiveData<String>
+    private val _validationMsg = MutableLiveData<Boolean>()
+    val validationMsg: LiveData<Boolean>
         get() = _validationMsg
+
+    private val _makeSelection = MutableLiveData<Boolean>()
+    val makeSelection: LiveData<Boolean>
+        get() = _makeSelection
 
     private val _exceedsMessage = MutableLiveData<String>()
     val exceedsMessage: LiveData<String>
@@ -42,11 +46,11 @@ class CreateNewExpenseFragmentViewModel(val database: ExpenseMonitorDao,var appl
 
 
     fun createNewExpense(amount:String, description:String, date:String, category:String) {
-        //TODO validation for empty categories
-        //TODO prevent navigation from go back when empty
-        if (amount.isEmpty() || description.isEmpty() || category.isEmpty()) {
-            _validationMsg.value = context?.getString(R.string.fill_empty)
-        } else {
+        if (amount.isEmpty() || description.isEmpty()) {
+            _validationMsg.value = false
+        }else if(category.isEmpty()){
+            _makeSelection.value = false
+        } else{
             viewModelScope.launch {
                 if (localRepository.sumationOfSpecifiedExpenses(
                         PrefManager.getCurrency(application).toString()
@@ -70,7 +74,7 @@ class CreateNewExpenseFragmentViewModel(val database: ExpenseMonitorDao,var appl
                         )
                         Log.d("res",res.toString())
                     }
-                    _validationMsg.value = context?.getString(R.string.expense_created_successfuly)
+                    _validationMsg.value = true
                 }
             }
         }

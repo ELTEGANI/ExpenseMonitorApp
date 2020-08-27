@@ -381,8 +381,6 @@ class MyExpenseFragment : Fragment() {
             dialogBinding.root.rootView.bar_chart.xAxis.isEnabled = true
             dialogBinding.root.rootView.bar_chart.xAxis.position = XAxis.XAxisPosition.BOTH_SIDED
             dialogBinding.root.rootView.bar_chart.invalidate()
-
-
         })
         dialog?.show()
     }
