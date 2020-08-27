@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 
+
 <PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:android="http://schemas.android.com/apk/res/android">
-
     <PreferenceCategory
             app:title="@string/general_settings">
         <ListPreference

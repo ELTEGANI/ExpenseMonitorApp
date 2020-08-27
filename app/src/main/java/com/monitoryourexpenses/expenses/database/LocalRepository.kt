@@ -32,11 +32,6 @@ class LocalRepository(private val database:ExpenseMonitorDao) {
     }
 
 
-    suspend fun clearMonthExpenses(startMonth: String,endMonth: String){
-       database.clearAllMonthExpenses(startMonth,endMonth)
-    }
-
-
     suspend fun deleteExpneseUsingId(id:String){
         database.deleteExpenses(id)
     }

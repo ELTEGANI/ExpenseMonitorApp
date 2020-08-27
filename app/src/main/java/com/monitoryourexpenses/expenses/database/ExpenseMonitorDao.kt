@@ -35,8 +35,6 @@ interface ExpenseMonitorDao {
     @Query("UPDATE expenses SET amount=:amount,description=:description,expense_category=:expensecategory,date=:date WHERE expense_id=:id")
     suspend fun updateExpenses(id: String,amount:String,description:String,expensecategory:String,date:String)
 
-    @Query("DELETE  FROM expenses WHERE date between :startMonth and :endMonth")
-    suspend fun clearAllMonthExpenses(startMonth:String,endMonth:String)
 
     @Insert
     suspend fun insertExpenses(expenses: Expenses)

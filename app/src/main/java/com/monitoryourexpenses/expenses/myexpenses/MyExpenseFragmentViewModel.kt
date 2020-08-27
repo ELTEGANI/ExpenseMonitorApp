@@ -140,7 +140,6 @@ class MyExpenseFragmentViewModel(val database:ExpenseMonitorDao, application: Ap
 
         if(currentDate > endOfTheMonth){
             viewModelScope.launch {
-               localRepository.clearMonthExpenses(PrefManager.getStartOfTheMonth(application).toString(),PrefManager.getEndOfTheMonth(application).toString())
                 PrefManager.saveStartOfTheMonth(application,LocalDate.now().toString())
                 PrefManager.saveEndOfTheMonth(application,LocalDate.now().plusMonths(1).toString())
             }
