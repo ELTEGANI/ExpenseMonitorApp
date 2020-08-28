@@ -3,6 +3,7 @@ package com.monitoryourexpenses.expenses.createexpense
 
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
+import android.graphics.Color
 import android.os.Bundle
 import android.view.*
 import android.view.LayoutInflater
@@ -19,13 +20,17 @@ import androidx.preference.PreferenceManager
 import androidx.recyclerview.selection.SelectionPredicates
 import androidx.recyclerview.selection.SelectionTracker
 import androidx.recyclerview.selection.StorageStrategy
+import androidx.transition.Slide
+import com.google.android.material.transition.MaterialContainerTransform
 import com.monitoryourexpenses.expenses.R
 import com.monitoryourexpenses.expenses.adapters.*
 import com.monitoryourexpenses.expenses.database.Categories
 import com.monitoryourexpenses.expenses.database.ExpenseMonitorDataBase
 import com.monitoryourexpenses.expenses.databinding.CreateNewExpenseFragmentBinding
 import com.monitoryourexpenses.expenses.utilites.PrefManager
+import com.monitoryourexpenses.expenses.utilites.themeColor
 import com.monitoryourexpenses.expenses.utilites.toast
+import kotlinx.android.synthetic.main.create_new_expense_fragment.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import java.text.SimpleDateFormat
 import java.util.*
@@ -171,10 +176,26 @@ class CreateNewExpenseFragment : Fragment() {
         binding.createNewExpenseButton.setOnClickListener {
                 viewModel.createNewExpense(binding.expenseAmountTextView.text.toString(),binding.expenseDescriptionTextView.text.toString(),
                     binding.expenseDateTextView.text.toString(),category)
-
         }
 
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        enterTransition = MaterialContainerTransform().apply {
+            startView = requireActivity().findViewById(R.id.fab)
+            endView = create_new_expense_constraint
+            duration = resources.getInteger(R.integer.expense_motion_duration_large).toLong()
+            scrimColor = Color.TRANSPARENT
+            containerColor = requireContext().themeColor(R.attr.colorSurface)
+            startContainerColor = requireContext().themeColor(R.attr.colorSurface)
+            endContainerColor = requireContext().themeColor(R.attr.colorSurface)
+        }
+        returnTransition = Slide().apply {
+            duration = resources.getInteger(R.integer.expense_motion_duration_medium).toLong()
+            addTarget(R.id.myNavHostfragment)
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

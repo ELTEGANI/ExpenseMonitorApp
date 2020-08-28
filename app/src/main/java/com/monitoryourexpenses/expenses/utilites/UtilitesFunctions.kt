@@ -1,5 +1,6 @@
 package com.monitoryourexpenses.expenses.utilites
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Context.CONNECTIVITY_SERVICE
 import android.graphics.Color
@@ -13,6 +14,9 @@ import android.view.Gravity
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
+import androidx.annotation.AttrRes
+import androidx.annotation.ColorInt
+import androidx.core.content.res.use
 import androidx.preference.PreferenceManager
 import com.monitoryourexpenses.expenses.utilites.MyApp.Companion.context
 import com.squareup.moshi.FromJson
@@ -67,4 +71,16 @@ fun Context.toast(message: CharSequence) {
     val toast = Toast.makeText(this, message, Toast.LENGTH_LONG)
     toast.setGravity(Gravity.BOTTOM, 0, 600)
     toast.show()
+}
+
+@ColorInt
+@SuppressLint("Recycle")
+fun Context.themeColor(
+    @AttrRes themeAttrId: Int
+): Int {
+    return obtainStyledAttributes(
+        intArrayOf(themeAttrId)
+    ).use {
+        it.getColor(0, Color.MAGENTA)
+    }
 }
