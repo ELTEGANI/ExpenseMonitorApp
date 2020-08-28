@@ -43,7 +43,7 @@ class SplashScreenFragment : Fragment() {
         }
 
         activityScope.launch {
-            delay(2000)
+            delay(1000)
             if(context?.let { PrefManager.hasCurrency(it) }!!){
                 findNavController().navigate(R.id.action_loginUserFragment_to_myExpenseFragment)
             }else{

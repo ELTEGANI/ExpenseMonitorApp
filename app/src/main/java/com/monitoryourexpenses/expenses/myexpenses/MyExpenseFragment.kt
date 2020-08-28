@@ -34,6 +34,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayoutMediator
+import com.google.android.material.transition.MaterialElevationScale
 import com.google.android.play.core.appupdate.AppUpdateManager
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
 import com.google.android.play.core.install.InstallState
@@ -148,6 +149,14 @@ class MyExpenseFragment : Fragment() {
         viewModel.navigateToMyExpense.observe(viewLifecycleOwner, Observer {
             shouldNavigate->if (shouldNavigate){
             val navController = binding.root.findNavController()
+            MyExpenseFragment.apply {
+                exitTransition = MaterialElevationScale(false).apply {
+                    duration = resources.getInteger(R.integer.expense_motion_duration_large).toLong()
+                }
+                reenterTransition = MaterialElevationScale(true).apply {
+                    duration = resources.getInteger(R.integer.expense_motion_duration_large).toLong()
+                }
+            }
             navController.navigate(R.id.action_myExpenseFragment_to_createNewExpenseFragment)
             viewModel.onNavigatedToMyExpense()
             }

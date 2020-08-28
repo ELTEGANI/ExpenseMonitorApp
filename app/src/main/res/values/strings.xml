@@ -210,4 +210,6 @@
     <string name="no_expenses_found">There Are No Added Expenses Currently</string>
     <string name="report_about_categories">Report About Categories</string>
     <string name="no_data_available">No data Available</string>
+    <string name="expense_card_transition_name">expense_card_%s</string>
+    <string name="expense_card_mange_expense_transition_name">expense_card_details</string>
 </resources>
