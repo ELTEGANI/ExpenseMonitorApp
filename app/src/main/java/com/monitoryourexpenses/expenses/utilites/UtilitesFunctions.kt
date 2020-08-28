@@ -5,25 +5,13 @@ import android.content.Context
 import android.content.Context.CONNECTIVITY_SERVICE
 import android.graphics.Color
 import android.net.ConnectivityManager
-import android.text.SpannableString
-import android.text.Spanned
-import android.text.TextPaint
-import android.text.method.LinkMovementMethod
-import android.text.style.ClickableSpan
 import android.view.Gravity
-import android.view.View
-import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.AttrRes
 import androidx.annotation.ColorInt
 import androidx.core.content.res.use
 import androidx.preference.PreferenceManager
 import com.monitoryourexpenses.expenses.utilites.MyApp.Companion.context
-import com.squareup.moshi.FromJson
-import com.squareup.moshi.ToJson
-import java.math.BigDecimal
-
-
 
 
 fun expenseAmountFormatter(amount: String?): String {

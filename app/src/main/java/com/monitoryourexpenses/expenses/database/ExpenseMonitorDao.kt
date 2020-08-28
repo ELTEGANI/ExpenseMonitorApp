@@ -35,7 +35,6 @@ interface ExpenseMonitorDao {
     @Query("UPDATE expenses SET amount=:amount,description=:description,expense_category=:expensecategory,date=:date WHERE expense_id=:id")
     suspend fun updateExpenses(id: String,amount:String,description:String,expensecategory:String,date:String)
 
-
     @Insert
     suspend fun insertExpenses(expenses: Expenses)
 

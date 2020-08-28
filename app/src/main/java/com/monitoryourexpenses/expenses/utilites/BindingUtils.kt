@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowInsets
 import android.widget.ImageView
-import android.widget.ProgressBar
 import android.widget.Spinner
 import android.widget.TextView
 import androidx.core.view.updateLayoutParams
@@ -15,7 +14,6 @@ import com.google.android.material.elevation.ElevationOverlayProvider
 import com.monitoryourexpenses.expenses.R
 import com.monitoryourexpenses.expenses.database.Categories
 import com.monitoryourexpenses.expenses.database.Expenses
-
 
 
 @SuppressLint("SetTextI18n")

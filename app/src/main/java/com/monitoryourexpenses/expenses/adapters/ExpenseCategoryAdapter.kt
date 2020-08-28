@@ -1,7 +1,6 @@
 package com.monitoryourexpenses.expenses.adapters
 
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.ViewGroup
 import androidx.recyclerview.selection.ItemDetailsLookup
 import androidx.recyclerview.selection.SelectionTracker
@@ -24,7 +23,7 @@ class ExpenseCategoryAdapter(private val categoryListener: CategoryListener): Li
 ){
 
     private val adapterScope = CoroutineScope(Dispatchers.Default)
-    var unFilteredList: List<Categories>? = null
+    private var unFilteredList: List<Categories>? = null
     var tracker: SelectionTracker<Long>? = null
 
     init {

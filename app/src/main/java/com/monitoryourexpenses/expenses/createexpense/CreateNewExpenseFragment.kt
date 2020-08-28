@@ -41,7 +41,7 @@ class CreateNewExpenseFragment : Fragment() {
     private lateinit var binding: CreateNewExpenseFragmentBinding
     lateinit var viewModel: CreateNewExpenseFragmentViewModel
     private var tracker: SelectionTracker<Long>? = null
-    var category = ""
+    private var category = ""
 
     @ExperimentalCoroutinesApi
     @SuppressLint("SimpleDateFormat")
@@ -95,7 +95,7 @@ class CreateNewExpenseFragment : Fragment() {
                 }
         })
 
-        viewModel.exceedsMessage.observe(viewLifecycleOwner, Observer {
+        viewModel.exceedsMessage.observe(viewLifecycleOwner, Observer { it ->
             if (it != null){
                 val builder = context?.let { it1 -> AlertDialog.Builder(it1) }
                 builder?.setTitle(getString(R.string.fixed_expense_title))

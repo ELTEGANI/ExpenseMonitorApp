@@ -21,7 +21,7 @@ import org.threeten.bp.LocalDate
 
 class GetUserCurrencyUserViewModel(var database: ExpenseMonitorDao, var application: Application) :ViewModel() {
 
-    var localRepository = LocalRepository(database)
+    private var localRepository = LocalRepository(database)
     var currency = ""
 
     init {

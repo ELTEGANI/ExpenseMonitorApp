@@ -2,10 +2,7 @@ package com.monitoryourexpenses.expenses.settings
 
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.text.InputFilter
-import android.text.InputFilter.LengthFilter
 import android.text.InputType
-import android.widget.EditText
 import androidx.navigation.fragment.findNavController
 import androidx.preference.EditTextPreference
 import androidx.preference.Preference
