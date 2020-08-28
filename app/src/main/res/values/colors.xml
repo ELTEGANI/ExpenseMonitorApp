@@ -9,25 +9,12 @@
     <color name="expensemonitor_black_800">#121212</color>
     <color name="expensemonitor_black_900">#000000</color>
 
-    <color name="expensemonitor_blue_50">#eef0f2</color>
     <color name="expensemonitor_blue_200">#adbbc4</color>
     <color name="expensemonitor_blue_300">#8ca2ae</color>
-    <color name="expensemonitor_blue_700">#344955</color>
-    <color name="expensemonitor_blue_800">#232f34</color>
 
     <color name="expensemonitor_white_50_alpha_060">#99ffffff</color>
 
-    <color name="expensemonitor_black_900_alpha_020">#33000000</color>
     <color name="expensemonitor_black_900_alpha_087">#de000000</color>
     <color name="expensemonitor_black_900_alpha_060">#99000000</color>
-
-    <color name="pruple">#320b86</color>
-    <color name="teal">#52c7b8</color>
-    <color name="cyan">#008ba3</color>
-    <color name="green">#087f23</color>
-    <color name="brown">#4b2c20</color>
-    <color name="orange">#c41c00</color>
-    <color name="gray">#8d8d8d</color>
-    <color name="lime">#99aa00</color>
 
 </resources>
