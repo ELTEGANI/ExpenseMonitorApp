@@ -103,7 +103,7 @@ class CreateNewExpenseFragment : Fragment() {
                     alertDialogBuilder?.setView(promptsView)
                     val userInput = promptsView.findViewById<View>(R.id.editText) as EditText
                     alertDialogBuilder?.setCancelable(false)
-                        ?.setPositiveButton(getString(R.string.save)) { _, _ -> // get user input and set it to result
+                        ?.setPositiveButton(getString(R.string.save)) { _, _ ->
                             if (userInput.text.toString().isNotEmpty()) {
                                 val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context).edit()
                                 sharedPreferences.putString("exceed_expense", userInput.text.toString())
