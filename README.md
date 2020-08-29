@@ -16,22 +16,22 @@ Application is available here:
 ## Screenshots
 <table align="center">
         <tr>
-          <td><img src = "app/screenshots/1.jpg" ></td>
-          <td><img src = "app/screenshots/2.jpg" ></td>
-          <td><img src = "app/screenshots/3.jpg" ></td>
-          <td><img src = "app/screenshots/4.jpg" ></td>
+          <td><img src = "app/screenshots/1_l.jpg" ></td>
+          <td><img src = "app/screenshots/2_l.jpg" ></td>
+          <td><img src = "app/screenshots/3_l.jpg" ></td>
+          <td><img src = "app/screenshots/4_l.jpg" ></td>
         </tr>
       <tr>
-        <td><img src = "app/screenshots/5.jpg" ></td>
-        <td><img src = "app/screenshots/6.jpg" ></td>
-        <td><img src = "app/screenshots/7.jpg" ></td>
-        <td><img src = "app/screenshots/8.jpg" ></td>
+        <td><img src = "app/screenshots/5_l.jpg" ></td>
+        <td><img src = "app/screenshots/6_l.jpg" ></td>
+        <td><img src = "app/screenshots/7_l.jpg" ></td>
+        <td><img src = "app/screenshots/8_l.jpg" ></td>
       </tr>
        <tr>
-              <td><img src = "app/screenshots/9.jpg" ></td>
-              <td><img src = "app/screenshots/10.jpg" ></td>
-              <td><img src = "app/screenshots/11.jpg" ></td>
-              <td><img src = "app/screenshots/12.jpg" ></td>
+              <td><img src = "app/screenshots/9_l.jpg" ></td>
+              <td><img src = "app/screenshots/10_l.jpg" ></td>
+              <td><img src = "app/screenshots/11_l.jpg" ></td>
+              <td><img src = "app/screenshots/12_l.jpg" ></td>
        </tr>
 </table> 
 
