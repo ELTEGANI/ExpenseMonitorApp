@@ -1,6 +1,5 @@
 package com.monitoryourexpenses.expenses.splashscreen
 
-
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -16,21 +15,19 @@ import com.monitoryourexpenses.expenses.databinding.SplashScreenFragmentBinding
 import com.monitoryourexpenses.expenses.utilites.PrefManager
 import kotlinx.coroutines.*
 
-
 class SplashScreenFragment : Fragment() {
 
     private lateinit var binding: SplashScreenFragmentBinding
     private val activityScope = CoroutineScope(Dispatchers.Main)
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        binding = DataBindingUtil.inflate(inflater, R.layout.splash_screen_fragment,container,false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.splash_screen_fragment, container, false)
         val application = requireNotNull(this.activity).application
 
         val viewModelFactory = SplashScreenViewModelFactory(application)
-        val viewModel = ViewModelProvider(this,viewModelFactory)
+        val viewModel = ViewModelProvider(this, viewModelFactory)
             .get(SplashScreenViewModel::class.java)
-
 
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
@@ -44,9 +41,9 @@ class SplashScreenFragment : Fragment() {
 
         activityScope.launch {
             delay(1000)
-            if(context?.let { PrefManager.hasCurrency(it) }!!){
+            if (context?.let { PrefManager.hasCurrency(it) }!!) {
                 findNavController().navigate(R.id.action_loginUserFragment_to_myExpenseFragment)
-            }else{
+            } else {
                 findNavController().navigate(R.id.action_loginUserFragment_to_registerationUserFragment)
             }
         }

@@ -13,21 +13,18 @@ import androidx.core.content.res.use
 import androidx.preference.PreferenceManager
 import com.monitoryourexpenses.expenses.utilites.MyApp.Companion.context
 
-
 fun expenseAmountFormatter(amount: String?): String {
-    var amountFormatted= ""
-    if (amount != null){
+    var amountFormatted = ""
+    if (amount != null) {
         try {
             val value = amount.replace(",", "")
             val reverseValue = StringBuilder(value).reverse()
                 .toString()
             val finalValue = StringBuilder()
-            for (i in 1..reverseValue.length)
-            {
+            for (i in 1..reverseValue.length) {
                 val `val` = reverseValue[i - 1]
                 finalValue.append(`val`)
-                if (i % 3 == 0 && i != reverseValue.length && i > 0)
-                {
+                if (i % 3 == 0 && i != reverseValue.length && i > 0) {
                     finalValue.append(",")
                 }
             }
@@ -36,15 +33,15 @@ fun expenseAmountFormatter(amount: String?): String {
             // Do nothing since not a number
         }
         return amountFormatted
-    }else{
+    } else {
         return "0"
     }
 }
 
-fun saveCurrencyForSettings(selectedCurrency:String){
+fun saveCurrencyForSettings(selectedCurrency: String) {
     val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
     val editor = sharedPreferences.edit()
-    editor.putString("userCurrency",selectedCurrency)
+    editor.putString("userCurrency", selectedCurrency)
     editor.apply()
 }
 

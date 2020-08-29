@@ -6,13 +6,12 @@ import androidx.lifecycle.ViewModelProvider
 import com.monitoryourexpenses.expenses.database.ExpenseMonitorDao
 import java.lang.IllegalArgumentException
 
-class WeekExpenseFragmentViewModelFactory(private val database: ExpenseMonitorDao, private val application: Application): ViewModelProvider.Factory {
+class WeekExpenseFragmentViewModelFactory(private val database: ExpenseMonitorDao, private val application: Application) : ViewModelProvider.Factory {
     @Suppress("unchecked_cast")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(WeekExpenseFragmentViewModel::class.java)) {
-            return WeekExpenseFragmentViewModel(database,application) as T
+            return WeekExpenseFragmentViewModel(database, application) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }
 }
-

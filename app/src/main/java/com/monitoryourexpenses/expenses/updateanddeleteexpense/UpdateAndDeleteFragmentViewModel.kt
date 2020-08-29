@@ -20,7 +20,7 @@ class UpdateAndDeleteFragmentViewModel(val expenses: Expenses, application: Appl
     val categories = localRepository.getAllCategories()
 
     private val _selectedExpense = MutableLiveData<Expenses>()
-    val selectedExpenseMsg :LiveData<Expenses>
+    val selectedExpenseMsg: LiveData<Expenses>
         get() = _selectedExpense
 
     private val _validationMsg = MutableLiveData<Boolean>()
@@ -43,25 +43,23 @@ class UpdateAndDeleteFragmentViewModel(val expenses: Expenses, application: Appl
     }
 
     @ExperimentalCoroutinesApi
-    fun deleteExpense(expenseId:String){
+    fun deleteExpense(expenseId: String) {
         viewModelScope.launch {
             localRepository.deleteExpneseUsingId(expenseId)
             _isExpenseDeleted.value = true
         }
     }
 
-
-
-    fun updateExpense(expenseId:String,amount:String, description:String, date:String, category:String){
-        if(description.isEmpty() || date.isEmpty() || amount.isEmpty()){
-            _validationMsg.value =  false
-        }else{
+    fun updateExpense(expenseId: String, amount: String, description: String, date: String, category: String) {
+        if (description.isEmpty() || date.isEmpty() || amount.isEmpty()) {
+            _validationMsg.value = false
+        } else {
             viewModelScope.launch {
                 if (localRepository.sumationOfSpecifiedExpenses(
                         PrefManager.getCurrency(application).toString())
                     == PreferenceManager.getDefaultSharedPreferences(application)
                         .getString("exceed_expense", null).toString()) {
-                    _exceedsMessage.value = PreferenceManager.getDefaultSharedPreferences(application).getString("exceed_expense",null)
+                    _exceedsMessage.value = PreferenceManager.getDefaultSharedPreferences(application).getString("exceed_expense", null)
                 } else {
                     viewModelScope.launch {
                         localRepository.updateExpenseUsingId(
@@ -71,12 +69,10 @@ class UpdateAndDeleteFragmentViewModel(val expenses: Expenses, application: Appl
                             category,
                             date
                         )
-                        _validationMsg.value =  true
+                        _validationMsg.value = true
                     }
                 }
             }
         }
     }
-
-
 }

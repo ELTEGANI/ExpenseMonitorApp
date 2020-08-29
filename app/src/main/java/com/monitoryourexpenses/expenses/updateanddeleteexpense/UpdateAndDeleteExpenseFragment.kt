@@ -24,12 +24,11 @@ import com.monitoryourexpenses.expenses.database.ExpenseMonitorDataBase
 import com.monitoryourexpenses.expenses.databinding.UpdateAndDeleteExpenseFragmentBinding
 import com.monitoryourexpenses.expenses.utilites.PrefManager
 import com.monitoryourexpenses.expenses.utilites.toast
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 class UpdateAndDeleteExpenseFragment : Fragment() {
-
 
     private lateinit var binding: UpdateAndDeleteExpenseFragmentBinding
     private var tracker: SelectionTracker<Long>? = null
@@ -40,21 +39,21 @@ class UpdateAndDeleteExpenseFragment : Fragment() {
 
         val application = requireNotNull(activity).application
         val dataBase = ExpenseMonitorDataBase.getInstance(application).expenseMonitorDao
-        binding = DataBindingUtil.inflate(inflater,R.layout.update_and_delete_expense_fragment,container,false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.update_and_delete_expense_fragment, container, false)
 
         val expenseResponse = arguments?.let {
             UpdateAndDeleteExpenseFragmentArgs.fromBundle(it).selectedExpense
         }
 
         val viewModelFactory = expenseResponse?.let {
-            UpdateAndDeleteFragmentViewModelFactory(it,application,dataBase)
+            UpdateAndDeleteFragmentViewModelFactory(it, application, dataBase)
         }
 
-        val viewModel = ViewModelProviders.of(this,viewModelFactory)
+        val viewModel = ViewModelProviders.of(this, viewModelFactory)
             .get(UpdateAndDeleteFragmentViewModel::class.java)
 
         binding.viewModel = viewModel
-        binding.lifecycleOwner =  this
+        binding.lifecycleOwner = this
 
         var category = expenseResponse?.expenseCategory.toString()
 
@@ -71,35 +70,32 @@ class UpdateAndDeleteExpenseFragment : Fragment() {
                         val format = SimpleDateFormat("yyyy-MM-dd")
                         val datestring = format.format(c.time)
                         viewModel.currentDate.value = datestring
-                    },year,month,day)
+                    }, year, month, day)
             }
             datePickerDialog?.show()
         }
 
-
         binding.updateExpenseButton.setOnClickListener {
-           viewModel.updateExpense(expenseResponse?.expense_id.toString(),binding.amountEditText.text.toString(),
-               binding.descriptionEditText.text.toString(),binding.dateEditText.text.toString(),category)
+           viewModel.updateExpense(expenseResponse?.expense_id.toString(), binding.amountEditText.text.toString(),
+               binding.descriptionEditText.text.toString(), binding.dateEditText.text.toString(), category)
         }
-
 
         binding.deleteExpenseButton.setOnClickListener {
             viewModel.deleteExpense(expenseResponse?.expense_id.toString())
         }
 
-        viewModel.validationMsg.observe(viewLifecycleOwner, Observer {shouldNavigation->
-            if (shouldNavigation){
+        viewModel.validationMsg.observe(viewLifecycleOwner, Observer { shouldNavigation ->
+            if (shouldNavigation) {
                 context?.toast(getString(R.string.update_expense))
                 val navController = binding.root.findNavController()
                 navController.navigate(R.id.action_updateAndDeleteExpenseFragment_to_myExpenseFragment)
-            }else{
+            } else {
                 context?.toast(getString(R.string.fill_empty))
             }
         })
 
-
-        viewModel.isExpenseDeleted.observe(viewLifecycleOwner, Observer { isDeleted->
-            if (isDeleted){
+        viewModel.isExpenseDeleted.observe(viewLifecycleOwner, Observer { isDeleted ->
+            if (isDeleted) {
                 context?.toast(getString(R.string.expense_deleted_successfuly))
                 val navController = binding.root.findNavController()
                 navController.navigate(R.id.action_updateAndDeleteExpenseFragment_to_myExpenseFragment)
@@ -107,12 +103,12 @@ class UpdateAndDeleteExpenseFragment : Fragment() {
         })
 
         viewModel.exceedsMessage.observe(viewLifecycleOwner, Observer {
-            if (it != null){
+            if (it != null) {
                 val builder = context?.let { it1 -> AlertDialog.Builder(it1) }
                 builder?.setTitle(getString(R.string.fixed_expense_title))
-                builder?.setMessage(getString(R.string.message_body_fixed_expense)+" "+it+" "+ PrefManager.getCurrency(context)+" "+getString(
+                builder?.setMessage(getString(R.string.message_body_fixed_expense) + " " + it + " " + PrefManager.getCurrency(context) + " " + getString(
                     R.string.message_body_fixed_expenses))
-                builder?.setPositiveButton(getString(R.string.rest_fixed_expense)){ dialog, which ->
+                builder?.setPositiveButton(getString(R.string.rest_fixed_expense)) { dialog, which ->
                     val li = LayoutInflater.from(context)
                     val promptsView: View = li.inflate(R.layout.alert_dialog, null)
                     val alertDialogBuilder = context?.let { AlertDialog.Builder(it) }
@@ -120,14 +116,13 @@ class UpdateAndDeleteExpenseFragment : Fragment() {
                     val userInput = promptsView.findViewById<View>(R.id.editText) as EditText
                     alertDialogBuilder?.setCancelable(false)
                         ?.setPositiveButton(getString(R.string.save)) { _, id -> // get user input and set it to result
-                            if(userInput.text.toString().isNotEmpty()){
+                            if (userInput.text.toString().isNotEmpty()) {
                                 val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context).edit()
-                                sharedPreferences.putString("exceed_expense",userInput.text.toString())
+                                sharedPreferences.putString("exceed_expense", userInput.text.toString())
                                 sharedPreferences.apply()
-                            }else{
+                            } else {
                                 context?.toast(getString(R.string.enter_fixed_expense))
                             }
-
                         }
                         ?.setNegativeButton(getString(R.string.close)) { _, id ->
                             dialog.cancel()
@@ -135,9 +130,9 @@ class UpdateAndDeleteExpenseFragment : Fragment() {
                     val alertDialog = alertDialogBuilder?.create()
                     alertDialog?.show()
                 }
-                builder?.setNegativeButton(getString(R.string.cancel_fixed_expense)){ dialog, which ->
+                builder?.setNegativeButton(getString(R.string.cancel_fixed_expense)) { dialog, which ->
                     val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context).edit()
-                    sharedPreferences.putString("exceed_expense",null)
+                    sharedPreferences.putString("exceed_expense", null)
                     sharedPreferences.apply()
                     dialog.dismiss()
                 }
@@ -147,11 +142,10 @@ class UpdateAndDeleteExpenseFragment : Fragment() {
             }
         })
 
-        val manager = NoPredictiveAnimationsGridLayoutManager(context,spanCount = 3)
+        val manager = NoPredictiveAnimationsGridLayoutManager(context, spanCount = 3)
         binding.categoryList.layoutManager = manager
 
-
-        val adapter = ExpenseCategoryAdapter(CategoryListener{
+        val adapter = ExpenseCategoryAdapter(CategoryListener {
             category = it.CategoryName.toString()
         })
 
@@ -163,7 +157,7 @@ class UpdateAndDeleteExpenseFragment : Fragment() {
         })
 
         tracker = SelectionTracker.Builder<Long>(
-            "mySelection",binding.categoryList,
+            "mySelection", binding.categoryList,
             MyItemKeyProvider(binding.categoryList),
             MyItemDetailsLookup(binding.categoryList),
             StorageStrategy.createLongStorage()
