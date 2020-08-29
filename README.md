@@ -16,44 +16,45 @@ Application is available here:
 ## Screenshots
 <table align="center">
         <tr>
-          <td><img src = "app/screenshots/1_l.jpg" ></td>
-          <td><img src = "app/screenshots/2_l.jpg" ></td>
-          <td><img src = "app/screenshots/3_l.jpg" ></td>
-          <td><img src = "app/screenshots/4_l.jpg" ></td>
+          <td><img src = "app/screenshots/1_L.jpg" ></td>
+          <td><img src = "app/screenshots/2_L.jpg" ></td>
+          <td><img src = "app/screenshots/3_L.jpg" ></td>
+          <td><img src = "app/screenshots/4_L.jpg" ></td>
         </tr>
       <tr>
-        <td><img src = "app/screenshots/5_l.jpg" ></td>
-        <td><img src = "app/screenshots/6_l.jpg" ></td>
-        <td><img src = "app/screenshots/7_l.jpg" ></td>
-        <td><img src = "app/screenshots/8_l.jpg" ></td>
+        <td><img src = "app/screenshots/5_L.jpg" ></td>
+        <td><img src = "app/screenshots/6_L.jpg" ></td>
+        <td><img src = "app/screenshots/7_L.jpg" ></td>
+        <td><img src = "app/screenshots/8_L.jpg" ></td>
       </tr>
        <tr>
-              <td><img src = "app/screenshots/9_l.jpg" ></td>
-              <td><img src = "app/screenshots/10_l.jpg" ></td>
-              <td><img src = "app/screenshots/11_l.jpg" ></td>
-              <td><img src = "app/screenshots/12_l.jpg" ></td>
+              <td><img src = "app/screenshots/9_L.jpg" ></td>
+              <td><img src = "app/screenshots/10_L.jpg" ></td>
+              <td><img src = "app/screenshots/11_L.jpg" ></td>
+              <td><img src = "app/screenshots/12_L.jpg" ></td>
+               <td><img src = "app/screenshots/13_L.jpg" ></td>
        </tr>
 </table> 
 
 ## Night Mode Screenshots
 <table align="center">
         <tr>
-          <td><img src = "app/screenshots/1_d.jpg" ></td>
-          <td><img src = "app/screenshots/2_d.jpg" ></td>
-          <td><img src = "app/screenshots/3_d.jpg" ></td>
-          <td><img src = "app/screenshots/4_d.jpg" ></td>
+          <td><img src = "app/screenshots/1_D.jpg" ></td>
+          <td><img src = "app/screenshots/2_D.jpg" ></td>
+          <td><img src = "app/screenshots/3_D.jpg" ></td>
+          <td><img src = "app/screenshots/4_D.jpg" ></td>
         </tr>
       <tr>
-        <td><img src = "app/screenshots/5_d.jpg" ></td>
-        <td><img src = "app/screenshots/6_d.jpg" ></td>
-        <td><img src = "app/screenshots/7_d.jpg" ></td>
-        <td><img src = "app/screenshots/8_d.jpg" ></td>
+        <td><img src = "app/screenshots/5_D.jpg" ></td>
+        <td><img src = "app/screenshots/6_D.jpg" ></td>
+        <td><img src = "app/screenshots/7_D.jpg" ></td>
+        <td><img src = "app/screenshots/8_D.jpg" ></td>
       </tr>
        <tr>
-              <td><img src = "app/screenshots/9_d.jpg" ></td>
-              <td><img src = "app/screenshots/10_d.jpg" ></td>
-              <td><img src = "app/screenshots/11_d.jpg" ></td>
-              <td><img src = "app/screenshots/12_d.jpg" ></td>
+              <td><img src = "app/screenshots/9_D.jpg" ></td>
+              <td><img src = "app/screenshots/10_D.jpg" ></td>
+              <td><img src = "app/screenshots/11_D.jpg" ></td>
+              <td><img src = "app/screenshots/12_D.jpg" ></td>
        </tr>
 </table> 
 
