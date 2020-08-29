@@ -73,3 +73,4 @@ Application is available here:
 - Unit-Testing [DOCS](https://developer.android.com/training/testing/unit-testing)
 - MPAndroidChart [DOCS](https://github.com/PhilJay/MPAndroidChart)
 - Container Transform [DOCS](https://github.com/material-components/material-components-android/blob/master/docs/theming/Motion.md)
+- R8 [DOCS](https://developer.android.com/studio/build/shrink-code)
