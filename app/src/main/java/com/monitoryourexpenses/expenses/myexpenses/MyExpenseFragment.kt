@@ -52,13 +52,12 @@ import com.monitoryourexpenses.expenses.databinding.MyExpenseFragmentBinding
 import com.monitoryourexpenses.expenses.utilites.PrefManager
 import com.monitoryourexpenses.expenses.utilites.isConnected
 import com.monitoryourexpenses.expenses.utilites.toast
+import java.util.*
+import kotlin.collections.ArrayList
 import kotlinx.android.synthetic.main.barchart_bottom_sheets.view.*
 import kotlinx.android.synthetic.main.piechart_bottom_sheets.view.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.threeten.bp.LocalDate
-import java.util.*
-import kotlin.collections.ArrayList
-
 
 class MyExpenseFragment : Fragment() {
 
@@ -84,23 +83,22 @@ class MyExpenseFragment : Fragment() {
 
     @ExperimentalCoroutinesApi
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.my_expense_fragment,container,false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.my_expense_fragment, container, false)
 
         val application = requireNotNull(this.activity).application
         val dataBase = ExpenseMonitorDataBase.getInstance(application).expenseMonitorDao
-        val viewModelFactory = MyExpenseFragmentViewModelFactory(dataBase,application)
+        val viewModelFactory = MyExpenseFragmentViewModelFactory(dataBase, application)
 
-        viewModel = ViewModelProvider(this,viewModelFactory)
+        viewModel = ViewModelProvider(this, viewModelFactory)
             .get(MyExpenseFragmentViewModel::class.java)
 
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
-
         (activity as AppCompatActivity).setSupportActionBar(binding.bottomAppBar)
         setHasOptionsMenu(true)
 
-        if(isConnected()){checkForAppUpdate()}
+        if (isConnected()) { checkForAppUpdate() }
 
         val gso =
             GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -117,37 +115,35 @@ class MyExpenseFragment : Fragment() {
             tab.text = getTabTitle(position)
         }.attach()
 
-
         viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             @SuppressLint("SetTextI18n")
-            override fun onPageSelected(position: Int){
+            override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
-                when(position){
-                    0->{
+                when (position) {
+                    0 -> {
                         viewModel.todayExpense.observe(viewLifecycleOwner, Observer {
-                        binding.expenseTextView.text = PrefManager.getCurrency(context)+" "+ it
+                        binding.expenseTextView.text = PrefManager.getCurrency(context) + " " + it
                         })
                         binding.dateTextView.text = LocalDate.now().toString()
                     }
-                    1->{
+                    1 -> {
                         viewModel.weekExpense.observe(viewLifecycleOwner, Observer {
-                        binding.expenseTextView.text = PrefManager.getCurrency(context)+" "+ it
+                        binding.expenseTextView.text = PrefManager.getCurrency(context) + " " + it
                         })
-                        binding.dateTextView.text = PrefManager.getStartOfTheWeek(context)+" "+"/"+" "+PrefManager.getEndOfTheWeek(context)
+                        binding.dateTextView.text = PrefManager.getStartOfTheWeek(context) + " " + "/" + " " + PrefManager.getEndOfTheWeek(context)
                     }
-                    2->{
+                    2 -> {
                         viewModel.monthExpense.observe(viewLifecycleOwner, Observer {
-                        binding.expenseTextView.text = PrefManager.getCurrency(context)+" "+ it
+                        binding.expenseTextView.text = PrefManager.getCurrency(context) + " " + it
                         })
-                        binding.dateTextView.text = PrefManager.getStartOfTheMonth(context)+" "+"/"+" "+ PrefManager.getEndOfTheMonth(context)
+                        binding.dateTextView.text = PrefManager.getStartOfTheMonth(context) + " " + "/" + " " + PrefManager.getEndOfTheMonth(context)
                     }
                 }
             }
         })
 
-
         viewModel.navigateToMyExpense.observe(viewLifecycleOwner, Observer {
-            shouldNavigate->if (shouldNavigate){
+            shouldNavigate -> if (shouldNavigate) {
             val navController = binding.root.findNavController()
             MyExpenseFragment.apply {
                 exitTransition = MaterialElevationScale(false).apply {
@@ -162,9 +158,7 @@ class MyExpenseFragment : Fragment() {
             }
         })
 
-
         return binding.root
-
     }
 
      private fun checkForAppUpdate() {
@@ -191,7 +185,6 @@ class MyExpenseFragment : Fragment() {
         }
     }
 
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == APP_UPDATE_REQUEST_CODE) {
@@ -217,7 +210,6 @@ class MyExpenseFragment : Fragment() {
         snackbar.show()
     }
 
-
     override fun onResume() {
         super.onResume()
         appUpdateManager.appUpdateInfo.addOnSuccessListener { appUpdateInfo ->
@@ -242,7 +234,6 @@ class MyExpenseFragment : Fragment() {
         private const val APP_UPDATE_REQUEST_CODE = 1991
     }
 
-
     private fun getTabTitle(position: Int): String? {
         return when (position) {
             TODAY_EXPENSE_INDEX -> getString(R.string.today)
@@ -252,16 +243,14 @@ class MyExpenseFragment : Fragment() {
         }
     }
 
-
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.main_menu, menu)
     }
 
-
    @ExperimentalCoroutinesApi
    override fun onOptionsItemSelected(item: MenuItem): Boolean {
     when (item.itemId) {
-         R.id.menu_dark_mode->{
+         R.id.menu_dark_mode -> {
                 val mode = if ((resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) ==
                     Configuration.UI_MODE_NIGHT_NO) {
                     AppCompatDelegate.MODE_NIGHT_YES
@@ -270,17 +259,17 @@ class MyExpenseFragment : Fragment() {
                 }
                 AppCompatDelegate.setDefaultNightMode(mode)
             }
-         R.id.share_application->{
+         R.id.share_application -> {
                 shareApp()
             }
-         R.id.action_setting->{
+         R.id.action_setting -> {
                 val action = MyExpenseFragmentDirections.actionMyExpenseFragmentToSettingsFragment()
                 findNavController().navigate(action)
          }
-        R.id.report_currency->{
+        R.id.report_currency -> {
            currenciesReportsDialog()
         }
-        R.id.report_category->{
+        R.id.report_category -> {
             categoriesReportsDialog()
         }
     }
@@ -300,11 +289,10 @@ class MyExpenseFragment : Fragment() {
         startActivity(shareIntent)
     }
 
-
     @ExperimentalCoroutinesApi
     private fun categoriesReportsDialog() {
-        viewModel.sumationOfCategories?.observe(viewLifecycleOwner, Observer {catogoriesAndAmount->
-            if(catogoriesAndAmount.isNotEmpty()){
+        viewModel.sumationOfCategories?.observe(viewLifecycleOwner, Observer { catogoriesAndAmount ->
+            if (catogoriesAndAmount.isNotEmpty()) {
                 val dialogBinding = DataBindingUtil
                     .inflate<ViewDataBinding>(LayoutInflater.from(context), R.layout.piechart_bottom_sheets, null, false)
                 val dialog = context?.let { BottomSheetDialog(it) }
@@ -312,7 +300,7 @@ class MyExpenseFragment : Fragment() {
                 val entries: MutableList<PieEntry> = ArrayList()
                 Collections.sort(entries, EntryXComparator())
                 catogoriesAndAmount.forEach { i ->
-                    entries.add(PieEntry(i.amount.toFloat(),i.expense_category))
+                    entries.add(PieEntry(i.amount.toFloat(), i.expense_category))
                 }
                 val pieDataSet = PieDataSet(entries, null)
                 pieDataSet.setColors(*ColorTemplate.COLORFUL_COLORS)
@@ -342,17 +330,16 @@ class MyExpenseFragment : Fragment() {
                 dialogBinding.root.rootView.pie_chart.data = pieData
                 dialogBinding.root.rootView.pie_chart.invalidate()
                 dialog?.show()
-            }else{
+            } else {
                 context?.toast(getString(R.string.no_data_available))
             }
         })
     }
 
-
     @ExperimentalCoroutinesApi
     private fun currenciesReportsDialog() {
-        viewModel.sumationOfCurrencies.observe(viewLifecycleOwner,Observer{currenciesAndAmount->
-            if (currenciesAndAmount.isNotEmpty()){
+        viewModel.sumationOfCurrencies.observe(viewLifecycleOwner, Observer { currenciesAndAmount ->
+            if (currenciesAndAmount.isNotEmpty()) {
                 val dialogBinding = DataBindingUtil
                     .inflate<ViewDataBinding>(LayoutInflater.from(context), R.layout.barchart_bottom_sheets, null, false)
                 val dialog = context?.let { BottomSheetDialog(it) }
@@ -360,7 +347,7 @@ class MyExpenseFragment : Fragment() {
                 val barEntries: MutableList<BarEntry> = ArrayList()
                 val currenciesList: ArrayList<String> = ArrayList()
                 for (i in currenciesAndAmount.indices) {
-                    barEntries.add(BarEntry(i.toFloat(),currenciesAndAmount[i].amount.toFloat()))
+                    barEntries.add(BarEntry(i.toFloat(), currenciesAndAmount[i].amount.toFloat()))
                     currenciesList.add(currenciesAndAmount[i].currency)
                 }
                 val barDataSet = BarDataSet(barEntries, "Currencies")
@@ -394,11 +381,9 @@ class MyExpenseFragment : Fragment() {
                 dialogBinding.root.rootView.bar_chart.xAxis.position = XAxis.XAxisPosition.BOTH_SIDED
                 dialogBinding.root.rootView.bar_chart.invalidate()
                 dialog?.show()
-            }else{
+            } else {
              context?.toast(getString(R.string.no_data_available))
             }
         })
     }
-
-
 }

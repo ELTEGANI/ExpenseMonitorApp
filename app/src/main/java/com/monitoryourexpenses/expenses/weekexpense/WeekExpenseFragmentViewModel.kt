@@ -9,27 +9,21 @@ import com.monitoryourexpenses.expenses.database.Expenses
 import com.monitoryourexpenses.expenses.database.LocalRepository
 import com.monitoryourexpenses.expenses.utilites.PrefManager
 
-
 class WeekExpenseFragmentViewModel(val database: ExpenseMonitorDao, val application: Application) : ViewModel() {
 
     private val localRepository = LocalRepository(database)
 
-
     private val _navigateToSelectedExpense = MutableLiveData<Expenses>()
-    val navigateToSelectedExpense :LiveData<Expenses>
+    val navigateToSelectedExpense: LiveData<Expenses>
         get() = _navigateToSelectedExpense
 
-    val weekExpenses = localRepository.getWeekExpenses(PrefManager.getStartOfTheWeek(application).toString(),PrefManager.getEndOfTheWeek(application).toString(),PrefManager.getCurrency(application).toString())
+    val weekExpenses = localRepository.getWeekExpenses(PrefManager.getStartOfTheWeek(application).toString(), PrefManager.getEndOfTheWeek(application).toString(), PrefManager.getCurrency(application).toString())
 
-    fun displaySelectedExpense(expenses: Expenses){
+    fun displaySelectedExpense(expenses: Expenses) {
         _navigateToSelectedExpense.value = expenses
     }
 
-
-    fun displaySelectedExpenseCompleted(){
+    fun displaySelectedExpenseCompleted() {
         _navigateToSelectedExpense.value = null
     }
-
-
-
 }

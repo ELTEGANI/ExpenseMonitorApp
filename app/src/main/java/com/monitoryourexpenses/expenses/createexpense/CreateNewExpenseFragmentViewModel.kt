@@ -1,6 +1,5 @@
 package com.monitoryourexpenses.expenses.createexpense
 
-
 import android.app.Application
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -17,8 +16,7 @@ import com.monitoryourexpenses.expenses.utilites.PrefManager
 import kotlinx.coroutines.launch
 import org.threeten.bp.LocalDate
 
-
-class CreateNewExpenseFragmentViewModel(val database: ExpenseMonitorDao,var application: Application) : ViewModel() {
+class CreateNewExpenseFragmentViewModel(val database: ExpenseMonitorDao, var application: Application) : ViewModel() {
 
     private val localRepository = LocalRepository(database)
     val amount = MutableLiveData<String>()
@@ -29,7 +27,6 @@ class CreateNewExpenseFragmentViewModel(val database: ExpenseMonitorDao,var appl
     init {
         currentDate.value = LocalDate.now().toString()
     }
-
 
     private val _validationMsg = MutableLiveData<Boolean>()
     val validationMsg: LiveData<Boolean>
@@ -43,13 +40,12 @@ class CreateNewExpenseFragmentViewModel(val database: ExpenseMonitorDao,var appl
     val exceedsMessage: LiveData<String>
         get() = _exceedsMessage
 
-
-    fun createNewExpense(amount:String, description:String, date:String, category:String) {
+    fun createNewExpense(amount: String, description: String, date: String, category: String) {
         if (amount.isEmpty() || description.isEmpty()) {
             _validationMsg.value = false
-        }else if(category.isEmpty()){
+        } else if (category.isEmpty()) {
             _makeSelection.value = false
-        } else{
+        } else {
             viewModelScope.launch {
                 if (localRepository.sumationOfSpecifiedExpenses(
                         PrefManager.getCurrency(application).toString()
@@ -71,7 +67,7 @@ class CreateNewExpenseFragmentViewModel(val database: ExpenseMonitorDao,var appl
                                 date = date
                             )
                         )
-                        Log.d("res",res.toString())
+                        Log.d("res", res.toString())
                     }
                     _validationMsg.value = true
                 }
@@ -79,10 +75,9 @@ class CreateNewExpenseFragmentViewModel(val database: ExpenseMonitorDao,var appl
         }
     }
 
-    fun addNewCategory(category:Categories){
+    fun addNewCategory(category: Categories) {
         viewModelScope.launch {
             localRepository.insertNewCategory(listOf(category))
         }
     }
-
 }

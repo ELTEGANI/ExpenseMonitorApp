@@ -15,39 +15,34 @@ import com.monitoryourexpenses.expenses.R
 import com.monitoryourexpenses.expenses.database.Categories
 import com.monitoryourexpenses.expenses.database.Expenses
 
-
 @SuppressLint("SetTextI18n")
 @BindingAdapter("expenseAmount")
-fun TextView.setExpenseAmount(expenses:Expenses?){
+fun TextView.setExpenseAmount(expenses: Expenses?) {
     expenses?.let {
-         text = PrefManager.getCurrency(context)+" "+ expenseAmountFormatter(expenses.amount.toString())
+         text = PrefManager.getCurrency(context) + " " + expenseAmountFormatter(expenses.amount.toString())
      }
 }
 
 @BindingAdapter("expenseCategory")
-fun TextView.setExpensecategory(expenses:Expenses?){
+fun TextView.setExpensecategory(expenses: Expenses?) {
     expenses?.let {
         text = expenses.expenseCategory
     }
 }
 
 @BindingAdapter("expenseDescription")
-fun TextView.setExpenseDescription(expenses:Expenses?){
+fun TextView.setExpenseDescription(expenses: Expenses?) {
     expenses?.let {
         text = expenses.description
     }
 }
 
-
-
 @BindingAdapter("expenseDate")
-fun TextView.setExpenseDate(expenses:Expenses?){
+fun TextView.setExpenseDate(expenses: Expenses?) {
     expenses?.let {
         text = expenses.date
     }
 }
-
-
 
 @BindingAdapter(
     "marginLeftSystemWindowInsets",
@@ -138,8 +133,6 @@ fun View.requestApplyInsetsWhenAttached() {
     }
 }
 
-
-
 @BindingAdapter(
     "paddingLeftSystemWindowInsets",
     "paddingTopSystemWindowInsets",
@@ -209,7 +202,7 @@ fun ImageView.setCategoryImage(category: Categories?) {
             context.getString(R.string.Adultsclothing) -> R.drawable.ic_receipt
             context.getString(R.string.Alimonyandchildsupport) -> R.drawable.ic_human_female_boy
             context.getString(R.string.Babysitter) -> R.drawable.ic_baby_face_outline
-            context.getString(R.string.beef)-> R.drawable.ic_food_drumstick
+            context.getString(R.string.beef) -> R.drawable.ic_food_drumstick
             context.getString(R.string.Books) -> R.drawable.ic_book_shelf
             context.getString(R.string.Bigpurchases) -> R.drawable.ic_basket_plus
             context.getString(R.string.Birthday) -> R.drawable.ic_cake_layered
@@ -233,4 +226,3 @@ fun TextView.setCategoryNameString(category: Categories?) {
         text = category.CategoryName
     }
 }
-

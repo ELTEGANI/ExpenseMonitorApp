@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import java.lang.IllegalArgumentException
 
-class SplashScreenViewModelFactory (private val application: Application): ViewModelProvider.Factory {
+class SplashScreenViewModelFactory(private val application: Application) : ViewModelProvider.Factory {
     @Suppress("unchecked_cast")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(SplashScreenViewModel::class.java)) {
@@ -14,4 +14,3 @@ class SplashScreenViewModelFactory (private val application: Application): ViewM
         throw IllegalArgumentException("Unknown ViewModel class")
     }
 }
-

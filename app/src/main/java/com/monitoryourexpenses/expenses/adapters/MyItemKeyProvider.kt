@@ -3,7 +3,6 @@ package com.monitoryourexpenses.expenses.adapters
 import androidx.recyclerview.selection.ItemKeyProvider
 import androidx.recyclerview.widget.RecyclerView
 
-
 class MyItemKeyProvider(private val recyclerView: RecyclerView) :
     ItemKeyProvider<Long>(SCOPE_CACHED) {
 

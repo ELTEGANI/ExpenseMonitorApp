@@ -10,17 +10,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.monitoryourexpenses.expenses.R
 import com.monitoryourexpenses.expenses.database.Categories
 import com.monitoryourexpenses.expenses.databinding.CategoriesItemExpenseBinding
+import java.util.*
 import kotlinx.android.synthetic.main.categories_item_expense.view.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.util.*
 
-
-class ExpenseCategoryAdapter(private val categoryListener: CategoryListener): ListAdapter<Categories, ExpenseCategoryAdapter.ViewHolder>(
+class ExpenseCategoryAdapter(private val categoryListener: CategoryListener) : ListAdapter<Categories, ExpenseCategoryAdapter.ViewHolder>(
     ExpenseCategoryResponseDiffCallback()
-){
+) {
 
     private val adapterScope = CoroutineScope(Dispatchers.Default)
     private var unFilteredList: List<Categories>? = null
@@ -30,34 +29,32 @@ class ExpenseCategoryAdapter(private val categoryListener: CategoryListener): Li
         setHasStableIds(true)
     }
 
-    fun addList(categories : List<Categories>?) {
+    fun addList(categories: List<Categories>?) {
         adapterScope.launch {
-            withContext(Dispatchers.Main){
+            withContext(Dispatchers.Main) {
                 unFilteredList = categories
                 submitList(categories)
             }
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType:Int): ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder.from(parent)
     }
 
-
-    override fun onBindViewHolder(holder: ViewHolder, position:Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         tracker?.let {
-            holder.bind(getItem(position),it.isSelected(position.toLong()),categoryListener)
+            holder.bind(getItem(position), it.isSelected(position.toLong()), categoryListener)
         }
 
-        if(tracker?.isSelected(position.toLong())!!){
+        if (tracker?.isSelected(position.toLong())!!) {
                 holder.itemView.cardView.setBackgroundResource(R.drawable.item_category_background)
-            }else{
+            } else {
                 holder.itemView.cardView.setBackgroundResource(0)
         }
     }
 
-
-    class ViewHolder private constructor(private val categoriesItemExpenseBinding: CategoriesItemExpenseBinding):
+    class ViewHolder private constructor(private val categoriesItemExpenseBinding: CategoriesItemExpenseBinding) :
         RecyclerView.ViewHolder(categoriesItemExpenseBinding.root) {
         fun bind(
             categories: Categories,
@@ -86,13 +83,13 @@ class ExpenseCategoryAdapter(private val categoryListener: CategoryListener): Li
 
     fun filter(query: CharSequence?) {
         val list = mutableListOf<Categories>()
-        if(!query?.trim().isNullOrEmpty()) {
+        if (!query?.trim().isNullOrEmpty()) {
             unFilteredList?.filter {
                 it.CategoryName?.toLowerCase(Locale.getDefault())!!.contains("$query")
             }?.let {
                list.addAll(it)
             }
-        }else {
+        } else {
             unFilteredList?.let {
                 list.addAll(it)
             }
@@ -103,8 +100,7 @@ class ExpenseCategoryAdapter(private val categoryListener: CategoryListener): Li
     override fun getItemId(position: Int): Long = position.toLong()
 }
 
-
-class ExpenseCategoryResponseDiffCallback: DiffUtil.ItemCallback<Categories>() {
+class ExpenseCategoryResponseDiffCallback : DiffUtil.ItemCallback<Categories>() {
     override fun areItemsTheSame(oldItem: Categories, newItem: Categories): Boolean {
         return oldItem.id == newItem.id
     }
@@ -113,6 +109,6 @@ class ExpenseCategoryResponseDiffCallback: DiffUtil.ItemCallback<Categories>() {
     }
 }
 
-class CategoryListener(val onClickListener:(categories:Categories)->Unit){
-    fun onClick(categories:Categories) = onClickListener(categories)
+class CategoryListener(val onClickListener: (categories: Categories) -> Unit) {
+    fun onClick(categories: Categories) = onClickListener(categories)
 }

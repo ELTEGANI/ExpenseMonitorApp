@@ -6,12 +6,9 @@ import com.monitoryourexpenses.expenses.monthexpense.MonthExpenseFragment
 import com.monitoryourexpenses.expenses.todayexpense.TodayExpenseFragment
 import com.monitoryourexpenses.expenses.weekexpense.WeekExpenseFragment
 
-
-
 const val TODAY_EXPENSE_INDEX = 0
 const val WEEK_EXPENSE_INDEX = 1
-const val MONTH_EXPENSE_INDEX =2
-
+const val MONTH_EXPENSE_INDEX = 2
 
 class PagerAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
 
@@ -32,5 +29,4 @@ class PagerAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
     override fun createFragment(position: Int): Fragment {
         return tabFragmentsCreators[position]?.invoke() ?: throw IndexOutOfBoundsException()
     }
-
 }

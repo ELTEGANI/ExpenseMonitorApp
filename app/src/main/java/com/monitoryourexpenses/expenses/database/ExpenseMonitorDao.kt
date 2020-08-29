@@ -6,40 +6,39 @@ import androidx.room.Insert
 import androidx.room.Query
 import kotlinx.coroutines.flow.Flow
 
-
 @Dao
 interface ExpenseMonitorDao {
 
     @Query("SELECT * from expenses WHERE date=:todayDate and currency =:currency")
-    fun retrieveTodayExpense(todayDate:String,currency: String): LiveData<List<Expenses>>
+    fun retrieveTodayExpense(todayDate: String, currency: String): LiveData<List<Expenses>>
 
     @Query("SELECT * from expenses WHERE date between :startWeek and :endWeek and currency =:currency")
-    fun retrieveWeekExpense(startWeek:String,endWeek:String,currency: String):LiveData<List<Expenses>>
+    fun retrieveWeekExpense(startWeek: String, endWeek: String, currency: String): LiveData<List<Expenses>>
 
     @Query("SELECT * from expenses WHERE date between :startMonth and :endMonth and currency =:currency")
-    fun retrieveMonthExpense(startMonth:String,endMonth:String,currency:String): LiveData<List<Expenses>>
+    fun retrieveMonthExpense(startMonth: String, endMonth: String, currency: String): LiveData<List<Expenses>>
 
     @Query("SELECT SUM(amount) from expenses WHERE date=:todayDate and currency =:currency")
-    fun retrieveSumationOfTodayExpense(todayDate:String,currency: String): Flow<String>
+    fun retrieveSumationOfTodayExpense(todayDate: String, currency: String): Flow<String>
 
     @Query("SELECT SUM(amount) from expenses WHERE date between :startWeek and :endWeek and currency =:currency")
-    fun retrieveSumationOfWeekExpense(startWeek:String,endWeek:String,currency: String): Flow<String>
+    fun retrieveSumationOfWeekExpense(startWeek: String, endWeek: String, currency: String): Flow<String>
 
     @Query("SELECT SUM(amount) from expenses WHERE date between :startMonth and :endMonth and currency =:currency")
-    fun retrieveSumationOfMonthExpense(startMonth:String,endMonth:String,currency:String): Flow<String>
+    fun retrieveSumationOfMonthExpense(startMonth: String, endMonth: String, currency: String): Flow<String>
 
     @Query("DELETE FROM expenses WHERE expense_id=:id")
-    suspend fun deleteExpenses(id:String)
+    suspend fun deleteExpenses(id: String)
 
-    //update expense
+    // update expense
     @Query("UPDATE expenses SET amount=:amount,description=:description,expense_category=:expensecategory,date=:date WHERE expense_id=:id")
-    suspend fun updateExpenses(id: String,amount:String,description:String,expensecategory:String,date:String)
+    suspend fun updateExpenses(id: String, amount: String, description: String, expensecategory: String, date: String)
 
     @Insert
     suspend fun insertExpenses(expenses: Expenses)
 
     @Insert
-    suspend fun insertNewCategory(categories:List<Categories>)
+    suspend fun insertNewCategory(categories: List<Categories>)
 
     @Insert
     fun insertExpensesForCachingData(vararg expenses: Expenses)
@@ -54,6 +53,5 @@ interface ExpenseMonitorDao {
     fun selectSumationOfCurrencies(): LiveData<List<AllCurrencies>>
 
     @Query("select expense_category,SUM(amount) as amount from expenses WHERE date BETWEEN :startMonth AND :endMonth AND currency =:currency GROUP BY expense_category")
-    fun selectSumationOfCategories(startMonth: String,endMonth: String,currency:String): LiveData<List<AllCategories>>
-
+    fun selectSumationOfCategories(startMonth: String, endMonth: String, currency: String): LiveData<List<AllCategories>>
 }
