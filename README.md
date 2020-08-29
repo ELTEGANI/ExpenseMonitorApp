@@ -27,6 +27,34 @@ Application is available here:
         <td><img src = "app/screenshots/7.jpg" ></td>
         <td><img src = "app/screenshots/8.jpg" ></td>
       </tr>
+       <tr>
+              <td><img src = "app/screenshots/9.jpg" ></td>
+              <td><img src = "app/screenshots/10.jpg" ></td>
+              <td><img src = "app/screenshots/11.jpg" ></td>
+              <td><img src = "app/screenshots/12.jpg" ></td>
+       </tr>
+</table> 
+
+## Night Mode Screenshots
+<table align="center">
+        <tr>
+          <td><img src = "app/screenshots/1_d.jpg" ></td>
+          <td><img src = "app/screenshots/2_d.jpg" ></td>
+          <td><img src = "app/screenshots/3_d.jpg" ></td>
+          <td><img src = "app/screenshots/4_d.jpg" ></td>
+        </tr>
+      <tr>
+        <td><img src = "app/screenshots/5_d.jpg" ></td>
+        <td><img src = "app/screenshots/6_d.jpg" ></td>
+        <td><img src = "app/screenshots/7_d.jpg" ></td>
+        <td><img src = "app/screenshots/8_d.jpg" ></td>
+      </tr>
+       <tr>
+              <td><img src = "app/screenshots/9_d.jpg" ></td>
+              <td><img src = "app/screenshots/10_d.jpg" ></td>
+              <td><img src = "app/screenshots/11_d.jpg" ></td>
+              <td><img src = "app/screenshots/12_d.jpg" ></td>
+       </tr>
 </table> 
 
 ### Libraries & documentation
@@ -43,3 +71,5 @@ Application is available here:
 - Recyclerview-Selection[DOCS](https://developer.android.com/reference/kotlin/androidx/recyclerview/selection/package-summary)
 - Kotlin Flow [DOCS](https://kotlinlang.org/docs/reference/coroutines/flow.html)
 - Unit-Testing [DOCS](https://developer.android.com/training/testing/unit-testing)
+- MPAndroidChart [DOCS](https://github.com/PhilJay/MPAndroidChart)
+- Container Transform [DOCS](https://github.com/material-components/material-components-android/blob/master/docs/theming/Motion.md)
