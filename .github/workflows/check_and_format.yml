@@ -11,21 +11,21 @@ jobs:
   Testing:
     runs-on: ubuntu-latest
   steps:
-      - uses: actions/checkout@v2
+    - uses: actions/checkout@v2
 
-      - name: Set Up SDK
+    - name: Set Up SDK
         uses: actions/checkout@v1
 
-      - name: Set up JDK 1.8
+    - name: Set up JDK 1.8
         uses: actions/setup-java@v1
-        with:
+      with:
           java-version: 1.8
 
-      - name: Looking for gradle check
+    - name: Looking for gradle check
         run: ./gradlew
 
-      - name: Run ktlintCheck
+    - name: Run ktlintCheck
         run: ./gradlew ktlintCheck
 
-      - name: Run ktlintFormat
+    - name: Run ktlintFormat
         run: ./gradlew ktlintFormat
