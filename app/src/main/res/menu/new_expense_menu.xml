@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/add_new_category"
-        android:title="@string/share_application"
+        android:title="@string/create_new_expense"
         android:icon="@drawable/ic_add"
         app:showAsAction="ifRoom"/>
 </menu>
