@@ -83,6 +83,11 @@ class MyExpenseFragment : Fragment() {
 
     @ExperimentalCoroutinesApi
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+
+        if (context?.let { PrefManager.hasCurrency(it) == false }!!) {
+            findNavController().navigate(R.id.action_myExpenseFragment_to_userCurrencyFragment)
+        }
+
         binding = DataBindingUtil.inflate(inflater, R.layout.my_expense_fragment, container, false)
 
         val application = requireNotNull(this.activity).application

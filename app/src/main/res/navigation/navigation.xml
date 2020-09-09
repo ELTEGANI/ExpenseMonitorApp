@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:startDestination="@id/loginUserFragment">
+    app:startDestination="@id/myExpenseFragment">
     <fragment
-            android:id="@+id/registerationUserFragment"
+            android:id="@+id/userCurrencyFragment"
             android:name="com.monitoryourexpenses.expenses.usercurrency.GetUserCurrencyFragment"
-            android:label="RegisterationUserFragment" >
+            android:label="UserCurrencyFragment" >
         <action
                 android:id="@+id/action_registeration_to_myExpense"
                 app:destination="@id/myExpenseFragment"
-                app:popUpTo="@+id/registerationUserFragment"
+                app:popUpTo="@+id/userCurrencyFragment"
                 app:popUpToInclusive="true" />
     </fragment>
 
@@ -26,14 +26,12 @@
                 app:destination="@id/updateAndDeleteExpenseFragment"
             />
         <action
-                android:id="@+id/action_myExpenseFragment_to_loginUserFragment"
-                app:destination="@id/loginUserFragment"
-                app:popUpTo="@+id/myExpenseFragment"
-                app:popUpToInclusive="true" />
-        <action
                 android:id="@+id/action_myExpenseFragment_to_settingsFragment"
                 app:destination="@id/settingsFragment"
                 app:popUpTo="@+id/myExpenseFragment" />
+        <action
+            android:id="@+id/action_myExpenseFragment_to_userCurrencyFragment"
+            app:destination="@id/userCurrencyFragment" />
     </fragment>
     <fragment
             android:id="@+id/createNewExpenseFragment"
@@ -43,21 +41,6 @@
                 android:id="@+id/action_createNewExpenseFragment_to_myExpenseFragment"
                 app:destination="@id/myExpenseFragment"
                 app:popUpTo="@+id/myExpenseFragment"
-                app:popUpToInclusive="true" />
-    </fragment>
-    <fragment
-            android:id="@+id/loginUserFragment"
-            android:name="com.monitoryourexpenses.expenses.splashscreen.SplashScreenFragment"
-            android:label="LoginUserFragment" >
-        <action
-                android:id="@+id/action_loginUserFragment_to_registerationUserFragment"
-                app:destination="@id/registerationUserFragment"
-                app:popUpTo="@+id/loginUserFragment"
-                app:popUpToInclusive="true" />
-        <action
-                android:id="@+id/action_loginUserFragment_to_myExpenseFragment"
-                app:destination="@id/myExpenseFragment"
-                app:popUpTo="@+id/loginUserFragment"
                 app:popUpToInclusive="true" />
     </fragment>
 
