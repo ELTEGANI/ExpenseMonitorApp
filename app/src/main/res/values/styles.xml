@@ -1,8 +1,7 @@
-
 <resources>
 
 
-    <style name="buttonStyle" parent="Widget.MaterialComponents.Button" >
+    <style name="buttonStyle" parent="Widget.MaterialComponents.Button">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">52dp</item>
         <item name="android:layout_marginStart">@dimen/grid_2</item>
@@ -51,5 +50,14 @@
     <style name="actionOverflowButtonStyle" parent="@style/Widget.AppCompat.ActionButton.Overflow">
         <item name="android:tint">?attr/colorSurface</item>
     </style>
+
+    <style name="Theme.ExpenseMonitor.DayNight.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.ExpenseMonitor.DayNight.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.ExpenseMonitor.DayNight.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 </resources>
