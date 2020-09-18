@@ -72,3 +72,4 @@ Application is available here:
 - MPAndroidChart [DOCS](https://github.com/PhilJay/MPAndroidChart)
 - Container Transform [DOCS](https://github.com/material-components/material-components-android/blob/master/docs/theming/Motion.md)
 - R8 [DOCS](https://developer.android.com/studio/build/shrink-code)
+- Dependency injection with Hilt [DOCS](https://developer.android.com/training/dependency-injection/hilt-android)
