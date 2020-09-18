@@ -9,6 +9,7 @@
             <variable
                     name="clickListener"
                     type="com.monitoryourexpenses.expenses.adapters.ExpenseCategoryListener" />
+
         </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -82,7 +83,6 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginBottom="70dp"
                     app:autoSizeTextType="uniform"
-                    app:expenseAmount="@{expensesProperties}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -100,6 +100,20 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.0" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/amount_expense"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginBottom="70dp"
+                    android:text="@{expensesProperties.amount.toString()}"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0" />
+
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.card.MaterialCardView>

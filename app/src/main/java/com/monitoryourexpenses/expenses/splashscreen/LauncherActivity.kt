@@ -9,10 +9,11 @@ import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.monitoryourexpenses.expenses.MainActivity
 import com.monitoryourexpenses.expenses.R
 import com.monitoryourexpenses.expenses.databinding.ActivityLauncherBinding
-import com.monitoryourexpenses.expenses.utilites.MyApp.Companion.context
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
 
 
+@AndroidEntryPoint
 class LauncherActivity : AppCompatActivity() {
 
     private lateinit var activityLauncherBinding : ActivityLauncherBinding
@@ -22,12 +23,12 @@ class LauncherActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         activityLauncherBinding = DataBindingUtil.setContentView(this, R.layout.activity_launcher)
 
-        context?.let {
-            Glide.with(it)
+
+            Glide.with(this)
                 .load(R.mipmap.ic_launcher_round)
                 .transform(CircleCrop())
                 .into(activityLauncherBinding.imageView)
-        }
+
         activityScope.launch {
             delay(1000)
             startActivity(Intent(this@LauncherActivity,MainActivity::class.java))

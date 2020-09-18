@@ -6,60 +6,58 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
 import com.monitoryourexpenses.expenses.R
 import com.monitoryourexpenses.expenses.adapters.DurationsExpenseAdapter
 import com.monitoryourexpenses.expenses.adapters.ExpenseCategoryListener
-import com.monitoryourexpenses.expenses.database.ExpenseMonitorDataBase
 import com.monitoryourexpenses.expenses.databinding.TodayExpenseFragmentBinding
 import com.monitoryourexpenses.expenses.myexpenses.MyExpenseFragmentDirections
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class TodayExpenseFragment : Fragment() {
 
-    private lateinit var binding: TodayExpenseFragmentBinding
+    private lateinit var todayExpenseFragmentBinding : TodayExpenseFragmentBinding
+    @Inject lateinit var adapter: DurationsExpenseAdapter
+    private val todayExpenseFragmentViewModel:TodayExpenseFragmentViewModel by viewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        binding = DataBindingUtil.inflate(inflater, R.layout.today_expense_fragment, container, false)
+        todayExpenseFragmentBinding = DataBindingUtil.inflate(inflater, R.layout.today_expense_fragment, container, false)
 
-        val application = requireNotNull(this.activity).application
-        val dataBase = ExpenseMonitorDataBase.getInstance(application).expenseMonitorDao
-        val viewModelFactory = TodayExpenseFragmentViewModelFactory(dataBase, application)
+        todayExpenseFragmentBinding.lifecycleOwner = this
+        todayExpenseFragmentBinding.viewModel = todayExpenseFragmentViewModel
 
-        val viewModel = ViewModelProvider(this, viewModelFactory)
-            .get(TodayExpenseFragmentViewModel::class.java)
-
-        binding.lifecycleOwner = this
-        binding.viewModel = viewModel
-
-        viewModel.navigateToSelectedExpense.observe(viewLifecycleOwner, Observer {
+        todayExpenseFragmentViewModel.navigateToSelectedExpense.observe(viewLifecycleOwner, Observer {
             if (it != null) {
                 val direction = MyExpenseFragmentDirections.actionMyExpenseFragmentToUpdateAndDeleteExpenseFragment(it)
                 findNavController().navigate(direction)
-                viewModel.displaySelectedExpenseCompleted()
+                todayExpenseFragmentViewModel.displaySelectedExpenseCompleted()
             }
         })
 
-        val adapter = DurationsExpenseAdapter(ExpenseCategoryListener {
-            viewModel.displaySelectedExpense(it)
+
+        adapter?.setOnClickListener(ExpenseCategoryListener {
+           todayExpenseFragmentViewModel.displaySelectedExpense(it)
         })
 
-        binding.todayExpenseList.itemAnimator = DefaultItemAnimator()
-        binding.todayExpenseList.adapter = adapter
+        todayExpenseFragmentBinding.todayExpenseList.itemAnimator = DefaultItemAnimator()
+        todayExpenseFragmentBinding.todayExpenseList.adapter = adapter
 
-        viewModel.todayExpenses.observe(viewLifecycleOwner, Observer {
+        todayExpenseFragmentViewModel.todayExpenses.observe(viewLifecycleOwner, Observer {
             it?.let {
                 if (it.isNotEmpty()) {
-                    adapter.submitList(it.reversed())
+                    adapter?.submitList(it.reversed())
                 } else {
-                    binding.noExpensesTextView.visibility = View.VISIBLE
+                    todayExpenseFragmentBinding.noExpensesTextView.visibility = View.VISIBLE
                 }
             }
         })
 
-        return binding.root
+        return todayExpenseFragmentBinding.root
     }
 }

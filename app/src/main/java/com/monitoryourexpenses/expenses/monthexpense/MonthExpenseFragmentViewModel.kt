@@ -1,23 +1,23 @@
 package com.monitoryourexpenses.expenses.monthexpense
 
-import android.app.Application
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.monitoryourexpenses.expenses.database.ExpenseMonitorDao
 import com.monitoryourexpenses.expenses.database.Expenses
 import com.monitoryourexpenses.expenses.database.LocalRepository
-import com.monitoryourexpenses.expenses.utilites.PrefManager
+import com.monitoryourexpenses.expenses.prefs.ExpenseMonitorSharedPreferences
+import javax.inject.Inject
 
-class MonthExpenseFragmentViewModel(val database: ExpenseMonitorDao, val application: Application) : ViewModel() {
+class MonthExpenseFragmentViewModel @ViewModelInject constructor(expenseMonitorSharedPreferences: ExpenseMonitorSharedPreferences, localRepository: LocalRepository) : ViewModel() {
 
-    private val localRepository = LocalRepository(database)
 
     private val _navigateToSelectedExpense = MutableLiveData<Expenses>()
     val navigateToSelectedExpense: LiveData<Expenses>
         get() = _navigateToSelectedExpense
 
-    val monthExpenses = localRepository.getMonthExpenses(PrefManager.getStartOfTheMonth(application).toString(), PrefManager.getEndOfTheMonth(application).toString(), PrefManager.getCurrency(application).toString())
+    val monthExpenses = localRepository.getMonthExpenses(expenseMonitorSharedPreferences.getStartOfTheMonth().toString(),expenseMonitorSharedPreferences.getEndOfTheMonth().toString(),
+        expenseMonitorSharedPreferences.getCurrency().toString())
 
     fun displaySelectedExpense(expenses: Expenses) {
         _navigateToSelectedExpense.value = expenses

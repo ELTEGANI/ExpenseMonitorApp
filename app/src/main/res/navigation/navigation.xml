@@ -64,10 +64,9 @@
             android:id="@+id/settingsFragment"
             android:name="com.monitoryourexpenses.expenses.settings.SettingsFragment"
             android:label="SettingsFragment" >
+
         <action
-                android:id="@+id/action_settingsFragment_to_myExpenseFragment"
-                app:destination="@id/myExpenseFragment"
-                app:popUpTo="@+id/myExpenseFragment"
-                app:popUpToInclusive="true" />
+            android:id="@+id/action_settingsFragment_to_myExpenseFragment"
+            app:destination="@id/myExpenseFragment" />
     </fragment>
 </navigation>

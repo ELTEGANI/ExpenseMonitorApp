@@ -93,7 +93,7 @@
                 android:imeOptions="actionNext"
                 android:inputType="text"
                 android:maxLength="50"
-                android:text="@{viewModel.selectedExpenseMsg.description}" />
+                />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -116,7 +116,6 @@
                 android:layout_height="52dp"
                 android:importantForAutofill="no"
                 android:inputType="number"
-                android:text="@{viewModel.selectedExpenseMsg.amount.toString()}"
                 style="@style/expenseItemStyle"
                 android:hint="@string/amount" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -150,7 +149,6 @@
                 android:id="@+id/date_edit_text"
                 android:layout_width="match_parent"
                 android:layout_height="52dp"
-                android:text="@{viewModel.currentDate}"
                 style="@style/expenseItemStyle"
                 android:enabled="false"
                 />

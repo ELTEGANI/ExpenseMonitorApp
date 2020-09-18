@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -16,50 +17,53 @@ import com.monitoryourexpenses.expenses.adapters.ExpenseCategoryListener
 import com.monitoryourexpenses.expenses.database.ExpenseMonitorDataBase
 import com.monitoryourexpenses.expenses.databinding.WeekExpenseFragmentBinding
 import com.monitoryourexpenses.expenses.myexpenses.MyExpenseFragmentDirections
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+
+@AndroidEntryPoint
 class WeekExpenseFragment : Fragment() {
 
-    private lateinit var binding: WeekExpenseFragmentBinding
+    private lateinit var weekExpenseFragmentBinding : WeekExpenseFragmentBinding
+
+    @Inject
+    lateinit var adapter: DurationsExpenseAdapter
+
+    private val weekExpenseFragmentViewModel:WeekExpenseFragmentViewModel by viewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        binding = DataBindingUtil.inflate(inflater, R.layout.week_expense_fragment, container, false)
+        weekExpenseFragmentBinding = DataBindingUtil.inflate(inflater, R.layout.week_expense_fragment, container, false)
 
-        val application = requireNotNull(this.activity).application
-        val dataBase = ExpenseMonitorDataBase.getInstance(application).expenseMonitorDao
-        val viewModelFactory = WeekExpenseFragmentViewModelFactory(dataBase, application)
 
-        val viewModel = ViewModelProvider(this, viewModelFactory)
-            .get(WeekExpenseFragmentViewModel::class.java)
+        weekExpenseFragmentBinding.lifecycleOwner = this
+        weekExpenseFragmentBinding.viewModel = weekExpenseFragmentViewModel
 
-        binding.lifecycleOwner = this
-        binding.viewModel = viewModel
-
-        val adapter = DurationsExpenseAdapter(ExpenseCategoryListener {
-            viewModel.displaySelectedExpense(it)
+        adapter?.setOnClickListener(ExpenseCategoryListener {
+            weekExpenseFragmentViewModel.displaySelectedExpense(it)
         })
 
-        viewModel.navigateToSelectedExpense.observe(viewLifecycleOwner, Observer {
+        weekExpenseFragmentViewModel.navigateToSelectedExpense.observe(viewLifecycleOwner, Observer {
             if (it != null) {
                 val direction = MyExpenseFragmentDirections.actionMyExpenseFragmentToUpdateAndDeleteExpenseFragment(it)
                 findNavController().navigate(direction)
-                viewModel.displaySelectedExpenseCompleted()
+                weekExpenseFragmentViewModel.displaySelectedExpenseCompleted()
             }
         })
 
-        binding.weekExpenseList.itemAnimator = DefaultItemAnimator()
-        binding.weekExpenseList.adapter = adapter
+        weekExpenseFragmentBinding.weekExpenseList.itemAnimator = DefaultItemAnimator()
+        weekExpenseFragmentBinding.weekExpenseList.adapter = adapter
 
-        viewModel.weekExpenses.observe(viewLifecycleOwner, Observer {
+        weekExpenseFragmentViewModel.weekExpenses.observe(viewLifecycleOwner, Observer {
             it?.let {
                 if (it.isNotEmpty()) {
-                    adapter.submitList(it.reversed())
+                    adapter?.submitList(it.reversed())
                 } else {
-                    binding.noExpensesTextView.visibility = View.VISIBLE
+                    weekExpenseFragmentBinding.noExpensesTextView.visibility = View.VISIBLE
                 }
             }
         })
 
-        return binding.root
+        return weekExpenseFragmentBinding.root
     }
 }

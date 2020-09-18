@@ -10,16 +10,25 @@ import androidx.recyclerview.widget.RecyclerView
 import com.monitoryourexpenses.expenses.R
 import com.monitoryourexpenses.expenses.database.Categories
 import com.monitoryourexpenses.expenses.databinding.CategoriesItemExpenseBinding
+import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 import kotlinx.android.synthetic.main.categories_item_expense.view.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class ExpenseCategoryAdapter(private val categoryListener: CategoryListener) : ListAdapter<Categories, ExpenseCategoryAdapter.ViewHolder>(
+class ExpenseCategoryAdapter @Inject constructor() : ListAdapter<Categories, ExpenseCategoryAdapter.ViewHolder>(
     ExpenseCategoryResponseDiffCallback()
 ) {
+
+    var categoryListener: CategoryListener? = null
+
+    fun setOnClickListener(categoryListener: CategoryListener) {
+        this.categoryListener = categoryListener
+    }
 
     private val adapterScope = CoroutineScope(Dispatchers.Default)
     private var unFilteredList: List<Categories>? = null
@@ -44,7 +53,11 @@ class ExpenseCategoryAdapter(private val categoryListener: CategoryListener) : L
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         tracker?.let {
-            holder.bind(getItem(position), it.isSelected(position.toLong()), categoryListener)
+            categoryListener?.let { it1 ->
+                holder.bind(getItem(position), it.isSelected(position.toLong()),
+                    it1
+                )
+            }
         }
 
         if (tracker?.isSelected(position.toLong())!!) {
@@ -109,6 +122,7 @@ class ExpenseCategoryResponseDiffCallback : DiffUtil.ItemCallback<Categories>() 
     }
 }
 
-class CategoryListener(val onClickListener: (categories: Categories) -> Unit) {
+
+class CategoryListener (val onClickListener: (categories: Categories) -> Unit) {
     fun onClick(categories: Categories) = onClickListener(categories)
 }

@@ -16,8 +16,8 @@ import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
@@ -47,24 +47,34 @@ import com.monitoryourexpenses.expenses.adapters.MONTH_EXPENSE_INDEX
 import com.monitoryourexpenses.expenses.adapters.PagerAdapter
 import com.monitoryourexpenses.expenses.adapters.TODAY_EXPENSE_INDEX
 import com.monitoryourexpenses.expenses.adapters.WEEK_EXPENSE_INDEX
-import com.monitoryourexpenses.expenses.database.ExpenseMonitorDataBase
 import com.monitoryourexpenses.expenses.databinding.MyExpenseFragmentBinding
-import com.monitoryourexpenses.expenses.utilites.PrefManager
-import com.monitoryourexpenses.expenses.utilites.isConnected
-import com.monitoryourexpenses.expenses.utilites.toast
+import com.monitoryourexpenses.expenses.prefs.ExpenseMonitorSharedPreferences
+import com.monitoryourexpenses.expenses.utilites.UtilitesFunctions
+import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlinx.android.synthetic.main.barchart_bottom_sheets.view.*
 import kotlinx.android.synthetic.main.piechart_bottom_sheets.view.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.threeten.bp.LocalDate
+import javax.inject.Inject
 
-class MyExpenseFragment : Fragment() {
 
-    private lateinit var binding: MyExpenseFragmentBinding
+@AndroidEntryPoint
+class MyExpenseFragment: Fragment() {
+
+    @Inject
+    lateinit var expenseMonitorSharedPreferences: ExpenseMonitorSharedPreferences
+
+    @Inject
+    lateinit var utilitesFunctions: UtilitesFunctions
+
+    private lateinit var myExpenseFragmentBinding : MyExpenseFragmentBinding
+
     @ExperimentalCoroutinesApi
-    lateinit var viewModel: MyExpenseFragmentViewModel
+    private  val myExpenseFragmentViewModel: MyExpenseFragmentViewModel by viewModels()
     private var mGoogleSignInClient: GoogleSignInClient? = null
+
 
     private val appUpdateManager: AppUpdateManager by lazy { AppUpdateManagerFactory.create(this.requireContext()) }
     private val appUpdatedListener: InstallStateUpdatedListener by lazy {
@@ -84,26 +94,19 @@ class MyExpenseFragment : Fragment() {
     @ExperimentalCoroutinesApi
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        if (context?.let { PrefManager.hasCurrency(it) == false }!!) {
+        if (!expenseMonitorSharedPreferences.hasCurrency()) {
             findNavController().navigate(R.id.action_myExpenseFragment_to_userCurrencyFragment)
         }
 
-        binding = DataBindingUtil.inflate(inflater, R.layout.my_expense_fragment, container, false)
+        myExpenseFragmentBinding = DataBindingUtil.inflate(inflater, R.layout.my_expense_fragment, container, false)
 
-        val application = requireNotNull(this.activity).application
-        val dataBase = ExpenseMonitorDataBase.getInstance(application).expenseMonitorDao
-        val viewModelFactory = MyExpenseFragmentViewModelFactory(dataBase, application)
+        myExpenseFragmentBinding.viewModel = myExpenseFragmentViewModel
+        myExpenseFragmentBinding.lifecycleOwner = this
 
-        viewModel = ViewModelProvider(this, viewModelFactory)
-            .get(MyExpenseFragmentViewModel::class.java)
-
-        binding.viewModel = viewModel
-        binding.lifecycleOwner = this
-
-        (activity as AppCompatActivity).setSupportActionBar(binding.bottomAppBar)
+        (activity as AppCompatActivity).setSupportActionBar(myExpenseFragmentBinding.bottomAppBar)
         setHasOptionsMenu(true)
 
-        if (isConnected()) { checkForAppUpdate() }
+        if (utilitesFunctions.isConnected()) { checkForAppUpdate() }
 
         val gso =
             GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -111,8 +114,8 @@ class MyExpenseFragment : Fragment() {
                 .build()
         mGoogleSignInClient = context?.let { GoogleSignIn.getClient(it, gso) }
 
-        val tabLayout = binding.tabs
-        val viewPager = binding.viewPager
+        val tabLayout = myExpenseFragmentBinding.tabs
+        val viewPager = myExpenseFragmentBinding.viewPager
 
         viewPager.adapter = PagerAdapter(this)
 
@@ -126,30 +129,30 @@ class MyExpenseFragment : Fragment() {
                 super.onPageSelected(position)
                 when (position) {
                     0 -> {
-                        viewModel.todayExpense.observe(viewLifecycleOwner, Observer {
-                        binding.expenseTextView.text = PrefManager.getCurrency(context) + " " + it
+                        myExpenseFragmentViewModel.todayExpense.observe(viewLifecycleOwner, Observer {
+                            myExpenseFragmentBinding.expenseTextView.text = expenseMonitorSharedPreferences.getCurrency() + " " + it
                         })
-                        binding.dateTextView.text = LocalDate.now().toString()
+                        myExpenseFragmentBinding.dateTextView.text = LocalDate.now().toString()
                     }
                     1 -> {
-                        viewModel.weekExpense.observe(viewLifecycleOwner, Observer {
-                        binding.expenseTextView.text = PrefManager.getCurrency(context) + " " + it
+                        myExpenseFragmentViewModel.weekExpense.observe(viewLifecycleOwner, Observer {
+                            myExpenseFragmentBinding.expenseTextView.text = expenseMonitorSharedPreferences.getCurrency() + " " + it
                         })
-                        binding.dateTextView.text = PrefManager.getStartOfTheWeek(context) + " " + "/" + " " + PrefManager.getEndOfTheWeek(context)
+                        myExpenseFragmentBinding.dateTextView.text = expenseMonitorSharedPreferences.getStartOfTheWeek() + " " + "/" + " " + expenseMonitorSharedPreferences.getEndOfTheWeek()
                     }
                     2 -> {
-                        viewModel.monthExpense.observe(viewLifecycleOwner, Observer {
-                        binding.expenseTextView.text = PrefManager.getCurrency(context) + " " + it
+                        myExpenseFragmentViewModel.monthExpense.observe(viewLifecycleOwner, Observer {
+                            myExpenseFragmentBinding.expenseTextView.text = expenseMonitorSharedPreferences.getCurrency() + " " + it
                         })
-                        binding.dateTextView.text = PrefManager.getStartOfTheMonth(context) + " " + "/" + " " + PrefManager.getEndOfTheMonth(context)
+                        myExpenseFragmentBinding.dateTextView.text = expenseMonitorSharedPreferences.getStartOfTheMonth() + " " + "/" + " " + expenseMonitorSharedPreferences.getEndOfTheMonth()
                     }
                 }
             }
         })
 
-        viewModel.navigateToMyExpense.observe(viewLifecycleOwner, Observer {
+        myExpenseFragmentViewModel.navigateToMyExpense.observe(viewLifecycleOwner, Observer {
             shouldNavigate -> if (shouldNavigate) {
-            val navController = binding.root.findNavController()
+            val navController = myExpenseFragmentBinding.root.findNavController()
             MyExpenseFragment.apply {
                 exitTransition = MaterialElevationScale(false).apply {
                     duration = resources.getInteger(R.integer.expense_motion_duration_large).toLong()
@@ -159,11 +162,11 @@ class MyExpenseFragment : Fragment() {
                 }
             }
             navController.navigate(R.id.action_myExpenseFragment_to_createNewExpenseFragment)
-            viewModel.onNavigatedToMyExpense()
+            myExpenseFragmentViewModel.onNavigatedToMyExpense()
             }
         })
 
-        return binding.root
+        return myExpenseFragmentBinding.root
     }
 
      private fun checkForAppUpdate() {
@@ -203,7 +206,7 @@ class MyExpenseFragment : Fragment() {
     }
 
     private fun popupSnackbarForCompleteUpdate() {
-        val snackbar = Snackbar.make(binding.coordinatorlayout,
+        val snackbar = Snackbar.make(myExpenseFragmentBinding.coordinatorlayout,
             getString(R.string.update_download),
             Snackbar.LENGTH_INDEFINITE)
         snackbar.setAction(getString(R.string.restart)) { appUpdateManager.completeUpdate() }
@@ -296,7 +299,7 @@ class MyExpenseFragment : Fragment() {
 
     @ExperimentalCoroutinesApi
     private fun categoriesReportsDialog() {
-        viewModel.sumationOfCategories?.observe(viewLifecycleOwner, Observer { catogoriesAndAmount ->
+        myExpenseFragmentViewModel.sumationOfCategories?.observe(viewLifecycleOwner, Observer { catogoriesAndAmount ->
             if (catogoriesAndAmount.isNotEmpty()) {
                 val dialogBinding = DataBindingUtil
                     .inflate<ViewDataBinding>(LayoutInflater.from(context), R.layout.piechart_bottom_sheets, null, false)
@@ -336,14 +339,14 @@ class MyExpenseFragment : Fragment() {
                 dialogBinding.root.rootView.pie_chart.invalidate()
                 dialog?.show()
             } else {
-                context?.toast(getString(R.string.no_data_available))
+                utilitesFunctions.toast(getString(R.string.no_data_available))
             }
         })
     }
 
     @ExperimentalCoroutinesApi
     private fun currenciesReportsDialog() {
-        viewModel.sumationOfCurrencies.observe(viewLifecycleOwner, Observer { currenciesAndAmount ->
+        myExpenseFragmentViewModel.sumationOfCurrencies.observe(viewLifecycleOwner, Observer { currenciesAndAmount ->
             if (currenciesAndAmount.isNotEmpty()) {
                 val dialogBinding = DataBindingUtil
                     .inflate<ViewDataBinding>(LayoutInflater.from(context), R.layout.barchart_bottom_sheets, null, false)
@@ -364,8 +367,7 @@ class MyExpenseFragment : Fragment() {
                 dialogBinding.root.rootView.bar_chart.data = barData
                 dialogBinding.root.rootView.bar_chart.xAxis.granularity = 1f
                 dialogBinding.root.rootView.bar_chart.xAxis.isGranularityEnabled = true
-                dialogBinding.root.rootView.bar_chart.xAxis.valueFormatter =
-                    IndexAxisValueFormatter(currenciesList)
+                dialogBinding.root.rootView.bar_chart.xAxis.valueFormatter = IndexAxisValueFormatter(currenciesList)
                 dialogBinding.root.rootView.bar_chart.description.isEnabled = false
                 dialogBinding.root.rootView.bar_chart.xAxis.setDrawGridLines(true)
                 dialogBinding.root.rootView.bar_chart.setPinchZoom(false)
@@ -387,7 +389,7 @@ class MyExpenseFragment : Fragment() {
                 dialogBinding.root.rootView.bar_chart.invalidate()
                 dialog?.show()
             } else {
-             context?.toast(getString(R.string.no_data_available))
+                utilitesFunctions.toast(getString(R.string.no_data_available))
             }
         })
     }

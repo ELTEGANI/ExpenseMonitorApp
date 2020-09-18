@@ -9,10 +9,15 @@ import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import com.monitoryourexpenses.expenses.BuildConfig
 import com.monitoryourexpenses.expenses.R
-import com.monitoryourexpenses.expenses.utilites.PrefManager
+import com.monitoryourexpenses.expenses.prefs.ExpenseMonitorSharedPreferences
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
-class SettingsFragment : PreferenceFragmentCompat(), SharedPreferences.OnSharedPreferenceChangeListener {
+@AndroidEntryPoint
+class SettingsFragment: PreferenceFragmentCompat(), SharedPreferences.OnSharedPreferenceChangeListener {
 
+    @Inject
+    lateinit var expenseMonitorSharedPreferences: ExpenseMonitorSharedPreferences
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
       setPreferencesFromResource(R.xml.settings, rootKey)
     }
@@ -43,11 +48,11 @@ class SettingsFragment : PreferenceFragmentCompat(), SharedPreferences.OnSharedP
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
        if (key != null && key != "exceed_expense") {
            sharedPreferences?.getString(key, null)?.substring(range = 0..2)?.let {
-               PrefManager.saveCurrency(context, it)
+               expenseMonitorSharedPreferences.saveCurrency(it)
            }
            // navigate back to main_menu expenses
-           val direction = SettingsFragmentDirections.actionSettingsFragmentToMyExpenseFragment()
-           findNavController().navigate(direction)
+//           val direction = SettingsFragmentDirections.actionSettingsFragmentToMyExpenseFragment()
+//           findNavController().navigate(direction)
        }
     }
 }
