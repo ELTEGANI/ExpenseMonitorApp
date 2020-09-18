@@ -1,27 +1,18 @@
 package com.monitoryourexpenses.expenses.updateanddeleteexpense
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
-import androidx.preference.PreferenceManager
-import com.monitoryourexpenses.expenses.database.ExpenseMonitorDao
+import androidx.hilt.lifecycle.ViewModelInject
+import androidx.lifecycle.*
 import com.monitoryourexpenses.expenses.database.Expenses
 import com.monitoryourexpenses.expenses.database.LocalRepository
-import com.monitoryourexpenses.expenses.utilites.PrefManager
+import com.monitoryourexpenses.expenses.prefs.ExpenseMonitorSharedPreferences
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
 
-class UpdateAndDeleteFragmentViewModel(val expenses: Expenses, application: Application, dataBase: ExpenseMonitorDao) : AndroidViewModel(application) {
+class UpdateAndDeleteFragmentViewModel @ViewModelInject constructor(
+    private var localRepository: LocalRepository,
+    var expenseMonitorSharedPreferences : ExpenseMonitorSharedPreferences) : ViewModel() {
 
-    private val application = getApplication<Application>().applicationContext
-    private val localRepository = LocalRepository(dataBase)
     val categories = localRepository.getAllCategories()
-
-    private val _selectedExpense = MutableLiveData<Expenses>()
-    val selectedExpenseMsg: LiveData<Expenses>
-        get() = _selectedExpense
 
     private val _validationMsg = MutableLiveData<Boolean>()
     val validationMsg: LiveData<Boolean>
@@ -35,12 +26,6 @@ class UpdateAndDeleteFragmentViewModel(val expenses: Expenses, application: Appl
     val exceedsMessage: LiveData<String>
         get() = _exceedsMessage
 
-    val currentDate = MutableLiveData<String>()
-
-    init {
-        _selectedExpense.value = expenses
-        currentDate.value = expenses.date
-    }
 
     @ExperimentalCoroutinesApi
     fun deleteExpense(expenseId: String) {
@@ -56,10 +41,9 @@ class UpdateAndDeleteFragmentViewModel(val expenses: Expenses, application: Appl
         } else {
             viewModelScope.launch {
                 if (localRepository.sumationOfSpecifiedExpenses(
-                        PrefManager.getCurrency(application).toString())
-                    == PreferenceManager.getDefaultSharedPreferences(application)
-                        .getString("exceed_expense", null).toString()) {
-                    _exceedsMessage.value = PreferenceManager.getDefaultSharedPreferences(application).getString("exceed_expense", null)
+                        expenseMonitorSharedPreferences.getCurrency().toString())
+                    == expenseMonitorSharedPreferences.getExceedExpense().toString()) {
+                    _exceedsMessage.value = expenseMonitorSharedPreferences.getExceedExpense()
                 } else {
                     viewModelScope.launch {
                         localRepository.updateExpenseUsingId(

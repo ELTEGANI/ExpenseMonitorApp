@@ -14,14 +14,8 @@ import com.google.android.material.elevation.ElevationOverlayProvider
 import com.monitoryourexpenses.expenses.R
 import com.monitoryourexpenses.expenses.database.Categories
 import com.monitoryourexpenses.expenses.database.Expenses
+import com.monitoryourexpenses.expenses.prefs.ExpenseMonitorSharedPreferences
 
-@SuppressLint("SetTextI18n")
-@BindingAdapter("expenseAmount")
-fun TextView.setExpenseAmount(expenses: Expenses?) {
-    expenses?.let {
-         text = PrefManager.getCurrency(context) + " " + expenseAmountFormatter(expenses.amount.toString())
-     }
-}
 
 @BindingAdapter("expenseCategory")
 fun TextView.setExpensecategory(expenses: Expenses?) {

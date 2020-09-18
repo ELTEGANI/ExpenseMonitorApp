@@ -1,24 +1,22 @@
 package com.monitoryourexpenses.expenses.createexpense
 
-import android.app.Application
 import android.util.Log
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.preference.PreferenceManager
 import com.monitoryourexpenses.expenses.database.Categories
-import com.monitoryourexpenses.expenses.database.ExpenseMonitorDao
 import com.monitoryourexpenses.expenses.database.Expenses
 import com.monitoryourexpenses.expenses.database.LocalRepository
-import com.monitoryourexpenses.expenses.utilites.MyApp.Companion.context
-import com.monitoryourexpenses.expenses.utilites.PrefManager
+import com.monitoryourexpenses.expenses.prefs.ExpenseMonitorSharedPreferences
 import kotlinx.coroutines.launch
 import org.threeten.bp.LocalDate
+import javax.inject.Inject
 
-class CreateNewExpenseFragmentViewModel(val database: ExpenseMonitorDao, var application: Application) : ViewModel() {
-
-    private val localRepository = LocalRepository(database)
+class CreateNewExpenseFragmentViewModel @ViewModelInject constructor(val localRepository: LocalRepository,
+                   var sharedPreferences: ExpenseMonitorSharedPreferences) : ViewModel() {
     val amount = MutableLiveData<String>()
     val description = MutableLiveData<String>()
     val currentDate = MutableLiveData<String>()
@@ -48,14 +46,11 @@ class CreateNewExpenseFragmentViewModel(val database: ExpenseMonitorDao, var app
         } else {
             viewModelScope.launch {
                 if (localRepository.sumationOfSpecifiedExpenses(
-                        PrefManager.getCurrency(application).toString()
+                        sharedPreferences.getCurrency().toString()
                     )
-                    == PreferenceManager.getDefaultSharedPreferences(application)
-                        .getString("exceed_expense", null).toString()
+                    == sharedPreferences.getExceedExpense().toString()
                 ) {
-                    _exceedsMessage.value =
-                        PreferenceManager.getDefaultSharedPreferences(application)
-                            .getString("exceed_expense", null)
+                    _exceedsMessage.value = sharedPreferences.getExceedExpense()
                 } else {
                     viewModelScope.launch {
                         val res = localRepository.insertExpense(
@@ -63,7 +58,7 @@ class CreateNewExpenseFragmentViewModel(val database: ExpenseMonitorDao, var app
                                 amount = amount.toBigDecimal(),
                                 description = description,
                                 expenseCategory = category,
-                                currency = PrefManager.getCurrency(context),
+                                currency = sharedPreferences.getCurrency(),
                                 date = date
                             )
                         )

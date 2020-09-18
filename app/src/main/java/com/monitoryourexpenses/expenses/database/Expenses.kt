@@ -6,6 +6,8 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import java.math.BigDecimal
 import kotlinx.android.parcel.Parcelize
+import javax.inject.Inject
+import javax.inject.Singleton
 
 @Entity(tableName = "expenses")
 @Parcelize

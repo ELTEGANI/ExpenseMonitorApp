@@ -1,27 +1,22 @@
 package com.monitoryourexpenses.expenses.myexpenses
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
+import androidx.hilt.lifecycle.ViewModelInject
+import androidx.lifecycle.*
 import com.monitoryourexpenses.expenses.database.AllCategories
 import com.monitoryourexpenses.expenses.database.AllCurrencies
-import com.monitoryourexpenses.expenses.database.ExpenseMonitorDao
 import com.monitoryourexpenses.expenses.database.LocalRepository
+import com.monitoryourexpenses.expenses.prefs.ExpenseMonitorSharedPreferences
 import com.monitoryourexpenses.expenses.utilites.*
-import com.monitoryourexpenses.expenses.utilites.MyApp.Companion.context
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.collect
 import org.threeten.bp.LocalDate
 
-class MyExpenseFragmentViewModel(val database: ExpenseMonitorDao, application: Application) : AndroidViewModel(application) {
+class MyExpenseFragmentViewModel @ViewModelInject constructor(var expenseMonitorSharedPreferences: ExpenseMonitorSharedPreferences,
+                                                                  private var localRepository: LocalRepository,
+                                                                  var utilitesFunctions:UtilitesFunctions) : ViewModel() {
 
-    private val localRepository = LocalRepository(database)
-
-    private val application = getApplication<Application>().applicationContext
     private val _navigateToMyExpense = MutableLiveData<Boolean>()
     val navigateToMyExpense: LiveData<Boolean>
     get() = _navigateToMyExpense
@@ -42,9 +37,9 @@ class MyExpenseFragmentViewModel(val database: ExpenseMonitorDao, application: A
         localRepository.selectSumationOfCurrencies()
 
     val sumationOfCategories: LiveData<List<AllCategories>>? =
-        PrefManager.getEndOfTheMonth(application)?.let { startEndTheMonth ->
-            PrefManager.getStartOfTheMonth(application)?.let { startOfTheMonth ->
-              PrefManager.getCurrency(application)?.let { currency ->
+        expenseMonitorSharedPreferences.getEndOfTheMonth()?.let { startEndTheMonth ->
+            expenseMonitorSharedPreferences.getStartOfTheMonth()?.let { startOfTheMonth ->
+                expenseMonitorSharedPreferences.getCurrency()?.let { currency ->
                   localRepository.selectSumationOfCatogries(
                       startOfTheMonth,
                       startEndTheMonth,
@@ -65,26 +60,27 @@ class MyExpenseFragmentViewModel(val database: ExpenseMonitorDao, application: A
 
     private fun getTodayExpenses() {
         viewModelScope.launch {
-            localRepository.getSumationOfTodayExpenses(PrefManager.getCurrentDate(application).toString(), PrefManager.getCurrency(application).toString()).collect {
-                        _todayExpense.value = expenseAmountFormatter(it)
+            localRepository.getSumationOfTodayExpenses(expenseMonitorSharedPreferences.getCurrentDate().toString(),
+                expenseMonitorSharedPreferences.getCurrency().toString()).collect {
+                        _todayExpense.value = utilitesFunctions.expenseAmountFormatter(it)
                 }
         }
     }
 
     private fun getWeekExpenses() {
         viewModelScope.launch {
-            localRepository.getSumationOfWeekExpenses(PrefManager.getStartOfTheWeek(application).toString(),
-                PrefManager.getEndOfTheWeek(application).toString(), PrefManager.getCurrency(application).toString()).collect {
-                    _weekExpense.value = expenseAmountFormatter(it)
+            localRepository.getSumationOfWeekExpenses(expenseMonitorSharedPreferences.getStartOfTheWeek().toString(),
+                expenseMonitorSharedPreferences.getEndOfTheWeek().toString(),expenseMonitorSharedPreferences.getCurrency().toString()).collect {
+                    _weekExpense.value = utilitesFunctions.expenseAmountFormatter(it)
             }
         }
     }
 
     private fun getMonthExpenses() {
         viewModelScope.launch {
-            localRepository.getSumationOfMonthExpenses(PrefManager.getStartOfTheMonth(application).toString(),
-                PrefManager.getEndOfTheMonth(application).toString(), PrefManager.getCurrency(application).toString()).collect {
-                    _monthExpense.value = expenseAmountFormatter(it)
+            localRepository.getSumationOfMonthExpenses(expenseMonitorSharedPreferences.getStartOfTheMonth().toString(),
+                expenseMonitorSharedPreferences.getEndOfTheMonth().toString(),expenseMonitorSharedPreferences.getCurrency().toString()).collect {
+                    _monthExpense.value = utilitesFunctions.expenseAmountFormatter(it)
             }
         }
     }
@@ -99,13 +95,13 @@ class MyExpenseFragmentViewModel(val database: ExpenseMonitorDao, application: A
 
     private fun checkIfDurationFinished() {
         // today
-        val savedCurrentDate = PrefManager.getCurrentDate(context)
+        val savedCurrentDate = expenseMonitorSharedPreferences.getCurrentDate()
 
         // week
-        val endOfWeek = PrefManager.getEndOfTheWeek(context)
+        val endOfWeek = expenseMonitorSharedPreferences.getEndOfTheWeek()
 
         // month
-        val endOfMonth = PrefManager.getEndOfTheMonth(context)
+        val endOfMonth = expenseMonitorSharedPreferences.getEndOfTheMonth()
 
         // compare dates
         try {
@@ -118,21 +114,21 @@ class MyExpenseFragmentViewModel(val database: ExpenseMonitorDao, application: A
 
         if (currentDate > savedDate) {
             viewModelScope.launch {
-                PrefManager.saveCurrentDate(context, LocalDate.now().toString())
+                expenseMonitorSharedPreferences.saveCurrentDate(LocalDate.now().toString())
             }
         }
 
         if (currentDate > endOfTheWeek) {
             viewModelScope.launch {
-                PrefManager.saveStartOfTheWeek(context, LocalDate.now().toString())
-                PrefManager.saveEndOfTheWeek(application, LocalDate.now().plusDays(7).toString())
+                expenseMonitorSharedPreferences.saveStartOfTheWeek(LocalDate.now().toString())
+                expenseMonitorSharedPreferences.saveEndOfTheWeek(LocalDate.now().plusDays(7).toString())
             }
         }
 
         if (currentDate > endOfTheMonth) {
             viewModelScope.launch {
-                PrefManager.saveStartOfTheMonth(application, LocalDate.now().toString())
-                PrefManager.saveEndOfTheMonth(application, LocalDate.now().plusMonths(1).toString())
+                expenseMonitorSharedPreferences.saveStartOfTheMonth(LocalDate.now().toString())
+                expenseMonitorSharedPreferences.saveEndOfTheMonth(LocalDate.now().plusMonths(1).toString())
             }
         }
         } catch (e: Exception) {
