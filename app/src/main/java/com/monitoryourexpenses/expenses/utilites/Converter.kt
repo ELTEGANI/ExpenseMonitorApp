@@ -2,8 +2,9 @@ package com.monitoryourexpenses.expenses.utilites
 
 import androidx.room.TypeConverter
 import java.math.BigDecimal
+import javax.inject.Inject
 
-class Converter {
+class Converter{
     companion object {
         @TypeConverter
         @JvmStatic

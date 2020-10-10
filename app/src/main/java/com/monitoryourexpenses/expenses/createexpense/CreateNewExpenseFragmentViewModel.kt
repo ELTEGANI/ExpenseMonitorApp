@@ -1,78 +1,108 @@
 package com.monitoryourexpenses.expenses.createexpense
 
-import android.util.Log
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.preference.PreferenceManager
+import com.monitoryourexpenses.expenses.Event
+import com.monitoryourexpenses.expenses.R
 import com.monitoryourexpenses.expenses.database.Categories
 import com.monitoryourexpenses.expenses.database.Expenses
 import com.monitoryourexpenses.expenses.database.LocalRepository
 import com.monitoryourexpenses.expenses.prefs.ExpenseMonitorSharedPreferences
 import kotlinx.coroutines.launch
 import org.threeten.bp.LocalDate
-import javax.inject.Inject
 
 class CreateNewExpenseFragmentViewModel @ViewModelInject constructor(val localRepository: LocalRepository,
-                   var sharedPreferences: ExpenseMonitorSharedPreferences) : ViewModel() {
-    val amount = MutableLiveData<String>()
+        val expenseMonitorSharedPreferences: ExpenseMonitorSharedPreferences) : ViewModel() {
+    val amount      = MutableLiveData<String>()
     val description = MutableLiveData<String>()
     val currentDate = MutableLiveData<String>()
+    var category    = MutableLiveData<String>()
+    var currency    = MutableLiveData<String>()
     val categories = localRepository.getAllCategories()
 
     init {
         currentDate.value = LocalDate.now().toString()
+        currency.value    =  expenseMonitorSharedPreferences.getCurrency()
     }
 
-    private val _validationMsg = MutableLiveData<Boolean>()
-    val validationMsg: LiveData<Boolean>
-        get() = _validationMsg
-
-    private val _makeSelection = MutableLiveData<Boolean>()
-    val makeSelection: LiveData<Boolean>
-        get() = _makeSelection
+    private val _snackbarText = MutableLiveData<Event<Int>>()
+    val snackbarText: LiveData<Event<Int>>
+        get() = _snackbarText
 
     private val _exceedsMessage = MutableLiveData<String>()
     val exceedsMessage: LiveData<String>
         get() = _exceedsMessage
 
-    fun createNewExpense(amount: String, description: String, date: String, category: String) {
-        if (amount.isEmpty() || description.isEmpty()) {
-            _validationMsg.value = false
-        } else if (category.isEmpty()) {
-            _makeSelection.value = false
+    private val _expenseUpdatedEvent = MutableLiveData<Event<Unit>>()
+    val expenseUpdatedEvent: LiveData<Event<Unit>> = _expenseUpdatedEvent
+
+
+
+    fun createNewExpense() {
+        val expenseCategory     = category.value
+        val expenseDescription  = description.value
+        val expenseAmount       = amount.value
+        val expenseDate         = currentDate.value
+        val expenseCurrency     = currency.value
+
+        if (expenseAmount == null || expenseDescription == null) {
+            _snackbarText.value = Event(R.string.fill_empty)
+        } else if (expenseCategory == null) {
+            _snackbarText.value = Event(R.string.select_category)
         } else {
             viewModelScope.launch {
                 if (localRepository.sumationOfSpecifiedExpenses(
-                        sharedPreferences.getCurrency().toString()
+                        expenseMonitorSharedPreferences.getCurrency().toString()
                     )
-                    == sharedPreferences.getExceedExpense().toString()
+                    == expenseMonitorSharedPreferences.getExceedExpense().toString()
                 ) {
-                    _exceedsMessage.value = sharedPreferences.getExceedExpense()
+                    _exceedsMessage.value = expenseMonitorSharedPreferences.getExceedExpense()
                 } else {
                     viewModelScope.launch {
-                        val res = localRepository.insertExpense(
+                        localRepository.insertExpense(
                             Expenses(
-                                amount = amount.toBigDecimal(),
-                                description = description,
-                                expenseCategory = category,
-                                currency = sharedPreferences.getCurrency(),
-                                date = date
+                                amount = expenseAmount.toBigDecimal(),
+                                description = expenseDescription,
+                                expenseCategory = expenseCategory,
+                                currency = expenseCurrency,
+                                date = expenseDate
                             )
                         )
-                        Log.d("res", res.toString())
                     }
-                    _validationMsg.value = true
+                    _snackbarText.value = Event(R.string.expense_created_successfuly)
+                    _expenseUpdatedEvent.value = Event(Unit)
+
                 }
             }
         }
     }
 
-    fun addNewCategory(category: Categories) {
-        viewModelScope.launch {
-            localRepository.insertNewCategory(listOf(category))
+    fun addNewCategory(category: String) {
+        if (category.isNotEmpty()){
+            val newCategory = Categories(id = null,CategoryName = category)
+            viewModelScope.launch {
+                localRepository.insertNewCategory(listOf(newCategory))
+            }
+        }else{
+            _snackbarText.value = Event(R.string.cant_be_empty)
+        }
+
+    }
+
+    fun saveExceedExpense(exceedExpense:String){
+        if (exceedExpense.isEmpty()){
+            _snackbarText.value = Event(R.string.enter_fixed_expense)
+        }else{
+            expenseMonitorSharedPreferences.saveExceededExpenseForSettings(exceedExpense)
         }
     }
+
+    fun cancelExpense(){
+        expenseMonitorSharedPreferences.clearExpense()
+    }
+
+
 }

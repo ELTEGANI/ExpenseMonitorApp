@@ -70,4 +70,5 @@
     <string name="report_currency">تقرير عن جميع عملاتك</string>
     <string name="report_about_categories">تقرير شهري عن الفئات</string>
     <string name="no_data_available">لاتوجد بيانات متاحة</string>
+    <string name="cant_be_empty">تصنيف لايمكن ان يكون فارغ</string>
 </resources>

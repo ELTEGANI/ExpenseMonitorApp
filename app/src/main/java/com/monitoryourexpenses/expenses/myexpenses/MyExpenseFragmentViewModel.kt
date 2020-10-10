@@ -40,7 +40,7 @@ class MyExpenseFragmentViewModel @ViewModelInject constructor(var expenseMonitor
         expenseMonitorSharedPreferences.getEndOfTheMonth()?.let { startEndTheMonth ->
             expenseMonitorSharedPreferences.getStartOfTheMonth()?.let { startOfTheMonth ->
                 expenseMonitorSharedPreferences.getCurrency()?.let { currency ->
-                  localRepository.selectSumationOfCatogries(
+                  localRepository.selectSumationOfCategories(
                       startOfTheMonth,
                       startEndTheMonth,
                       currency

@@ -4,11 +4,9 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.monitoryourexpenses.expenses.database.ExpenseMonitorDao
 import com.monitoryourexpenses.expenses.database.Expenses
 import com.monitoryourexpenses.expenses.database.LocalRepository
 import com.monitoryourexpenses.expenses.prefs.ExpenseMonitorSharedPreferences
-import javax.inject.Inject
 
 class WeekExpenseFragmentViewModel @ViewModelInject constructor(localRepository: LocalRepository, expenseMonitorSharedPreferences: ExpenseMonitorSharedPreferences) : ViewModel() {
 

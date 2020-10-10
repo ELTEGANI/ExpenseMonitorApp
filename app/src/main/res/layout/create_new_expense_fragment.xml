@@ -89,6 +89,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="52dp"
                 android:imeOptions="actionDone"
+                android:text="@={viewModel.description}"
                 android:hint="@string/description"/>
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -111,6 +112,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="52dp"
                 android:inputType="number"
+                android:text="@={viewModel.amount}"
                 style="@style/expenseItemStyle"
                 android:hint="@string/amount" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -146,9 +148,9 @@
                 android:id="@+id/expense_date_textView"
                 android:layout_width="match_parent"
                 android:layout_height="52dp"
-                android:text="@{viewModel.currentDate}"
                 style="@style/expenseItemStyle"
                 android:enabled="false"
+                android:text="@={viewModel.currentDate}"
                 />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -162,6 +164,7 @@
             android:layout_marginEnd="16dp"
             android:text="@string/create_new_expense"
             app:cornerRadius="15dp"
+            android:onClick="@{() -> viewModel.createNewExpense()}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textInputLayout6" />

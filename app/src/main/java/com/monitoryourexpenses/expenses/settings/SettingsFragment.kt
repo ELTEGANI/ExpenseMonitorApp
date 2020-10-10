@@ -50,9 +50,6 @@ class SettingsFragment: PreferenceFragmentCompat(), SharedPreferences.OnSharedPr
            sharedPreferences?.getString(key, null)?.substring(range = 0..2)?.let {
                expenseMonitorSharedPreferences.saveCurrency(it)
            }
-           // navigate back to main_menu expenses
-//           val direction = SettingsFragmentDirections.actionSettingsFragmentToMyExpenseFragment()
-//           findNavController().navigate(direction)
        }
     }
 }

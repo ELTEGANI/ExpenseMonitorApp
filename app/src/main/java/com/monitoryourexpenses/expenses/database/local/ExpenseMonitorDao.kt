@@ -1,9 +1,13 @@
-package com.monitoryourexpenses.expenses.database
+package com.monitoryourexpenses.expenses.database.local
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
+import com.monitoryourexpenses.expenses.database.AllCategories
+import com.monitoryourexpenses.expenses.database.AllCurrencies
+import com.monitoryourexpenses.expenses.database.Categories
+import com.monitoryourexpenses.expenses.database.Expenses
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -54,4 +58,7 @@ interface ExpenseMonitorDao {
 
     @Query("select expense_category,SUM(amount) as amount from expenses WHERE date BETWEEN :startMonth AND :endMonth AND currency =:currency GROUP BY expense_category")
     fun selectSumationOfCategories(startMonth: String, endMonth: String, currency: String): LiveData<List<AllCategories>>
+
+
+
 }
