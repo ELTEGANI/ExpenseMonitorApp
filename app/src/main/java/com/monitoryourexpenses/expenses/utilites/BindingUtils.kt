@@ -1,6 +1,8 @@
 package com.monitoryourexpenses.expenses.utilites
 
 import android.annotation.SuppressLint
+import android.content.Context
+import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.view.View
 import android.view.ViewGroup
@@ -8,9 +10,13 @@ import android.view.WindowInsets
 import android.widget.ImageView
 import android.widget.Spinner
 import android.widget.TextView
+import androidx.annotation.AttrRes
+import androidx.annotation.ColorInt
+import androidx.appcompat.widget.TintTypedArray.obtainStyledAttributes
 import androidx.core.view.updateLayoutParams
 import androidx.databinding.BindingAdapter
 import com.google.android.material.elevation.ElevationOverlayProvider
+import com.google.android.material.internal.ThemeEnforcement.obtainStyledAttributes
 import com.monitoryourexpenses.expenses.R
 import com.monitoryourexpenses.expenses.database.Categories
 import com.monitoryourexpenses.expenses.database.Expenses
@@ -220,3 +226,4 @@ fun TextView.setCategoryNameString(category: Categories?) {
         text = category.CategoryName
     }
 }
+

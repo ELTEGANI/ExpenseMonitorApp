@@ -13,20 +13,20 @@ import androidx.appcompat.widget.SearchView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
-import androidx.preference.PreferenceManager
 import androidx.recyclerview.selection.SelectionPredicates
 import androidx.recyclerview.selection.SelectionTracker
 import androidx.recyclerview.selection.StorageStrategy
 import androidx.transition.Slide
+import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.transition.MaterialContainerTransform
+import com.monitoryourexpenses.expenses.EventObserver
 import com.monitoryourexpenses.expenses.R
 import com.monitoryourexpenses.expenses.adapters.*
-import com.monitoryourexpenses.expenses.database.Categories
 import com.monitoryourexpenses.expenses.databinding.CreateNewExpenseFragmentBinding
 import com.monitoryourexpenses.expenses.prefs.ExpenseMonitorSharedPreferences
 import com.monitoryourexpenses.expenses.utilites.UtilitesFunctions
+import com.monitoryourexpenses.expenses.utilites.setupSnackbar
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
 import java.util.*
@@ -43,12 +43,11 @@ class CreateNewExpenseFragment: Fragment() {
     lateinit var adapter: ExpenseCategoryAdapter
     @Inject
     lateinit var expenseMonitorSharedPreferences: ExpenseMonitorSharedPreferences
-    @Inject
-    lateinit var utilitesFunctions :UtilitesFunctions
 
     private var tracker: SelectionTracker<Long>? = null
-    private var category = ""
 
+    @Inject
+    lateinit var utilitesFunctions:UtilitesFunctions
     @ExperimentalCoroutinesApi
     @SuppressLint("SimpleDateFormat")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -65,7 +64,7 @@ class CreateNewExpenseFragment: Fragment() {
             val day = c.get(Calendar.DAY_OF_MONTH)
             val datePickerDialog = context?.let { it1 -> DatePickerDialog(
                 it1,
-                DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+                { view, year, monthOfYear, dayOfMonth ->
                     val calendar = Calendar.getInstance()
                     calendar.set(year, monthOfYear, dayOfMonth)
                     val format = SimpleDateFormat("yyyy-MM-dd")
@@ -76,23 +75,8 @@ class CreateNewExpenseFragment: Fragment() {
             datePickerDialog?.show()
         }
 
-        createNewExpenseFragmentViewModel.validationMsg.observe(viewLifecycleOwner, Observer { shouldNavigate ->
-            if (shouldNavigate) {
-                utilitesFunctions.toast(getString(R.string.expense_created_successfuly))
-                val navController = createNewExpenseFragmentBinding.root.findNavController()
-                navController.navigate(R.id.action_createNewExpenseFragment_to_myExpenseFragment)
-            } else {
-                utilitesFunctions.toast(getString(R.string.fill_empty))
-            }
-        })
 
-        createNewExpenseFragmentViewModel.makeSelection.observe(viewLifecycleOwner, Observer { isSelected ->
-            if (!isSelected) {
-                utilitesFunctions.toast(getString(R.string.select_category))
-                }
-        })
-
-        createNewExpenseFragmentViewModel.exceedsMessage.observe(viewLifecycleOwner, Observer { it ->
+        createNewExpenseFragmentViewModel.exceedsMessage.observe(viewLifecycleOwner, { it ->
             if (it != null) {
                 val builder = context?.let { it1 -> AlertDialog.Builder(it1) }
                 builder?.setTitle(getString(R.string.fixed_expense_title))
@@ -104,16 +88,10 @@ class CreateNewExpenseFragment: Fragment() {
                     val promptsView: View = li.inflate(R.layout.alert_dialog, null)
                     val alertDialogBuilder = context?.let { AlertDialog.Builder(it) }
                     alertDialogBuilder?.setView(promptsView)
-                    val userInput = promptsView.findViewById<View>(R.id.editText) as EditText
+                    val expense = promptsView.findViewById<View>(R.id.editText) as EditText
                     alertDialogBuilder?.setCancelable(false)
                         ?.setPositiveButton(getString(R.string.save)) { _, _ ->
-                            if (userInput.text.toString().isNotEmpty()) {
-                                val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context).edit()
-                                sharedPreferences.putString("exceed_expense", userInput.text.toString())
-                                sharedPreferences.apply()
-                            } else {
-                                utilitesFunctions.toast(getString(R.string.enter_fixed_expense))
-                            }
+                           createNewExpenseFragmentViewModel.saveExceedExpense(expense.text.toString())
                         }
                         ?.setNegativeButton(getString(R.string.close)) { _, id ->
                             dialog.cancel()
@@ -122,9 +100,7 @@ class CreateNewExpenseFragment: Fragment() {
                     alertDialog?.show()
                 }
                 builder?.setNegativeButton(getString(R.string.cancel_fixed_expense)) { dialog, which ->
-                    val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context).edit()
-                    sharedPreferences.putString("exceed_expense", null)
-                    sharedPreferences.apply()
+                    createNewExpenseFragmentViewModel.cancelExpense()
                   dialog.dismiss()
                 }
 
@@ -140,12 +116,15 @@ class CreateNewExpenseFragment: Fragment() {
         val manager = NoPredictiveAnimationsGridLayoutManager(context, spanCount = 3)
         createNewExpenseFragmentBinding.categoryList.layoutManager = manager
 
-        adapter?.setOnClickListener(CategoryListener {
-            category = it.CategoryName.toString()
+        adapter.setOnClickListener(CategoryListener {
+            val expenseCategory = it.CategoryName.toString()
+            if (expenseCategory.isNotEmpty()){
+                createNewExpenseFragmentViewModel.category.value = expenseCategory
+            }
         })
 
         createNewExpenseFragmentBinding.categoryList.adapter = adapter
-        createNewExpenseFragmentViewModel.categories.observe(viewLifecycleOwner, Observer {
+        createNewExpenseFragmentViewModel.categories.observe(viewLifecycleOwner,{
             it?.let {
                 adapter.addList(it.reversed())
             }
@@ -170,16 +149,14 @@ class CreateNewExpenseFragment: Fragment() {
             }
         })
 
-        createNewExpenseFragmentBinding.createNewExpenseButton.setOnClickListener {
-            createNewExpenseFragmentViewModel.createNewExpense(createNewExpenseFragmentBinding.expenseAmountTextView.text.toString(), createNewExpenseFragmentBinding.expenseDescriptionTextView.text.toString(),
-                createNewExpenseFragmentBinding.expenseDateTextView.text.toString(), category)
-        }
 
         return createNewExpenseFragmentBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupSnackbar()
+        setupNavigation()
         enterTransition = MaterialContainerTransform().apply {
             startView = requireActivity().findViewById(R.id.fab)
             endView = create_new_expense_constraint
@@ -214,18 +191,25 @@ class CreateNewExpenseFragment: Fragment() {
         val customLayout: View = layoutInflater.inflate(R.layout.add_new_category_dialog, null)
         builder?.setView(customLayout)
         builder?.setPositiveButton(getString(R.string.ok)) { _, _ ->
-            val editText: EditText = customLayout.findViewById(R.id.editTextTextNewCategory)
-            if (editText.text.toString().isNotEmpty()) {
-                createNewExpenseFragmentViewModel.addNewCategory(Categories(id = null, CategoryName = editText.text.toString()))
-            } else {
-                utilitesFunctions.toast(getString(R.string.select_category))
-            }
+            val category: EditText = customLayout.findViewById(R.id.editTextTextNewCategory)
+                createNewExpenseFragmentViewModel.addNewCategory(category.text.toString())
         }
         builder?.setNegativeButton(getString(R.string.close_categories)) { dialogInterface, _ ->
            dialogInterface.dismiss()
         }
         val dialog = builder?.create()
         dialog?.show()
+    }
+
+    private fun setupSnackbar() {
+        view?.setupSnackbar(this, createNewExpenseFragmentViewModel.snackbarText, Snackbar.LENGTH_SHORT)
+    }
+
+    private fun setupNavigation() {
+        createNewExpenseFragmentViewModel.expenseUpdatedEvent.observe(viewLifecycleOwner, EventObserver {
+                val navController = createNewExpenseFragmentBinding.root.findNavController()
+                navController.navigate(R.id.action_createNewExpenseFragment_to_myExpenseFragment)
+        })
     }
 
 }

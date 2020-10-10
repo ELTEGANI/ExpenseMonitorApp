@@ -30,7 +30,7 @@ class UpdateAndDeleteFragmentViewModel @ViewModelInject constructor(
     @ExperimentalCoroutinesApi
     fun deleteExpense(expenseId: String) {
         viewModelScope.launch {
-            localRepository.deleteExpneseUsingId(expenseId)
+            localRepository.deleteExpenseUsingId(expenseId)
             _isExpenseDeleted.value = true
         }
     }

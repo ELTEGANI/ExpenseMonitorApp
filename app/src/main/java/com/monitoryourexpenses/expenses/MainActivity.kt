@@ -15,7 +15,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        AndroidThreeTen.init(this)
         activityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
     }
 }

@@ -49,6 +49,13 @@ class ExpenseMonitorSharedPreferences @Inject constructor(@ApplicationContext va
         putString("userCurrency", selectedCurrency)
     }
 
+    fun saveExceededExpenseForSettings(expense: String) = sharedPreferences.edit {
+        putString("exceed_expense", expense)
+    }
+
+    fun clearExpense() = sharedPreferences.edit {
+        putString("exceed_expense",null)
+    }
 
     fun getCurrentDate()= sharedPreferences.getString("CURRENT_DATE", null)
 

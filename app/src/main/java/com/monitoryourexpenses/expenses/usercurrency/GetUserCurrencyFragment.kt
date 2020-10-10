@@ -9,10 +9,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.monitoryourexpenses.expenses.R
-import com.monitoryourexpenses.expenses.database.ExpenseMonitorDataBase
 import com.monitoryourexpenses.expenses.databinding.GetUserCurrencyFragmentBinding
 import dagger.hilt.android.AndroidEntryPoint
 

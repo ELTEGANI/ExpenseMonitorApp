@@ -1,6 +1,7 @@
 package com.monitoryourexpenses.expenses.database
 
 import androidx.lifecycle.LiveData
+import com.monitoryourexpenses.expenses.database.local.ExpenseMonitorDao
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -16,51 +17,52 @@ class LocalRepository @Inject constructor(private val expenseMonitorDao: Expense
         return expenseMonitorDao.retrieveWeekExpense(startWeek, endWeek, currency)
     }
 
-    fun getMonthExpenses(startMonth: String, endMonth: String, currency: String): LiveData<List<Expenses>> {
+     fun getMonthExpenses(startMonth: String, endMonth: String, currency: String): LiveData<List<Expenses>> {
         return expenseMonitorDao.retrieveMonthExpense(startMonth, endMonth, currency)
     }
 
-      fun getSumationOfTodayExpenses(todayDate: String, currency: String): Flow<String> {
+       fun getSumationOfTodayExpenses(todayDate: String, currency: String): Flow<String> {
         return expenseMonitorDao.retrieveSumationOfTodayExpense(todayDate, currency)
      }
 
-      fun getSumationOfMonthExpenses(startMonth: String, endMonth: String, currency: String): Flow<String> {
+       fun getSumationOfMonthExpenses(startMonth: String, endMonth: String, currency: String): Flow<String> {
           return expenseMonitorDao.retrieveSumationOfMonthExpense(startMonth, endMonth, currency)
     }
 
-     fun getSumationOfWeekExpenses(startWeek: String, endWeek: String, currency: String): Flow<String> {
+      fun getSumationOfWeekExpenses(startWeek: String, endWeek: String, currency: String): Flow<String> {
          return expenseMonitorDao.retrieveSumationOfWeekExpense(startWeek, endWeek, currency)
     }
 
-    suspend fun deleteExpneseUsingId(id: String) {
+     suspend fun deleteExpenseUsingId(id: String) {
         expenseMonitorDao.deleteExpenses(id)
     }
 
-    suspend fun updateExpenseUsingId(expense_id: String, amount: String, description: String, expensecategory: String, date: String) {
+     suspend fun updateExpenseUsingId(expense_id: String, amount: String, description: String, expensecategory: String, date: String) {
         expenseMonitorDao.updateExpenses(expense_id, amount, description, expensecategory, date)
     }
 
-    suspend fun insertExpense(expenses: Expenses) {
+     suspend fun insertExpense(expenses: Expenses) {
         expenseMonitorDao.insertExpenses(expenses)
     }
 
-    suspend fun insertNewCategory(categories: List<Categories>) {
+     suspend fun insertNewCategory(categories: List<Categories>) {
         expenseMonitorDao.insertNewCategory(categories)
     }
 
-    suspend fun sumationOfSpecifiedExpenses(currency: String): String {
+     suspend fun sumationOfSpecifiedExpenses(currency: String): String {
        return expenseMonitorDao.sumationOfSpecifiedExpenses(currency)
     }
 
-    fun getAllCategories(): LiveData<List<Categories>> {
+     fun getAllCategories(): LiveData<List<Categories>> {
         return expenseMonitorDao.selectAllCategories()
     }
 
-    fun selectSumationOfCurrencies(): LiveData<List<AllCurrencies>> {
+     fun selectSumationOfCurrencies(): LiveData<List<AllCurrencies>> {
         return expenseMonitorDao.selectSumationOfCurrencies()
     }
 
-    fun selectSumationOfCatogries(startMonth: String, endMonth: String, currency: String): LiveData<List<AllCategories>> {
+     fun selectSumationOfCategories(startMonth: String, endMonth: String, currency: String): LiveData<List<AllCategories>> {
         return expenseMonitorDao.selectSumationOfCategories(startMonth, endMonth, currency)
     }
+
 }
