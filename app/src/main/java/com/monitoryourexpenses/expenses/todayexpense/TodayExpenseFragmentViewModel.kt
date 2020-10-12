@@ -9,15 +9,16 @@ import com.monitoryourexpenses.expenses.database.LocalRepository
 import com.monitoryourexpenses.expenses.prefs.ExpenseMonitorSharedPreferences
 
 
-class TodayExpenseFragmentViewModel @ViewModelInject constructor(localRepository: LocalRepository,
-sharedPreferences: ExpenseMonitorSharedPreferences) : ViewModel() {
+class TodayExpenseFragmentViewModel @ViewModelInject constructor(
+    localRepository: LocalRepository,
+    var expenseMonitorSharedPreferences: ExpenseMonitorSharedPreferences) : ViewModel() {
 
     private val _navigateToSelectedExpense = MutableLiveData<Expenses>()
     val navigateToSelectedExpense: LiveData<Expenses>
         get() = _navigateToSelectedExpense
 
-    val todayExpenses = localRepository.getTodayExpenses(sharedPreferences.getCurrentDate().toString(),
-        sharedPreferences.getCurrency().toString())
+    val todayExpenses = localRepository.getTodayExpenses(expenseMonitorSharedPreferences.getCurrentDate().toString(),
+        expenseMonitorSharedPreferences.getCurrency().toString())
 
     fun displaySelectedExpense(expense: Expenses) {
         _navigateToSelectedExpense.value = expense

@@ -16,11 +16,13 @@ import org.threeten.bp.LocalDate
 
 class CreateNewExpenseFragmentViewModel @ViewModelInject constructor(val localRepository: LocalRepository,
         val expenseMonitorSharedPreferences: ExpenseMonitorSharedPreferences) : ViewModel() {
+
     val amount      = MutableLiveData<String>()
     val description = MutableLiveData<String>()
     val currentDate = MutableLiveData<String>()
     var category    = MutableLiveData<String>()
     var currency    = MutableLiveData<String>()
+
     val categories = localRepository.getAllCategories()
 
     init {
@@ -36,8 +38,8 @@ class CreateNewExpenseFragmentViewModel @ViewModelInject constructor(val localRe
     val exceedsMessage: LiveData<String>
         get() = _exceedsMessage
 
-    private val _expenseUpdatedEvent = MutableLiveData<Event<Unit>>()
-    val expenseUpdatedEvent: LiveData<Event<Unit>> = _expenseUpdatedEvent
+    private val _createdExpenseEvent = MutableLiveData<Event<Unit>>()
+    val createdExpenseEvent: LiveData<Event<Unit>> = _createdExpenseEvent
 
 
 
@@ -73,7 +75,7 @@ class CreateNewExpenseFragmentViewModel @ViewModelInject constructor(val localRe
                         )
                     }
                     _snackbarText.value = Event(R.string.expense_created_successfuly)
-                    _expenseUpdatedEvent.value = Event(Unit)
+                    _createdExpenseEvent.value = Event(Unit)
 
                 }
             }

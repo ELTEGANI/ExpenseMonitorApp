@@ -206,7 +206,7 @@ class CreateNewExpenseFragment: Fragment() {
     }
 
     private fun setupNavigation() {
-        createNewExpenseFragmentViewModel.expenseUpdatedEvent.observe(viewLifecycleOwner, EventObserver {
+        createNewExpenseFragmentViewModel.createdExpenseEvent.observe(viewLifecycleOwner, EventObserver {
                 val navController = createNewExpenseFragmentBinding.root.findNavController()
                 navController.navigate(R.id.action_createNewExpenseFragment_to_myExpenseFragment)
         })
