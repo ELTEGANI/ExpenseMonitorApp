@@ -2,7 +2,8 @@ package com.monitoryourexpenses.expenses.updateanddeleteexpense
 
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
-import com.monitoryourexpenses.expenses.database.Expenses
+import com.monitoryourexpenses.expenses.Event
+import com.monitoryourexpenses.expenses.R
 import com.monitoryourexpenses.expenses.database.LocalRepository
 import com.monitoryourexpenses.expenses.prefs.ExpenseMonitorSharedPreferences
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -12,32 +13,50 @@ class UpdateAndDeleteFragmentViewModel @ViewModelInject constructor(
     private var localRepository: LocalRepository,
     var expenseMonitorSharedPreferences : ExpenseMonitorSharedPreferences) : ViewModel() {
 
+    val amount       = MutableLiveData<String>()
+    val description  = MutableLiveData<String>()
+    val currentDate  = MutableLiveData<String>()
+    var category     = MutableLiveData<String>()
+    var currency     = MutableLiveData<String>()
+    var expenseId    = MutableLiveData<String>()
+
+    init {
+        currency.value    =  expenseMonitorSharedPreferences.getCurrency()
+    }
     val categories = localRepository.getAllCategories()
 
-    private val _validationMsg = MutableLiveData<Boolean>()
-    val validationMsg: LiveData<Boolean>
-        get() = _validationMsg
-
-    private val _isExpenseDeleted = MutableLiveData<Boolean>()
-    val isExpenseDeleted: LiveData<Boolean>
-        get() = _isExpenseDeleted
+    private val _snackbarText = MutableLiveData<Event<Int>>()
+    val snackbarText: LiveData<Event<Int>>
+        get() = _snackbarText
 
     private val _exceedsMessage = MutableLiveData<String>()
     val exceedsMessage: LiveData<String>
         get() = _exceedsMessage
 
+    private val _updatedExpenseEvent = MutableLiveData<Event<Unit>>()
+    val updatedExpenseEvent: LiveData<Event<Unit>> = _updatedExpenseEvent
+
 
     @ExperimentalCoroutinesApi
-    fun deleteExpense(expenseId: String) {
+    fun deleteExpense() {
         viewModelScope.launch {
-            localRepository.deleteExpenseUsingId(expenseId)
-            _isExpenseDeleted.value = true
+            localRepository.deleteExpenseUsingId(expenseId.value.toString())
+            _snackbarText.value = Event(R.string.delete_expense)
+            _updatedExpenseEvent.value = Event(Unit)
         }
     }
 
-    fun updateExpense(expenseId: String, amount: String, description: String, date: String, category: String) {
-        if (description.isEmpty() || date.isEmpty() || amount.isEmpty()) {
-            _validationMsg.value = false
+    fun updateExpense() {
+
+        val expenseCategory     = category.value
+        val expenseDescription  = description.value
+        val expenseAmount       = amount.value
+        val expenseDate         = currentDate.value
+        val expenseCurrency     = currency.value
+        val expenseId           = expenseId.value
+
+        if (expenseDescription.toString().isEmpty() || expenseAmount.toString().isEmpty()) {
+            _snackbarText.value = Event(R.string.fill_empty)
         } else {
             viewModelScope.launch {
                 if (localRepository.sumationOfSpecifiedExpenses(
@@ -46,17 +65,44 @@ class UpdateAndDeleteFragmentViewModel @ViewModelInject constructor(
                     _exceedsMessage.value = expenseMonitorSharedPreferences.getExceedExpense()
                 } else {
                     viewModelScope.launch {
-                        localRepository.updateExpenseUsingId(
-                            expenseId,
-                            amount,
-                            description,
-                            category,
-                            date
-                        )
-                        _validationMsg.value = true
+                        expenseId?.let {id->
+                            expenseCurrency?.let { currency ->
+                                expenseDate?.let { date ->
+                                    expenseCategory?.let { category ->
+                                        expenseAmount?.toBigDecimal()?.let { amount ->
+                                            expenseDescription?.let { description ->
+                                                localRepository.updateExpenseUsingId(
+                                                    id,
+                                                    amount,
+                                                    description,
+                                                    category,
+                                                    date,
+                                                    currency
+                                                )
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        _snackbarText.value = Event(R.string.update_expense)
+                        _updatedExpenseEvent.value = Event(Unit)
                     }
                 }
             }
         }
     }
+
+    fun saveExceedExpense(exceedExpense:String){
+        if (exceedExpense.isEmpty()){
+            _snackbarText.value = Event(R.string.enter_fixed_expense)
+        }else{
+            expenseMonitorSharedPreferences.saveExceededExpenseForSettings(exceedExpense)
+        }
+    }
+
+    fun cancelExpense(){
+        expenseMonitorSharedPreferences.clearExpense()
+    }
+
 }

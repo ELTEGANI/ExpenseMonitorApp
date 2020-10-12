@@ -3,6 +3,7 @@ package com.monitoryourexpenses.expenses.database
 import androidx.lifecycle.LiveData
 import com.monitoryourexpenses.expenses.database.local.ExpenseMonitorDao
 import kotlinx.coroutines.flow.Flow
+import java.math.BigDecimal
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -37,8 +38,9 @@ class LocalRepository @Inject constructor(private val expenseMonitorDao: Expense
         expenseMonitorDao.deleteExpenses(id)
     }
 
-     suspend fun updateExpenseUsingId(expense_id: String, amount: String, description: String, expensecategory: String, date: String) {
-        expenseMonitorDao.updateExpenses(expense_id, amount, description, expensecategory, date)
+     suspend fun updateExpenseUsingId(expense_id: String, amount: BigDecimal, description: String, expensecategory: String, date: String
+     ,currency: String) {
+        expenseMonitorDao.updateExpenses(expense_id,amount,description,expensecategory,date,currency)
     }
 
      suspend fun insertExpense(expenses: Expenses) {

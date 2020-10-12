@@ -41,7 +41,7 @@ class TodayExpenseFragment : Fragment() {
         })
 
 
-        adapter?.setOnClickListener(ExpenseCategoryListener {
+        adapter.setOnClickListener(ExpenseCategoryListener {
            todayExpenseFragmentViewModel.displaySelectedExpense(it)
         })
 
@@ -51,7 +51,7 @@ class TodayExpenseFragment : Fragment() {
         todayExpenseFragmentViewModel.todayExpenses.observe(viewLifecycleOwner, Observer {
             it?.let {
                 if (it.isNotEmpty()) {
-                    adapter?.submitList(it.reversed())
+                    adapter.submitList(it.reversed())
                 } else {
                     todayExpenseFragmentBinding.noExpensesTextView.visibility = View.VISIBLE
                 }

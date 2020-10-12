@@ -9,6 +9,7 @@ import com.monitoryourexpenses.expenses.database.AllCurrencies
 import com.monitoryourexpenses.expenses.database.Categories
 import com.monitoryourexpenses.expenses.database.Expenses
 import kotlinx.coroutines.flow.Flow
+import java.math.BigDecimal
 
 @Dao
 interface ExpenseMonitorDao {
@@ -35,8 +36,8 @@ interface ExpenseMonitorDao {
     suspend fun deleteExpenses(id: String)
 
     // update expense
-    @Query("UPDATE expenses SET amount=:amount,description=:description,expense_category=:expensecategory,date=:date WHERE expense_id=:id")
-    suspend fun updateExpenses(id: String, amount: String, description: String, expensecategory: String, date: String)
+    @Query("UPDATE expenses SET amount=:amount,description=:description,expense_category=:expensecategory,currency=:currency,date=:date WHERE expense_id=:id")
+    suspend fun updateExpenses(id: String, amount: BigDecimal, description: String, expensecategory: String, date: String, currency: String)
 
     @Insert
     suspend fun insertExpenses(expenses: Expenses)
