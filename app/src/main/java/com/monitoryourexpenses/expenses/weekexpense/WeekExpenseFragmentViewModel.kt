@@ -8,7 +8,8 @@ import com.monitoryourexpenses.expenses.database.Expenses
 import com.monitoryourexpenses.expenses.database.LocalRepository
 import com.monitoryourexpenses.expenses.prefs.ExpenseMonitorSharedPreferences
 
-class WeekExpenseFragmentViewModel @ViewModelInject constructor(localRepository: LocalRepository, expenseMonitorSharedPreferences: ExpenseMonitorSharedPreferences) : ViewModel() {
+class WeekExpenseFragmentViewModel @ViewModelInject constructor(localRepository: LocalRepository,
+         var expenseMonitorSharedPreferences: ExpenseMonitorSharedPreferences) : ViewModel() {
 
 
     private val _navigateToSelectedExpense = MutableLiveData<Expenses>()

@@ -37,7 +37,7 @@ class WeekExpenseFragment : Fragment() {
         weekExpenseFragmentBinding.lifecycleOwner = this
         weekExpenseFragmentBinding.viewModel = weekExpenseFragmentViewModel
 
-        adapter?.setOnClickListener(ExpenseCategoryListener {
+        adapter.setOnClickListener(ExpenseCategoryListener {
             weekExpenseFragmentViewModel.displaySelectedExpense(it)
         })
 
@@ -55,7 +55,7 @@ class WeekExpenseFragment : Fragment() {
         weekExpenseFragmentViewModel.weekExpenses.observe(viewLifecycleOwner, Observer {
             it?.let {
                 if (it.isNotEmpty()) {
-                    adapter?.submitList(it.reversed())
+                    adapter.submitList(it.reversed())
                 } else {
                     weekExpenseFragmentBinding.noExpensesTextView.visibility = View.VISIBLE
                 }
