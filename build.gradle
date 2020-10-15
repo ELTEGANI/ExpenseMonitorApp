@@ -35,8 +35,6 @@ buildscript {
         androidXTestExtKotlinRunnerVersion = '1.1.2'
         androidXTestRulesVersion = '1.2.0'
         fragmentVersion = '1.2.5'
-
-
     }
     repositories {
         google()

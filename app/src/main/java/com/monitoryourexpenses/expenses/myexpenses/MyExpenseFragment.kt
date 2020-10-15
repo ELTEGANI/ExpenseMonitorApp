@@ -28,9 +28,6 @@ import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet
 import com.github.mikephil.charting.utils.ColorTemplate
 import com.github.mikephil.charting.utils.EntryXComparator
-import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInClient
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayoutMediator
@@ -42,6 +39,7 @@ import com.google.android.play.core.install.InstallStateUpdatedListener
 import com.google.android.play.core.install.model.AppUpdateType
 import com.google.android.play.core.install.model.InstallStatus
 import com.google.android.play.core.install.model.UpdateAvailability
+import com.monitoryourexpenses.expenses.EventObserver
 import com.monitoryourexpenses.expenses.R
 import com.monitoryourexpenses.expenses.adapters.MONTH_EXPENSE_INDEX
 import com.monitoryourexpenses.expenses.adapters.PagerAdapter
@@ -73,8 +71,6 @@ class MyExpenseFragment: Fragment() {
 
     @ExperimentalCoroutinesApi
     private  val myExpenseFragmentViewModel: MyExpenseFragmentViewModel by viewModels()
-    private var mGoogleSignInClient: GoogleSignInClient? = null
-
 
     private val appUpdateManager: AppUpdateManager by lazy { AppUpdateManagerFactory.create(this.requireContext()) }
     private val appUpdatedListener: InstallStateUpdatedListener by lazy {
@@ -98,7 +94,8 @@ class MyExpenseFragment: Fragment() {
             findNavController().navigate(R.id.action_myExpenseFragment_to_userCurrencyFragment)
         }
 
-        myExpenseFragmentBinding = DataBindingUtil.inflate(inflater, R.layout.my_expense_fragment, container, false)
+        myExpenseFragmentBinding =
+            DataBindingUtil.inflate(inflater, R.layout.my_expense_fragment, container, false)
 
         myExpenseFragmentBinding.viewModel = myExpenseFragmentViewModel
         myExpenseFragmentBinding.lifecycleOwner = this
@@ -107,12 +104,6 @@ class MyExpenseFragment: Fragment() {
         setHasOptionsMenu(true)
 
         if (utilitesFunctions.isConnected()) { checkForAppUpdate() }
-
-        val gso =
-            GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestEmail()
-                .build()
-        mGoogleSignInClient = context?.let { GoogleSignIn.getClient(it, gso) }
 
         val tabLayout = myExpenseFragmentBinding.tabs
         val viewPager = myExpenseFragmentBinding.viewPager
@@ -129,117 +120,38 @@ class MyExpenseFragment: Fragment() {
                 super.onPageSelected(position)
                 when (position) {
                     0 -> {
-                        myExpenseFragmentViewModel.todayExpense.observe(viewLifecycleOwner, Observer {
-                            myExpenseFragmentBinding.expenseTextView.text = expenseMonitorSharedPreferences.getCurrency() + " " + it
-                        })
+                        myExpenseFragmentViewModel.todayExpense.observe(
+                            viewLifecycleOwner,{
+                                myExpenseFragmentBinding.expenseTextView.text =
+                                    expenseMonitorSharedPreferences.getCurrency() + " " + it
+                            })
                         myExpenseFragmentBinding.dateTextView.text = LocalDate.now().toString()
                     }
                     1 -> {
-                        myExpenseFragmentViewModel.weekExpense.observe(viewLifecycleOwner, Observer {
-                            myExpenseFragmentBinding.expenseTextView.text = expenseMonitorSharedPreferences.getCurrency() + " " + it
-                        })
-                        myExpenseFragmentBinding.dateTextView.text = expenseMonitorSharedPreferences.getStartOfTheWeek() + " " + "/" + " " + expenseMonitorSharedPreferences.getEndOfTheWeek()
+                        myExpenseFragmentViewModel.weekExpense.observe(
+                            viewLifecycleOwner,
+                             {
+                                myExpenseFragmentBinding.expenseTextView.text =
+                                    expenseMonitorSharedPreferences.getCurrency() + " " + it
+                            })
+                        myExpenseFragmentBinding.dateTextView.text =
+                            expenseMonitorSharedPreferences.getStartOfTheWeek() + " " + "/" + " " + expenseMonitorSharedPreferences.getEndOfTheWeek()
                     }
                     2 -> {
-                        myExpenseFragmentViewModel.monthExpense.observe(viewLifecycleOwner, Observer {
-                            myExpenseFragmentBinding.expenseTextView.text = expenseMonitorSharedPreferences.getCurrency() + " " + it
-                        })
-                        myExpenseFragmentBinding.dateTextView.text = expenseMonitorSharedPreferences.getStartOfTheMonth() + " " + "/" + " " + expenseMonitorSharedPreferences.getEndOfTheMonth()
+                        myExpenseFragmentViewModel.monthExpense.observe(
+                            viewLifecycleOwner,
+                             {
+                                myExpenseFragmentBinding.expenseTextView.text =
+                                    expenseMonitorSharedPreferences.getCurrency() + " " + it
+                            })
+                        myExpenseFragmentBinding.dateTextView.text =
+                            expenseMonitorSharedPreferences.getStartOfTheMonth() + " " + "/" + " " + expenseMonitorSharedPreferences.getEndOfTheMonth()
                     }
                 }
-            }
-        })
-
-        myExpenseFragmentViewModel.navigateToMyExpense.observe(viewLifecycleOwner, Observer {
-            shouldNavigate -> if (shouldNavigate) {
-            val navController = myExpenseFragmentBinding.root.findNavController()
-            MyExpenseFragment.apply {
-                exitTransition = MaterialElevationScale(false).apply {
-                    duration = resources.getInteger(R.integer.expense_motion_duration_large).toLong()
-                }
-                reenterTransition = MaterialElevationScale(true).apply {
-                    duration = resources.getInteger(R.integer.expense_motion_duration_large).toLong()
-                }
-            }
-            navController.navigate(R.id.action_myExpenseFragment_to_createNewExpenseFragment)
-            myExpenseFragmentViewModel.onNavigatedToMyExpense()
             }
         })
 
         return myExpenseFragmentBinding.root
-    }
-
-     private fun checkForAppUpdate() {
-        val appUpdateInfoTask = appUpdateManager.appUpdateInfo
-         appUpdateInfoTask.addOnSuccessListener { appUpdateInfo ->
-            if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE) {
-                try {
-                    val installType = when {
-                        appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE) -> AppUpdateType.IMMEDIATE
-                        else -> null
-                    }
-                    if (installType == AppUpdateType.IMMEDIATE) appUpdateManager.registerListener(appUpdatedListener)
-                    installType?.let {
-                        appUpdateManager.startUpdateFlowForResult(
-                            appUpdateInfo,
-                            it,
-                            (context as Activity?)!!,
-                            APP_UPDATE_REQUEST_CODE)
-                    }
-                } catch (e: IntentSender.SendIntentException) {
-                    e.printStackTrace()
-                }
-            }
-        }
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == APP_UPDATE_REQUEST_CODE) {
-            if (resultCode != Activity.RESULT_OK) {
-                Toast.makeText(context,
-                    getString(R.string.app_failed_to_update),
-                    Toast.LENGTH_SHORT)
-                    .show()
-            }
-        }
-    }
-
-    private fun popupSnackbarForCompleteUpdate() {
-        val snackbar = Snackbar.make(myExpenseFragmentBinding.coordinatorlayout,
-            getString(R.string.update_download),
-            Snackbar.LENGTH_INDEFINITE)
-        snackbar.setAction(getString(R.string.restart)) { appUpdateManager.completeUpdate() }
-        context?.let { ContextCompat.getColor(it, R.color.color_on_surface_emphasis_high) }?.let {
-            snackbar.setActionTextColor(
-                it
-            )
-        }
-        snackbar.show()
-    }
-
-    override fun onResume() {
-        super.onResume()
-        appUpdateManager.appUpdateInfo.addOnSuccessListener { appUpdateInfo ->
-                if (appUpdateInfo.installStatus() == InstallStatus.DOWNLOADED) {
-                    popupSnackbarForCompleteUpdate()
-                }
-                try {
-                    if (appUpdateInfo.updateAvailability() == UpdateAvailability.DEVELOPER_TRIGGERED_UPDATE_IN_PROGRESS) {
-                        appUpdateManager.startUpdateFlowForResult(
-                            appUpdateInfo,
-                            AppUpdateType.IMMEDIATE,
-                            (context as Activity?)!!,
-                            APP_UPDATE_REQUEST_CODE)
-                    }
-                } catch (e: IntentSender.SendIntentException) {
-                    e.printStackTrace()
-                }
-            }
-    }
-
-    companion object {
-        private const val APP_UPDATE_REQUEST_CODE = 1991
     }
 
     private fun getTabTitle(position: Int): String? {
@@ -393,4 +305,101 @@ class MyExpenseFragment: Fragment() {
             }
         })
     }
+    @ExperimentalCoroutinesApi
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setupNavigation()
+    }
+
+    @ExperimentalCoroutinesApi
+    private fun setupNavigation() {
+        myExpenseFragmentViewModel.navigateToCreateNewExpense.observe(viewLifecycleOwner, EventObserver {
+                    val navController = myExpenseFragmentBinding.root.findNavController()
+                    MyExpenseFragment.apply {
+                        exitTransition = MaterialElevationScale(false).apply {
+                            duration = resources.getInteger(R.integer.expense_motion_duration_large)
+                                .toLong()
+                        }
+                        reenterTransition = MaterialElevationScale(true).apply {
+                            duration = resources.getInteger(R.integer.expense_motion_duration_large)
+                                .toLong()
+                        }
+                    }
+                    navController.navigate(R.id.action_myExpenseFragment_to_createNewExpenseFragment)
+        })
+    }
+
+    private fun checkForAppUpdate() {
+        val appUpdateInfoTask = appUpdateManager.appUpdateInfo
+        appUpdateInfoTask.addOnSuccessListener { appUpdateInfo ->
+            if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE) {
+                try {
+                    val installType = when {
+                        appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE) -> AppUpdateType.IMMEDIATE
+                        else -> null
+                    }
+                    if (installType == AppUpdateType.IMMEDIATE) appUpdateManager.registerListener(appUpdatedListener)
+                    installType?.let {
+                        appUpdateManager.startUpdateFlowForResult(
+                            appUpdateInfo,
+                            it,
+                            (context as Activity?)!!,
+                            APP_UPDATE_REQUEST_CODE)
+                    }
+                } catch (e: IntentSender.SendIntentException) {
+                    e.printStackTrace()
+                }
+            }
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == APP_UPDATE_REQUEST_CODE) {
+            if (resultCode != Activity.RESULT_OK) {
+                Toast.makeText(context,
+                    getString(R.string.app_failed_to_update),
+                    Toast.LENGTH_SHORT)
+                    .show()
+            }
+        }
+    }
+
+    private fun popupSnackbarForCompleteUpdate() {
+        val snackbar = Snackbar.make(myExpenseFragmentBinding.coordinatorlayout,
+            getString(R.string.update_download),
+            Snackbar.LENGTH_INDEFINITE)
+        snackbar.setAction(getString(R.string.restart)) { appUpdateManager.completeUpdate() }
+        context?.let { ContextCompat.getColor(it, R.color.color_on_surface_emphasis_high) }?.let {
+            snackbar.setActionTextColor(
+                it
+            )
+        }
+        snackbar.show()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        appUpdateManager.appUpdateInfo.addOnSuccessListener { appUpdateInfo ->
+            if (appUpdateInfo.installStatus() == InstallStatus.DOWNLOADED) {
+                popupSnackbarForCompleteUpdate()
+            }
+            try {
+                if (appUpdateInfo.updateAvailability() == UpdateAvailability.DEVELOPER_TRIGGERED_UPDATE_IN_PROGRESS) {
+                    appUpdateManager.startUpdateFlowForResult(
+                        appUpdateInfo,
+                        AppUpdateType.IMMEDIATE,
+                        (context as Activity?)!!,
+                        APP_UPDATE_REQUEST_CODE)
+                }
+            } catch (e: IntentSender.SendIntentException) {
+                e.printStackTrace()
+            }
+        }
+    }
+
+    companion object {
+        private const val APP_UPDATE_REQUEST_CODE = 1991
+    }
+
 }
