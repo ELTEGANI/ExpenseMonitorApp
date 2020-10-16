@@ -8,14 +8,23 @@ Expense Monitor, monitors all your daily, weekly, and monthly expenses and class
 
 App Features:-
 1- Choose your currency.
+
 2- Create an expense with description and categorize it.
+
 3- Use multiple currencies for your account.
+
 4- Mange all your expenses delete or update it.
+
 5- offline mode for all your expenses.
+
 6- Alert you when you exceed your fixed expense.
+
 7- Dark Mode Supported.
+
 8- Monthly Report About Categories.
+
 9- Report About All Your Currencies
+
 10-Add Your Own Categories
 
 Application is available here:
