@@ -6,7 +6,8 @@
         
 Expense Monitor, monitors all your daily, weekly, and monthly expenses and classifies them in categories using one currency or multiple currencies. So you can stay aware of all your expenses and where they went.
 
-App Features:-
+# App Features:-
+
 1- Choose your currency.
 
 2- Create an expense with description and categorize it.
