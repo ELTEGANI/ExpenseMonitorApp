@@ -66,8 +66,7 @@
             android:label="SettingsFragment" >
         <action
             android:id="@+id/action_settingsFragment_to_myExpenseFragment"
-            app:destination="@id/myExpenseFragment"
-            />
+            app:destination="@id/myExpenseFragment" />
     </fragment>
 
 </navigation>
