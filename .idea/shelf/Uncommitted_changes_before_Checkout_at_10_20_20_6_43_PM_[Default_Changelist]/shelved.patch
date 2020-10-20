@@ -1,0 +1,18 @@
+Index: app/src/main/java/com/monitoryourexpenses/expenses/settings/SettingsFragment.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.monitoryourexpenses.expenses.settings\n\nimport android.content.SharedPreferences\nimport android.os.Bundle\nimport android.text.InputType\nimport androidx.navigation.fragment.findNavController\nimport androidx.preference.EditTextPreference\nimport androidx.preference.Preference\nimport androidx.preference.PreferenceFragmentCompat\nimport com.monitoryourexpenses.expenses.BuildConfig\nimport com.monitoryourexpenses.expenses.R\nimport com.monitoryourexpenses.expenses.prefs.ExpenseMonitorSharedPreferences\nimport dagger.hilt.android.AndroidEntryPoint\nimport javax.inject.Inject\n\n@AndroidEntryPoint\nclass SettingsFragment: PreferenceFragmentCompat(), SharedPreferences.OnSharedPreferenceChangeListener {\n\n    @Inject\n    lateinit var expenseMonitorSharedPreferences: ExpenseMonitorSharedPreferences\n    override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {\n      setPreferencesFromResource(R.xml.settings, rootKey)\n    }\n\n    override fun onCreate(savedInstanceState: Bundle?) {\n        super.onCreate(savedInstanceState)\n        preferenceManager.sharedPreferences.registerOnSharedPreferenceChangeListener(this)\n\n        val buildVersion = findPreference<Preference>(\"buildversion\")\n        buildVersion?.summary = BuildConfig.VERSION_NAME\n\n        val preference: EditTextPreference? = findPreference(\"exceed_expense\")\n        preference?.setOnBindEditTextListener { editText ->\n            editText.inputType = InputType.TYPE_CLASS_NUMBER // set only numbers allowed to input\n        }\n    }\n\n    override fun onResume() {\n        super.onResume()\n        preferenceManager.sharedPreferences.registerOnSharedPreferenceChangeListener(this)\n    }\n\n    override fun onPause() {\n        super.onPause()\n        preferenceManager.sharedPreferences.unregisterOnSharedPreferenceChangeListener(this)\n    }\n\n    override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {\n       if (key != null && key != \"exceed_expense\") {\n           sharedPreferences?.getString(key, null)?.substring(range = 0..2)?.let {\n               expenseMonitorSharedPreferences.saveCurrency(it)\n           }\n       }\n        if (findNavController().currentDestination?.id == R.id.settingsFragment) {\n            findNavController().navigate(R.id.action_settingsFragment_to_myExpenseFragment)\n        }\n    }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/monitoryourexpenses/expenses/settings/SettingsFragment.kt	(revision 8b651659ed2e3ff03aed1df2f1781588f8f95325)
++++ app/src/main/java/com/monitoryourexpenses/expenses/settings/SettingsFragment.kt	(date 1603212126000)
+@@ -31,7 +31,7 @@
+ 
+         val preference: EditTextPreference? = findPreference("exceed_expense")
+         preference?.setOnBindEditTextListener { editText ->
+-            editText.inputType = InputType.TYPE_CLASS_NUMBER // set only numbers allowed to input
++            editText.inputType = InputType.TYPE_CLASS_NUMBER
+         }
+     }
+ 
