@@ -51,5 +51,8 @@ class SettingsFragment: PreferenceFragmentCompat(), SharedPreferences.OnSharedPr
                expenseMonitorSharedPreferences.saveCurrency(it)
            }
        }
+        if (findNavController().currentDestination?.id == R.id.settingsFragment) {
+            findNavController().navigate(R.id.action_settingsFragment_to_myExpenseFragment)
+        }
     }
 }
