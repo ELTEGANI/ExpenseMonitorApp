@@ -4,8 +4,27 @@
      
 # Expense Monitor App
         
-Expense Monitor, monitors all your daily, weekly and monthly expenses and classifies them in categories using one currency or multiple currencies. 
-So you can stay aware of all your expenses and where they went.
+Expense Monitor, monitors all your daily, weekly, and monthly expenses and classifies them in categories using one currency or multiple currencies. So you can stay aware of all your expenses and where they went.below the app features
+
+1- Choose your currency.
+
+2- Create an expense with description and categorize it.
+
+3- Use multiple currencies for your account.
+
+4- Mange all your expenses delete or update it.
+
+5- offline mode for all your expenses.
+
+6- Alert you when you exceed your fixed expense.
+
+7- Dark Mode Supported.
+
+8- Monthly Report About Categories.
+
+9- Report About All Your Currencies
+
+10-Add Your Own Categories
 
 Application is available here:
 
@@ -56,7 +75,7 @@ Application is available here:
        </tr>
 </table> 
 
-### Libraries & documentation
+### Tech Stack & documentation
 - MVVM Architecture [DOCS](https://developer.android.com/jetpack/guide)
 - Glide [Docs](https://bumptech.github.io/glide/)
 - Room [Docs](https://developer.android.com/jetpack/androidx/releases/room)
