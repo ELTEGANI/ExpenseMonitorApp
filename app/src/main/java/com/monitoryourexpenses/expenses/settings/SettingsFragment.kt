@@ -31,7 +31,7 @@ class SettingsFragment: PreferenceFragmentCompat(), SharedPreferences.OnSharedPr
 
         val preference: EditTextPreference? = findPreference("exceed_expense")
         preference?.setOnBindEditTextListener { editText ->
-            editText.inputType = InputType.TYPE_CLASS_NUMBER // set only numbers allowed to input
+            editText.inputType = InputType.TYPE_CLASS_NUMBER
         }
     }
 
@@ -51,8 +51,8 @@ class SettingsFragment: PreferenceFragmentCompat(), SharedPreferences.OnSharedPr
                expenseMonitorSharedPreferences.saveCurrency(it)
            }
        }
-        if (findNavController().currentDestination?.id == R.id.settingsFragment) {
+          if (findNavController().currentDestination?.id == R.id.settingsFragment) {
             findNavController().navigate(R.id.action_settingsFragment_to_myExpenseFragment)
-        }
+          }
     }
 }
