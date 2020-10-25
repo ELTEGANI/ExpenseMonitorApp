@@ -56,11 +56,7 @@ class CreateNewExpenseFragmentViewModel @ViewModelInject constructor(val localRe
             _snackbarText.value = Event(R.string.select_category)
         } else {
             viewModelScope.launch {
-                if (localRepository.sumationOfSpecifiedExpenses(
-                        expenseMonitorSharedPreferences.getCurrency().toString()
-                    )
-                    == expenseMonitorSharedPreferences.getExceedExpense().toString()
-                ) {
+                if (localRepository.checkIfFixedExpenseExceeded()) {
                     _exceedsMessage.value = expenseMonitorSharedPreferences.getExceedExpense()
                 } else {
                     viewModelScope.launch {
@@ -76,7 +72,6 @@ class CreateNewExpenseFragmentViewModel @ViewModelInject constructor(val localRe
                     }
                     _snackbarText.value = Event(R.string.expense_created_successfuly)
                     _createdExpenseEvent.value = Event(Unit)
-
                 }
             }
         }
@@ -91,7 +86,6 @@ class CreateNewExpenseFragmentViewModel @ViewModelInject constructor(val localRe
         }else{
             _snackbarText.value = Event(R.string.cant_be_empty)
         }
-
     }
 
     fun saveExceedExpense(exceedExpense:String){

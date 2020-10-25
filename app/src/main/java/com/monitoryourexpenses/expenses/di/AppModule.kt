@@ -30,7 +30,5 @@ object AppModule {
         return appDatabase.expenseMonitorDao
     }
 
-
-
 }
 
