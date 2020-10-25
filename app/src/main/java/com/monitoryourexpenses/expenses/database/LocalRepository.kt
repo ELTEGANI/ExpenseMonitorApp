@@ -2,13 +2,15 @@ package com.monitoryourexpenses.expenses.database
 
 import androidx.lifecycle.LiveData
 import com.monitoryourexpenses.expenses.database.local.ExpenseMonitorDao
+import com.monitoryourexpenses.expenses.prefs.ExpenseMonitorSharedPreferences
 import kotlinx.coroutines.flow.Flow
 import java.math.BigDecimal
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class LocalRepository @Inject constructor(private val expenseMonitorDao: ExpenseMonitorDao) {
+class LocalRepository @Inject constructor(private val expenseMonitorDao: ExpenseMonitorDao,
+ var expenseMonitorSharedPreferences: ExpenseMonitorSharedPreferences) {
 
     fun getTodayExpenses(todayDate: String, currency: String): LiveData<List<Expenses>> {
         return expenseMonitorDao.retrieveTodayExpense(todayDate, currency)
@@ -51,9 +53,10 @@ class LocalRepository @Inject constructor(private val expenseMonitorDao: Expense
         expenseMonitorDao.insertNewCategory(categories)
     }
 
-     suspend fun sumationOfSpecifiedExpenses(currency: String): String {
-       return expenseMonitorDao.sumationOfSpecifiedExpenses(currency)
-    }
+     suspend fun checkIfFixedExpenseExceeded(): Boolean {
+         return (expenseMonitorDao.sumationOfSpecifiedExpenses(expenseMonitorSharedPreferences.getCurrency().toString()) ==
+                 expenseMonitorSharedPreferences.getExceedExpense())
+     }
 
      fun getAllCategories(): LiveData<List<Categories>> {
         return expenseMonitorDao.selectAllCategories()
@@ -66,5 +69,4 @@ class LocalRepository @Inject constructor(private val expenseMonitorDao: Expense
      fun selectSumationOfCategories(startMonth: String, endMonth: String, currency: String): LiveData<List<AllCategories>> {
         return expenseMonitorDao.selectSumationOfCategories(startMonth, endMonth, currency)
     }
-
 }

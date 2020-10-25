@@ -59,9 +59,7 @@ class UpdateAndDeleteFragmentViewModel @ViewModelInject constructor(
             _snackbarText.value = Event(R.string.fill_empty)
         } else {
             viewModelScope.launch {
-                if (localRepository.sumationOfSpecifiedExpenses(
-                        expenseMonitorSharedPreferences.getCurrency().toString())
-                    == expenseMonitorSharedPreferences.getExceedExpense().toString()) {
+                if (localRepository.checkIfFixedExpenseExceeded()) {
                     _exceedsMessage.value = expenseMonitorSharedPreferences.getExceedExpense()
                 } else {
                     viewModelScope.launch {
