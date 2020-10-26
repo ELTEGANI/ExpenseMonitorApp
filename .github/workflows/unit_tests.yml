@@ -2,7 +2,7 @@
 
 name: Unit Tests Workflow
 
-on: [push,pull_request]
+on: [pull_request]
 
 jobs:
   testing:
