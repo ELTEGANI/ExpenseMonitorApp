@@ -70,9 +70,9 @@ class CreateNewExpenseFragmentViewModel @ViewModelInject constructor(val localRe
                             )
                         )
                     }
-                    _snackbarText.value = Event(R.string.expense_created_successfuly)
-                    _createdExpenseEvent.value = Event(Unit)
                 }
+                _snackbarText.value = Event(R.string.expense_created_successfuly)
+                _createdExpenseEvent.value = Event(Unit)
             }
         }
     }

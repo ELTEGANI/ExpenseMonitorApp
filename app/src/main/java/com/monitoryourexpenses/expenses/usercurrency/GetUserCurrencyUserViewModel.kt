@@ -57,7 +57,7 @@ class GetUserCurrencyUserViewModel @ViewModelInject
             }
     }
 
-    private fun saveAllDates() {
+    fun saveAllDates() {
         viewModelScope.launch {
             expenseMonitorSharedPreferences.saveCurrentDate(LocalDate.now().toString())
             expenseMonitorSharedPreferences.saveStartOfTheWeek(LocalDate.now().toString())
@@ -67,7 +67,7 @@ class GetUserCurrencyUserViewModel @ViewModelInject
         }
     }
 
-    private suspend fun insertAllCategories() {
+    fun insertAllCategories() {
         viewModelScope.launch {
             val listOfCategories = listOf(
                 Categories(null, context.getString(R.string.Anniversary)),

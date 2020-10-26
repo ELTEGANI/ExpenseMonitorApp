@@ -12,6 +12,7 @@ import com.monitoryourexpenses.expenses.database.LocalRepository
 import com.monitoryourexpenses.expenses.database.local.ExpenseMonitorDao
 import com.monitoryourexpenses.expenses.prefs.ExpenseMonitorSharedPreferences
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -21,7 +22,7 @@ import org.robolectric.annotation.Config
 
 
 /**
- * Unit tests for the implementation of [CreateNewExpenseFragmentViewMode]
+ * Unit tests for the implementation of [CreateNewExpenseFragmentViewModel]
  */
 @ExperimentalCoroutinesApi
 @RunWith(AndroidJUnit4::class)
@@ -51,7 +52,7 @@ class CreateNewExpenseFragmentViewModelTest{
     }
 
     @Test
-    fun saveNewExpensesToRepository_showsSuccessMessageUi() {
+    fun saveNewExpensesToRepository_showsSuccessMessageUi() = mainCoroutineRule.runBlockingTest {
         val expenseCategory     = "food"
         val expenseDescription  = "expense for food"
         val expensesAmount      = "1000"
@@ -71,57 +72,42 @@ class CreateNewExpenseFragmentViewModelTest{
     }
 
     @Test
-    fun saveNewExpenseToRepository_nullExpensesAmount_error(){
+    fun saveNewExpenseToRepository_nullExpensesAmount_error() = mainCoroutineRule.runBlockingTest {
         saveExpenseAndAssertSnackBarError(null,"sdf","food")
     }
 
     @Test
-    fun saveNewExpenseToRepository_nullExpensesAmount_and_nullExpensesDescription_error(){
+    fun saveNewExpenseToRepository_nullExpensesAmount_and_nullExpensesDescription_error() = mainCoroutineRule.runBlockingTest {
         saveExpenseAndAssertSnackBarError(null,null,"drink")
     }
 
     @Test
-    fun saveNewExpenseToRepository_nullCategory_error(){
+    fun saveNewExpenseToRepository_nullCategory_error() = mainCoroutineRule.runBlockingTest {
         saveExpenseAndAssertSnackBarErrorWhenCategoryIsNull("200","for my car",null)
     }
 
-    private fun saveExpenseAndAssertSnackBarError(expensesAmount: String?, expenseDescription: String?,
-                                                  expenseCategory: String?) {
-        (createNewExpenseFragmentViewModel).apply {
-           category.value    = expenseCategory
-           description.value = expenseDescription
-           amount.value      = expensesAmount
-        }
-
-        // When saving an incomplete task
-        createNewExpenseFragmentViewModel.createNewExpense()
-
-        // Then the snackBar shows an error
-        assertSnackbarMessage(createNewExpenseFragmentViewModel.snackbarText,R.string.fill_empty)
-    }
-
     @Test
-    fun addNewCategory_emptyCategory(){
+    fun addNewCategory_emptyCategory() = mainCoroutineRule.runBlockingTest {
         val newCategory = ""
         createNewExpenseFragmentViewModel.addNewCategory(newCategory)
         assertSnackbarMessage(createNewExpenseFragmentViewModel.snackbarText,R.string.cant_be_empty)
     }
 
     @Test
-    fun addNewCategory(){
+    fun addNewCategory() = mainCoroutineRule.runBlockingTest {
         val newCategory = "Food"
         createNewExpenseFragmentViewModel.addNewCategory(newCategory)
     }
 
     @Test
-    fun saveExceedExpense_emptyExceedExpense_error(){
+    fun saveExceedExpense_emptyExceedExpense_error() = mainCoroutineRule.runBlockingTest {
         val fixedExpense = ""
         createNewExpenseFragmentViewModel.saveExceedExpense(fixedExpense)
         assertSnackbarMessage(createNewExpenseFragmentViewModel.snackbarText,R.string.enter_fixed_expense)
     }
 
     @Test
-    fun saveExceedExpense(){
+    fun saveExceedExpense() = mainCoroutineRule.runBlockingTest {
         val fixedExpense = "1000"
         createNewExpenseFragmentViewModel.saveExceedExpense(fixedExpense)
         assertThat(expenseMonitorSharedPreferences.getExceedExpense()).isEqualTo(fixedExpense)
@@ -135,12 +121,23 @@ class CreateNewExpenseFragmentViewModelTest{
             amount.value      = expensesAmount
         }
 
-        // When saving an incomplete task
+        // When saving an incomplete expense
         createNewExpenseFragmentViewModel.createNewExpense()
 
         // Then the snackBar shows an error
         assertSnackbarMessage(createNewExpenseFragmentViewModel.snackbarText,R.string.select_category)
     }
 
+    private fun saveExpenseAndAssertSnackBarError(expensesAmount: String?, expenseDescription: String?,
+                                                  expenseCategory: String?) {
+        (createNewExpenseFragmentViewModel).apply {
+            category.value    = expenseCategory
+            description.value = expenseDescription
+            amount.value      = expensesAmount
+        }
+
+        createNewExpenseFragmentViewModel.createNewExpense()
+        assertSnackbarMessage(createNewExpenseFragmentViewModel.snackbarText,R.string.fill_empty)
+    }
 
 }
