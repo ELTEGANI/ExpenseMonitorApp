@@ -25,9 +25,9 @@ class UpdateAndDeleteFragmentViewModel @ViewModelInject constructor(
     }
     val categories = localRepository.getAllCategories()
 
-    private val _snackbarText = MutableLiveData<Event<Int>>()
-    val snackbarText: LiveData<Event<Int>>
-        get() = _snackbarText
+    private val _snackBarText = MutableLiveData<Event<Int>>()
+    val snackBarText: LiveData<Event<Int>>
+        get() = _snackBarText
 
     private val _exceedsMessage = MutableLiveData<String>()
     val exceedsMessage: LiveData<String>
@@ -41,13 +41,12 @@ class UpdateAndDeleteFragmentViewModel @ViewModelInject constructor(
     fun deleteExpense() {
         viewModelScope.launch {
             localRepository.deleteExpenseUsingId(expenseId.value.toString())
-            _snackbarText.value = Event(R.string.delete_expense)
+            _snackBarText.value = Event(R.string.delete_expense)
             _updatedExpenseEvent.value = Event(Unit)
         }
     }
 
     fun updateExpense() {
-
         val expenseCategory     = category.value
         val expenseDescription  = description.value
         val expenseAmount       = amount.value
@@ -55,8 +54,8 @@ class UpdateAndDeleteFragmentViewModel @ViewModelInject constructor(
         val expenseCurrency     = currency.value
         val expenseId           = expenseId.value
 
-        if (expenseDescription.toString().isEmpty() || expenseAmount.toString().isEmpty()) {
-            _snackbarText.value = Event(R.string.fill_empty)
+        if (expenseDescription == null || expenseAmount == null) {
+            _snackBarText.value = Event(R.string.fill_empty)
         } else {
             viewModelScope.launch {
                 if (localRepository.checkIfFixedExpenseExceeded()) {
@@ -67,8 +66,8 @@ class UpdateAndDeleteFragmentViewModel @ViewModelInject constructor(
                             expenseCurrency?.let { currency ->
                                 expenseDate?.let { date ->
                                     expenseCategory?.let { category ->
-                                        expenseAmount?.toBigDecimal()?.let { amount ->
-                                            expenseDescription?.let { description ->
+                                        expenseAmount.toBigDecimal().let { amount ->
+                                            expenseDescription.let { description ->
                                                 localRepository.updateExpenseUsingId(
                                                     id,
                                                     amount,
@@ -83,17 +82,17 @@ class UpdateAndDeleteFragmentViewModel @ViewModelInject constructor(
                                 }
                             }
                         }
-                        _snackbarText.value = Event(R.string.update_expense)
-                        _updatedExpenseEvent.value = Event(Unit)
                     }
                 }
+                _snackBarText.value = Event(R.string.update_expense)
+                _updatedExpenseEvent.value = Event(Unit)
             }
         }
     }
 
     fun saveExceedExpense(exceedExpense:String){
         if (exceedExpense.isEmpty()){
-            _snackbarText.value = Event(R.string.enter_fixed_expense)
+            _snackBarText.value = Event(R.string.enter_fixed_expense)
         }else{
             expenseMonitorSharedPreferences.saveExceededExpenseForSettings(exceedExpense)
         }

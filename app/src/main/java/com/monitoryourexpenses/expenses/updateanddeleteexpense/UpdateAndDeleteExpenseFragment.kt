@@ -2,7 +2,6 @@ package com.monitoryourexpenses.expenses.updateanddeleteexpense
 
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
-import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,24 +12,18 @@ import androidx.appcompat.widget.SearchView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
-import androidx.preference.PreferenceManager
 import androidx.recyclerview.selection.SelectionPredicates
 import androidx.recyclerview.selection.SelectionTracker
 import androidx.recyclerview.selection.StorageStrategy
-import androidx.transition.Slide
 import com.google.android.material.snackbar.Snackbar
-import com.google.android.material.transition.MaterialContainerTransform
 import com.monitoryourexpenses.expenses.EventObserver
 import com.monitoryourexpenses.expenses.R
 import com.monitoryourexpenses.expenses.adapters.*
 import com.monitoryourexpenses.expenses.databinding.UpdateAndDeleteExpenseFragmentBinding
 import com.monitoryourexpenses.expenses.prefs.ExpenseMonitorSharedPreferences
-import com.monitoryourexpenses.expenses.utilites.UtilitesFunctions
 import com.monitoryourexpenses.expenses.utilites.setupSnackbar
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.create_new_expense_fragment.*
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -175,7 +168,7 @@ class UpdateAndDeleteExpenseFragment  : Fragment() {
     }
 
     private fun setupSnackbar() {
-        view?.setupSnackbar(this,updateAndDeleteFragmentViewModel.snackbarText, Snackbar.LENGTH_SHORT)
+        view?.setupSnackbar(this,updateAndDeleteFragmentViewModel.snackBarText, Snackbar.LENGTH_SHORT)
     }
 
     private fun setupNavigation() {
