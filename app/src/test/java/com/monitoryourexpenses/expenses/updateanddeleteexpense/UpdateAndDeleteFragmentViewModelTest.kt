@@ -89,5 +89,32 @@ class UpdateAndDeleteFragmentViewModelTest{
         updateAndDeleteFragmentViewModel.updateExpense()
         assertSnackbarMessage(updateAndDeleteFragmentViewModel.snackBarText,R.string.fill_empty)
     }
-    
+
+    @Test
+    fun updateExpense()=mainCoroutineRule.runBlockingTest{
+        val expenseCategory     = "food"
+        val expenseDescription  = "expense for food"
+        val expensesAmount      = "1000"
+        val expenseDate         = "2020-10-10"
+        val expenseCurrency     = "SDG"
+
+        (updateAndDeleteFragmentViewModel).apply {
+            category.value    = expenseCategory
+            description.value = expenseDescription
+            amount.value      = expensesAmount
+            currentDate.value = expenseDate
+            currency.value    = expenseCurrency
+        }
+
+        updateAndDeleteFragmentViewModel.updateExpense()
+        assertSnackbarMessage(updateAndDeleteFragmentViewModel.snackBarText,R.string.update_expense)
+    }
+
+    @Test
+    fun deleteExpense() = mainCoroutineRule.runBlockingTest {
+        updateAndDeleteFragmentViewModel.deleteExpense()
+        assertSnackbarMessage(updateAndDeleteFragmentViewModel.snackBarText,R.string.delete_expense)
+    }
+
+
 }
