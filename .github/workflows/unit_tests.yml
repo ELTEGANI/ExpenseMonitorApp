@@ -2,17 +2,11 @@
 
 name: Unit Tests Workflow
 
-on:
-  pull_request:
-    branches:
-      - master
-  push:
-    branches:
-      - '*'
+on: [push,pull_request]
 
 jobs:
   testing:
-    name: Lint Check and Testing
+    name: Testing
 
     runs-on: ubuntu-latest
 
