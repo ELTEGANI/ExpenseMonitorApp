@@ -58,7 +58,7 @@ class UpdateAndDeleteFragmentViewModel @ViewModelInject constructor(
             _snackBarText.value = Event(R.string.fill_empty)
         } else {
             viewModelScope.launch {
-                if (localRepository.checkIfFixedExpenseExceeded()) {
+                if (localRepository.totalOfCurrentExpenses()) {
                     _exceedsMessage.value = expenseMonitorSharedPreferences.getExceedExpense()
                 } else {
                     viewModelScope.launch {
@@ -83,9 +83,9 @@ class UpdateAndDeleteFragmentViewModel @ViewModelInject constructor(
                             }
                         }
                     }
+                    _snackBarText.value = Event(R.string.update_expense)
+                    _updatedExpenseEvent.value = Event(Unit)
                 }
-                _snackBarText.value = Event(R.string.update_expense)
-                _updatedExpenseEvent.value = Event(Unit)
             }
         }
     }

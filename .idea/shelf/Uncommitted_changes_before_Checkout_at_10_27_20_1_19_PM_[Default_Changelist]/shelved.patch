@@ -1,0 +1,137 @@
+Index: app/src/main/java/com/monitoryourexpenses/expenses/database/LocalRepository.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.monitoryourexpenses.expenses.database\n\nimport androidx.lifecycle.LiveData\nimport com.monitoryourexpenses.expenses.database.local.ExpenseMonitorDao\nimport kotlinx.coroutines.flow.Flow\nimport java.math.BigDecimal\nimport javax.inject.Inject\nimport javax.inject.Singleton\n\n@Singleton\nclass LocalRepository @Inject constructor(private val expenseMonitorDao: ExpenseMonitorDao) {\n\n    fun getTodayExpenses(todayDate: String, currency: String): LiveData<List<Expenses>> {\n        return expenseMonitorDao.retrieveTodayExpense(todayDate, currency)\n    }\n\n    fun getWeekExpenses(startWeek: String, endWeek: String, currency: String): LiveData<List<Expenses>> {\n        return expenseMonitorDao.retrieveWeekExpense(startWeek, endWeek, currency)\n    }\n\n     fun getMonthExpenses(startMonth: String, endMonth: String, currency: String): LiveData<List<Expenses>> {\n        return expenseMonitorDao.retrieveMonthExpense(startMonth, endMonth, currency)\n    }\n\n       fun getSumationOfTodayExpenses(todayDate: String, currency: String): Flow<String> {\n        return expenseMonitorDao.retrieveSumationOfTodayExpense(todayDate, currency)\n     }\n\n       fun getSumationOfMonthExpenses(startMonth: String, endMonth: String, currency: String): Flow<String> {\n          return expenseMonitorDao.retrieveSumationOfMonthExpense(startMonth, endMonth, currency)\n    }\n\n      fun getSumationOfWeekExpenses(startWeek: String, endWeek: String, currency: String): Flow<String> {\n         return expenseMonitorDao.retrieveSumationOfWeekExpense(startWeek, endWeek, currency)\n    }\n\n     suspend fun deleteExpenseUsingId(id: String) {\n        expenseMonitorDao.deleteExpenses(id)\n    }\n\n     suspend fun updateExpenseUsingId(expense_id: String, amount: BigDecimal, description: String, expensecategory: String, date: String\n     ,currency: String) {\n        expenseMonitorDao.updateExpenses(expense_id,amount,description,expensecategory,date,currency)\n    }\n\n     suspend fun insertExpense(expenses: Expenses) {\n        expenseMonitorDao.insertExpenses(expenses)\n    }\n\n     suspend fun insertNewCategory(categories: List<Categories>) {\n        expenseMonitorDao.insertNewCategory(categories)\n    }\n\n     suspend fun sumationOfSpecifiedExpenses(currency: String): String {\n       return expenseMonitorDao.sumationOfSpecifiedExpenses(currency)\n    }\n\n     fun getAllCategories(): LiveData<List<Categories>> {\n        return expenseMonitorDao.selectAllCategories()\n    }\n\n     fun selectSumationOfCurrencies(): LiveData<List<AllCurrencies>> {\n        return expenseMonitorDao.selectSumationOfCurrencies()\n    }\n\n     fun selectSumationOfCategories(startMonth: String, endMonth: String, currency: String): LiveData<List<AllCategories>> {\n        return expenseMonitorDao.selectSumationOfCategories(startMonth, endMonth, currency)\n    }\n\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/monitoryourexpenses/expenses/database/LocalRepository.kt	(revision 41308b071abe153801d6e117d87642aed9910c03)
++++ app/src/main/java/com/monitoryourexpenses/expenses/database/LocalRepository.kt	(date 1603797343000)
+@@ -1,17 +1,22 @@
+ package com.monitoryourexpenses.expenses.database
+ 
++import androidx.annotation.VisibleForTesting
+ import androidx.lifecycle.LiveData
+ import com.monitoryourexpenses.expenses.database.local.ExpenseMonitorDao
++import com.monitoryourexpenses.expenses.prefs.ExpenseMonitorSharedPreferences
+ import kotlinx.coroutines.flow.Flow
++import kotlinx.coroutines.runBlocking
+ import java.math.BigDecimal
+ import javax.inject.Inject
+ import javax.inject.Singleton
+ 
+ @Singleton
+-class LocalRepository @Inject constructor(private val expenseMonitorDao: ExpenseMonitorDao) {
++class LocalRepository @Inject constructor(private val expenseMonitorDao: ExpenseMonitorDao,
++var expenseMonitorSharedPreferences: ExpenseMonitorSharedPreferences) {
+ 
+-    fun getTodayExpenses(todayDate: String, currency: String): LiveData<List<Expenses>> {
+-        return expenseMonitorDao.retrieveTodayExpense(todayDate, currency)
++    fun getTodayExpenses(): LiveData<List<Expenses>> {
++        return expenseMonitorDao.retrieveTodayExpense(expenseMonitorSharedPreferences.getCurrentDate().toString(),
++            expenseMonitorSharedPreferences.getCurrency().toString())
+     }
+ 
+     fun getWeekExpenses(startWeek: String, endWeek: String, currency: String): LiveData<List<Expenses>> {
+Index: app/src/main/java/com/monitoryourexpenses/expenses/todayexpense/TodayExpenseFragmentViewModel.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.monitoryourexpenses.expenses.todayexpense\n\nimport androidx.hilt.lifecycle.ViewModelInject\nimport androidx.lifecycle.LiveData\nimport androidx.lifecycle.MutableLiveData\nimport androidx.lifecycle.ViewModel\nimport com.monitoryourexpenses.expenses.database.Expenses\nimport com.monitoryourexpenses.expenses.database.LocalRepository\nimport com.monitoryourexpenses.expenses.prefs.ExpenseMonitorSharedPreferences\n\n\nclass TodayExpenseFragmentViewModel @ViewModelInject constructor(\n    localRepository: LocalRepository,\n    var expenseMonitorSharedPreferences: ExpenseMonitorSharedPreferences) : ViewModel() {\n\n    private val _navigateToSelectedExpense = MutableLiveData<Expenses>()\n    val navigateToSelectedExpense: LiveData<Expenses>\n        get() = _navigateToSelectedExpense\n\n    val todayExpenses = localRepository.getTodayExpenses(expenseMonitorSharedPreferences.getCurrentDate().toString(),\n        expenseMonitorSharedPreferences.getCurrency().toString())\n\n    fun displaySelectedExpense(expense: Expenses) {\n        _navigateToSelectedExpense.value = expense\n    }\n\n    fun displaySelectedExpenseCompleted() {\n        _navigateToSelectedExpense.value = null\n    }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/monitoryourexpenses/expenses/todayexpense/TodayExpenseFragmentViewModel.kt	(revision 41308b071abe153801d6e117d87642aed9910c03)
++++ app/src/main/java/com/monitoryourexpenses/expenses/todayexpense/TodayExpenseFragmentViewModel.kt	(date 1603797200000)
+@@ -10,15 +10,13 @@
+ 
+ 
+ class TodayExpenseFragmentViewModel @ViewModelInject constructor(
+-    localRepository: LocalRepository,
+-    var expenseMonitorSharedPreferences: ExpenseMonitorSharedPreferences) : ViewModel() {
++    var localRepository: LocalRepository) : ViewModel() {
+ 
+     private val _navigateToSelectedExpense = MutableLiveData<Expenses>()
+     val navigateToSelectedExpense: LiveData<Expenses>
+         get() = _navigateToSelectedExpense
+ 
+-    val todayExpenses = localRepository.getTodayExpenses(expenseMonitorSharedPreferences.getCurrentDate().toString(),
+-        expenseMonitorSharedPreferences.getCurrency().toString())
++    val todayExpenses = localRepository.getTodayExpenses()
+ 
+     fun displaySelectedExpense(expense: Expenses) {
+         _navigateToSelectedExpense.value = expense
+Index: app/src/test/java/com/monitoryourexpenses/expenses/todayexpense/TodayExpenseFragmentViewModelTest.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/test/java/com/monitoryourexpenses/expenses/todayexpense/TodayExpenseFragmentViewModelTest.kt	(date 1603797200000)
++++ app/src/test/java/com/monitoryourexpenses/expenses/todayexpense/TodayExpenseFragmentViewModelTest.kt	(date 1603797200000)
+@@ -0,0 +1,66 @@
++package com.monitoryourexpenses.expenses.todayexpense
++
++import androidx.arch.core.executor.testing.InstantTaskExecutorRule
++import androidx.test.core.app.ApplicationProvider
++import androidx.test.ext.junit.runners.AndroidJUnit4
++import com.google.common.truth.Truth.assertThat
++import com.monitoryourexpenses.expenses.MainCoroutineRule
++import com.monitoryourexpenses.expenses.database.Expenses
++import com.monitoryourexpenses.expenses.database.LocalRepository
++import com.monitoryourexpenses.expenses.database.local.ExpenseMonitorDao
++import com.monitoryourexpenses.expenses.getOrAwaitValue
++import com.monitoryourexpenses.expenses.observeForTesting
++import com.monitoryourexpenses.expenses.prefs.ExpenseMonitorSharedPreferences
++import com.monitoryourexpenses.expenses.updateanddeleteexpense.UpdateAndDeleteFragmentViewModel
++import com.monitoryourexpenses.expenses.updateanddeleteexpense.UpdateAndDeleteFragmentViewModelTest
++import kotlinx.coroutines.ExperimentalCoroutinesApi
++import kotlinx.coroutines.test.runBlockingTest
++import org.junit.Before
++import org.junit.Rule
++import org.junit.Test
++import org.junit.runner.RunWith
++import org.mockito.Mockito
++import org.robolectric.annotation.Config
++
++
++/**
++ * Unit tests for the implementation of [TodayExpenseFragmentViewModelTest]
++ */
++@ExperimentalCoroutinesApi
++@RunWith(AndroidJUnit4::class)
++@Config(sdk = [Config.OLDEST_SDK])
++class TodayExpenseFragmentViewModelTest{
++
++    private lateinit var todayExpenseFragmentViewModel: TodayExpenseFragmentViewModel
++
++    private var expenseMonitorDao : ExpenseMonitorDao = Mockito.mock(ExpenseMonitorDao::class.java)
++
++    private lateinit var localRepository: LocalRepository
++
++    private lateinit var expenseMonitorSharedPreferences: ExpenseMonitorSharedPreferences
++
++    @ExperimentalCoroutinesApi
++    @get:Rule
++    var mainCoroutineRule = MainCoroutineRule()
++
++    @get:Rule
++    var instantExecutorRule = InstantTaskExecutorRule()
++
++    @Before
++    fun setViewModel(){
++        expenseMonitorSharedPreferences   = ExpenseMonitorSharedPreferences(ApplicationProvider.getApplicationContext())
++        localRepository                   = LocalRepository(expenseMonitorDao,expenseMonitorSharedPreferences)
++        todayExpenseFragmentViewModel     = TodayExpenseFragmentViewModel(localRepository)
++    }
++
++    @Test
++    fun getTodayExpenses() = mainCoroutineRule.runBlockingTest {
++        // Pause dispatcher so we can verify initial values
++        mainCoroutineRule.pauseDispatcher()
++
++        todayExpenseFragmentViewModel.todayExpenses.observeForTesting {
++            assertThat(todayExpenseFragmentViewModel.todayExpenses.getOrAwaitValue()).hasSize(1)
++        }
++    }
++
++}
+\ No newline at end of file

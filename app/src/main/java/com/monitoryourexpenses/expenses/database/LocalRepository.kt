@@ -12,8 +12,9 @@ import javax.inject.Singleton
 class LocalRepository @Inject constructor(private val expenseMonitorDao: ExpenseMonitorDao,
  var expenseMonitorSharedPreferences: ExpenseMonitorSharedPreferences) {
 
-    fun getTodayExpenses(todayDate: String, currency: String): LiveData<List<Expenses>> {
-        return expenseMonitorDao.retrieveTodayExpense(todayDate, currency)
+    fun getTodayExpenses(): Flow<List<Expenses>> {
+        return expenseMonitorDao.retrieveTodayExpense(expenseMonitorSharedPreferences.getCurrentDate().toString(),
+            expenseMonitorSharedPreferences.getCurrency().toString())
     }
 
     fun getWeekExpenses(startWeek: String, endWeek: String, currency: String): LiveData<List<Expenses>> {
@@ -53,10 +54,13 @@ class LocalRepository @Inject constructor(private val expenseMonitorDao: Expense
         expenseMonitorDao.insertNewCategory(categories)
     }
 
-     suspend fun checkIfFixedExpenseExceeded(): Boolean {
-         return (expenseMonitorDao.sumationOfSpecifiedExpenses(expenseMonitorSharedPreferences.getCurrency().toString()) ==
-                 expenseMonitorSharedPreferences.getExceedExpense())
-     }
+    suspend fun totalOfCurrentExpenses() : Boolean{
+        val totalExpense = expenseMonitorDao.sumationOfSpecifiedExpenses(expenseMonitorSharedPreferences.getCurrency().toString())
+        if(expenseMonitorSharedPreferences.getExceedExpense() != null) {
+           return  totalExpense == expenseMonitorSharedPreferences.getExceedExpense()
+        }
+        return false
+    }
 
      fun getAllCategories(): LiveData<List<Categories>> {
         return expenseMonitorDao.selectAllCategories()
