@@ -67,7 +67,7 @@
         <action
             android:id="@+id/action_settingsFragment_to_myExpenseFragment"
             app:destination="@id/myExpenseFragment"
-            app:popUpTo="@id/settingsFragment"
+            app:popUpTo="@id/myExpenseFragment"
             app:popUpToInclusive="true" />
     </fragment>
 
