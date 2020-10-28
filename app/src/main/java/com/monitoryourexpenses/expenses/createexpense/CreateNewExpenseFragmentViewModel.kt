@@ -1,5 +1,6 @@
 package com.monitoryourexpenses.expenses.createexpense
 
+import android.util.Log
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -56,23 +57,20 @@ class CreateNewExpenseFragmentViewModel @ViewModelInject constructor(val localRe
             _snackbarText.value = Event(R.string.select_category)
         } else {
             viewModelScope.launch {
-                if (localRepository.checkIfFixedExpenseExceeded()) {
+                if (localRepository.totalOfCurrentExpenses()) {
                     _exceedsMessage.value = expenseMonitorSharedPreferences.getExceedExpense()
                 } else {
-                    viewModelScope.launch {
                         localRepository.insertExpense(
                             Expenses(
                                 amount = expenseAmount.toBigDecimal(),
                                 description = expenseDescription,
                                 expenseCategory = expenseCategory,
                                 currency = expenseCurrency,
-                                date = expenseDate
-                            )
+                                date = expenseDate)
                         )
-                    }
+                    _snackbarText.value = Event(R.string.expense_created_successfuly)
+                    _createdExpenseEvent.value = Event(Unit)
                 }
-                _snackbarText.value = Event(R.string.expense_created_successfuly)
-                _createdExpenseEvent.value = Event(Unit)
             }
         }
     }
