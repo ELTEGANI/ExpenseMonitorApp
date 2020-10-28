@@ -20,6 +20,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mockito
 import org.robolectric.annotation.Config
+import org.threeten.bp.LocalDate
 
 /**
  * Unit tests for the implementation of [GetUserCurrencyUserViewModelTest]
@@ -93,10 +94,10 @@ class GetUserCurrencyUserViewModelTest{
     @Test
     fun saveAllDatesInSharedPreferences() = mainCoroutineRule.runBlockingTest{
         getUserCurrencyUserViewModel.saveAllDates()
-        assertThat(expenseMonitorSharedPreferences.getCurrentDate()).isEqualTo("2020-10-26")
-        assertThat(expenseMonitorSharedPreferences.getStartOfTheWeek()).isEqualTo("2020-10-26")
-        assertThat(expenseMonitorSharedPreferences.getEndOfTheWeek()).isEqualTo("2020-11-02")
-        assertThat(expenseMonitorSharedPreferences.getStartOfTheMonth()).isEqualTo("2020-10-26")
-        assertThat(expenseMonitorSharedPreferences.getEndOfTheMonth()).isEqualTo("2020-11-26")
+        assertThat(expenseMonitorSharedPreferences.getCurrentDate()).isEqualTo(LocalDate.now().toString())
+        assertThat(expenseMonitorSharedPreferences.getStartOfTheWeek()).isEqualTo(LocalDate.now().toString())
+        assertThat(expenseMonitorSharedPreferences.getEndOfTheWeek()).isEqualTo(LocalDate.now().plusDays(7).toString())
+        assertThat(expenseMonitorSharedPreferences.getStartOfTheMonth()).isEqualTo(LocalDate.now().toString())
+        assertThat(expenseMonitorSharedPreferences.getEndOfTheMonth()).isEqualTo(LocalDate.now().plusMonths(1).toString())
     }
 }
