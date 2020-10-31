@@ -11,7 +11,7 @@ import javax.inject.Singleton
 data class Categories(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
-    val id: Int?,
+    val id: Int? = 0,
 
     @ColumnInfo(name = "CategoryName")
     var CategoryName: String?

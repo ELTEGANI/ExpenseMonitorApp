@@ -48,7 +48,7 @@ class TodayExpenseFragment : Fragment() {
         todayExpenseFragmentBinding.todayExpenseList.itemAnimator = DefaultItemAnimator()
         todayExpenseFragmentBinding.todayExpenseList.adapter = adapter
 
-        todayExpenseFragmentViewModel.getTodayExpenses().observe(viewLifecycleOwner,{
+        todayExpenseFragmentViewModel.todayExpenses?.observe(viewLifecycleOwner,{
             it?.let {
                 if (it.isNotEmpty()) {
                     adapter.submitList(it.reversed())

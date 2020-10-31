@@ -8,11 +8,10 @@ import java.math.BigDecimal
 import javax.inject.Inject
 import javax.inject.Singleton
 
-@Singleton
 class LocalRepository @Inject constructor(private val expenseMonitorDao: ExpenseMonitorDao,
  var expenseMonitorSharedPreferences: ExpenseMonitorSharedPreferences) {
 
-    fun getTodayExpenses(): Flow<List<Expenses>> {
+    fun getTodayExpenses(): LiveData<List<Expenses>>? {
         return expenseMonitorDao.retrieveTodayExpense(expenseMonitorSharedPreferences.getCurrentDate().toString(),
             expenseMonitorSharedPreferences.getCurrency().toString())
     }

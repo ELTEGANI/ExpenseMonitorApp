@@ -3,7 +3,6 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'androidx.navigation.safeargs.kotlin'
-apply plugin: 'kotlin-kapt'
 apply plugin: 'dagger.hilt.android.plugin'
 
 android {
@@ -24,6 +23,9 @@ android {
             }
         }
         vectorDrawables.useSupportLibrary = true
+
+        testInstrumentationRunner "com.monitoryourexpenses.expenses.CustomTestRunner"
+
     }
     buildTypes {
         release {
@@ -57,6 +59,19 @@ android {
     testOptions {
         unitTests {
             includeAndroidResources = true
+        }
+    }
+    sourceSets {
+        main {
+            java {
+                srcDirs 'src/main/java', 'src/main/java/androidDebug'
+            }
+        }
+    }
+    configurations.all {
+        resolutionStrategy {
+            exclude group: "org.jetbrains.kotlinx", module: "kotlinx-coroutines-debug"
+
         }
     }
 }
@@ -186,9 +201,14 @@ dependencies {
     // When using Kotlin.
     kapt 'androidx.hilt:hilt-compiler:1.0.0-alpha02'
 
-    // Hilt testing
-    androidTestImplementation "com.google.dagger:hilt-android-testing:$hiltVersion"
-    kaptAndroidTest "com.google.dagger:hilt-android-compiler:$hiltVersion"
-    kaptAndroidTest "androidx.hilt:hilt-compiler:$hiltAndroidXVersion"
+    // For Robolectric tests.
+    testImplementation 'com.google.dagger:hilt-android-testing:2.28.3-alpha'
+    // ...with Kotlin.
+    kaptTest 'com.google.dagger:hilt-android-compiler:2.28.3-alpha'
+
+    // For instrumented tests.
+    androidTestImplementation 'com.google.dagger:hilt-android-testing:2.28.3-alpha'
+    // ...with Kotlin.
+    kaptAndroidTest 'com.google.dagger:hilt-android-compiler:2.28.3-alpha'
 
 }

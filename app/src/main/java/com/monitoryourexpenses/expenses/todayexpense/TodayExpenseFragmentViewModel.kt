@@ -16,21 +16,11 @@ import kotlinx.coroutines.launch
 class TodayExpenseFragmentViewModel @ViewModelInject constructor(var localRepository: LocalRepository,
     var expenseMonitorSharedPreferences: ExpenseMonitorSharedPreferences) : ViewModel() {
 
-    var selectedExpense:MutableLiveData<List<Expenses>> = MutableLiveData<List<Expenses>>()
-
     private val _navigateToSelectedExpense = MutableLiveData<Expenses>()
     val navigateToSelectedExpense: LiveData<Expenses>
         get() = _navigateToSelectedExpense
 
-    init {
-      viewModelScope.launch(Dispatchers.IO) {
-          localRepository.getTodayExpenses().collect {todayExpenses->
-              selectedExpense.postValue(todayExpenses)
-          }
-      }
-    }
-
-    fun getTodayExpenses() = selectedExpense
+    val todayExpenses: LiveData<List<Expenses>>? = localRepository.getTodayExpenses()
 
     fun displaySelectedExpense(expense: Expenses) {
         _navigateToSelectedExpense.value = expense
