@@ -15,7 +15,7 @@ import java.math.BigDecimal
 interface ExpenseMonitorDao {
 
     @Query("SELECT * from expenses WHERE date=:todayDate and currency =:currency")
-    fun retrieveTodayExpense(todayDate: String, currency: String): Flow<List<Expenses>>
+    fun retrieveTodayExpense(todayDate: String, currency: String): LiveData<List<Expenses>>
 
     @Query("SELECT * from expenses WHERE date between :startWeek and :endWeek and currency =:currency")
     fun retrieveWeekExpense(startWeek: String, endWeek: String, currency: String): LiveData<List<Expenses>>

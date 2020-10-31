@@ -130,7 +130,7 @@ class CreateNewExpenseFragment: Fragment() {
             }
         })
 
-        tracker = SelectionTracker.Builder<Long>(
+        tracker = SelectionTracker.Builder(
             "mySelection", createNewExpenseFragmentBinding.categoryList,
             MyItemKeyProvider(createNewExpenseFragmentBinding.categoryList),
             MyItemDetailsLookup(createNewExpenseFragmentBinding.categoryList),
@@ -148,7 +148,6 @@ class CreateNewExpenseFragment: Fragment() {
                 return true
             }
         })
-
 
         return createNewExpenseFragmentBinding.root
     }
