@@ -7,11 +7,12 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.action.ViewActions.click
-import androidx.test.espresso.action.ViewActions.replaceText
+import androidx.test.espresso.action.ViewActions.*
+import androidx.test.espresso.assertion.ViewAssertions
+import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.contrib.RecyclerViewActions
-import androidx.test.espresso.matcher.ViewMatchers.withId
-import androidx.test.espresso.matcher.ViewMatchers.withText
+import androidx.test.espresso.matcher.ViewMatchers
+import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.MediumTest
 import androidx.test.platform.app.InstrumentationRegistry
@@ -22,6 +23,8 @@ import com.monitoryourexpenses.expenses.database.LocalRepository
 import com.monitoryourexpenses.expenses.di.LocalRepositoryModule
 import com.monitoryourexpenses.expenses.launchFragmentInHiltContainer
 import com.monitoryourexpenses.expenses.myexpenses.MyExpenseFragmentDirections
+import com.monitoryourexpenses.expenses.prefs.ExpenseMonitorSharedPreferences
+import com.monitoryourexpenses.expenses.prefs.ExpenseMonitorSharedPreferences_Factory
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import dagger.hilt.android.testing.UninstallModules
@@ -56,15 +59,56 @@ class CreateNewExpenseFragmentTest{
     @Inject
     lateinit var localRepository: LocalRepository
 
+    @Inject
+    lateinit var expenseMonitorSharedPreferences: ExpenseMonitorSharedPreferences
+
     @Before
     fun init() {
         initAndroidThreeTen()
         // Populate @Inject fields in test class
         hiltRule.inject()
+        addCategories()
+    }
+
+    @Test
+    fun emptyExpense_isNotSaved(){
+        //Given -On the "Add Expense" screen.
+        val navController = Mockito.mock(NavController::class.java)
+        launchFragment(navController)
+
+        //WHEN -inValid amount,date,category and description combination and click save
+        onView(withId(R.id.expense_description_textView)).perform(clearText())
+        onView(withId(R.id.expense_amount_textView)).perform(clearText())
+        onView(withId(R.id.create_new_expense_button)).perform(click())
+
+        // THEN - Entered Expense is still displayed
+        onView(withId(R.id.expense_description_textView)).check(matches(isDisplayed()))
     }
 
     @Test
     fun validExpense_isSaved(){
+        //Given -On the "Add Expense" screen.
+        val navController = Mockito.mock(NavController::class.java)
+        launchFragment(navController)
+
+        //WHEN -Valid amount,date,category and description combination and click save
+        onView(withId(R.id.categoryList)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(1,click()))
+        onView(withId(R.id.expense_description_textView)).perform(replaceText("For Food"))
+        onView(withId(R.id.expense_amount_textView)).perform(replaceText("1000"))
+        onView(withId(R.id.expense_date_textView)).perform(replaceText(LocalDate.now().toString()))
+        onView(withId(R.id.create_new_expense_button)).perform(click())
+
+        //THEN - Verify that the repository saved the expense
+        val expenses = localRepository.getTodayExpenses()?.value
+        assertEquals(expenses?.size, 1)
+        assertEquals(expenses?.get(0)?.amount, "1000")
+        assertEquals(expenses?.get(0)?.description, "For Food")
+        assertEquals(expenses?.get(0)?.date, LocalDate.now().toString())
+    }
+
+
+    @Test
+    fun validExpense_navigatesBack(){
         //Given -On the "Add Expense" screen.
         val navController = Mockito.mock(NavController::class.java)
         launchFragment(navController)
@@ -94,4 +138,10 @@ class CreateNewExpenseFragmentTest{
         AndroidThreeTen.init(appContext)
     }
 
+    private fun addCategories(){
+        runBlocking {
+            localRepository.insertNewCategory(listOf(Categories(null,"Food"),Categories(null,"Home"),
+            Categories(null,"Kids")))
+        }
+    }
 }

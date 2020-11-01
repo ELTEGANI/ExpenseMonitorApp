@@ -201,7 +201,7 @@ class CreateNewExpenseFragment: Fragment() {
     }
 
     private fun setupSnackbar() {
-        view?.setupSnackbar(this, createNewExpenseFragmentViewModel.snackbarText, Snackbar.LENGTH_SHORT)
+        view?.setupSnackbar(this, createNewExpenseFragmentViewModel.snackbarText, Snackbar.LENGTH_LONG)
     }
 
     private fun setupNavigation() {
