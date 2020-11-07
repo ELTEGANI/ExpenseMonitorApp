@@ -26,7 +26,7 @@ import com.monitoryourexpenses.expenses.adapters.*
 import com.monitoryourexpenses.expenses.databinding.CreateNewExpenseFragmentBinding
 import com.monitoryourexpenses.expenses.prefs.ExpenseMonitorSharedPreferences
 import com.monitoryourexpenses.expenses.utilites.UtilitesFunctions
-import com.monitoryourexpenses.expenses.utilites.setupSnackbar
+import com.monitoryourexpenses.expenses.utilites.setupSnackBar
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
 import java.util.*
@@ -201,7 +201,7 @@ class CreateNewExpenseFragment: Fragment() {
     }
 
     private fun setupSnackbar() {
-        view?.setupSnackbar(this, createNewExpenseFragmentViewModel.snackbarText, Snackbar.LENGTH_LONG)
+        view?.setupSnackBar(this, createNewExpenseFragmentViewModel.snackbarText, Snackbar.LENGTH_LONG)
     }
 
     private fun setupNavigation() {

@@ -75,4 +75,5 @@ class LocalRepository @Inject constructor(private val expenseMonitorDao: Expense
         return expenseMonitorDao.selectSumationOfCategories(startMonth, endMonth, currency)
     }
 
+
 }
