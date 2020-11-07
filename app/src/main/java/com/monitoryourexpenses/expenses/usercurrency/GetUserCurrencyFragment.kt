@@ -1,25 +1,19 @@
 package com.monitoryourexpenses.expenses.usercurrency
 
-import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
-import androidx.transition.Slide
 import com.google.android.material.snackbar.Snackbar
-import com.google.android.material.transition.MaterialContainerTransform
 import com.monitoryourexpenses.expenses.EventObserver
 import com.monitoryourexpenses.expenses.R
 import com.monitoryourexpenses.expenses.databinding.GetUserCurrencyFragmentBinding
-import com.monitoryourexpenses.expenses.utilites.setupSnackbar
+import com.monitoryourexpenses.expenses.utilites.setupSnackBar
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.create_new_expense_fragment.*
 
 @AndroidEntryPoint
 class GetUserCurrencyFragment : Fragment() {
@@ -50,7 +44,7 @@ class GetUserCurrencyFragment : Fragment() {
     }
 
     private fun setupSnackbar() {
-        view?.setupSnackbar(this,getUserCurrencyUserViewModel.snackbarText, Snackbar.LENGTH_SHORT)
+        view?.setupSnackBar(this,getUserCurrencyUserViewModel.snackbarText, Snackbar.LENGTH_SHORT)
     }
 
     private fun setupNavigation() {

@@ -22,7 +22,7 @@ import com.monitoryourexpenses.expenses.R
 import com.monitoryourexpenses.expenses.adapters.*
 import com.monitoryourexpenses.expenses.databinding.UpdateAndDeleteExpenseFragmentBinding
 import com.monitoryourexpenses.expenses.prefs.ExpenseMonitorSharedPreferences
-import com.monitoryourexpenses.expenses.utilites.setupSnackbar
+import com.monitoryourexpenses.expenses.utilites.setupSnackBar
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
 import java.util.*
@@ -163,12 +163,12 @@ class UpdateAndDeleteExpenseFragment  : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupSnackbar()
+        setupSnackBar()
         setupNavigation()
     }
 
-    private fun setupSnackbar() {
-        view?.setupSnackbar(this,updateAndDeleteFragmentViewModel.snackBarText, Snackbar.LENGTH_SHORT)
+    private fun setupSnackBar() {
+        view?.setupSnackBar(this,updateAndDeleteFragmentViewModel.snackBarText, Snackbar.LENGTH_SHORT)
     }
 
     private fun setupNavigation() {

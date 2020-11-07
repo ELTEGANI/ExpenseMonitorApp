@@ -34,7 +34,7 @@ fun View.showSnackbar(snackbarText: String, timeLength: Int) {
 /**
  * Triggers a snackbar message when the value contained by snackbarTaskMessageLiveEvent is modified.
  */
-fun View.setupSnackbar(
+fun View.setupSnackBar(
     lifecycleOwner: LifecycleOwner,
     snackbarEvent: LiveData<Event<Int>>,
     timeLength: Int
