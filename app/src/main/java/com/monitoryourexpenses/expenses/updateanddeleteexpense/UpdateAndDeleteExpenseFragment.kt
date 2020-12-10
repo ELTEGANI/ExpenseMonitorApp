@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.SearchView
 import androidx.databinding.DataBindingUtil
@@ -53,24 +54,22 @@ class UpdateAndDeleteExpenseFragment  : Fragment() {
 
         updateAndDeleteExpenseFragmentBinding = DataBindingUtil.inflate(inflater, R.layout.update_and_delete_expense_fragment, container, false)
 
-        val expenseResponse = arguments?.let {
-            UpdateAndDeleteExpenseFragmentArgs.fromBundle(it).selectedExpense
-        }
-
-
-        updateAndDeleteFragmentViewModel.description.value  = expenseResponse?.description.toString()
-        updateAndDeleteFragmentViewModel.amount.value       = expenseResponse?.amount.toString()
-        updateAndDeleteFragmentViewModel.currentDate.value  = expenseResponse?.date.toString()
-        updateAndDeleteFragmentViewModel.expenseId.value    = expenseResponse?.expense_id.toString()
-        updateAndDeleteFragmentViewModel.category.value     = expenseResponse?.expenseCategory.toString()
-
-
         updateAndDeleteExpenseFragmentBinding.lifecycleOwner = this
         updateAndDeleteExpenseFragmentBinding.viewModel = updateAndDeleteFragmentViewModel
 
-        updateAndDeleteExpenseFragmentBinding.descriptionEditText.setText(expenseResponse?.description.toString())
-        updateAndDeleteExpenseFragmentBinding.amountEditText.setText(expenseResponse?.amount.toString())
-        updateAndDeleteExpenseFragmentBinding.dateEditText.setText(expenseResponse?.date.toString())
+        val id = arguments?.let {
+            UpdateAndDeleteExpenseFragmentArgs.fromBundle(it).id
+        }
+
+        if (id != null) {
+            updateAndDeleteFragmentViewModel.expense(id).observe(viewLifecycleOwner, { expense ->
+                if (expense != null) {
+                    updateAndDeleteExpenseFragmentBinding.descriptionEditText.setText(expense.description.toString())
+                    updateAndDeleteExpenseFragmentBinding.amountEditText.setText(expense.amount.toString())
+                    updateAndDeleteExpenseFragmentBinding.dateEditText.setText(expense.date.toString())
+                }
+            })
+        }
 
         updateAndDeleteExpenseFragmentBinding.dateButton.setOnClickListener {
             val c = Calendar.getInstance()
@@ -83,7 +82,7 @@ class UpdateAndDeleteExpenseFragment  : Fragment() {
                         calendar.set(year, monthOfYear, dayOfMonth)
                         val format = SimpleDateFormat("yyyy-MM-dd")
                         val date = format.format(c.time)
-                        updateAndDeleteFragmentViewModel.currentDate.value = date
+                        updateAndDeleteExpenseFragmentBinding.dateEditText.setText(date)
                     }, year, month, day)
             }
             datePickerDialog?.show()
@@ -130,6 +129,20 @@ class UpdateAndDeleteExpenseFragment  : Fragment() {
                 updateAndDeleteFragmentViewModel.category.value = expenseCategory
             }
         })
+
+        updateAndDeleteExpenseFragmentBinding.updateExpenseButton.setOnClickListener {
+            if (id != null) {
+                updateAndDeleteFragmentViewModel.updateExpense(updateAndDeleteExpenseFragmentBinding.descriptionEditText.text.toString()
+                    ,updateAndDeleteExpenseFragmentBinding.amountEditText.text.toString(),updateAndDeleteExpenseFragmentBinding.dateEditText.text.toString()
+                    ,id)
+            }
+        }
+
+        updateAndDeleteExpenseFragmentBinding.deleteExpenseButton.setOnClickListener {
+            if (id != null) {
+                updateAndDeleteFragmentViewModel.deleteExpense(id)
+            }
+        }
 
         updateAndDeleteExpenseFragmentBinding.categoryList.adapter = adapter
         updateAndDeleteFragmentViewModel.categories.observe(viewLifecycleOwner,  {

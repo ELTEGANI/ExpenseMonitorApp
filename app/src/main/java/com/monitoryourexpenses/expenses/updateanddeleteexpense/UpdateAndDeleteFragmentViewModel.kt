@@ -4,6 +4,7 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
 import com.monitoryourexpenses.expenses.Event
 import com.monitoryourexpenses.expenses.R
+import com.monitoryourexpenses.expenses.database.Expenses
 import com.monitoryourexpenses.expenses.database.LocalRepository
 import com.monitoryourexpenses.expenses.prefs.ExpenseMonitorSharedPreferences
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -13,12 +14,9 @@ class UpdateAndDeleteFragmentViewModel @ViewModelInject constructor(
     private var localRepository: LocalRepository,
     var expenseMonitorSharedPreferences : ExpenseMonitorSharedPreferences) : ViewModel() {
 
-    val amount       = MutableLiveData<String>()
-    val description  = MutableLiveData<String>()
-    val currentDate  = MutableLiveData<String>()
-    var category     = MutableLiveData<String>()
     var currency     = MutableLiveData<String>()
-    var expenseId    = MutableLiveData<String>()
+    var category    = MutableLiveData<String>()
+
 
     init {
         currency.value    =  expenseMonitorSharedPreferences.getCurrency()
@@ -37,24 +35,22 @@ class UpdateAndDeleteFragmentViewModel @ViewModelInject constructor(
     val updatedExpenseEvent: LiveData<Event<Unit>> = _updatedExpenseEvent
 
 
+    fun expense(id:String): LiveData<Expenses> = localRepository.getExpense(id)
+
     @ExperimentalCoroutinesApi
-    fun deleteExpense() {
+    fun deleteExpense(id:String) {
         viewModelScope.launch {
-            localRepository.deleteExpenseUsingId(expenseId.value.toString())
+            localRepository.deleteExpenseUsingId(id)
             _snackBarText.value = Event(R.string.delete_expense)
             _updatedExpenseEvent.value = Event(Unit)
         }
     }
 
-    fun updateExpense() {
+    fun updateExpense(expenseDescription:String,expenseAmount:String,expenseDate:String,id:String) {
         val expenseCategory     = category.value
-        val expenseDescription  = description.value
-        val expenseAmount       = amount.value
-        val expenseDate         = currentDate.value
         val expenseCurrency     = currency.value
-        val expenseId           = expenseId.value
 
-        if (expenseDescription == null || expenseAmount == null) {
+        if (expenseDescription.isEmpty() || expenseAmount.isEmpty()) {
             _snackBarText.value = Event(R.string.fill_empty)
         } else {
             viewModelScope.launch {
@@ -62,9 +58,9 @@ class UpdateAndDeleteFragmentViewModel @ViewModelInject constructor(
                     _exceedsMessage.value = expenseMonitorSharedPreferences.getExceedExpense()
                 } else {
                     viewModelScope.launch {
-                        expenseId?.let {id->
+                        id.let {id->
                             expenseCurrency?.let { currency ->
-                                expenseDate?.let { date ->
+                                expenseDate.let { date ->
                                     expenseCategory?.let { category ->
                                         expenseAmount.toBigDecimal().let { amount ->
                                             expenseDescription.let { description ->
@@ -97,6 +93,7 @@ class UpdateAndDeleteFragmentViewModel @ViewModelInject constructor(
             expenseMonitorSharedPreferences.saveExceededExpenseForSettings(exceedExpense)
         }
     }
+
 
     fun cancelExpense(){
         expenseMonitorSharedPreferences.clearExpense()

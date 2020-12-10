@@ -90,7 +90,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="52dp"
                 android:hint="@string/description"
-                android:text="@={viewModel.description}"
                 android:imeOptions="actionNext"
                 android:inputType="text"
                 android:maxLength="50"
@@ -117,7 +116,6 @@
                 android:layout_height="52dp"
                 android:importantForAutofill="no"
                 android:inputType="number"
-                android:text="@={viewModel.amount}"
                 style="@style/expenseItemStyle"
                 android:hint="@string/amount" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -153,7 +151,6 @@
                 android:layout_height="52dp"
                 style="@style/expenseItemStyle"
                 android:enabled="false"
-                android:text="@={viewModel.currentDate}"
                 />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -167,7 +164,6 @@
             android:layout_marginEnd="16dp"
             android:text="@string/update_expense"
             app:cornerRadius="15dp"
-            android:onClick="@{() -> viewModel.updateExpense()}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textInputLayout6" />
@@ -182,7 +178,6 @@
             android:backgroundTint="?attr/colorError"
             android:text="@string/delete_expense"
             app:cornerRadius="15dp"
-            android:onClick="@{() -> viewModel.deleteExpense()}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"

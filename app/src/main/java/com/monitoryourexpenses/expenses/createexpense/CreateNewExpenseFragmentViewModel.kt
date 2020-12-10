@@ -42,7 +42,6 @@ class CreateNewExpenseFragmentViewModel @ViewModelInject constructor(val localRe
     val createdExpenseEvent: LiveData<Event<Unit>> = _createdExpenseEvent
 
 
-
     fun createNewExpense() {
         val expenseCategory     = category.value
         val expenseDescription  = description.value

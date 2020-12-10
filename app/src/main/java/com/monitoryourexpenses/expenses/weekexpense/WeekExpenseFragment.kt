@@ -33,7 +33,6 @@ class WeekExpenseFragment : Fragment() {
 
         weekExpenseFragmentBinding = DataBindingUtil.inflate(inflater, R.layout.week_expense_fragment, container, false)
 
-
         weekExpenseFragmentBinding.lifecycleOwner = this
         weekExpenseFragmentBinding.viewModel = weekExpenseFragmentViewModel
 
@@ -41,9 +40,11 @@ class WeekExpenseFragment : Fragment() {
             weekExpenseFragmentViewModel.displaySelectedExpense(it)
         })
 
-        weekExpenseFragmentViewModel.navigateToSelectedExpense.observe(viewLifecycleOwner, Observer {
+        weekExpenseFragmentViewModel.navigateToSelectedExpense.observe(viewLifecycleOwner, {
             if (it != null) {
-                val direction = MyExpenseFragmentDirections.actionMyExpenseFragmentToUpdateAndDeleteExpenseFragment(it)
+                val direction = MyExpenseFragmentDirections.actionMyExpenseFragmentToUpdateAndDeleteExpenseFragment(
+                    it.expense_id.toString()
+                )
                 findNavController().navigate(direction)
                 weekExpenseFragmentViewModel.displaySelectedExpenseCompleted()
             }

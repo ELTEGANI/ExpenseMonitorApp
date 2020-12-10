@@ -15,14 +15,16 @@ import kotlinx.android.synthetic.main.update_and_delete_expense_fragment.view.*
 import javax.inject.Inject
 
 
-class DurationsExpenseAdapter @Inject constructor() : ListAdapter<Expenses, DurationsExpenseAdapter.ViewHolder>(
-    GetExpensesResponseDiffCallback()
-) {
+class DurationsExpenseAdapter @Inject constructor() : ListAdapter<Expenses, DurationsExpenseAdapter.ViewHolder>(GetExpensesResponseDiffCallback()) {
+
     var expenseCategoryListener: ExpenseCategoryListener? = null
+
     @Inject
     lateinit var expenseMonitorSharedPreferences: ExpenseMonitorSharedPreferences
+
     @Inject
     lateinit var utilitesFunctions: UtilitesFunctions
+
     fun setOnClickListener(expenseCategoryListener: ExpenseCategoryListener) {
         this.expenseCategoryListener = expenseCategoryListener
     }

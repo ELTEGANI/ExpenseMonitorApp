@@ -18,15 +18,12 @@ package com.monitoryourexpenses.expenses
 
 import android.content.ComponentName
 import android.content.Intent
-import android.os.Bundle
 import androidx.annotation.StyleRes
 import androidx.core.util.Preconditions
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.testing.FragmentScenario.EmptyFragmentActivity
 import androidx.test.core.app.ActivityScenario
 import androidx.test.core.app.ApplicationProvider
-import com.monitoryourexpenses.expenses.HiltTestActivity
-import com.monitoryourexpenses.expenses.R
 
 /**
  * launchFragmentInContainer from the androidx.fragment:fragment-testing library
