@@ -29,11 +29,8 @@ import org.robolectric.annotation.Config
 class UpdateAndDeleteFragmentViewModelTest{
 
     private lateinit var updateAndDeleteFragmentViewModel: UpdateAndDeleteFragmentViewModel
-
     private var expenseMonitorDao : ExpenseMonitorDao = Mockito.mock(ExpenseMonitorDao::class.java)
-
     private lateinit var localRepository: LocalRepository
-
     private lateinit var expenseMonitorSharedPreferences: ExpenseMonitorSharedPreferences
 
     @ExperimentalCoroutinesApi

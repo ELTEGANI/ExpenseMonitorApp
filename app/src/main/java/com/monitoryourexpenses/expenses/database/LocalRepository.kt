@@ -1,14 +1,11 @@
 package com.monitoryourexpenses.expenses.database
 
-import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.LiveData
 import com.monitoryourexpenses.expenses.database.local.ExpenseMonitorDao
 import com.monitoryourexpenses.expenses.prefs.ExpenseMonitorSharedPreferences
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.runBlocking
 import java.math.BigDecimal
 import javax.inject.Inject
-import javax.inject.Singleton
 
 class LocalRepository @Inject constructor(private val expenseMonitorDao: ExpenseMonitorDao,
  var expenseMonitorSharedPreferences: ExpenseMonitorSharedPreferences) {
@@ -65,6 +62,10 @@ class LocalRepository @Inject constructor(private val expenseMonitorDao: Expense
 
      fun getAllCategories(): LiveData<List<Categories>> {
         return expenseMonitorDao.selectAllCategories()
+    }
+
+    fun getExpense(id: String?): LiveData<Expenses> {
+        return expenseMonitorDao.selectExpense(id)
     }
 
      fun selectSumationOfCurrencies(): LiveData<List<AllCurrencies>> {

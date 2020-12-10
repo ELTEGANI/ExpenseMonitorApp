@@ -135,7 +135,6 @@ class CreateNewExpenseFragmentViewModelTest{
             description.value = expenseDescription
             amount.value      = expensesAmount
         }
-
         createNewExpenseFragmentViewModel.createNewExpense()
         assertSnackbarMessage(createNewExpenseFragmentViewModel.snackbarText,R.string.fill_empty)
     }

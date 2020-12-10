@@ -39,9 +39,11 @@ class MonthExpenseFragment : Fragment() {
             monthExpenseFragmentViewModel.displaySelectedExpense(it)
         })
 
-        monthExpenseFragmentViewModel.navigateToSelectedExpense.observe(viewLifecycleOwner, Observer {
+        monthExpenseFragmentViewModel.navigateToSelectedExpense.observe(viewLifecycleOwner, {
             if (it != null) {
-                val direction = MyExpenseFragmentDirections.actionMyExpenseFragmentToUpdateAndDeleteExpenseFragment(it)
+                val direction = MyExpenseFragmentDirections.actionMyExpenseFragmentToUpdateAndDeleteExpenseFragment(
+                    it.expense_id.toString()
+                )
                 findNavController().navigate(direction)
                 monthExpenseFragmentViewModel.displaySelectedExpenseCompleted()
             }

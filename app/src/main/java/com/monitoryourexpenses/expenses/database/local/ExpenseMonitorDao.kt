@@ -60,6 +60,8 @@ interface ExpenseMonitorDao {
     @Query("select expense_category,SUM(amount) as amount from expenses WHERE date BETWEEN :startMonth AND :endMonth AND currency =:currency GROUP BY expense_category")
     fun selectSumationOfCategories(startMonth: String, endMonth: String, currency: String): LiveData<List<AllCategories>>
 
-    
+
+    @Query("select * from expenses WHERE expense_id=:id")
+    fun selectExpense(id: String?): LiveData<Expenses>
 
 }

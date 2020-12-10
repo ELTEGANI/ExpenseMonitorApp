@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:startDestination="@id/myExpenseFragment">
+    app:startDestination="@id/userCurrencyFragment">
     <fragment
             android:id="@+id/userCurrencyFragment"
             android:name="com.monitoryourexpenses.expenses.usercurrency.GetUserCurrencyFragment"
@@ -49,9 +49,8 @@
             android:name="com.monitoryourexpenses.expenses.updateanddeleteexpense.UpdateAndDeleteExpenseFragment"
             android:label="UpdateAndDeleteExpenseFragment">
         <argument
-                android:name="selectedExpense"
-                app:argType="com.monitoryourexpenses.expenses.database.Expenses"
-                />
+            android:name="id"
+            app:argType="string" />
         <action
                 android:id="@+id/action_updateAndDeleteExpenseFragment_to_myExpenseFragment"
                 app:destination="@id/myExpenseFragment"

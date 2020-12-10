@@ -38,14 +38,13 @@ object AppModule {
 /**
  * The binding for LocalRepository is on its own module so that we can replace it easily in tests.
  */
-@Module
-@InstallIn(ApplicationComponent::class)
-object LocalRepositoryModule {
-
-    @Singleton
-    @Provides
-    fun LocalRepository(expenseMonitorDao: ExpenseMonitorDao,expenseMonitorSharedPreferences:
-    ExpenseMonitorSharedPreferences):LocalRepository{
-        return LocalRepository(expenseMonitorDao,expenseMonitorSharedPreferences)
-    }
-}
+//@Module
+//@InstallIn(ApplicationComponent::class)
+//object LocalRepositoryModule {
+//
+//    @Singleton
+//    @Provides
+//    fun LocalRepository(expenseMonitorDao: ExpenseMonitorDao,expenseMonitorSharedPreferences: ExpenseMonitorSharedPreferences):LocalRepository{
+//        return LocalRepository(expenseMonitorDao,expenseMonitorSharedPreferences)
+//    }
+//}

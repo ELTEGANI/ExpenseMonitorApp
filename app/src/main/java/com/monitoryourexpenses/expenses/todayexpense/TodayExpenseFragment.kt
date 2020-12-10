@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
 import com.monitoryourexpenses.expenses.R
@@ -25,16 +24,18 @@ class TodayExpenseFragment : Fragment() {
     @Inject lateinit var adapter: DurationsExpenseAdapter
     private val todayExpenseFragmentViewModel:TodayExpenseFragmentViewModel by viewModels()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
 
         todayExpenseFragmentBinding = DataBindingUtil.inflate(inflater, R.layout.today_expense_fragment, container, false)
 
         todayExpenseFragmentBinding.lifecycleOwner = this
         todayExpenseFragmentBinding.viewModel = todayExpenseFragmentViewModel
 
-        todayExpenseFragmentViewModel.navigateToSelectedExpense.observe(viewLifecycleOwner, Observer {
+        todayExpenseFragmentViewModel.navigateToSelectedExpense.observe(viewLifecycleOwner, {
             if (it != null) {
-                val direction = MyExpenseFragmentDirections.actionMyExpenseFragmentToUpdateAndDeleteExpenseFragment(it)
+                val direction = MyExpenseFragmentDirections.actionMyExpenseFragmentToUpdateAndDeleteExpenseFragment(
+                    it.expense_id.toString()
+                )
                 findNavController().navigate(direction)
                 todayExpenseFragmentViewModel.displaySelectedExpenseCompleted()
             }
