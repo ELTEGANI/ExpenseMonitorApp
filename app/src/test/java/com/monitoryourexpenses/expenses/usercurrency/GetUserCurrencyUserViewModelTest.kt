@@ -98,6 +98,6 @@ class GetUserCurrencyUserViewModelTest{
         assertThat(expenseMonitorSharedPreferences.getStartOfTheWeek()).isEqualTo(LocalDate.now().toString())
         assertThat(expenseMonitorSharedPreferences.getEndOfTheWeek()).isEqualTo(LocalDate.now().plusDays(7).toString())
         assertThat(expenseMonitorSharedPreferences.getStartOfTheMonth()).isEqualTo(LocalDate.now().toString())
-        assertThat(expenseMonitorSharedPreferences.getEndOfTheMonth()).isEqualTo(LocalDate.now().plusMonths(1).toString())
+        assertThat(expenseMonitorSharedPreferences.getEndOfTheMonth()).isEqualTo(LocalDate.now().plusMonths(10).toString())
     }
 }
