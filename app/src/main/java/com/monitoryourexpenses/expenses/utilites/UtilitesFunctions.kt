@@ -60,7 +60,7 @@ class UtilitesFunctions @Inject constructor(@ApplicationContext var context: Con
     @SuppressLint("Recycle")
     fun themeColor(@AttrRes themeAttrId: Int): Int {
         return context.obtainStyledAttributes(intArrayOf(themeAttrId)).use {
-            it.getColor(0, Color.MAGENTA)
+            it.getColor(0, Color.WHITE)
         }
     }
 }
