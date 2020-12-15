@@ -48,6 +48,8 @@ class CreateNewExpenseFragment: Fragment() {
 
     @Inject
     lateinit var utilitesFunctions:UtilitesFunctions
+
+
     @ExperimentalCoroutinesApi
     @SuppressLint("SimpleDateFormat")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
