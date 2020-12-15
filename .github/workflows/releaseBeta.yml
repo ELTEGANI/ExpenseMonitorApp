@@ -2,7 +2,8 @@ name: Release (Beta)
 
 on:
   pull_request:
-    branches: [ beta ]
+    branches:
+      - beta
 
 jobs:
   deploy:
