@@ -91,4 +91,5 @@ class GetUserCurrencyUserViewModel @ViewModelInject
             localRepository.insertNewCategory(listOfCategories)
         }
     }
+
 }
