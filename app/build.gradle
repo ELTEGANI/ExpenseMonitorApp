@@ -186,7 +186,7 @@ dependencies {
     kapt "com.github.bumptech.glide:compiler:$version_glide_compiler"
 
     //play core
-    implementation 'com.google.android.play:core:1.8.3'
+    implementation 'com.google.android.play:core:1.9.0'
 
     implementation 'com.toptoche.searchablespinner:searchablespinnerlibrary:1.3.1'
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
