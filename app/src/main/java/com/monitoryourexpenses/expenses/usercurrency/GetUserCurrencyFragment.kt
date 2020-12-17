@@ -23,6 +23,7 @@ class GetUserCurrencyFragment : Fragment() {
 
     private lateinit var getUserCurrencyFragmentBinding : GetUserCurrencyFragmentBinding
     private val getUserCurrencyUserViewModel:GetUserCurrencyUserViewModel by viewModels()
+
     @Inject
     lateinit var expenseMonitorSharedPreferences:ExpenseMonitorSharedPreferences
 
@@ -45,6 +46,7 @@ class GetUserCurrencyFragment : Fragment() {
         getUserCurrencyFragmentBinding.nextButton.setOnClickListener {
             getUserCurrencyUserViewModel.saveUserCurrency()
         }
+
         return getUserCurrencyFragmentBinding.root
     }
 

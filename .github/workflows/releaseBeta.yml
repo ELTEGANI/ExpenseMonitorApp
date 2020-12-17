@@ -1,8 +1,11 @@
 name: Release (Beta Version)
 
 on:
-  pull_request:
-    branches: [ beta ]
+  push:
+    paths:
+      - 'app/**'
+    branches:
+      -  beta
 
 jobs:
   deploy:
@@ -22,7 +25,6 @@ jobs:
           key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
           restore-keys: |
             ${{ runner.os }}-gems-
-
       - name: Cache Gradle
         uses: actions/cache@v1
         with:
@@ -42,7 +44,6 @@ jobs:
         run: |
           bundle config path vendor/bundle
           bundle install --jobs 4 --retry 3
-
       - name: Configure Keystore
         run: |
           echo "$ANDROID_KEYSTORE_FILE" > keystore.jks.b64
@@ -52,8 +53,8 @@ jobs:
           echo "storePassword=$KEYSTORE_STORE_PASSWORD" >> keystore.properties
           echo "keyPassword=$KEYSTORE_KEY_PASSWORD" >> keystore.properties
         env:
-          BUILD_KEY_STORE: ${{ secrets.BUILD_KEY_STORE }}
-          ANDROID_KEY_STORE_ALIAS: ${{ secrets.ANDROID_KEY_STORE_ALIAS }}
+          ANDROID_KEYSTORE_FILE: ${{ secrets.ANDROID_KEYSTORE_FILE }}
+          KEYSTORE_KEY_ALIAS: ${{ secrets.KEYSTORE_KEY_ALIAS }}
           KEYSTORE_KEY_PASSWORD: ${{ secrets.KEYSTORE_KEY_PASSWORD }}
           KEYSTORE_STORE_PASSWORD: ${{ secrets.KEYSTORE_STORE_PASSWORD }}
 
