@@ -2,10 +2,8 @@ name: Release (Beta)
 
 on:
   pull_request:
-    paths:
-      - 'app/**'
     branches:
-      -  master
+      - master
 
 jobs:
   deploy:
