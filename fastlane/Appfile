@@ -1,2 +1,3 @@
 json_key_file("play_config.json")
+
 package_name("com.monitoryourexpenses.expenses")
