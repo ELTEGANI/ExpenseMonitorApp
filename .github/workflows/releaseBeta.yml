@@ -5,7 +5,7 @@ on:
     paths:
       - 'app/**'
     branches:
-      - beta
+      - master
 
 jobs:
   deploy:
