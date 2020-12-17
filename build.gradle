@@ -49,8 +49,8 @@ buildscript {
         classpath "com.android.tools.build:gradle:${buildGradle}"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$gradlePlugin"
-        classpath("org.jlleitschuh.gradle:ktlint-gradle:9.2.1")
-        classpath 'com.google.dagger:hilt-android-gradle-plugin:2.28.3-alpha'
+        classpath("org.jlleitschuh.gradle:ktlint-gradle:9.3.0")
+        classpath 'com.google.dagger:hilt-android-gradle-plugin:2.29.1-alpha'
     }
 }
 
