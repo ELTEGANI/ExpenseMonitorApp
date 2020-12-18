@@ -1,7 +1,9 @@
 name: Release (Beta)
 
 on:
+
   pull_request:
+
     branches:
       - master
 
