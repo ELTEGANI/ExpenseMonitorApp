@@ -6,7 +6,13 @@ default_platform(:android)
 platform :android do
 
  lane :beta do
-      gradle(task: "clean bundleRelease")
+       gradle(
+            task: "clean",
+          )
+          gradle(
+            task: "bundle",
+            build_type: "Release"
+          )
       upload_to_play_store(track: 'beta')
  end
 
