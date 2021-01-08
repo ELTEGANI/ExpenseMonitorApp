@@ -1,9 +1,9 @@
 name: Release (Beta Version)
 
 on:
+
   pull_request:
-    paths:
-      - 'app/**'
+
     branches:
       - master
 
