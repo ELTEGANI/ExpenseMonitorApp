@@ -1,0 +1,14 @@
+current directory: /home/etegani/Downloads/ExpenseMonitorApp/vendor/bundle/ruby/2.6.0/gems/json-2.5.1/ext/json
+/usr/bin/ruby -I /usr/share/rubygems -r ./siteconf20210108-13368-14y7yx9.rb extconf.rb
+creating Makefile
+
+current directory: /home/etegani/Downloads/ExpenseMonitorApp/vendor/bundle/ruby/2.6.0/gems/json-2.5.1/ext/json
+make "DESTDIR=" clean
+rm -f  *.o  *.bak mkmf.log .*.time
+
+current directory: /home/etegani/Downloads/ExpenseMonitorApp/vendor/bundle/ruby/2.6.0/gems/json-2.5.1/ext/json
+make "DESTDIR="
+make: Nothing to be done for 'all'.
+
+current directory: /home/etegani/Downloads/ExpenseMonitorApp/vendor/bundle/ruby/2.6.0/gems/json-2.5.1/ext/json
+make "DESTDIR=" install
