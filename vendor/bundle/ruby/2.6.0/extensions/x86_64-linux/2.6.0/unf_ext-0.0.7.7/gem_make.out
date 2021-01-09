@@ -1,0 +1,21 @@
+current directory: /home/etegani/Downloads/ExpenseMonitorApp/vendor/bundle/ruby/2.6.0/gems/unf_ext-0.0.7.7/ext/unf_ext
+/usr/bin/ruby -I /usr/share/rubygems -r ./siteconf20210109-9467-k7dwda.rb extconf.rb
+checking for -lstdc++... yes
+creating Makefile
+
+current directory: /home/etegani/Downloads/ExpenseMonitorApp/vendor/bundle/ruby/2.6.0/gems/unf_ext-0.0.7.7/ext/unf_ext
+make "DESTDIR=" clean
+rm -f 
+rm -f unf_ext.so  *.o  *.bak mkmf.log .*.time
+
+current directory: /home/etegani/Downloads/ExpenseMonitorApp/vendor/bundle/ruby/2.6.0/gems/unf_ext-0.0.7.7/ext/unf_ext
+make "DESTDIR="
+g++ -I. -I/usr/include -I/usr/include/ruby/backward -I/usr/include -I.   -fPIC -O2 -g -pipe -Wall -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fexceptions -fstack-protector-strong -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -specs=/usr/lib/rpm/redhat/redhat-annobin-cc1 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection -m64 -o unf.o -c unf.cc
+rm -f unf_ext.so
+g++ -shared -o unf_ext.so unf.o -L. -L/usr/lib64 -L. -Wl,-z,relro -Wl,--as-needed  -Wl,-z,now -specs=/usr/lib/rpm/redhat/redhat-hardened-ld -fstack-protector-strong -rdynamic -Wl,-export-dynamic -Wl,-z,relro -Wl,--as-needed  -Wl,-z,now -specs=/usr/lib/rpm/redhat/redhat-hardened-ld  -m64  -lruby -lstdc++  -lm   -lc
+
+current directory: /home/etegani/Downloads/ExpenseMonitorApp/vendor/bundle/ruby/2.6.0/gems/unf_ext-0.0.7.7/ext/unf_ext
+make "DESTDIR=" install
+/usr/bin/mkdir -p . ./.gem.20210109-9467-a348sm
+exit > .sitearchdir.time
+/usr/bin/install -c -m 0755 unf_ext.so ./.gem.20210109-9467-a348sm
