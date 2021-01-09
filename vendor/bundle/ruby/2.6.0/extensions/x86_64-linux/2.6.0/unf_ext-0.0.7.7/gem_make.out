@@ -1,5 +1,5 @@
 current directory: /home/etegani/Downloads/ExpenseMonitorApp/vendor/bundle/ruby/2.6.0/gems/unf_ext-0.0.7.7/ext/unf_ext
-/usr/bin/ruby -I /usr/share/rubygems -r ./siteconf20210109-9467-k7dwda.rb extconf.rb
+/usr/bin/ruby -I /usr/share/rubygems -r ./siteconf20210109-5050-1fmb5vr.rb extconf.rb
 checking for -lstdc++... yes
 creating Makefile
 
@@ -16,6 +16,6 @@ g++ -shared -o unf_ext.so unf.o -L. -L/usr/lib64 -L. -Wl,-z,relro -Wl,--as-neede
 
 current directory: /home/etegani/Downloads/ExpenseMonitorApp/vendor/bundle/ruby/2.6.0/gems/unf_ext-0.0.7.7/ext/unf_ext
 make "DESTDIR=" install
-/usr/bin/mkdir -p . ./.gem.20210109-9467-a348sm
+/usr/bin/mkdir -p . ./.gem.20210109-5050-1i6woy
 exit > .sitearchdir.time
-/usr/bin/install -c -m 0755 unf_ext.so ./.gem.20210109-9467-a348sm
+/usr/bin/install -c -m 0755 unf_ext.so ./.gem.20210109-5050-1i6woy

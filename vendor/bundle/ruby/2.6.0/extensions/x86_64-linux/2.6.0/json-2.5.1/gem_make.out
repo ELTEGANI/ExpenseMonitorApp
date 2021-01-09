@@ -1,5 +1,5 @@
 current directory: /home/etegani/Downloads/ExpenseMonitorApp/vendor/bundle/ruby/2.6.0/gems/json-2.5.1/ext/json
-/usr/bin/ruby -I /usr/share/rubygems -r ./siteconf20210109-9467-1vc12om.rb extconf.rb
+/usr/bin/ruby -I /usr/share/rubygems -r ./siteconf20210109-5050-17hrzvj.rb extconf.rb
 creating Makefile
 
 current directory: /home/etegani/Downloads/ExpenseMonitorApp/vendor/bundle/ruby/2.6.0/gems/json-2.5.1/ext/json
