@@ -13,10 +13,12 @@ platform :android
          f = File.new(path, 'w')
          f.write(s)
          f.close
-    end
+     end
+
   desc "Deploy a beta version to the Google Play"
      lane :beta do
          gradle(task: "clean bundleRelease")
          upload_to_play_store(track: 'beta')
      end
+
 end
