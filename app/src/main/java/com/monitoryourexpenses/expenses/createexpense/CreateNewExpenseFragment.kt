@@ -43,9 +43,7 @@ class CreateNewExpenseFragment: Fragment() {
     lateinit var adapter: ExpenseCategoryAdapter
     @Inject
     lateinit var expenseMonitorSharedPreferences: ExpenseMonitorSharedPreferences
-
     private var tracker: SelectionTracker<Long>? = null
-
     @Inject
     lateinit var utilitesFunctions:UtilitesFunctions
 
