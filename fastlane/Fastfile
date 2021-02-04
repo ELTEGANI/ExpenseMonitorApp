@@ -3,7 +3,7 @@
 default_platform(:android)
 
 platform :android do
-  desc "add version control"
+  desc "add version code"
      lane :bump_version_code do
          path = '../app/build.gradle'
          re = /versionCode\s+(\d+)/
