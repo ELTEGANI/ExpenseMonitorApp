@@ -3,7 +3,6 @@
 default_platform(:android)
 
 platform :android do
-
   desc "add version control"
      lane :bump_version_code do
          path = '../app/build.gradle'
@@ -15,11 +14,9 @@ platform :android do
          f.write(s)
          f.close
      end
-
   desc "Deploy a beta version to the Google Play"
      lane :beta do
          gradle(task: "clean bundleRelease")
          upload_to_play_store(track: 'beta')
      end
-
 end
