@@ -2,7 +2,8 @@
 
 default_platform(:android)
 
-platform :android
+platform :android do
+
   desc "add version control"
      lane :bump_version_code do
          path = '../app/build.gradle'
