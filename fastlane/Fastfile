@@ -20,3 +20,4 @@ platform :android do
          upload_to_play_store(track: 'beta')
      end
 end
+
