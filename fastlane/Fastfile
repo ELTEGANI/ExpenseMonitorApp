@@ -2,7 +2,7 @@ default_platform(:android)
 
 platform :android do
  desc "Deploy beta version to the Google Play"
-  lane :IncrementBuildNumber do
+  lane :incrementBuildNumber do
           g = google_play_track_version_codes
           gb = google_play_track_version_codes(track: 'beta')
           ga = google_play_track_version_codes(track: 'alpha')
