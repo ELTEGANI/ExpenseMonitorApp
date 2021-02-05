@@ -2,15 +2,9 @@ default_platform(:android)
 
 platform :android do
   desc "Deploy a beta version to the Google Play"
-  lane :bump_version_code do
-         path = '../app/build.gradle'
-         re = /versionCode\s+(\d+)/
-         s = File.read(path)
-         versionCode = s[re, 1].to_i
-         s[re, 1] = (versionCode + 1).to_s
-         f = File.new(path, 'w')
-         f.write(s)
-         f.close
+lane :increment do
+         increment_version_code(
+         gradle_file_path: "app/build.gradle")
      end
   lane :beta do
          gradle(task: "clean bundleRelease")
