@@ -2,7 +2,7 @@ default_platform(:android)
 
 platform :android do
   desc "Deploy a beta version to the Google Play"
-  lane :beta do
+  lane :clean do
            gradle(task: "clean")
      end
   lane :increment do
