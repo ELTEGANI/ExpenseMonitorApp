@@ -1,6 +1,5 @@
 default_platform(:android)
 
-
 platform :android do
  desc "Deploy beta version to the Google Play"
   lane :beta do
