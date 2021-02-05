@@ -1,7 +1,7 @@
 default_platform(:android)
 
 platform :android do
-  desc "Deploy a beta version to the Google Play"
+  desc "Deploy beta version to the Google Play"
   lane :increment do
          increment_version_code(gradle_file_path: "app/build.gradle")
      end
