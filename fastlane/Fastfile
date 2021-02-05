@@ -2,16 +2,9 @@ default_platform(:android)
 
 platform :android do
  desc "Deploy beta version to the Google Play"
-  lane :increment do
-         g = google_play_track_version_codes
-         gb = google_play_track_version_codes(track: 'beta')
-         ga = google_play_track_version_codes(track: 'alpha')
-         max_value = [g[0].to_i, gb[0].to_i, ga[0].to_i].max
-         version_updated = max_value + 1
-         increment_version_code(app_project_dir:"../app/build.gradle", version_code: version_updated.to_i)
-     end
   lane :beta do
-         gradle(task: "clean bundleRelease")
-         upload_to_play_store(track: 'beta')
+          increment_version_code(gradle_file_path: "app/build.gradle")
+          gradle(task: "clean bundleRelease")
+          upload_to_play_store(track: 'beta')
      end
 end
