@@ -1,0 +1,341 @@
+current directory: /home/etegani/Downloads/ExpenseMonitorApp/vendor/bundle/ruby/2.6.0/gems/digest-crc-0.6.3/ext/digest
+/usr/bin/ruby -rrubygems /home/etegani/Downloads/ExpenseMonitorApp/vendor/bundle/ruby/2.6.0/gems/rake-13.0.3/exe/rake RUBYARCHDIR\=/home/etegani/Downloads/ExpenseMonitorApp/vendor/bundle/ruby/2.6.0/extensions/x86_64-linux/2.6.0/digest-crc-0.6.3 RUBYLIBDIR\=/home/etegani/Downloads/ExpenseMonitorApp/vendor/bundle/ruby/2.6.0/extensions/x86_64-linux/2.6.0/digest-crc-0.6.3
+/usr/bin/ruby -S extconf.rb
+/home/etegani/Downloads/ExpenseMonitorApp/vendor/bundle/ruby/2.6.0/gems/rake-13.0.3/lib/rake/file_utils.rb:54: warning: Insecure world writable dir /opt/bin in PATH, mode 040777
+checking for stdint.h... yes
+checking for stddef.h... yes
+creating extconf.h
+creating Makefile
+make clean
+rm -f 
+rm -f crc12_3gpp_ext.so  *.o  *.bak mkmf.log .*.time
+make
+gcc -I. -I/usr/include -I/usr/include/ruby/backward -I/usr/include -I. -DRUBY_EXTCONF_H=\"extconf.h\"    -fPIC -O2 -g -pipe -Wall -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fexceptions -fstack-protector-strong -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -specs=/usr/lib/rpm/redhat/redhat-annobin-cc1 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection -fPIC -m64 -o crc12_3gpp.o -c crc12_3gpp.c
+gcc -I. -I/usr/include -I/usr/include/ruby/backward -I/usr/include -I. -DRUBY_EXTCONF_H=\"extconf.h\"    -fPIC -O2 -g -pipe -Wall -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fexceptions -fstack-protector-strong -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -specs=/usr/lib/rpm/redhat/redhat-annobin-cc1 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection -fPIC -m64 -o crc12_3gpp_ext.o -c crc12_3gpp_ext.c
+rm -f crc12_3gpp_ext.so
+gcc -shared -o crc12_3gpp_ext.so crc12_3gpp.o crc12_3gpp_ext.o -L. -L/usr/lib64 -L. -Wl,-z,relro -Wl,--as-needed  -Wl,-z,now -specs=/usr/lib/rpm/redhat/redhat-hardened-ld -fstack-protector-strong -rdynamic -Wl,-export-dynamic -Wl,-z,relro -Wl,--as-needed  -Wl,-z,now -specs=/usr/lib/rpm/redhat/redhat-hardened-ld  -m64  -lruby  -lm   -lc
+/usr/bin/ruby -S extconf.rb
+checking for stdint.h... yes
+checking for stddef.h... yes
+creating extconf.h
+creating Makefile
+make clean
+rm -f 
+rm -f crc15_ext.so  *.o  *.bak mkmf.log .*.time
+make
+gcc -I. -I/usr/include -I/usr/include/ruby/backward -I/usr/include -I. -DRUBY_EXTCONF_H=\"extconf.h\"    -fPIC -O2 -g -pipe -Wall -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fexceptions -fstack-protector-strong -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -specs=/usr/lib/rpm/redhat/redhat-annobin-cc1 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection -fPIC -m64 -o crc15.o -c crc15.c
+gcc -I. -I/usr/include -I/usr/include/ruby/backward -I/usr/include -I. -DRUBY_EXTCONF_H=\"extconf.h\"    -fPIC -O2 -g -pipe -Wall -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fexceptions -fstack-protector-strong -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -specs=/usr/lib/rpm/redhat/redhat-annobin-cc1 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection -fPIC -m64 -o crc15_ext.o -c crc15_ext.c
+rm -f crc15_ext.so
+gcc -shared -o crc15_ext.so crc15.o crc15_ext.o -L. -L/usr/lib64 -L. -Wl,-z,relro -Wl,--as-needed  -Wl,-z,now -specs=/usr/lib/rpm/redhat/redhat-hardened-ld -fstack-protector-strong -rdynamic -Wl,-export-dynamic -Wl,-z,relro -Wl,--as-needed  -Wl,-z,now -specs=/usr/lib/rpm/redhat/redhat-hardened-ld  -m64  -lruby  -lm   -lc
+/usr/bin/ruby -S extconf.rb
+checking for stdint.h... yes
+checking for stddef.h... yes
+creating extconf.h
+creating Makefile
+make clean
+rm -f 
+rm -f crc16_ext.so  *.o  *.bak mkmf.log .*.time
+make
+gcc -I. -I/usr/include -I/usr/include/ruby/backward -I/usr/include -I. -DRUBY_EXTCONF_H=\"extconf.h\"    -fPIC -O2 -g -pipe -Wall -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fexceptions -fstack-protector-strong -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -specs=/usr/lib/rpm/redhat/redhat-annobin-cc1 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection -fPIC -m64 -o crc16.o -c crc16.c
+gcc -I. -I/usr/include -I/usr/include/ruby/backward -I/usr/include -I. -DRUBY_EXTCONF_H=\"extconf.h\"    -fPIC -O2 -g -pipe -Wall -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fexceptions -fstack-protector-strong -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -specs=/usr/lib/rpm/redhat/redhat-annobin-cc1 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection -fPIC -m64 -o crc16_ext.o -c crc16_ext.c
+rm -f crc16_ext.so
+gcc -shared -o crc16_ext.so crc16.o crc16_ext.o -L. -L/usr/lib64 -L. -Wl,-z,relro -Wl,--as-needed  -Wl,-z,now -specs=/usr/lib/rpm/redhat/redhat-hardened-ld -fstack-protector-strong -rdynamic -Wl,-export-dynamic -Wl,-z,relro -Wl,--as-needed  -Wl,-z,now -specs=/usr/lib/rpm/redhat/redhat-hardened-ld  -m64  -lruby  -lm   -lc
+/usr/bin/ruby -S extconf.rb
+checking for stdint.h... yes
+checking for stddef.h... yes
+creating extconf.h
+creating Makefile
+make clean
+rm -f 
+rm -f crc16_ccitt_ext.so  *.o  *.bak mkmf.log .*.time
+make
+gcc -I. -I/usr/include -I/usr/include/ruby/backward -I/usr/include -I. -DRUBY_EXTCONF_H=\"extconf.h\"    -fPIC -O2 -g -pipe -Wall -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fexceptions -fstack-protector-strong -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -specs=/usr/lib/rpm/redhat/redhat-annobin-cc1 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection -fPIC -m64 -o crc16_ccitt.o -c crc16_ccitt.c
+gcc -I. -I/usr/include -I/usr/include/ruby/backward -I/usr/include -I. -DRUBY_EXTCONF_H=\"extconf.h\"    -fPIC -O2 -g -pipe -Wall -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fexceptions -fstack-protector-strong -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -specs=/usr/lib/rpm/redhat/redhat-annobin-cc1 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection -fPIC -m64 -o crc16_ccitt_ext.o -c crc16_ccitt_ext.c
+rm -f crc16_ccitt_ext.so
+gcc -shared -o crc16_ccitt_ext.so crc16_ccitt.o crc16_ccitt_ext.o -L. -L/usr/lib64 -L. -Wl,-z,relro -Wl,--as-needed  -Wl,-z,now -specs=/usr/lib/rpm/redhat/redhat-hardened-ld -fstack-protector-strong -rdynamic -Wl,-export-dynamic -Wl,-z,relro -Wl,--as-needed  -Wl,-z,now -specs=/usr/lib/rpm/redhat/redhat-hardened-ld  -m64  -lruby  -lm   -lc
+/usr/bin/ruby -S extconf.rb
+checking for stdint.h... yes
+checking for stddef.h... yes
+creating extconf.h
+creating Makefile
+make clean
+rm -f 
+rm -f crc16_dnp_ext.so  *.o  *.bak mkmf.log .*.time
+make
+gcc -I. -I/usr/include -I/usr/include/ruby/backward -I/usr/include -I. -DRUBY_EXTCONF_H=\"extconf.h\"    -fPIC -O2 -g -pipe -Wall -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fexceptions -fstack-protector-strong -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -specs=/usr/lib/rpm/redhat/redhat-annobin-cc1 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection -fPIC -m64 -o crc16_dnp.o -c crc16_dnp.c
+gcc -I. -I/usr/include -I/usr/include/ruby/backward -I/usr/include -I. -DRUBY_EXTCONF_H=\"extconf.h\"    -fPIC -O2 -g -pipe -Wall -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fexceptions -fstack-protector-strong -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -specs=/usr/lib/rpm/redhat/redhat-annobin-cc1 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection -fPIC -m64 -o crc16_dnp_ext.o -c crc16_dnp_ext.c
+rm -f crc16_dnp_ext.so
+gcc -shared -o crc16_dnp_ext.so crc16_dnp.o crc16_dnp_ext.o -L. -L/usr/lib64 -L. -Wl,-z,relro -Wl,--as-needed  -Wl,-z,now -specs=/usr/lib/rpm/redhat/redhat-hardened-ld -fstack-protector-strong -rdynamic -Wl,-export-dynamic -Wl,-z,relro -Wl,--as-needed  -Wl,-z,now -specs=/usr/lib/rpm/redhat/redhat-hardened-ld  -m64  -lruby  -lm   -lc
+/usr/bin/ruby -S extconf.rb
+checking for stdint.h... yes
+checking for stddef.h... yes
+creating extconf.h
+creating Makefile
+make clean
+rm -f 
+rm -f crc16_genibus_ext.so  *.o  *.bak mkmf.log .*.time
+make
+gcc -I. -I/usr/include -I/usr/include/ruby/backward -I/usr/include -I. -DRUBY_EXTCONF_H=\"extconf.h\"    -fPIC -O2 -g -pipe -Wall -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fexceptions -fstack-protector-strong -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -specs=/usr/lib/rpm/redhat/redhat-annobin-cc1 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection -fPIC -m64 -o crc16_genibus.o -c crc16_genibus.c
+gcc -I. -I/usr/include -I/usr/include/ruby/backward -I/usr/include -I. -DRUBY_EXTCONF_H=\"extconf.h\"    -fPIC -O2 -g -pipe -Wall -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fexceptions -fstack-protector-strong -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -specs=/usr/lib/rpm/redhat/redhat-annobin-cc1 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection -fPIC -m64 -o crc16_genibus_ext.o -c crc16_genibus_ext.c
+rm -f crc16_genibus_ext.so
+gcc -shared -o crc16_genibus_ext.so crc16_genibus.o crc16_genibus_ext.o -L. -L/usr/lib64 -L. -Wl,-z,relro -Wl,--as-needed  -Wl,-z,now -specs=/usr/lib/rpm/redhat/redhat-hardened-ld -fstack-protector-strong -rdynamic -Wl,-export-dynamic -Wl,-z,relro -Wl,--as-needed  -Wl,-z,now -specs=/usr/lib/rpm/redhat/redhat-hardened-ld  -m64  -lruby  -lm   -lc
+/usr/bin/ruby -S extconf.rb
+checking for stdint.h... yes
+checking for stddef.h... yes
+creating extconf.h
+creating Makefile
+make clean
+rm -f 
+rm -f crc16_kermit_ext.so  *.o  *.bak mkmf.log .*.time
+make
+gcc -I. -I/usr/include -I/usr/include/ruby/backward -I/usr/include -I. -DRUBY_EXTCONF_H=\"extconf.h\"    -fPIC -O2 -g -pipe -Wall -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fexceptions -fstack-protector-strong -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -specs=/usr/lib/rpm/redhat/redhat-annobin-cc1 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection -fPIC -m64 -o crc16_kermit.o -c crc16_kermit.c
+gcc -I. -I/usr/include -I/usr/include/ruby/backward -I/usr/include -I. -DRUBY_EXTCONF_H=\"extconf.h\"    -fPIC -O2 -g -pipe -Wall -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fexceptions -fstack-protector-strong -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -specs=/usr/lib/rpm/redhat/redhat-annobin-cc1 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection -fPIC -m64 -o crc16_kermit_ext.o -c crc16_kermit_ext.c
+rm -f crc16_kermit_ext.so
+gcc -shared -o crc16_kermit_ext.so crc16_kermit.o crc16_kermit_ext.o -L. -L/usr/lib64 -L. -Wl,-z,relro -Wl,--as-needed  -Wl,-z,now -specs=/usr/lib/rpm/redhat/redhat-hardened-ld -fstack-protector-strong -rdynamic -Wl,-export-dynamic -Wl,-z,relro -Wl,--as-needed  -Wl,-z,now -specs=/usr/lib/rpm/redhat/redhat-hardened-ld  -m64  -lruby  -lm   -lc
+/usr/bin/ruby -S extconf.rb
+checking for stdint.h... yes
+checking for stddef.h... yes
+creating extconf.h
+creating Makefile
+make clean
+rm -f 
+rm -f crc16_modbus_ext.so  *.o  *.bak mkmf.log .*.time
+make
+gcc -I. -I/usr/include -I/usr/include/ruby/backward -I/usr/include -I. -DRUBY_EXTCONF_H=\"extconf.h\"    -fPIC -O2 -g -pipe -Wall -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fexceptions -fstack-protector-strong -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -specs=/usr/lib/rpm/redhat/redhat-annobin-cc1 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection -fPIC -m64 -o crc16_modbus.o -c crc16_modbus.c
+gcc -I. -I/usr/include -I/usr/include/ruby/backward -I/usr/include -I. -DRUBY_EXTCONF_H=\"extconf.h\"    -fPIC -O2 -g -pipe -Wall -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fexceptions -fstack-protector-strong -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -specs=/usr/lib/rpm/redhat/redhat-annobin-cc1 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection -fPIC -m64 -o crc16_modbus_ext.o -c crc16_modbus_ext.c
+rm -f crc16_modbus_ext.so
+gcc -shared -o crc16_modbus_ext.so crc16_modbus.o crc16_modbus_ext.o -L. -L/usr/lib64 -L. -Wl,-z,relro -Wl,--as-needed  -Wl,-z,now -specs=/usr/lib/rpm/redhat/redhat-hardened-ld -fstack-protector-strong -rdynamic -Wl,-export-dynamic -Wl,-z,relro -Wl,--as-needed  -Wl,-z,now -specs=/usr/lib/rpm/redhat/redhat-hardened-ld  -m64  -lruby  -lm   -lc
+/usr/bin/ruby -S extconf.rb
+checking for stdint.h... yes
+checking for stddef.h... yes
+creating extconf.h
+creating Makefile
+make clean
+rm -f 
+rm -f crc16_usb_ext.so  *.o  *.bak mkmf.log .*.time
+make
+gcc -I. -I/usr/include -I/usr/include/ruby/backward -I/usr/include -I. -DRUBY_EXTCONF_H=\"extconf.h\"    -fPIC -O2 -g -pipe -Wall -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fexceptions -fstack-protector-strong -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -specs=/usr/lib/rpm/redhat/redhat-annobin-cc1 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection -fPIC -m64 -o crc16_usb.o -c crc16_usb.c
+gcc -I. -I/usr/include -I/usr/include/ruby/backward -I/usr/include -I. -DRUBY_EXTCONF_H=\"extconf.h\"    -fPIC -O2 -g -pipe -Wall -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fexceptions -fstack-protector-strong -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -specs=/usr/lib/rpm/redhat/redhat-annobin-cc1 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection -fPIC -m64 -o crc16_usb_ext.o -c crc16_usb_ext.c
+rm -f crc16_usb_ext.so
+gcc -shared -o crc16_usb_ext.so crc16_usb.o crc16_usb_ext.o -L. -L/usr/lib64 -L. -Wl,-z,relro -Wl,--as-needed  -Wl,-z,now -specs=/usr/lib/rpm/redhat/redhat-hardened-ld -fstack-protector-strong -rdynamic -Wl,-export-dynamic -Wl,-z,relro -Wl,--as-needed  -Wl,-z,now -specs=/usr/lib/rpm/redhat/redhat-hardened-ld  -m64  -lruby  -lm   -lc
+/usr/bin/ruby -S extconf.rb
+checking for stdint.h... yes
+checking for stddef.h... yes
+creating extconf.h
+creating Makefile
+make clean
+rm -f 
+rm -f crc16_x_25_ext.so  *.o  *.bak mkmf.log .*.time
+make
+gcc -I. -I/usr/include -I/usr/include/ruby/backward -I/usr/include -I. -DRUBY_EXTCONF_H=\"extconf.h\"    -fPIC -O2 -g -pipe -Wall -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fexceptions -fstack-protector-strong -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -specs=/usr/lib/rpm/redhat/redhat-annobin-cc1 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection -fPIC -m64 -o crc16_x_25.o -c crc16_x_25.c
+gcc -I. -I/usr/include -I/usr/include/ruby/backward -I/usr/include -I. -DRUBY_EXTCONF_H=\"extconf.h\"    -fPIC -O2 -g -pipe -Wall -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fexceptions -fstack-protector-strong -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -specs=/usr/lib/rpm/redhat/redhat-annobin-cc1 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection -fPIC -m64 -o crc16_x_25_ext.o -c crc16_x_25_ext.c
+rm -f crc16_x_25_ext.so
+gcc -shared -o crc16_x_25_ext.so crc16_x_25.o crc16_x_25_ext.o -L. -L/usr/lib64 -L. -Wl,-z,relro -Wl,--as-needed  -Wl,-z,now -specs=/usr/lib/rpm/redhat/redhat-hardened-ld -fstack-protector-strong -rdynamic -Wl,-export-dynamic -Wl,-z,relro -Wl,--as-needed  -Wl,-z,now -specs=/usr/lib/rpm/redhat/redhat-hardened-ld  -m64  -lruby  -lm   -lc
+/usr/bin/ruby -S extconf.rb
+checking for stdint.h... yes
+checking for stddef.h... yes
+creating extconf.h
+creating Makefile
+make clean
+rm -f 
+rm -f crc16_xmodem_ext.so  *.o  *.bak mkmf.log .*.time
+make
+gcc -I. -I/usr/include -I/usr/include/ruby/backward -I/usr/include -I. -DRUBY_EXTCONF_H=\"extconf.h\"    -fPIC -O2 -g -pipe -Wall -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fexceptions -fstack-protector-strong -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -specs=/usr/lib/rpm/redhat/redhat-annobin-cc1 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection -fPIC -m64 -o crc16_xmodem.o -c crc16_xmodem.c
+gcc -I. -I/usr/include -I/usr/include/ruby/backward -I/usr/include -I. -DRUBY_EXTCONF_H=\"extconf.h\"    -fPIC -O2 -g -pipe -Wall -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fexceptions -fstack-protector-strong -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -specs=/usr/lib/rpm/redhat/redhat-annobin-cc1 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection -fPIC -m64 -o crc16_xmodem_ext.o -c crc16_xmodem_ext.c
+rm -f crc16_xmodem_ext.so
+gcc -shared -o crc16_xmodem_ext.so crc16_xmodem.o crc16_xmodem_ext.o -L. -L/usr/lib64 -L. -Wl,-z,relro -Wl,--as-needed  -Wl,-z,now -specs=/usr/lib/rpm/redhat/redhat-hardened-ld -fstack-protector-strong -rdynamic -Wl,-export-dynamic -Wl,-z,relro -Wl,--as-needed  -Wl,-z,now -specs=/usr/lib/rpm/redhat/redhat-hardened-ld  -m64  -lruby  -lm   -lc
+/usr/bin/ruby -S extconf.rb
+checking for stdint.h... yes
+checking for stddef.h... yes
+creating extconf.h
+creating Makefile
+make clean
+rm -f 
+rm -f crc16_zmodem_ext.so  *.o  *.bak mkmf.log .*.time
+make
+gcc -I. -I/usr/include -I/usr/include/ruby/backward -I/usr/include -I. -DRUBY_EXTCONF_H=\"extconf.h\"    -fPIC -O2 -g -pipe -Wall -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fexceptions -fstack-protector-strong -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -specs=/usr/lib/rpm/redhat/redhat-annobin-cc1 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection -fPIC -m64 -o crc16_zmodem.o -c crc16_zmodem.c
+gcc -I. -I/usr/include -I/usr/include/ruby/backward -I/usr/include -I. -DRUBY_EXTCONF_H=\"extconf.h\"    -fPIC -O2 -g -pipe -Wall -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fexceptions -fstack-protector-strong -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -specs=/usr/lib/rpm/redhat/redhat-annobin-cc1 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection -fPIC -m64 -o crc16_zmodem_ext.o -c crc16_zmodem_ext.c
+rm -f crc16_zmodem_ext.so
+gcc -shared -o crc16_zmodem_ext.so crc16_zmodem.o crc16_zmodem_ext.o -L. -L/usr/lib64 -L. -Wl,-z,relro -Wl,--as-needed  -Wl,-z,now -specs=/usr/lib/rpm/redhat/redhat-hardened-ld -fstack-protector-strong -rdynamic -Wl,-export-dynamic -Wl,-z,relro -Wl,--as-needed  -Wl,-z,now -specs=/usr/lib/rpm/redhat/redhat-hardened-ld  -m64  -lruby  -lm   -lc
+/usr/bin/ruby -S extconf.rb
+checking for stdint.h... yes
+checking for stddef.h... yes
+creating extconf.h
+creating Makefile
+make clean
+rm -f 
+rm -f crc24_ext.so  *.o  *.bak mkmf.log .*.time
+make
+gcc -I. -I/usr/include -I/usr/include/ruby/backward -I/usr/include -I. -DRUBY_EXTCONF_H=\"extconf.h\"    -fPIC -O2 -g -pipe -Wall -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fexceptions -fstack-protector-strong -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -specs=/usr/lib/rpm/redhat/redhat-annobin-cc1 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection -fPIC -m64 -o crc24.o -c crc24.c
+gcc -I. -I/usr/include -I/usr/include/ruby/backward -I/usr/include -I. -DRUBY_EXTCONF_H=\"extconf.h\"    -fPIC -O2 -g -pipe -Wall -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fexceptions -fstack-protector-strong -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -specs=/usr/lib/rpm/redhat/redhat-annobin-cc1 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection -fPIC -m64 -o crc24_ext.o -c crc24_ext.c
+rm -f crc24_ext.so
+gcc -shared -o crc24_ext.so crc24.o crc24_ext.o -L. -L/usr/lib64 -L. -Wl,-z,relro -Wl,--as-needed  -Wl,-z,now -specs=/usr/lib/rpm/redhat/redhat-hardened-ld -fstack-protector-strong -rdynamic -Wl,-export-dynamic -Wl,-z,relro -Wl,--as-needed  -Wl,-z,now -specs=/usr/lib/rpm/redhat/redhat-hardened-ld  -m64  -lruby  -lm   -lc
+/usr/bin/ruby -S extconf.rb
+checking for stdint.h... yes
+checking for stddef.h... yes
+creating extconf.h
+creating Makefile
+make clean
+rm -f 
+rm -f crc32_ext.so  *.o  *.bak mkmf.log .*.time
+make
+gcc -I. -I/usr/include -I/usr/include/ruby/backward -I/usr/include -I. -DRUBY_EXTCONF_H=\"extconf.h\"    -fPIC -O2 -g -pipe -Wall -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fexceptions -fstack-protector-strong -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -specs=/usr/lib/rpm/redhat/redhat-annobin-cc1 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection -fPIC -m64 -o crc32.o -c crc32.c
+gcc -I. -I/usr/include -I/usr/include/ruby/backward -I/usr/include -I. -DRUBY_EXTCONF_H=\"extconf.h\"    -fPIC -O2 -g -pipe -Wall -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fexceptions -fstack-protector-strong -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -specs=/usr/lib/rpm/redhat/redhat-annobin-cc1 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection -fPIC -m64 -o crc32_ext.o -c crc32_ext.c
+rm -f crc32_ext.so
+gcc -shared -o crc32_ext.so crc32.o crc32_ext.o -L. -L/usr/lib64 -L. -Wl,-z,relro -Wl,--as-needed  -Wl,-z,now -specs=/usr/lib/rpm/redhat/redhat-hardened-ld -fstack-protector-strong -rdynamic -Wl,-export-dynamic -Wl,-z,relro -Wl,--as-needed  -Wl,-z,now -specs=/usr/lib/rpm/redhat/redhat-hardened-ld  -m64  -lruby  -lm   -lc
+/usr/bin/ruby -S extconf.rb
+checking for stdint.h... yes
+checking for stddef.h... yes
+creating extconf.h
+creating Makefile
+make clean
+rm -f 
+rm -f crc32_bzip2_ext.so  *.o  *.bak mkmf.log .*.time
+make
+gcc -I. -I/usr/include -I/usr/include/ruby/backward -I/usr/include -I. -DRUBY_EXTCONF_H=\"extconf.h\"    -fPIC -O2 -g -pipe -Wall -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fexceptions -fstack-protector-strong -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -specs=/usr/lib/rpm/redhat/redhat-annobin-cc1 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection -fPIC -m64 -o crc32_bzip2.o -c crc32_bzip2.c
+gcc -I. -I/usr/include -I/usr/include/ruby/backward -I/usr/include -I. -DRUBY_EXTCONF_H=\"extconf.h\"    -fPIC -O2 -g -pipe -Wall -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fexceptions -fstack-protector-strong -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -specs=/usr/lib/rpm/redhat/redhat-annobin-cc1 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection -fPIC -m64 -o crc32_bzip2_ext.o -c crc32_bzip2_ext.c
+rm -f crc32_bzip2_ext.so
+gcc -shared -o crc32_bzip2_ext.so crc32_bzip2.o crc32_bzip2_ext.o -L. -L/usr/lib64 -L. -Wl,-z,relro -Wl,--as-needed  -Wl,-z,now -specs=/usr/lib/rpm/redhat/redhat-hardened-ld -fstack-protector-strong -rdynamic -Wl,-export-dynamic -Wl,-z,relro -Wl,--as-needed  -Wl,-z,now -specs=/usr/lib/rpm/redhat/redhat-hardened-ld  -m64  -lruby  -lm   -lc
+/usr/bin/ruby -S extconf.rb
+checking for stdint.h... yes
+checking for stddef.h... yes
+creating extconf.h
+creating Makefile
+make clean
+rm -f 
+rm -f crc32_jam_ext.so  *.o  *.bak mkmf.log .*.time
+make
+gcc -I. -I/usr/include -I/usr/include/ruby/backward -I/usr/include -I. -DRUBY_EXTCONF_H=\"extconf.h\"    -fPIC -O2 -g -pipe -Wall -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fexceptions -fstack-protector-strong -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -specs=/usr/lib/rpm/redhat/redhat-annobin-cc1 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection -fPIC -m64 -o crc32_jam.o -c crc32_jam.c
+gcc -I. -I/usr/include -I/usr/include/ruby/backward -I/usr/include -I. -DRUBY_EXTCONF_H=\"extconf.h\"    -fPIC -O2 -g -pipe -Wall -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fexceptions -fstack-protector-strong -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -specs=/usr/lib/rpm/redhat/redhat-annobin-cc1 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection -fPIC -m64 -o crc32_jam_ext.o -c crc32_jam_ext.c
+rm -f crc32_jam_ext.so
+gcc -shared -o crc32_jam_ext.so crc32_jam.o crc32_jam_ext.o -L. -L/usr/lib64 -L. -Wl,-z,relro -Wl,--as-needed  -Wl,-z,now -specs=/usr/lib/rpm/redhat/redhat-hardened-ld -fstack-protector-strong -rdynamic -Wl,-export-dynamic -Wl,-z,relro -Wl,--as-needed  -Wl,-z,now -specs=/usr/lib/rpm/redhat/redhat-hardened-ld  -m64  -lruby  -lm   -lc
+/usr/bin/ruby -S extconf.rb
+checking for stdint.h... yes
+checking for stddef.h... yes
+creating extconf.h
+creating Makefile
+make clean
+rm -f 
+rm -f crc32_mpeg_ext.so  *.o  *.bak mkmf.log .*.time
+make
+gcc -I. -I/usr/include -I/usr/include/ruby/backward -I/usr/include -I. -DRUBY_EXTCONF_H=\"extconf.h\"    -fPIC -O2 -g -pipe -Wall -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fexceptions -fstack-protector-strong -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -specs=/usr/lib/rpm/redhat/redhat-annobin-cc1 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection -fPIC -m64 -o crc32_mpeg.o -c crc32_mpeg.c
+gcc -I. -I/usr/include -I/usr/include/ruby/backward -I/usr/include -I. -DRUBY_EXTCONF_H=\"extconf.h\"    -fPIC -O2 -g -pipe -Wall -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fexceptions -fstack-protector-strong -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -specs=/usr/lib/rpm/redhat/redhat-annobin-cc1 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection -fPIC -m64 -o crc32_mpeg_ext.o -c crc32_mpeg_ext.c
+rm -f crc32_mpeg_ext.so
+gcc -shared -o crc32_mpeg_ext.so crc32_mpeg.o crc32_mpeg_ext.o -L. -L/usr/lib64 -L. -Wl,-z,relro -Wl,--as-needed  -Wl,-z,now -specs=/usr/lib/rpm/redhat/redhat-hardened-ld -fstack-protector-strong -rdynamic -Wl,-export-dynamic -Wl,-z,relro -Wl,--as-needed  -Wl,-z,now -specs=/usr/lib/rpm/redhat/redhat-hardened-ld  -m64  -lruby  -lm   -lc
+/usr/bin/ruby -S extconf.rb
+checking for stdint.h... yes
+checking for stddef.h... yes
+creating extconf.h
+creating Makefile
+make clean
+rm -f 
+rm -f crc32_posix_ext.so  *.o  *.bak mkmf.log .*.time
+make
+gcc -I. -I/usr/include -I/usr/include/ruby/backward -I/usr/include -I. -DRUBY_EXTCONF_H=\"extconf.h\"    -fPIC -O2 -g -pipe -Wall -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fexceptions -fstack-protector-strong -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -specs=/usr/lib/rpm/redhat/redhat-annobin-cc1 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection -fPIC -m64 -o crc32_posix.o -c crc32_posix.c
+gcc -I. -I/usr/include -I/usr/include/ruby/backward -I/usr/include -I. -DRUBY_EXTCONF_H=\"extconf.h\"    -fPIC -O2 -g -pipe -Wall -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fexceptions -fstack-protector-strong -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -specs=/usr/lib/rpm/redhat/redhat-annobin-cc1 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection -fPIC -m64 -o crc32_posix_ext.o -c crc32_posix_ext.c
+rm -f crc32_posix_ext.so
+gcc -shared -o crc32_posix_ext.so crc32_posix.o crc32_posix_ext.o -L. -L/usr/lib64 -L. -Wl,-z,relro -Wl,--as-needed  -Wl,-z,now -specs=/usr/lib/rpm/redhat/redhat-hardened-ld -fstack-protector-strong -rdynamic -Wl,-export-dynamic -Wl,-z,relro -Wl,--as-needed  -Wl,-z,now -specs=/usr/lib/rpm/redhat/redhat-hardened-ld  -m64  -lruby  -lm   -lc
+/usr/bin/ruby -S extconf.rb
+checking for stdint.h... yes
+checking for stddef.h... yes
+creating extconf.h
+creating Makefile
+make clean
+rm -f 
+rm -f crc32_xfer_ext.so  *.o  *.bak mkmf.log .*.time
+make
+gcc -I. -I/usr/include -I/usr/include/ruby/backward -I/usr/include -I. -DRUBY_EXTCONF_H=\"extconf.h\"    -fPIC -O2 -g -pipe -Wall -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fexceptions -fstack-protector-strong -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -specs=/usr/lib/rpm/redhat/redhat-annobin-cc1 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection -fPIC -m64 -o crc32_xfer.o -c crc32_xfer.c
+gcc -I. -I/usr/include -I/usr/include/ruby/backward -I/usr/include -I. -DRUBY_EXTCONF_H=\"extconf.h\"    -fPIC -O2 -g -pipe -Wall -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fexceptions -fstack-protector-strong -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -specs=/usr/lib/rpm/redhat/redhat-annobin-cc1 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection -fPIC -m64 -o crc32_xfer_ext.o -c crc32_xfer_ext.c
+rm -f crc32_xfer_ext.so
+gcc -shared -o crc32_xfer_ext.so crc32_xfer.o crc32_xfer_ext.o -L. -L/usr/lib64 -L. -Wl,-z,relro -Wl,--as-needed  -Wl,-z,now -specs=/usr/lib/rpm/redhat/redhat-hardened-ld -fstack-protector-strong -rdynamic -Wl,-export-dynamic -Wl,-z,relro -Wl,--as-needed  -Wl,-z,now -specs=/usr/lib/rpm/redhat/redhat-hardened-ld  -m64  -lruby  -lm   -lc
+/usr/bin/ruby -S extconf.rb
+checking for stdint.h... yes
+checking for stddef.h... yes
+creating extconf.h
+creating Makefile
+make clean
+rm -f 
+rm -f crc32c_ext.so  *.o  *.bak mkmf.log .*.time
+make
+gcc -I. -I/usr/include -I/usr/include/ruby/backward -I/usr/include -I. -DRUBY_EXTCONF_H=\"extconf.h\"    -fPIC -O2 -g -pipe -Wall -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fexceptions -fstack-protector-strong -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -specs=/usr/lib/rpm/redhat/redhat-annobin-cc1 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection -fPIC -m64 -o crc32c.o -c crc32c.c
+gcc -I. -I/usr/include -I/usr/include/ruby/backward -I/usr/include -I. -DRUBY_EXTCONF_H=\"extconf.h\"    -fPIC -O2 -g -pipe -Wall -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fexceptions -fstack-protector-strong -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -specs=/usr/lib/rpm/redhat/redhat-annobin-cc1 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection -fPIC -m64 -o crc32c_ext.o -c crc32c_ext.c
+rm -f crc32c_ext.so
+gcc -shared -o crc32c_ext.so crc32c.o crc32c_ext.o -L. -L/usr/lib64 -L. -Wl,-z,relro -Wl,--as-needed  -Wl,-z,now -specs=/usr/lib/rpm/redhat/redhat-hardened-ld -fstack-protector-strong -rdynamic -Wl,-export-dynamic -Wl,-z,relro -Wl,--as-needed  -Wl,-z,now -specs=/usr/lib/rpm/redhat/redhat-hardened-ld  -m64  -lruby  -lm   -lc
+/usr/bin/ruby -S extconf.rb
+checking for stdint.h... yes
+checking for stddef.h... yes
+creating extconf.h
+creating Makefile
+make clean
+rm -f 
+rm -f crc5_ext.so  *.o  *.bak mkmf.log .*.time
+make
+gcc -I. -I/usr/include -I/usr/include/ruby/backward -I/usr/include -I. -DRUBY_EXTCONF_H=\"extconf.h\"    -fPIC -O2 -g -pipe -Wall -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fexceptions -fstack-protector-strong -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -specs=/usr/lib/rpm/redhat/redhat-annobin-cc1 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection -fPIC -m64 -o crc5.o -c crc5.c
+gcc -I. -I/usr/include -I/usr/include/ruby/backward -I/usr/include -I. -DRUBY_EXTCONF_H=\"extconf.h\"    -fPIC -O2 -g -pipe -Wall -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fexceptions -fstack-protector-strong -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -specs=/usr/lib/rpm/redhat/redhat-annobin-cc1 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection -fPIC -m64 -o crc5_ext.o -c crc5_ext.c
+rm -f crc5_ext.so
+gcc -shared -o crc5_ext.so crc5.o crc5_ext.o -L. -L/usr/lib64 -L. -Wl,-z,relro -Wl,--as-needed  -Wl,-z,now -specs=/usr/lib/rpm/redhat/redhat-hardened-ld -fstack-protector-strong -rdynamic -Wl,-export-dynamic -Wl,-z,relro -Wl,--as-needed  -Wl,-z,now -specs=/usr/lib/rpm/redhat/redhat-hardened-ld  -m64  -lruby  -lm   -lc
+/usr/bin/ruby -S extconf.rb
+checking for stdint.h... yes
+checking for stddef.h... yes
+creating extconf.h
+creating Makefile
+make clean
+rm -f 
+rm -f crc64_ext.so  *.o  *.bak mkmf.log .*.time
+make
+gcc -I. -I/usr/include -I/usr/include/ruby/backward -I/usr/include -I. -DRUBY_EXTCONF_H=\"extconf.h\"    -fPIC -O2 -g -pipe -Wall -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fexceptions -fstack-protector-strong -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -specs=/usr/lib/rpm/redhat/redhat-annobin-cc1 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection -fPIC -m64 -o crc64.o -c crc64.c
+gcc -I. -I/usr/include -I/usr/include/ruby/backward -I/usr/include -I. -DRUBY_EXTCONF_H=\"extconf.h\"    -fPIC -O2 -g -pipe -Wall -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fexceptions -fstack-protector-strong -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -specs=/usr/lib/rpm/redhat/redhat-annobin-cc1 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection -fPIC -m64 -o crc64_ext.o -c crc64_ext.c
+rm -f crc64_ext.so
+gcc -shared -o crc64_ext.so crc64.o crc64_ext.o -L. -L/usr/lib64 -L. -Wl,-z,relro -Wl,--as-needed  -Wl,-z,now -specs=/usr/lib/rpm/redhat/redhat-hardened-ld -fstack-protector-strong -rdynamic -Wl,-export-dynamic -Wl,-z,relro -Wl,--as-needed  -Wl,-z,now -specs=/usr/lib/rpm/redhat/redhat-hardened-ld  -m64  -lruby  -lm   -lc
+/usr/bin/ruby -S extconf.rb
+checking for stdint.h... yes
+checking for stddef.h... yes
+creating extconf.h
+creating Makefile
+make clean
+rm -f 
+rm -f crc64_jones_ext.so  *.o  *.bak mkmf.log .*.time
+make
+gcc -I. -I/usr/include -I/usr/include/ruby/backward -I/usr/include -I. -DRUBY_EXTCONF_H=\"extconf.h\"    -fPIC -O2 -g -pipe -Wall -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fexceptions -fstack-protector-strong -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -specs=/usr/lib/rpm/redhat/redhat-annobin-cc1 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection -fPIC -m64 -o crc64_jones.o -c crc64_jones.c
+gcc -I. -I/usr/include -I/usr/include/ruby/backward -I/usr/include -I. -DRUBY_EXTCONF_H=\"extconf.h\"    -fPIC -O2 -g -pipe -Wall -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fexceptions -fstack-protector-strong -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -specs=/usr/lib/rpm/redhat/redhat-annobin-cc1 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection -fPIC -m64 -o crc64_jones_ext.o -c crc64_jones_ext.c
+rm -f crc64_jones_ext.so
+gcc -shared -o crc64_jones_ext.so crc64_jones.o crc64_jones_ext.o -L. -L/usr/lib64 -L. -Wl,-z,relro -Wl,--as-needed  -Wl,-z,now -specs=/usr/lib/rpm/redhat/redhat-hardened-ld -fstack-protector-strong -rdynamic -Wl,-export-dynamic -Wl,-z,relro -Wl,--as-needed  -Wl,-z,now -specs=/usr/lib/rpm/redhat/redhat-hardened-ld  -m64  -lruby  -lm   -lc
+/usr/bin/ruby -S extconf.rb
+checking for stdint.h... yes
+checking for stddef.h... yes
+creating extconf.h
+creating Makefile
+make clean
+rm -f 
+rm -f crc64_xz_ext.so  *.o  *.bak mkmf.log .*.time
+make
+gcc -I. -I/usr/include -I/usr/include/ruby/backward -I/usr/include -I. -DRUBY_EXTCONF_H=\"extconf.h\"    -fPIC -O2 -g -pipe -Wall -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fexceptions -fstack-protector-strong -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -specs=/usr/lib/rpm/redhat/redhat-annobin-cc1 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection -fPIC -m64 -o crc64_xz.o -c crc64_xz.c
+gcc -I. -I/usr/include -I/usr/include/ruby/backward -I/usr/include -I. -DRUBY_EXTCONF_H=\"extconf.h\"    -fPIC -O2 -g -pipe -Wall -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fexceptions -fstack-protector-strong -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -specs=/usr/lib/rpm/redhat/redhat-annobin-cc1 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection -fPIC -m64 -o crc64_xz_ext.o -c crc64_xz_ext.c
+rm -f crc64_xz_ext.so
+gcc -shared -o crc64_xz_ext.so crc64_xz.o crc64_xz_ext.o -L. -L/usr/lib64 -L. -Wl,-z,relro -Wl,--as-needed  -Wl,-z,now -specs=/usr/lib/rpm/redhat/redhat-hardened-ld -fstack-protector-strong -rdynamic -Wl,-export-dynamic -Wl,-z,relro -Wl,--as-needed  -Wl,-z,now -specs=/usr/lib/rpm/redhat/redhat-hardened-ld  -m64  -lruby  -lm   -lc
+/usr/bin/ruby -S extconf.rb
+checking for stdint.h... yes
+checking for stddef.h... yes
+creating extconf.h
+creating Makefile
+make clean
+rm -f 
+rm -f crc8_ext.so  *.o  *.bak mkmf.log .*.time
+make
+gcc -I. -I/usr/include -I/usr/include/ruby/backward -I/usr/include -I. -DRUBY_EXTCONF_H=\"extconf.h\"    -fPIC -O2 -g -pipe -Wall -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fexceptions -fstack-protector-strong -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -specs=/usr/lib/rpm/redhat/redhat-annobin-cc1 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection -fPIC -m64 -o crc8.o -c crc8.c
+gcc -I. -I/usr/include -I/usr/include/ruby/backward -I/usr/include -I. -DRUBY_EXTCONF_H=\"extconf.h\"    -fPIC -O2 -g -pipe -Wall -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fexceptions -fstack-protector-strong -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -specs=/usr/lib/rpm/redhat/redhat-annobin-cc1 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection -fPIC -m64 -o crc8_ext.o -c crc8_ext.c
+rm -f crc8_ext.so
+gcc -shared -o crc8_ext.so crc8.o crc8_ext.o -L. -L/usr/lib64 -L. -Wl,-z,relro -Wl,--as-needed  -Wl,-z,now -specs=/usr/lib/rpm/redhat/redhat-hardened-ld -fstack-protector-strong -rdynamic -Wl,-export-dynamic -Wl,-z,relro -Wl,--as-needed  -Wl,-z,now -specs=/usr/lib/rpm/redhat/redhat-hardened-ld  -m64  -lruby  -lm   -lc
+/usr/bin/ruby -S extconf.rb
+checking for stdint.h... yes
+checking for stddef.h... yes
+creating extconf.h
+creating Makefile
+make clean
+rm -f 
+rm -f crc8_1wire_ext.so  *.o  *.bak mkmf.log .*.time
+make
+gcc -I. -I/usr/include -I/usr/include/ruby/backward -I/usr/include -I. -DRUBY_EXTCONF_H=\"extconf.h\"    -fPIC -O2 -g -pipe -Wall -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fexceptions -fstack-protector-strong -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -specs=/usr/lib/rpm/redhat/redhat-annobin-cc1 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection -fPIC -m64 -o crc8_1wire.o -c crc8_1wire.c
+gcc -I. -I/usr/include -I/usr/include/ruby/backward -I/usr/include -I. -DRUBY_EXTCONF_H=\"extconf.h\"    -fPIC -O2 -g -pipe -Wall -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fexceptions -fstack-protector-strong -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -specs=/usr/lib/rpm/redhat/redhat-annobin-cc1 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection -fPIC -m64 -o crc8_1wire_ext.o -c crc8_1wire_ext.c
+rm -f crc8_1wire_ext.so
+gcc -shared -o crc8_1wire_ext.so crc8_1wire.o crc8_1wire_ext.o -L. -L/usr/lib64 -L. -Wl,-z,relro -Wl,--as-needed  -Wl,-z,now -specs=/usr/lib/rpm/redhat/redhat-hardened-ld -fstack-protector-strong -rdynamic -Wl,-export-dynamic -Wl,-z,relro -Wl,--as-needed  -Wl,-z,now -specs=/usr/lib/rpm/redhat/redhat-hardened-ld  -m64  -lruby  -lm   -lc
