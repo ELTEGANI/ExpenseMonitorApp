@@ -2,9 +2,19 @@ default_platform(:android)
 
 platform :android do
   desc "Deploy a beta version to the Google Play"
-     lane :beta do
+  lane :beta do
+           gradle(task: "clean")
+     end
+  lane :increment_version_code do
          increment_version_code(gradle_file_path:"app/build.gradle")
+     end
+  lane :commit_android_version_bump do
          commit_android_version_bump(gradle_file_folder:"app")
+     end
+  lane :commit_android_version_bump do
+         commit_android_version_bump(gradle_file_folder:"app")
+     end
+  lane :beta do
          gradle(task: "clean bundleRelease")
          upload_to_play_store(track: 'beta')
      end
