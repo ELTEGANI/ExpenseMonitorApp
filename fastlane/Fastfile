@@ -8,7 +8,7 @@ platform :android do
          ga = google_play_track_version_codes(track: 'alpha')
          max_value = [g[0].to_i, gb[0].to_i, ga[0].to_i].max
          version_updated = max_value + 1
-         increment_version_code(app_project_dir: "./app", version_code: version_updated.to_i)
+         increment_version_code(app_project_dir: "app/build.gradle", version_code: version_updated.to_i)
      end
   lane :beta do
          gradle(task: "clean bundleRelease")
