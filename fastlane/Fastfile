@@ -4,7 +4,7 @@ platform :android do
  desc "Deploy beta version to the Google Play"
   lane :beta do
           increment_version_code(gradle_file_path: "app/build.gradle")
-          commit_android_version_bump(gradle_file_folder:"./app")
+          commit_android_version_bump(gradle_file_folder:"../app/build.gradle")
           gradle(task: "clean bundleRelease")
           upload_to_play_store(track: 'beta')
      end
