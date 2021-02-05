@@ -12,7 +12,7 @@ platform :android do
       f.write(s)
       f.close
      end
-  lane :gitPush do
+  lane :gitpush do
           git_add
           git_commit(path: "*", message: "Version")
           push_to_git_remote
