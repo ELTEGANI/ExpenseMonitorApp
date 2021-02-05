@@ -16,7 +16,6 @@ import javax.inject.Inject
 
 
 class DurationsExpenseAdapter @Inject constructor() : ListAdapter<Expenses, DurationsExpenseAdapter.ViewHolder>(GetExpensesResponseDiffCallback()) {
-
     var expenseCategoryListener: ExpenseCategoryListener? = null
 
     @Inject
@@ -64,7 +63,6 @@ class GetExpensesResponseDiffCallback : DiffUtil.ItemCallback<Expenses>() {
         return oldItem == newItem
     }
 }
-
 
 class ExpenseCategoryListener (val onClickListener: (expense: Expenses) -> Unit) {
     fun onClick(expense: Expenses) = onClickListener(expense)

@@ -340,7 +340,7 @@ class MyExpenseFragment: Fragment() {
                         appUpdateManager.startUpdateFlowForResult(
                             appUpdateInfo,
                             it,
-                            (context as Activity?)!!,
+                            context,
                             APP_UPDATE_REQUEST_CODE)
                     }
                 } catch (e: IntentSender.SendIntentException) {
