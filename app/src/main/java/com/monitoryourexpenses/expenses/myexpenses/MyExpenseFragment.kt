@@ -2,6 +2,7 @@ package com.monitoryourexpenses.expenses.myexpenses
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.content.IntentSender
 import android.content.res.Configuration
@@ -50,6 +51,7 @@ import com.monitoryourexpenses.expenses.databinding.MyExpenseFragmentBinding
 import com.monitoryourexpenses.expenses.prefs.ExpenseMonitorSharedPreferences
 import com.monitoryourexpenses.expenses.utilites.UtilitesFunctions
 import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.qualifiers.ApplicationContext
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlinx.android.synthetic.main.barchart_bottom_sheets.view.*
@@ -69,6 +71,7 @@ class MyExpenseFragment: Fragment() {
     lateinit var utilitesFunctions: UtilitesFunctions
 
     private lateinit var myExpenseFragmentBinding : MyExpenseFragmentBinding
+
 
     @ExperimentalCoroutinesApi
     private  val myExpenseFragmentViewModel: MyExpenseFragmentViewModel by viewModels()
@@ -337,11 +340,7 @@ class MyExpenseFragment: Fragment() {
                     }
                     if (installType == AppUpdateType.IMMEDIATE) appUpdateManager.registerListener(appUpdatedListener)
                     installType?.let {
-                        appUpdateManager.startUpdateFlowForResult(
-                            appUpdateInfo,
-                            it,
-                            context,
-                            APP_UPDATE_REQUEST_CODE)
+                        appUpdateManager.startUpdateFlowForResult(appUpdateInfo,it,requireActivity(),APP_UPDATE_REQUEST_CODE)
                     }
                 } catch (e: IntentSender.SendIntentException) {
                     e.printStackTrace()
