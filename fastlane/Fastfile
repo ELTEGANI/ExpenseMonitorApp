@@ -1,9 +1,8 @@
 default_platform(:android)
 
 platform :android do
-  desc "Deploy beta version to the Google Play"
+ desc "Deploy beta version to the Google Play"
   lane :IncrementBuildNumber do
-
       path = '../app/build.gradle'
       re = /versionCode\s+(\d+)/
       s = File.read(path)
@@ -12,13 +11,14 @@ platform :android do
       f = File.new(path, 'w')
       f.write(s)
       f.close
-    end
+     end
   lane :gitPush do
           git_add
           git_commit(path: "*", message: "Version")
           push_to_git_remote
      end
-  lane :test do
-         commit_android_version_bump(gradle_file_folder:"app")
+  lane :beta do
+         gradle(task: "clean bundleRelease")
+         upload_to_play_store(track: 'beta')
      end
 end
