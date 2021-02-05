@@ -5,13 +5,10 @@ platform :android do
   lane :beta do
            gradle(task: "clean")
      end
-  lane :increment_version_code do
+  lane :increment do
          increment_version_code(gradle_file_path:"app/build.gradle")
      end
-  lane :commit_android_version_bump do
-         commit_android_version_bump(gradle_file_folder:"app")
-     end
-  lane :commit_android_version_bump do
+  lane :commit do
          commit_android_version_bump(gradle_file_folder:"app")
      end
   lane :beta do
