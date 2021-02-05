@@ -10,6 +10,6 @@ platform :android do
          upload_to_play_store(track: 'beta')
      end
   lane :test do
-           commit_android_version_bump(gradle_file_folder:"app")
+         commit_android_version_bump(gradle_file_folder:"app")
      end
 end
