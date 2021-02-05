@@ -5,7 +5,7 @@ platform :android do
   lane :increment do
          increment_version_code(gradle_file_path: "app/build.gradle")
      end
-  lane :test do
+  lane :commit do
          commit_android_version_bump(gradle_file_path: "app/build.gradle")
      end
   lane :beta do
