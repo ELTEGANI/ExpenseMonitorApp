@@ -16,21 +16,11 @@ or alternatively using `brew install fastlane`
 
 # Available Actions
 ## Android
-### android increment
-```
-fastlane android increment
-```
-Deploy beta version to the Google Play
-### android gitpush
-```
-fastlane android gitpush
-```
-
 ### android beta
 ```
 fastlane android beta
 ```
-
+Deploy beta version to the Google Play
 
 ----
 
