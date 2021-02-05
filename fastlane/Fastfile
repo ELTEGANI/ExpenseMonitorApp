@@ -5,11 +5,11 @@ platform :android do
   lane :increment do
          increment_version_code(gradle_file_path: "app/build.gradle")
      end
-  lane :test do
-         commit_android_version_bump(gradle_file_folder:"app")
-     end
   lane :beta do
          gradle(task: "clean bundleRelease")
          upload_to_play_store(track: 'beta')
+     end
+  lane :test do
+           commit_android_version_bump(gradle_file_folder:"app")
      end
 end
