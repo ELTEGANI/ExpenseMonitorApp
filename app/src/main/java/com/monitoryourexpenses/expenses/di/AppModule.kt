@@ -34,7 +34,6 @@ object AppModule {
     fun provideExpenseMonitorDao(appDatabase: ExpenseMonitorDataBase): ExpenseMonitorDao {
         return appDatabase.expenseMonitorDao
     }
-
 }
 
 /**
