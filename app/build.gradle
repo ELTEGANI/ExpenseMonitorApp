@@ -5,22 +5,11 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'androidx.navigation.safeargs.kotlin'
 apply plugin: 'dagger.hilt.android.plugin'
 
-def keystorePropertiesFile = rootProject.file("keystore.properties")
-def keystoreProperties = new Properties()
-keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 
 android {
     compileSdkVersion 30
     buildToolsVersion "29.0.3"
 
-    signingConfigs {
-        config {
-            keyAlias keystoreProperties['keyAlias']
-            keyPassword keystoreProperties['keyPassword']
-            storeFile file(keystoreProperties['storeFile'])
-            storePassword keystoreProperties['storePassword']
-        }
-    }
 
     defaultConfig {
         applicationId "com.monitoryourexpenses.expenses"
@@ -39,7 +28,6 @@ android {
         vectorDrawables.useSupportLibrary = true
 
         testInstrumentationRunner "com.monitoryourexpenses.expenses.CustomTestRunner"
-        signingConfig signingConfigs.config
 
     }
     buildTypes {
@@ -91,6 +79,10 @@ android {
 }
 
 dependencies {
+    def appCenterSdkVersion = '4.1.0'
+    implementation "com.microsoft.appcenter:appcenter-analytics:${appCenterSdkVersion}"
+    implementation "com.microsoft.appcenter:appcenter-crashes:${appCenterSdkVersion}"
+
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
