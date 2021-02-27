@@ -3,3 +3,6 @@ No data goes through our servers or server databases.
 In fact, I do not own any servers or server databases.
 So it is literally impossible to collect any of the user's data.
 Hence, no user data is collected by us.
+
+
+[![Build status](https://build.appcenter.ms/v0.1/apps/05d140cf-6a9f-481d-9120-75e8d3025138/branches/dev/badge)](https://appcenter.ms)
