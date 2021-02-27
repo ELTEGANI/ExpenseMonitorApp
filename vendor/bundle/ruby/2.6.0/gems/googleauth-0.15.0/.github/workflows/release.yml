@@ -1,0 +1,36 @@
+on:
+  schedule:
+    - cron: '29 9 * * 1'
+  workflow_dispatch:
+
+name: release
+jobs:
+  release-please:
+    runs-on: ubuntu-latest
+    steps:
+      - name: ReleasePlease
+        id: release-please
+        uses: GoogleCloudPlatform/release-please-action@v2
+        with:
+          command: release-pr
+          token: ${{ secrets.YOSHI_CODE_BOT_TOKEN }}
+          fork: true
+          release-type: ruby
+          package-name: google-auth-library-ruby
+          version-file: lib/googleauth/version.rb
+          monorepo-tags: true
+          bump-minor-pre-major: true
+      - name: ReleaseLabel
+        id: release-label
+        if: ${{ steps.release-please.outputs.pr }}
+        uses: actions/github-script@v2
+        with:
+          github-token: ${{secrets.YOSHI_APPROVER_TOKEN}}
+          script: |
+            core.info("Labeling release");
+            github.issues.addLabels({
+              owner: 'googleapis',
+              repo: 'google-auth-library-ruby',
+              issue_number: ${{ steps.release-please.outputs.pr }},
+              labels: ["autorelease: pending", "kokoro:force-run"]
+            });
