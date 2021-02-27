@@ -92,3 +92,6 @@ Application is available here:
 - Container Transform [DOCS](https://github.com/material-components/material-components-android/blob/master/docs/theming/Motion.md)
 - R8 [DOCS](https://developer.android.com/studio/build/shrink-code)
 - Dependency injection with Hilt [DOCS](https://developer.android.com/training/dependency-injection/hilt-android)
+
+
+[![Build status](https://build.appcenter.ms/v0.1/apps/05d140cf-6a9f-481d-9120-75e8d3025138/branches/dev/badge)](https://appcenter.ms)
