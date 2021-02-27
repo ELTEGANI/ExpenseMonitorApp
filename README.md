@@ -94,4 +94,4 @@ Application is available here:
 - Dependency injection with Hilt [DOCS](https://developer.android.com/training/dependency-injection/hilt-android)
 
 
-[![Build status](https://build.appcenter.ms/v0.1/apps/da6402fe-c7ef-4073-8b1f-7149be87e03e/branches/master/badge)](https://appcenter.ms)
+[![Build status](https://build.appcenter.ms/v0.1/apps/da6402fe-c7ef-4073-8b1f-7149be87e03e/branches/dev/badge)](https://appcenter.ms)
