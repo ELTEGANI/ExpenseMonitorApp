@@ -19,9 +19,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         activityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
-        AppCenter.start(
-            application, "30092061-e44e-410a-89b9-706a1dd65167",
-            Analytics::class.java, Crashes::class.java)
+        AppCenter.start(application, "da6402fe-c7ef-4073-8b1f-7149be87e03e",Analytics::class.java, Crashes::class.java)
 
     }
 }
