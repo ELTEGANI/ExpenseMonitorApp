@@ -96,4 +96,6 @@ Application is available here:
 
 dev:[![Build status](https://build.appcenter.ms/v0.1/apps/da6402fe-c7ef-4073-8b1f-7149be87e03e/branches/dev/badge)](https://appcenter.ms)
 
-test:[![Build status](https://build.appcenter.ms/v0.1/apps/da6402fe-c7ef-4073-8b1f-7149be87e03e/branches/test/badge)](https://appcenter.ms)
+test:[![Build status](https://build.appcenter.ms/v0.1/apps/da6402fe-c7ef-4073-8b1f-7149be87e03e/branches/test/badge)](https://appcenter.ms
+
+master:[![Build status](https://build.appcenter.ms/v0.1/apps/da6402fe-c7ef-4073-8b1f-7149be87e03e/branches/master/badge)](https://appcenter.ms)
