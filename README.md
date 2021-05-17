@@ -1,6 +1,4 @@
 <div align="center">
-
-# ![alt text](https://github.com/ELTEGANI/ExpenseMonitorApp/blob/master/app/screenshots/logo.png)   
      
 # Expense Monitor App
         
@@ -32,48 +30,6 @@ Application is available here:
 
 </div>
 
-## Screenshots
-<table align="center">
-        <tr>
-          <td><img src = "app/screenshots/1_L.jpg" ></td>
-          <td><img src = "app/screenshots/2_L.jpg" ></td>
-          <td><img src = "app/screenshots/3_L.jpg" ></td>
-          <td><img src = "app/screenshots/4_L.jpg" ></td>
-        </tr>
-      <tr>
-        <td><img src = "app/screenshots/5_L.jpg" ></td>
-        <td><img src = "app/screenshots/6_L.jpg" ></td>
-        <td><img src = "app/screenshots/7_L.jpg" ></td>
-        <td><img src = "app/screenshots/8_L.jpg" ></td>
-      </tr>
-       <tr>
-              <td><img src = "app/screenshots/9_L.jpg" ></td>
-              <td><img src = "app/screenshots/10_L.jpg" ></td>
-              <td><img src = "app/screenshots/11_L.jpg" ></td>
-              <td><img src = "app/screenshots/12_L.jpg" ></td>
-       </tr>
-       <tr>
-              <td><img src = "app/screenshots/13_L.jpg" ></td>
-       </tr>
-</table> 
-
-## Night Mode Screenshots
-<table align="center">
-        <tr>
-          <td><img src = "app/screenshots/1_D.jpg" ></td>
-          <td><img src = "app/screenshots/2_D.jpg" ></td>
-          <td><img src = "app/screenshots/3_D.jpg" ></td>
-          <td><img src = "app/screenshots/4_D.jpg" ></td>
-          <td><img src = "app/screenshots/5_D.jpg" ></td>
-        </tr>
-      <tr>
-        <td><img src = "app/screenshots/6_D.jpg" ></td>
-        <td><img src = "app/screenshots/7_D.jpg" ></td>
-        <td><img src = "app/screenshots/8_D.jpg" ></td>
-        <td><img src = "app/screenshots/9_D.jpg" ></td>
-        <td><img src = "app/screenshots/10_D.jpg" ></td>
-       </tr>
-</table> 
 
 ### Tech Stack & documentation
 - MVVM Architecture [DOCS](https://developer.android.com/jetpack/guide)
